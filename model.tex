@@ -77,14 +77,24 @@ making it a pragmatic agent in a limited sense:
   \exp
   \left(
     \lambda
-    (
+    \left(
       \log
-      (\listenerZero(\state \given \msg, \Lex))
-      - \gamma\Costs(\msg)
-     )
+      \left(
+        \alpha 
+        \,
+        \listenerZero(\state \given \msg, \Lex)
+      \right)
+      - \gamma \, \Costs(\msg)
+     \right)
   \right)
   \]
 \end{definition}
+
+The weight $\alpha$ governs how much the speaker values conveying
+information about the world.  The weight $\lambda > 0$ functions as a
+temperature parameter, controlling how much the speaker lets the
+listener's distribution affect its own. (By default, we set $\lambda =
+1$; this parameter plays no role in the paper.)
 
 The $\listenerOne$ listener responds to $\speakerOne$ in the sense
 that it reasons about that agent and the priors; the definition is
@@ -152,18 +162,45 @@ value on the listener $\ListenerOne$'s correct apprehension of
 $\LexStar$. This socially confident, pedagogically-minded speaker is
 defined as follows:
 
+\begin{definition}[$\SpeakerK$]\label{def:l1}
+  \[
+  \SpeakerK(\msg \given \state, \LexStar) 
+  \propto \\
+  \exp
+  \left(
+    \lambda
+    \left(
+      \log
+      \left(
+        \alpha 
+        \,
+        \ListenerK[k-1](\state \given \msg, \Lex)
+      \right)
+      - 
+      \beta 
+      \, 
+      \log\left(\ListenerK[k-1](\Lex\given\msg)\right)
+      -
+      \gamma \, \Costs(\msg)
+     \right)
+  \right)
+  \]
+\end{definition}
+
+The new weight $\beta$ defines how much value the speaker places on
+conveying information about its perferred lexicon.
+
+The $\ListenerK$ listener values $\SpeakerK$'s preferences and seeks
+to conform to them:
+
 \begin{definition}[$\ListenerK$]\label{def:l1}
   \begin{align*}
   \ListenerK(\state, \Lex \given \msg) 
   &= 
   \sum_{\Lex} \listenerOne(\state \given \msg, \Lex) \ListenerK(\Lex \given \msg) 
   \\
-  \ListenerK(\Lex \given \msg) &\propto \Prior(\Lex) \sum_{\state\in\States} \SpeakerK(\msg \given \state, \Lex = \LexStar)\Prior(\state)
+  \ListenerK(\Lex \given \msg) &\propto \Prior(\Lex) \sum_{\state\in\States} \SpeakerK(\msg \given \state, \LexStar)\Prior(\state)
   \end{align*}
-\end{definition}
-
-\begin{definition}[$\SpeakerK$]\label{def:l1}
-  $\SpeakerK(\msg \given \state, \LexStar) \propto$
 \end{definition}
 
 \Figref{fig:model} summarizes the relationship between the above
@@ -179,6 +216,8 @@ use.
   \caption{Pictoral representation of the recursive reasoning process.}
   \label{fig:model}
 \end{figure}
+
+\mynote{Perhaps close by explaining why the model preserves existing results for implicature, etc.}
 
 %%% Local Variables: 
 %%% mode: latex
