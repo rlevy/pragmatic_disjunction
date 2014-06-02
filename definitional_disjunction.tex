@@ -2,12 +2,57 @@
 \usepackage{nips14submit_e,times}
 \usepackage{hyperref}
 \usepackage{url}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{stmaryrd}
+
 \usepackage{natbib}
+
 %\documentstyle[nips14submit_09,times,art10]{article} % For LaTeX 2.09
 
+\newcommand{\sem}[1]{\ensuremath{\llbracket#1\rrbracket}}
 
-\title{Definitional disjunction }
+\newcommand{\States}{T}
+\newcommand{\state}{t}
+\newcommand{\Messages}{M}
+\newcommand{\msg}{m}
+\newcommand{\Costs}{C}
+\newcommand{\Prior}{P}
+\newcommand{\Cgame}{(\States, \Messages, \Lex, \Prior, \Costs)}
 
+\newcommand{\Lex}{\mathcal{L}}
+\newcommand{\LexStar}{\Lex^{\ast}}
+
+\newcommand{\GenericListener}{L}
+\newcommand{\GenericSpeaker}{S}
+
+\newcommand{\listenerZero}{l_{0}}
+\newcommand{\speakerOne}{s_{1}}
+\newcommand{\listenerOne}{l_{1}}
+\newcommand{\ListenerOne}{L_{1}}
+\newcommand{\SpeakerK}[1][k]{S_{#1}}
+\newcommand{\ListenerK}[1][k]{L_{#1}}
+
+
+
+\newcommand{\Reals}{\mathbb{R}}
+\newcommand{\given}{\mid}
+\newcommand{\Indicator}{\mathbb{I}}
+\newcommand{\br}{\text{br}}
+\newcommand{\SpeakerIBR}{\SpeakerBR^{\br}}
+\newcommand{\ListenerIBR}{\ListenerBR^{\br}}
+\newcommand{\set}[1]{\ensuremath{\left\{ #1 \right\}}}
+\newcommand{\setp}[2]{\ensuremath{\set{#1 \mid #2\right.}}}
+\newcommand{\tuple}[1]{\ensuremath{\left< #1 \right>}}
+
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+
+
+\title{Recursive Bayesian models for communicating in language and about language}
 
 \author{
 Roger Levy\thanks{Use footnote for providing further information
@@ -43,17 +88,28 @@ Stanford \ CA\  USA \ 94305\\
 
 \begin{document}
 
-
 \maketitle
 
 \begin{abstract}
-  Abstract
+  \input{abstract}
 \end{abstract}
 
 \input{intro}
 
+\input{model}
+
+\input{defdisj}
+
+\input{conclusion}
 
 \bibliographystyle{plain}
-\bibliography{definitional_disjunction-bib}
+\bibliography{potts-bib-database} %definitional_disjunction-bib}
 
 \end{document}
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End: 
+

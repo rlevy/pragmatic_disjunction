@@ -1,0 +1,131 @@
+\section{Model}\label{sec:model}
+
+Communication games model production and interpretation.  
+
+\begin{definition}[Communication games]\label{def:struc} 
+  A communication game is a structure $\Cgame$:
+  \begin{enumerate}\setlength{\itemsep}{0pt}
+  \item $\States$ is a set of states (worlds, referents, propositions, etc.).
+  \item $\Messages$ is a set of messages.
+  \item $\Lex: \Messages \mapsto \wp(\States)$ is a lexicon.
+  \item $\Prior : \States \mapsto [0,1]$ is a prior probability
+    distribution over states.   
+  \item $\Costs : \Messages \mapsto \Reals$ is a cost function on messages.
+  \end{enumerate}
+\end{definition}
+
+The speaker observes a state $\state$ and chooses a message $\msg$
+based on $\state$ and the message costs $\Costs$. The listener chooses
+a state $\state'$ based on $\msg$ and her prior expectations $\Prior$
+about the state.  We assume throughout that the speaker will choose a
+message that has maximum probability given the state, and that the
+hearer will choose a state that has maximum probability given the
+speaker's message.  This amounts to the assumption that the speaker
+and hearer would like to communicate, which might or might not be tied
+up with their real-world goals
+\cite{Franke-etal:2009,Asher:Lascarides:2013}
+
+Production and interpretation can be modeled as a recursive process in
+which the speaker and listener reason about each other reasoning about
+each other.  Suppose we begin with a truth-conditional listener
+$\GenericListener$: given message $\msg$, $\GenericListener$ guesses a
+state $\state \in \Lex(\msg)$ based only on the prior.  The speaker
+$\GenericSpeaker$ can model this truth-conditional listener in
+production, anticipating her inferences and trying to respond in a way
+that maximizes the chances of successful communication.  What's more,
+$\GenericListener$ can plan for this kind of sophisticated speaker and
+make her inferences accordingly.  And so forth. The process can
+proceed until the system stabilizes or until the participants reach
+the limits of their rationality, mental energy, or commitment to the
+cause
+\cite{CamererHo:2004,Franke:2008,Franke09DISS,Jaeger:2007,Jaeger:2011}.
+
+The most basic listener $\listenerZero$ simply uses the
+truth-conditions of the message $\msg$ and the prior over states to
+estimate the probability of each state:
+
+\begin{definition}[$\listenerZero$]\label{def:l0}
+  \[
+  \listenerZero(\state \given \msg, \Lex) 
+  \propto
+  \frac{\mathbb{I}(\state \in \Lex(\msg)}{|\Lex(\msg)|}
+  \Prior(\state)
+  \]
+\end{definition}
+
+The most basic speaker $\speakerOne$ reasons about $\listenerZero$,
+taking message costs into account:
+
+\begin{definition}[$\speakerOne$]\label{def:s1}  
+  \[
+  \speakerOne(\msg \given \state, \Lex) 
+  \propto
+  \exp
+  \left(
+    \log
+    \left(\listenerZero(\state \given \msg, \Lex)\right) 
+    - \Costs(\msg)
+  \right)
+  \]
+\end{definition}
+
+The $\listenerOne$ listener responds to $\speakerOne$ in the sense
+that it reasons about that agent and the priors; the definition is
+parallel to the one for $\listenerZero$ except that the starting point
+is the pragmatic distribution $\speakerOne$ rather than the truth
+conditions given directly by $\Lex$:
+
+\begin{definition}[$\listenerOne$]\label{def:l1}
+  \[
+  \listenerOne(\state \given \msg, \Lex) 
+  \propto 
+  \speakerOne(\msg \given \state, \Lex)\Prior(\state)
+  \]
+\end{definition}
+
+The above are all lexicon-specific in the sens that the basic semantic
+interpretation function $\Lex$ remains fixed throughout all the
+calculations.  The agent $\ListenerOne$ is the first in the hierarchy
+to reason in terms of $\Lex$; this listener is identical to the
+``social anxiety'' listener of \cite{Smith:Goodman:Frank:2013}. It
+forms a posterior over lexica, and marginalizes over this posterior to
+form beliefs about communicated meaning:
+
+\begin{definition}[$\ListenerOne$]\label{def:l1}
+  \[
+  \ListenerOne(\state, \Lex \given \msg) 
+  = 
+  \sum_{\Lex} \listenerOne(\state \given \msg, \Lex) \ListenerOne(\Lex \given \msg) 
+  \]
+  where
+  $\ListenerOne(\Lex \given \msg) \propto \Prior(\Lex) \sum_{\state\in\States} \speakerOne(\msg \given \state)\Prior(\state)$
+\end{definition}
+
+The novelty in our approach comes from treating the expert speaker
+differently. This speaker does not have social anxiety, but rather
+knows the lexicon $\LexStar$ that they intend to use. Furthermore,
+this speaker places value on the listener $\ListenerOne$'s correct
+apprehension of $\LexStar$:
+
+\begin{definition}[$\SpeakerK$]\label{def:s1}  
+ DEFINE
+\end{definition}
+
+\begin{definition}[$\ListenerOne$]\label{def:l1}
+  DEFINE
+\end{definition}
+
+\begin{figure}[htp]
+  \centering
+  \includegraphics[scale=1]{images/model}
+  \caption{Pictoral representation of the recursive reasoning process.}
+  \label{fig:model}
+\end{figure}
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "definitional_disjunction"
+%%% End: 
+
+
