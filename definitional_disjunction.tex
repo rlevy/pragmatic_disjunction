@@ -6,13 +6,15 @@
 \usepackage{amsmath}
 \usepackage{amsthm}
 \usepackage{amssymb}
-\usepackage{stmaryrd}
-
-\usepackage{natbib}
+%\usepackage{stmaryrd}
+\usepackage{natbib} % just for bib right now; we can remove this dependency
 
 %\documentstyle[nips14submit_09,times,art10]{article} % For LaTeX 2.09
 
-\newcommand{\sem}[1]{\ensuremath{\llbracket#1\rrbracket}}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+
+%\newcommand{\sem}[1]{\ensuremath{\llbracket#1\rrbracket}}
 
 \newcommand{\States}{T}
 \newcommand{\state}{t}
@@ -35,8 +37,6 @@
 \newcommand{\SpeakerK}[1][k]{S_{#1}}
 \newcommand{\ListenerK}[1][k]{L_{#1}}
 
-
-
 \newcommand{\Reals}{\mathbb{R}}
 \newcommand{\given}{\mid}
 \newcommand{\Indicator}{\mathbb{I}}
@@ -47,10 +47,18 @@
 \newcommand{\setp}[2]{\ensuremath{\set{#1 \mid #2\right.}}}
 \newcommand{\tuple}[1]{\ensuremath{\left< #1 \right>}}
 
+\newcommand{\Secref}[1]{Section~\ref{#1}}
+\newcommand{\Figref}[1]{Figure~\ref{#1}}
+\newcommand{\Tabref}[1]{Table~\ref{#1}}
+\newcommand{\Equationref}[1]{Equation~\ref{#1}}
 
-\theoremstyle{definition}
-\newtheorem{definition}{Definition}
+\newcommand{\secref}[1]{section~\ref{#1}}
+\newcommand{\figref}[1]{figure~\ref{#1}}
+\newcommand{\tabref}[1]{table~\ref{#1}}
 
+\newcommand{\mynote}[1]{{\color{red}\framebox{\raggedright\footnotesize#1}}}
+
+%=====================================================================
 
 \title{Recursive Bayesian models for communicating in language and about language}
 
