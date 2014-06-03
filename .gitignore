@@ -5,4 +5,5 @@
 *.out
 *.rel
 *.synctex.gz
+*_region_.tex
 definitional_disjunction.pdf

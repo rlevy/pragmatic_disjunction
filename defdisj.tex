@@ -23,7 +23,47 @@ of them.
 
 \begin{table}[htp]
   \centering
+  \begin{subtable}[b]{0.33\textwidth}
+    \begin{tabular}[b]{l r r r}
+      \toprule
+      $\Lex_{1}$         & $w_{1}$ & $w_{2}$ & $w_{3}$ \\
+      \midrule
+      \word{wine lover} & \True   & \False & \False \\
+      \word{oenophile}  & \True   & \False & \False\\
+      \bottomrule
+    \end{tabular}
+    
+    \begin{tabular}[b]{l r r r}
+      \toprule
+      $\Lex_{2}$         & $w_{1}$ & $w_{2}$ & $w_{3}$ \\
+      \midrule
+      \word{wine lover} & \True   & \False & \False\\
+      \word{oenophile}  & \False  & \True & \False \\
+      \bottomrule
+    \end{tabular}
 
+    \begin{tabular}[b]{l r rr}
+      \toprule
+      $\Lex_{3}$         & $w_{1}$ & $w_{2}$ & $w_{3}$ \\
+      \midrule
+      \word{wine lover} & \True   & \False & \False\\
+      \word{oenophile}  & \False  & \False  & \True \\
+      \bottomrule
+    \end{tabular}
+    \caption{Initial listener lexica. $\LexStar = \Lex_{1}$}
+  \end{subtable}
+  \hfill
+  \begin{subtable}[b]{0.3\textwidth} 
+    \centering
+    to be added
+    \caption{Final lexicon.}
+  \end{subtable}
+ \hfill
+  \begin{subtable}[b]{0.3\textwidth}   
+    \centering
+    to be added
+    \caption{Final listener lexicon.}
+  \end{subtable}
   \caption{Basic run of the definitional disjunction calculation, starting from truth conditions.}
 \end{table}
 
