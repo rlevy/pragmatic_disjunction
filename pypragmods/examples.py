@@ -103,7 +103,7 @@ def expert_disjunction(n=2):
     # Corresponding key listener result:
     print "======================================================================"
     print 'Corresponding key listener result (same, mutatis mutandis, for <Lex1, B>, <Lex2, C>, <Lex3, D>)'
-    print "".join([x.rjust(10) for x in ["Spk", "A", "X", "A v X"]])
+    print "".join([x.rjust(10) for x in ["Lis", "A", "X", "A v X"]])
     index = 2
     for i in range(0, len(langs), 2):
         vals = [langs[i][0][j][0] for j in [0,4,5]]

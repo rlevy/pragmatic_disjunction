@@ -6,4 +6,5 @@
 *.rel
 *.synctex.gz
 *_region_.tex
+*.pyc
 definitional_disjunction.pdf
