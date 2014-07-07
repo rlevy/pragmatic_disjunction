@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import numpy as np
 from pragmods import Pragmod, display_matrix
 from lexica import Lexica
@@ -96,23 +98,23 @@ def explore_expert_disjunction(n=25,
                   alpha=alpha,
                   beta=beta)
 
-    langs = mod.run_expertise_model(n=n, display=False)
+    langs = mod.run_expertise_model(n=n, display=True)
 
     print "======================================================================"
     print """Reproduce Roger's "key speaker result" """
-    print "".join([x.rjust(10) for x in ["Spk", "A", "X", "A v X"]])
+    print "".join([x.rjust(10) for x in ["Spk", "A", "X", "A v X", "NULL"]])
     index = 2
     for i in range(1, len(langs), 2):
-        vals = [langs[i][j][0][0] for j in [target_lexicon_index,unk_index,unknown_disjunction_index]]
+        vals = [langs[i][j][target_lexicon_index][0] for j in [0, unk_index, unknown_disjunction_index, -1]]
         print ('S%i' % index).rjust(10), "".join([str(round(x, 4)).rjust(10) for x in vals])
         index += 1
 
     print "======================================================================"
     print 'Corresponding key listener result (same, mutatis mutandis, for <Lex1, B>, <Lex2, C>, <Lex3, D>)'
-    print "".join([x.rjust(10) for x in ["Lis", "A", "X", "A v X"]])
-    index = 2
+    print "".join([x.rjust(10) for x in ["Lis", "A", "X", "A v X", "NULL"]])
+    index = 1
     for i in range(0, len(langs), 2):
-        vals = [langs[i][0][j][0] for j in [target_lexicon_index,unk_index,unknown_disjunction_index]]
+        vals = [langs[i][target_lexicon_index][j][0] for j in [0, unk_index, unknown_disjunction_index, -1]]
         print ('L%i, Lex0' % index).rjust(10), "".join([str(round(x, 4)).rjust(10) for x in vals])
         index += 1
 
@@ -123,7 +125,7 @@ def expert_disjunction1():
         'C': ['w3'],
         'X': ['w1', 'w2', 'w3']}
 
-    explore_expert_disjunction(n=10,
+    explore_expert_disjunction(n=25,
                                baselexicon=baselexicon,
                                disjunction_cost=0.05,
                                null_cost=4.0,

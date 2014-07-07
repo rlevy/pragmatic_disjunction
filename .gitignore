@@ -7,4 +7,5 @@
 *.synctex.gz
 *_region_.tex
 *.pyc
+*.csv
 definitional_disjunction.pdf
