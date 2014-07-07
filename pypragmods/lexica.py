@@ -73,13 +73,16 @@ class Lexica:
         complex_msgs = [connective.join(sorted(cm)) for cm in self.powerset(self.messages, minsize=2)]
         for i, lex in enumerate(lexica):
             for cm in complex_msgs:
+                cm_parts = cm.split(connective)
                 # Get all the worlds consistent with the complex message:
-                vals = reduce(combo_func, [set(lex[word]) for word in cm.split(connective)])
+                vals = reduce(combo_func, [set(lex[word]) for word in cm_parts])
                 # Get the powerset of that set of worlds:
                 vals = self.powerset(vals, minsize=1)
                 # Create the new value, containing worlds and "disjoined worlds":
                 lex[cm] = [connective.join(sorted(sem)) for sem in vals]
-                self.costs[cm] = cost_value + sum(self.costs[word] for word in cm.split(connective))
+                self.costs[cm] = (cost_value*(len(cm_parts)-1)) + sum(self.costs[word] for word in cm_parts)
+            for msg in self.messages:
+                lex[msg] += [connective.join(sorted(sem)) for sem in self.powerset(lex[msg], minsize=2)]
             lexica[i] = lex
         return lexica
 

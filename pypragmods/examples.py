@@ -59,62 +59,101 @@ def m_implicature_smith_etal(n=2):
                   temperature=3.0)
     display_all_models(mod, n=n)
 
-    
-def expert_disjunction(n=2):
-    lexica = Lexica(
-        baselexicon={
-            'A': ['w1'], 
-            'B': ['w2'], 
-            'C': ['w3'],
-            'D': ['w4'],
-            'X': ['w1', 'w2', 'w3', 'w4']},
-        join_closure=True,
-        disjunction_cost=0.001,
-        null_cost=4.0)
 
-    # The unknown word has an atomic meaning:
-    mats = lexica.lexica2matrices()    
-    mats = [mat for mat in mats if np.sum(mat[4]) == 1]
-    #print len(mats)
-    #for mat in mats:
-    #    display_matrix(mat, rnames=lexica.messages, cnames=lexica.states)
-            
+def explore_expert_disjunction(n=25,
+                               baselexicon=None,
+                               disjunction_cost=0.001,
+                               null_cost=4.0,
+                               temperature=2.0,
+                               alpha=1.0,
+                               beta=1.0,
+                               unknown_word='X',
+                               unknown_disjunction='A v X',
+                               unknown_word_has_atomic_meaning=True,
+                               target_lexicon_index=0):
+    
+    lexica = Lexica(baselexicon=baselexicon,
+                    join_closure=True,
+                    disjunction_cost=disjunction_cost,
+                    null_cost=null_cost)
+
+    mats = lexica.lexica2matrices()
+
+    unk_index = lexica.messages.index(unknown_word)
+
+    unknown_disjunction_index = lexica.messages.index(unknown_disjunction)
+
+    if unknown_word_has_atomic_meaning:        
+        mats = [mat for mat in mats if np.sum(mat[unk_index]) == 1]
+
     mod = Pragmod(lexica=mats,
                   messages=lexica.messages,
                   meanings=lexica.states,
                   costs=lexica.cost_vector(),
                   prior=np.repeat(1.0/len(lexica.states), len(lexica.states)),
                   lexprior=np.repeat(1.0/len(mats), len(mats)),
-                  temperature=2.0,
-                  alpha=1.0,
-                  beta=1.0)
+                  temperature=temperature,
+                  alpha=alpha,
+                  beta=beta)
+
     langs = mod.run_expertise_model(n=n, display=False)
 
-    # Reproduce Roger's "key speaker result":
     print "======================================================================"
     print """Reproduce Roger's "key speaker result" """
     print "".join([x.rjust(10) for x in ["Spk", "A", "X", "A v X"]])
     index = 2
     for i in range(1, len(langs), 2):
-        vals = [langs[i][j][0][0] for j in [0,4,5]]
-        print ('S%i' % index).rjust(10), "".join([str(round(x, 3)).rjust(10) for x in vals])
+        vals = [langs[i][j][0][0] for j in [target_lexicon_index,unk_index,unknown_disjunction_index]]
+        print ('S%i' % index).rjust(10), "".join([str(round(x, 4)).rjust(10) for x in vals])
         index += 1
 
-    # Corresponding key listener result:
     print "======================================================================"
     print 'Corresponding key listener result (same, mutatis mutandis, for <Lex1, B>, <Lex2, C>, <Lex3, D>)'
     print "".join([x.rjust(10) for x in ["Lis", "A", "X", "A v X"]])
     index = 2
     for i in range(0, len(langs), 2):
-        vals = [langs[i][0][j][0] for j in [0,4,5]]
-        print ('L%i, Lex0' % index).rjust(10), "".join([str(round(x, 3)).rjust(10) for x in vals])
+        vals = [langs[i][0][j][0] for j in [target_lexicon_index,unk_index,unknown_disjunction_index]]
+        print ('L%i, Lex0' % index).rjust(10), "".join([str(round(x, 4)).rjust(10) for x in vals])
         index += 1
-        
-                                      
+
+def expert_disjunction1():
+    baselexicon = {
+        'A': ['w1'], 
+        'B': ['w2'], 
+        'C': ['w3'],
+        'X': ['w1', 'w2', 'w3']}
+
+    explore_expert_disjunction(n=10,
+                               baselexicon=baselexicon,
+                               disjunction_cost=0.05,
+                               null_cost=4.0,
+                               temperature=3.0,
+                               alpha=1.0,
+                               beta=5.0,
+                               unknown_word_has_atomic_meaning=True)
+
+def expert_disjunction2():
+    baselexicon = {
+        'A': ['w1'], 
+        'B': ['w2'], 
+        'C': ['w3'],
+        'D': ['w4'],
+        'X': ['w1', 'w2', 'w3', 'w4']}
+
+    explore_expert_disjunction(n=25,
+                               baselexicon=baselexicon,
+                               disjunction_cost=0.001,
+                               null_cost=4.0,
+                               temperature=2.0,
+                               alpha=1.0,
+                               beta=1.0,
+                               unknown_word_has_atomic_meaning=True)
+                                                  
+                                                      
 if __name__ == '__main__':    
 
     #scalars(n=3)
     #m_implicature_bergen_etal2014()
     #m_implicature_smith_etal(n=3)
-    expert_disjunction(n=25)
+    expert_disjunction2()
 
