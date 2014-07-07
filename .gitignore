@@ -8,4 +8,5 @@
 *_region_.tex
 *.pyc
 *.csv
+*.Rapp.history
 definitional_disjunction.pdf
