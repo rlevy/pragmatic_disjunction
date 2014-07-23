@@ -37,7 +37,7 @@ def context():
         costs=np.array([0.0, 0.0]),
         prior=np.array([0.5, 0.5]),
         lexprior=np.array([0.5, 0.5]),
-        temperature=2.8)
+        temperature=1.0)
 
     langs = mod.run_expertise_model(n=10, display=True)
 
