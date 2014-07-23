@@ -11,8 +11,16 @@ def colnorm(mat):
     return np.divide(mat, np.sum(mat, axis=0))
 
 def safelog(vals):
-    #return np.nan_to_num(np.log(x)) # replaces log(0) with log(epsilon)
-    return np.log(vals)
+    if isinstance(vals, np.float64):
+        if vals > 0.0:
+            return np.log(vals)
+        else:
+            return 0.0
+    else:
+        vals  = np.log(vals)
+        nan_locs = np.isnan(vals)
+        vals[nan_locs] = 0.0
+        return vals
 
 def display_matrix(mat, display=True, rnames=None, cnames=None, title='', digits=4):
     """Utility function for displaying strategies to standard output.
