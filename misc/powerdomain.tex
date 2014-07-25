@@ -1,0 +1,111 @@
+\documentclass[12pt]{article}
+
+\usepackage{xcolor}
+\usepackage{tikz}
+
+
+\newcommand{\cfbox}[2]{%
+    \colorlet{currentcolor}{.}%
+    {\color{#1}%
+    \fbox{\color{currentcolor}#2}}%
+}
+
+%\newcommand{\redcfbox}[1]{\cfbox{red}{#1}}
+\newcommand{\redcfbox}[1]{#1}
+\begin{document}
+\thispagestyle{empty}
+
+
+\begin{tikzpicture}
+  \node (A) at (-2,0) {$1$};
+\node (B) at (2,0) {$2$};
+
+  \node (AB) at (0,2) {$1 \wedge 2$};
+\node (AvB) at (0,-2) {$1 \vee 2$};
+
+\draw (A) -- (AB);
+\draw (A) -- (AvB);
+\draw (B) -- (AB);
+\draw (B) -- (AvB);
+
+
+\end{tikzpicture}
+
+% \begin{tikzpicture}
+% \node (ABC) at (0,0) {$1 \wedge 2 \wedge 3$};
+% \node (AB) at (-3,-2) {$1 \wedge 2$};
+% \node (AC) at (0,-2) {$1 \wedge 3$};
+% \node (BC) at (3,-2) {$2 \wedge 3$};
+
+% \draw (ABC) -- (AB);
+% \draw (ABC) -- (AC);
+% \draw (ABC) -- (BC);
+
+% \node (ABvC) at (-3,-4) {$1 \wedge (2 \vee 3)$};
+% \node (BAvC) at (0,-4) {$2 \wedge (1 \vee 3)$};
+% \node (CAvB) at (3,-4) {$3 \wedge (1 \vee 2)$};
+
+% \draw (ABvC) -- (AB);
+% \draw (ABvC) -- (AC);
+% \draw (BAvC) -- (AB);
+% \draw (BAvC) -- (BC);
+% \draw (CAvB) -- (AC);
+% \draw (CAvB) -- (BC);
+
+% \node (A) at (-3,-6) {\redcfbox{$1$}};
+% \node (B) at (1,-6) {\redcfbox{$2$}};
+% \node (C) at (3,-6) {\redcfbox{$3$}};
+% \node (AvBAvCBvC) at (-1,-6) {\parbox{1.5cm}{${(1 \vee 2)} \wedge {(1 \vee 3)} \wedge {(2 \vee 3)}$}};
+
+% \draw (ABvC) -- (A);
+% \draw (BAvC) -- (B);
+% \draw (CAvB) -- (C);
+
+
+% \draw[style=dashed] (ABvC) -- (AvBAvCBvC);
+% \draw[style=dashed] (BAvC) -- (AvBAvCBvC);
+% \draw[style=dashed] (CAvB) -- (AvBAvCBvC);
+
+
+% \node (AvBC) at (-3,-8) {$1 \vee (2 \wedge 3)$};
+% \node (BvAC) at (0,-8) {$2 \vee (1 \wedge 3)$};
+% \node (CvAB) at (3,-8) {$3 \vee (1 \wedge 2)$};
+
+% \draw (AvBC) -- (A);
+% \draw (BvAC) -- (B);
+% \draw (CvAB) -- (C);
+
+% \draw[style=dashed] (AvBC) -- (AvBAvCBvC);
+% \draw[style=dashed] (BvAC) -- (AvBAvCBvC);
+% \draw[style=dashed] (CvAB) -- (AvBAvCBvC);
+
+% \node (AvB) at (-3,-10) {\redcfbox{$1 \vee 2$}};
+% \node (AvC) at (0,-10) {\redcfbox{$1 \vee 3$}};
+% \node (BvC) at (3,-10) {\redcfbox{$2 \vee 3$}};
+
+
+% \draw (AvBC) -- (AvB);
+% \draw (AvBC) -- (AvC);
+% \draw (BvAC) -- (AvB);
+% \draw (BvAC) -- (BvC);
+% \draw (CvAB) -- (AvC);
+% \draw (CvAB) -- (BvC);
+
+
+
+% \node (AvBvC) at (0,-12) {\redcfbox{$1 \vee 2 \vee 3$}};
+
+
+% \draw (AvBvC) -- (AvB);
+% \draw (AvBvC) -- (AvC);
+% \draw (AvBvC) -- (BvC);
+
+% \end{tikzpicture}
+
+
+\end{document}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: t
+%%% End: 
