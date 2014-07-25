@@ -74,7 +74,7 @@ def expert_disjunction(n=2):
 
     # The unknown word has an atomic meaning:
     mats = lexica.lexica2matrices()    
-    mats = [mat for mat in mats if np.sum(mat[4]) == 1]
+    # mats = [mat for mat in mats if np.sum(mat[4]) == 1]
     #print len(mats)
     #for mat in mats:
     #    display_matrix(mat, rnames=lexica.messages, cnames=lexica.states)
