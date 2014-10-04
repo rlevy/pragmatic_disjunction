@@ -70,7 +70,7 @@ class Lexica:
         return self.add_closure(lexica=lexica, connective=CONJUNCTION_SIGN, combo_func=(lambda x,y : x & y), cost_value=self.conjunction_cost)    
 
     def add_closure(self, lexica=None, connective=None, combo_func=None, cost_value=None):
-        complex_msgs = [connective.join(sorted(cm)) for cm in self.powerset(self.messages, minsize=2)]
+        complex_msgs = [connective.join(sorted(cm)) for cm in self.powerset(self.messages, minsize=1)]
         for i, lex in enumerate(lexica):
             for cm in complex_msgs:
                 # Get all the worlds consistent with the complex message:
