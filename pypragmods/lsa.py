@@ -90,6 +90,17 @@ class HurfordExperiment:
                                                      parameter_values=beta_values,
                                                      legend_loc=legend_loc)
 
+    def plot_listener_inference_alpha_values(self,
+                                            msg='A v C',
+                                            target_state='1 v 2',                                                 
+                                            alpha_values=np.arange(0.01, 5.0, 0.01),
+                                            legend_loc='upper right'):
+        self.plot_listener_inference_parameter_space(msg=msg,
+                                                     target_state=target_state,
+                                                     parameter_name='alpha',
+                                                     parameter_values=alpha_values,
+                                                     legend_loc=legend_loc)
+
     def plot_listener_inference_disjunction_costs(self,
                                                   msg='A v C',
                                                   target_state='1 v 2',                                                 
@@ -144,7 +155,7 @@ class HurfordExperiment:
             dots = [(paramval, val) for paramval, val, marker in probs[lex_index] if marker]
             if dots:           
                 dotsx, dotsy = zip(*dots)
-                plt.plot(dotsx, dotsy, marker=".", linestyle="o", color=colors[lex_index],  linewidth=3)    
+                plt.plot(dotsx, dotsy, marker="o", linestyle="", color=colors[lex_index],  linewidth=3)    
         plt.title("Listener hears '%s'\n%s" % (msg, self.params2str(exclude=[parameter_name])))
         plt.xlabel(parameter_name)
         plt.ylabel("Listener probability for <Lex, %s>" % target_state)
@@ -166,7 +177,7 @@ if __name__ == '__main__':
 
 
    hurford = HurfordExperiment(n=3,
-                               temperature=1.5,
+                               temperature=2.0,
                                beta=1.0,
                                disjunction_cost=1.0,
                                baselexicon={'A': ['1'], 'B': ['2'], 'C': ['3'], 'D': ['4'], 'X': ['1', '2', '3', '4']},
@@ -176,4 +187,7 @@ if __name__ == '__main__':
    #hurford.display_listener_inference(msg='A v X')
    #hurford.plot_listener_inference_disjunction_costs(msg='A v X', target_state='1', legend_loc='right')
    #print display_matrix(hurford.lexica[0], rnames=hurford.messages, cnames=hurford.states)
-   hurford.plot_listener_inference_lambda_values(msg='A v X', target_state='1', legend_loc='right')
+   #hurford.plot_listener_inference_lambda_values(msg='A v X', target_state='1', legend_loc='right')
+   hurford.plot_listener_inference_beta_values(msg='A v X', target_state='1', legend_loc='right')
+   #hurford.plot_listener_inference_alpha_values(msg='A v X', target_state='1 v 2', legend_loc='right')
+    
