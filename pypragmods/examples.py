@@ -116,5 +116,5 @@ if __name__ == '__main__':
     #scalars(n=3)
     #m_implicature_bergen_etal2014()
     #m_implicature_smith_etal(n=3)
-    expert_disjunction(n=25)
+    #expert_disjunction(n=25)
 
