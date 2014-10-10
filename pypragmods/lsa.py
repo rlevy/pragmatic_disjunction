@@ -5,6 +5,8 @@ import copy
 from collections import defaultdict
 import matplotlib.pyplot as plt
 import matplotlib
+import matplotlib.font_manager as font_manager
+
 
 class HurfordExperiment:
     def __init__(self,
@@ -66,70 +68,125 @@ class HurfordExperiment:
 
     def params2str(self, joiner='; ', exclude=[]):
         vals = []
-        for x in ('n', 'temperature', 'disjunction_cost', 'lexical_costs', 'alpha', 'beta'):
+        params = {'n': r'$n$',
+                  'temperature': r'$\lambda$',
+                  'disjunction_cost': r'cost($\vee$)',
+                  'lexical_costs': r'costs',
+                  'alpha': r'$\alpha$',
+                  'beta': r'$\beta$'}
+        for x in sorted(params):
             if x not in exclude:
-                vals.append("%s: %s" % (x, getattr(self, x)))
+                if x == 'lexical_costs':
+                    for p, c in sorted(self.lexical_costs.items()):
+                        vals.append('cost(%s): %s' % (p, c))
+                else:
+                    vals.append("%s: %s" % (params[x], getattr(self, x)))
         return joiner.join(vals)
 
     def lex2str(self, lexicon):
+        def state_sorter(x):
+            x = sorted(x, cmp=(lambda x, y: cmp(len(x), len(y))))
+            #x = sorted(x)
+            return x
         entries = []
         for p_index, p in enumerate(sorted(self.baselexicon.keys())):
-            sem = [s for i, s in enumerate(self.states) if lexicon[p_index][i] > 0.0]
-            entry = p + "={" + ",".join(sorted(sem)) + "}"
+            sem = [s for i, s in enumerate(self.states) if lexicon[p_index][i] > 0.0]            
+            entry = p + "={" + ",".join(state_sorter(sem)) + "}"
             entries.append(entry)
         return "; ".join(entries)
+
+    def plot_listener_inference_depth_values(self,
+                                             msg='A v C',
+                                             target_state='1 v 2',
+                                             n_values=np.arange(1, 5, 1),
+                                             legend_loc='upper right',
+                                             output_filename=None):
+        self.plot_listener_inference_parameter_space(msg=msg,
+                                                     target_state=target_state,
+                                                     parameter_name='n',
+                                                     parameter_text='Depth',
+                                                     parameter_values=n_values,
+                                                     legend_loc=legend_loc,
+                                                     output_filename=output_filename)
+
 
     def plot_listener_inference_beta_values(self,
                                             msg='A v C',
                                             target_state='1 v 2',                                                 
                                             beta_values=np.arange(0.01, 5.0, 0.01),
-                                            legend_loc='upper right'):
+                                            legend_loc='upper right',
+                                            output_filename=None):
         self.plot_listener_inference_parameter_space(msg=msg,
                                                      target_state=target_state,
                                                      parameter_name='beta',
+                                                     parameter_text=r"$\beta$",
                                                      parameter_values=beta_values,
-                                                     legend_loc=legend_loc)
+                                                     legend_loc=legend_loc,
+                                                     output_filename=output_filename)
 
     def plot_listener_inference_alpha_values(self,
                                             msg='A v C',
                                             target_state='1 v 2',                                                 
                                             alpha_values=np.arange(0.01, 5.0, 0.01),
-                                            legend_loc='upper right'):
+                                            legend_loc='upper right',
+                                            output_filename=None):
         self.plot_listener_inference_parameter_space(msg=msg,
                                                      target_state=target_state,
                                                      parameter_name='alpha',
+                                                     parameter_text=r"$\alpha$",
                                                      parameter_values=alpha_values,
-                                                     legend_loc=legend_loc)
+                                                     legend_loc=legend_loc,
+                                                     output_filename=output_filename)
 
     def plot_listener_inference_disjunction_costs(self,
                                                   msg='A v C',
                                                   target_state='1 v 2',                                                 
                                                   disjunction_cost_values=np.arange(0.0, 5.0, 0.01),
-                                                  legend_loc='upper right'):
+                                                  legend_loc='upper right',
+                                                  output_filename=None):
         self.plot_listener_inference_parameter_space(msg=msg,
                                                      target_state=target_state,
                                                      parameter_name='disjunction_cost',
                                                      parameter_values=disjunction_cost_values,
-                                                     legend_loc=legend_loc)
+                                                     legend_loc=legend_loc,
+                                                     output_filename=output_filename)
 
     def plot_listener_inference_lambda_values(self,
                                               msg='A v C',
                                               target_state='1 v 2',
                                               lambda_values=np.arange(0.01, 5.0, 0.01),
-                                              legend_loc='upper right'):
+                                              legend_loc='upper right',
+                                              output_filename=None):
         self.plot_listener_inference_parameter_space(msg=msg,
                                                      target_state=target_state,
                                                      parameter_name='temperature',
+                                                     parameter_text=r"$\lambda$",
                                                      parameter_values=lambda_values,
-                                                     legend_loc=legend_loc)
+                                                     legend_loc=legend_loc,
+                                                     output_filename=output_filename)
        
 
     def plot_listener_inference_parameter_space(self,
                                                 msg='A v C',
                                                 target_state='1 v 2',
                                                 parameter_name='disjunction_cost',
+                                                parameter_text=None,
                                                 parameter_values=np.arange(0.0, 5.0, 0.01),
-                                                legend_loc='upper right'):
+                                                legend_loc='upper right',
+                                                output_filename=None):
+        if parameter_text == None: parameter_text = parameter_name
+        # Plotting set-up:
+        prop = font_manager.FontProperties(fname='/Library/Fonts/Arial.ttf')
+        matplotlib.rcParams['font.family'] = prop.get_name()
+        setup = {'family': 'sans-serif', 'sans-serif':['Helvetica'], 'weight':'normal', 'size':18}
+        title_size = 18
+        axis_label_size = 18
+        #matplotlib.rc('font', **setup) 
+        matplotlib.rc('xtick', labelsize=14)
+        matplotlib.rc('ytick', labelsize=14)
+        matplotlib.rcParams.update({'font.size': 12})
+        fig = plt.figure(figsize=(13, 9))
+        # Computation
         param_val_pairs = []
         original = getattr(self, parameter_name)        
         probs = defaultdict(list)
@@ -144,8 +201,7 @@ class HurfordExperiment:
                 maxval = False
                 if np.max(prob_table) == prob:
                     maxval = True
-                probs[lex_index].append((paramval, prob, maxval))
-        fig = plt.figure(figsize=(11, 7))
+                probs[lex_index].append((paramval, prob, maxval))        
         # The first set of colors is good for colorbind people:
         colors = ['#1B9E77', '#D95F02', '#7570B3', '#E7298A', '#66A61E', '#E6AB02', '#A6761D', '#666666'] + matplotlib.colors.cnames.values()
         for lex_index in range(len(self.lexica)):
@@ -156,38 +212,43 @@ class HurfordExperiment:
             if dots:           
                 dotsx, dotsy = zip(*dots)
                 plt.plot(dotsx, dotsy, marker="o", linestyle="", color=colors[lex_index],  linewidth=3)    
-        plt.title("Listener hears '%s'\n%s" % (msg, self.params2str(exclude=[parameter_name])))
-        plt.xlabel(parameter_name)
-        plt.ylabel("Listener probability for <Lex, %s>" % target_state)
+        plt.title("Listener hears '%s'\n\n%s" % (msg, self.params2str(exclude=[parameter_name])), fontsize=title_size)
+        plt.xlabel(parameter_text, fontsize=axis_label_size)
+        plt.ylabel(r"Listener probability for $\langle$Lex, %s$\rangle$" % target_state, fontsize=axis_label_size)
         plt.legend(loc=legend_loc)
         x1,x2,y1,y2 = plt.axis()
         plt.axis((x1, x2, 0.0, 1.0))
         setattr(self, parameter_name, original)
-        plt.show()
+        if output_filename:
+            plt.savefig(output_filename)
+        else:
+            plt.show()
 
                     
 if __name__ == '__main__':    
 
-   hurford = HurfordExperiment(temperature=2.0, disjunction_cost=2.0, beta=2.0)
-   #hurford.build()
-   #hurford.display_listener_inference()
+   hurford = HurfordExperiment(temperature=2.0, disjunction_cost=2.0, beta=1.0, alpha=1.0)
+   # hurford.build()
+   # hurford.display_listener_inference(msg='A v C')
    # hurford.plot_listener_inference_disjunction_costs()
    # hurford.plot_listener_inference_disjunction_costs(msg='A v C', target_state='1', legend_loc='lower right')
    # hurford.plot_listener_inference_beta_values(msg='A v C', target_state='1')
+   #hurford.plot_listener_inference_lambda_values(msg='A v C', target_state='1 v 2', output_filename='temp.pdf')
+   hurford.plot_listener_inference_depth_values(msg='A v C', target_state='1', legend_loc='right', output_filename='temp.pdf')
 
-
-   hurford = HurfordExperiment(n=3,
-                               temperature=2.0,
-                               beta=1.0,
-                               disjunction_cost=1.0,
-                               baselexicon={'A': ['1'], 'B': ['2'], 'C': ['3'], 'D': ['4'], 'X': ['1', '2', '3', '4']},
-                               lexical_costs={'A':0.0, 'B':0.0, 'C':0.0, 'D':0.0, 'X':0.0})
+   # hurford = HurfordExperiment(n=3,
+   #                             temperature=1.0,
+   #                             beta=0.0,
+   #                             disjunction_cost=0.01,
+   #                             baselexicon={'A': ['1'], 'B': ['2'], 'C': ['3'], 'D': ['4'], 'X': ['1', '2', '3', '4']},
+   #                             lexical_costs={'A':0.0, 'B':0.0, 'C':0.0, 'D':0.0, 'X':0.0})
 
    #hurford.build()
-   #hurford.display_listener_inference(msg='A v X')
+   # hurford.display_listener_inference(msg='A v X')
    #hurford.plot_listener_inference_disjunction_costs(msg='A v X', target_state='1', legend_loc='right')
    #print display_matrix(hurford.lexica[0], rnames=hurford.messages, cnames=hurford.states)
    #hurford.plot_listener_inference_lambda_values(msg='A v X', target_state='1', legend_loc='right')
-   hurford.plot_listener_inference_beta_values(msg='A v X', target_state='1', legend_loc='right')
+   #hurford.plot_listener_inference_beta_values(msg='A v X', target_state='1', legend_loc='right')
    #hurford.plot_listener_inference_alpha_values(msg='A v X', target_state='1 v 2', legend_loc='right')
+   #hurford.plot_listener_inference_lambda_values(msg='A v X', target_state='1 v 2', lambda_values=np.arange(0.0, 5.0, 0.1))
     
