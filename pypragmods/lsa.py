@@ -1,3 +1,4 @@
+import os
 import numpy as np
 from pragmods import Pragmod, display_matrix
 from lexica import Lexica
@@ -176,7 +177,10 @@ class HurfordExperiment:
                                                 output_filename=None):
         if parameter_text == None: parameter_text = parameter_name
         # Plotting set-up:
-        prop = font_manager.FontProperties(fname='/Library/Fonts/Arial.ttf')
+        fontname='/Library/Fonts/Arial.ttf'
+        if os.uname()[1] == 'lingpc29.ucsd.edu':
+            fontname='/Library/Fonts/Microsoft/Arial.ttf'
+        prop = font_manager.FontProperties(fname=fontname)
         matplotlib.rcParams['font.family'] = prop.get_name()
         setup = {'family': 'sans-serif', 'sans-serif':['Helvetica'], 'weight':'normal', 'size':18}
         title_size = 18
