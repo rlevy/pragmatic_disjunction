@@ -3,6 +3,8 @@ import numpy as np
 from pragmods import Pragmod, display_matrix
 from lexica import Lexica
 import copy
+import csv
+from itertools import product
 from collections import defaultdict
 import matplotlib.pyplot as plt
 import matplotlib
@@ -86,9 +88,7 @@ class HurfordExperiment:
 
     def lex2str(self, lexicon):
         def state_sorter(x):
-            x = sorted(x, cmp=(lambda x, y: cmp(len(x), len(y))))
-            #x = sorted(x)
-            return x
+            return sorted(x, cmp=(lambda x, y: cmp(len(x), len(y))))
         entries = []
         for p_index, p in enumerate(sorted(self.baselexicon.keys())):
             sem = [s for i, s in enumerate(self.states) if lexicon[p_index][i] > 0.0]            
@@ -109,7 +109,6 @@ class HurfordExperiment:
                                                      parameter_values=n_values,
                                                      legend_loc=legend_loc,
                                                      output_filename=output_filename)
-
 
     def plot_listener_inference_beta_values(self,
                                             msg='A v C',
@@ -228,31 +227,67 @@ class HurfordExperiment:
         else:
             plt.show()
 
+def explore_hyperparameters(msg='A v C', target_state='1 v 2', target_lex_index=0):    
+    temps = np.arange(0.0, 3.0, 0.2)
+    dcosts = np.arange(0.0, 3.0, 0.2)
+    alphas = np.arange(0.0, 3.0, 0.2)
+    betas = np.arange(0.0, 3.0, 0.2)
+    depths = [3]
+    results = []
+    for temp, dcost, alpha, beta, depth in product(temps, dcosts, alphas, betas, depths):
+        params = [temp, dcost, alpha, beta, depth]
+        hurford = HurfordExperiment(temperature=temp, disjunction_cost=dcost, beta=beta, alpha=alpha)
+        hurford.build()
+        target_state_index = hurford.states.index(target_state)
+        prob_table = hurford.listener_inference(msg=msg)
+        prob_table_sort = np.sort(prob_table.flatten())
+        prob_table_max = prob_table_sort[-1]
+        if prob_table_max == prob_table_sort[-2]:
+            prob_table_max = None
+        prob = prob_table[target_lex_index][target_state_index]
+        result = False
+        if prob == prob_table_max:
+            result = True
+        params.append(result)
+        print params
+        results.append(params)
+    output_filename = "paramexplore-%s_%s_%s.csv" % (msg.replace(" ", ""), target_state.replace(" ", ""), target_lex_index)
+    w = csv.writer(file(output_filename, 'w'))
+    w.writerow(['lambda', 'dcost', 'alpha', 'beta', 'depth', 'outcome'])
+    w.writerows(results)
+
                     
 if __name__ == '__main__':    
 
-   hurford = HurfordExperiment(temperature=2.0, disjunction_cost=2.0, beta=1.0, alpha=1.0)
-   # hurford.build()
-   # hurford.display_listener_inference(msg='A v C')
-   # hurford.plot_listener_inference_disjunction_costs()
-   # hurford.plot_listener_inference_disjunction_costs(msg='A v C', target_state='1', legend_loc='lower right')
-   # hurford.plot_listener_inference_beta_values(msg='A v C', target_state='1')
-   #hurford.plot_listener_inference_lambda_values(msg='A v C', target_state='1 v 2', output_filename='temp.pdf')
-   hurford.plot_listener_inference_depth_values(msg='A v C', target_state='1', legend_loc='right', output_filename='temp.pdf')
+    # hurford = HurfordExperiment(temperature=2.0, disjunction_cost=2.0, beta=1.0, alpha=1.0)
+    # hurford.build()
+    # hurford.display_listener_inference(msg='A v C')
+    # hurford.plot_listener_inference_disjunction_costs()
+    # hurford.plot_listener_inference_disjunction_costs(msg='A v C', target_state='1', legend_loc='lower right')
+    # hurford.plot_listener_inference_beta_values(msg='A v C', target_state='1')
+    # hurford.plot_listener_inference_lambda_values(msg='A v C', target_state='1 v 2', output_filename='temp.pdf')
+    # hurford.plot_listener_inference_depth_values(msg='A v C', target_state='1', legend_loc='right', output_filename='temp.pdf')
 
-   # hurford = HurfordExperiment(n=3,
-   #                             temperature=1.0,
-   #                             beta=0.0,
-   #                             disjunction_cost=0.01,
-   #                             baselexicon={'A': ['1'], 'B': ['2'], 'C': ['3'], 'D': ['4'], 'X': ['1', '2', '3', '4']},
-   #                             lexical_costs={'A':0.0, 'B':0.0, 'C':0.0, 'D':0.0, 'X':0.0})
+    # hurford = HurfordExperiment(n=3,
+    #                             temperature=1.0,
+    #                             beta=0.0,
+    #                             disjunction_cost=0.01,
+    #                             baselexicon={'A': ['1'], 'B': ['2'], 'C': ['3'], 'D': ['4'], 'X': ['1', '2', '3', '4']},
+    #                             lexical_costs={'A':0.0, 'B':0.0, 'C':0.0, 'D':0.0, 'X':0.0})
+    
+    # hurford.build()
+    # hurford.display_listener_inference(msg='A v X')
+    # hurford.plot_listener_inference_disjunction_costs(msg='A v X', target_state='1', legend_loc='right')
+    # print display_matrix(hurford.lexica[0], rnames=hurford.messages, cnames=hurford.states)
+    # hurford.plot_listener_inference_lambda_values(msg='A v X', target_state='1', legend_loc='right')
+    # hurford.plot_listener_inference_beta_values(msg='A v X', target_state='1', legend_loc='right')
+    # hurford.plot_listener_inference_alpha_values(msg='A v X', target_state='1 v 2', legend_loc='right')
+    # hurford.plot_listener_inference_lambda_values(msg='A v X', target_state='1 v 2', lambda_values=np.arange(0.0, 5.0, 0.1))
 
-   #hurford.build()
-   # hurford.display_listener_inference(msg='A v X')
-   #hurford.plot_listener_inference_disjunction_costs(msg='A v X', target_state='1', legend_loc='right')
-   #print display_matrix(hurford.lexica[0], rnames=hurford.messages, cnames=hurford.states)
-   #hurford.plot_listener_inference_lambda_values(msg='A v X', target_state='1', legend_loc='right')
-   #hurford.plot_listener_inference_beta_values(msg='A v X', target_state='1', legend_loc='right')
-   #hurford.plot_listener_inference_alpha_values(msg='A v X', target_state='1 v 2', legend_loc='right')
-   #hurford.plot_listener_inference_lambda_values(msg='A v X', target_state='1 v 2', lambda_values=np.arange(0.0, 5.0, 0.1))
+    # Hurfordian:
+    # explore_hyperparameters(msg='A v C', target_state='1 v 2', target_lex_index=1)
+
+    explore_hyperparameters(msg='A v C', target_state='1', target_lex_index=0)
+    
+
     
