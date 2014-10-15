@@ -5,13 +5,12 @@ import numpy as np
 def rownorm(mat):
     """Row normalization of a matrix"""
     return np.divide(mat.T, np.sum(mat, axis=1)).T
-
+    
 def colnorm(mat):
-    """Column normalization of a matrix"""
+    """Column normalization of a matrix"""    
     return np.divide(mat, np.sum(mat, axis=0))
 
 def safelog(vals):
-    #return np.nan_to_num(np.log(x)) # replaces log(0) with log(epsilon)
     return np.log(vals)
 
 def display_matrix(mat, display=True, rnames=None, cnames=None, title='', digits=4):

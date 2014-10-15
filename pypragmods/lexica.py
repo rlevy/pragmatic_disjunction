@@ -79,7 +79,9 @@ class Lexica:
                 vals = self.powerset(vals, minsize=1)
                 # Create the new value, containing worlds and "disjoined worlds":
                 lex[cm] = [connective.join(sorted(sem)) for sem in vals]
-                self.costs[cm] = cost_value + sum(self.costs[word] for word in cm.split(connective))
+                args = cm.split(connective)
+                signs = len(args)-1                
+                self.costs[cm] = (cost_value*signs) + sum(self.costs[word] for word in args)
             lexica[i] = lex
         return lexica
 

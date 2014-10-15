@@ -49,7 +49,7 @@ class HurfordExperiment:
                              alpha=self.alpha,
                              beta=self.beta)
 
-        self.langs = self.model.run_expertise_model(n=self.n, display=False)
+        self.langs = self.model.run_expertise_model(n=self.n, display=True)
 
     def listener_inference(self, msg='A v C'):
         final_lis_lang = self.langs[-1]
@@ -257,16 +257,28 @@ def explore_hyperparameters(msg='A v C', target_state='1 v 2', target_lex_index=
     w.writerows(results)
 
                     
-if __name__ == '__main__':    
+if __name__ == '__main__':
 
-    # hurford = HurfordExperiment(temperature=2.0, disjunction_cost=2.0, beta=1.0, alpha=1.0)
+    # hurford = HurfordExperiment(temperature=2.0, disjunction_cost=1.0, beta=1.0, alpha=1.0)
+    # hurford.build()
+    # for i, lex in enumerate(hurford.lexica):
+    #     print "======================================================================"
+    #     print "Lex%s" % i
+    #     lis0 = hurford.model.l0(lex)
+    #     display_matrix(lis0, rnames=hurford.messages, cnames=hurford.states)
+    #     spk1 = hurford.model.s1(lex)
+    #     display_matrix(spk1, cnames=hurford.messages, rnames=hurford.states)
+    #     lis1 = hurford.model.l1(lex)
+    #     display_matrix(lis1, rnames=hurford.messages, cnames=hurford.states)
+
+    hurford = HurfordExperiment(temperature=2.0, disjunction_cost=2.0, beta=1.0, alpha=1.0)
     # hurford.build()
     # hurford.display_listener_inference(msg='A v C')
     # hurford.plot_listener_inference_disjunction_costs()
     # hurford.plot_listener_inference_disjunction_costs(msg='A v C', target_state='1', legend_loc='lower right')
     # hurford.plot_listener_inference_beta_values(msg='A v C', target_state='1')
     # hurford.plot_listener_inference_lambda_values(msg='A v C', target_state='1 v 2', output_filename='temp.pdf')
-    # hurford.plot_listener_inference_depth_values(msg='A v C', target_state='1', legend_loc='right', output_filename='temp.pdf')
+    hurford.plot_listener_inference_depth_values(msg='A v C', target_state='1', legend_loc='right', output_filename='temp.pdf', n_values=[1])
 
     # hurford = HurfordExperiment(n=3,
     #                             temperature=1.0,
@@ -287,7 +299,7 @@ if __name__ == '__main__':
     # Hurfordian:
     # explore_hyperparameters(msg='A v C', target_state='1 v 2', target_lex_index=1)
 
-    explore_hyperparameters(msg='A v C', target_state='1', target_lex_index=0)
+    # explore_hyperparameters(msg='A v C', target_state='1', target_lex_index=0)
     
 
     
