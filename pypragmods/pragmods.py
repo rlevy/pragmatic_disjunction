@@ -11,7 +11,8 @@ def colnorm(mat):
     return np.divide(mat, np.sum(mat, axis=0))
 
 def safelog(vals):
-    return np.log(vals)
+    with np.errstate(divide='ignore'):
+        return np.log(vals)
 
 def display_matrix(mat, display=True, rnames=None, cnames=None, title='', digits=4):
     """Utility function for displaying strategies to standard output.
