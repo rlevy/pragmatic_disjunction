@@ -133,30 +133,35 @@ class Experiment:
 
     def plot_listener_inference_lambda_values(self, msg='A v X', target_state='1 v 2', lambda_values=np.arange(0.01, 5.0, 0.01), legend_loc='upper right', output_filename=None): 
         self.plot_listener_inference_parameter_space(msg=msg, target_state=target_state, parameter_name='temperature', parameter_text=r"$\lambda$", parameter_values=lambda_values, legend_loc=legend_loc, output_filename=output_filename)
-       
 
-    def plot_listener_inference_parameter_space(self,
-                                                msg='A v X',
-                                                target_state='1 v 2',
-                                                parameter_name='disjunction_cost',
-                                                parameter_text=None,
-                                                parameter_values=np.arange(0.0, 5.0, 0.01),
-                                                legend_loc='upper right',
-                                                output_filename=None):
-        if parameter_text == None: parameter_text = parameter_name        
-        setup = {'family': 'sans-serif', 'sans-serif':['Helvetica'], 'weight':'normal', 'size':18}
-        title_size = 18
-        axis_label_size = 18
-        matplotlib.rc('font', **setup) 
-        matplotlib.rc('xtick', labelsize=14)
-        matplotlib.rc('ytick', labelsize=14)
-        matplotlib.rcParams.update({'font.size': 12})
-        fig = plt.figure(figsize=(13, 9))
-        # Computation
-        param_val_pairs = []
-        original = getattr(self, parameter_name)        
+    def plot_alpha_beta_ratio_space(self, msg='A v X', target_state='1 v 2', alpha_values=np.arange(0.0, 15.0, 1.0), beta_values=np.arange(0.0, 15.0, 1.0), legend_loc='upper right',  output_filename=None):
         probs = defaultdict(list)
-        for paramval in parameter_values:
+        alpha_original = self.alpha
+        beta_original = self.beta
+        for a, b in product(alpha_values, beta_values):
+            self.alpha = a
+            self.beta = b
+            ratio = np.log(b/a)
+            self.build()
+            target_state_index = self.states.index(target_state)
+            self.display_listener_inference(msg=msg)             
+            prob_table = self.listener_inference(msg=msg)
+            for lex_index in range(len(self.lexica)):
+                prob = prob_table[lex_index][target_state_index]
+                maxval = False
+                if np.max(prob_table) == prob:
+                    maxval = True
+                probs[lex_index].append((ratio, prob, maxval))
+        # Restore orginals:
+        self.alpha = alpha_original
+        self.beta = beta_original
+        self.lex_plot(probs, msg=msg, target_state=target_state, parameter_names=['alpha', 'beta'], parameter_text=r"$\log(\beta/\alpha)$", legend_loc=legend_loc, output_filename=output_filename, marker=".", linestyle="")
+       
+    def plot_listener_inference_parameter_space(self, msg='A v X', target_state='1 v 2', parameter_name='disjunction_cost',  parameter_text=None, parameter_values=np.arange(0.0, 5.0, 0.01), legend_loc='upper right',  output_filename=None):    
+        probs = defaultdict(list)
+        # Store the original to respect the problem:
+        original = getattr(self, parameter_name)
+        for paramval in parameter_values:           
             setattr(self, parameter_name, paramval)
             self.build()
             target_state_index = self.states.index(target_state)
@@ -167,25 +172,39 @@ class Experiment:
                 maxval = False
                 if np.max(prob_table) == prob:
                     maxval = True
-                probs[lex_index].append((paramval, prob, maxval))        
+                probs[lex_index].append((paramval, prob, maxval))
+        # Restore the original:
+        setattr(self, parameter_name, original)
+        # Plot:        
+        self.lex_plot(probs, msg=msg, target_state=target_state, parameter_names=[parameter_name], parameter_text=parameter_text, legend_loc=legend_loc, output_filename=output_filename)
+
+    def lex_plot(self, probs, msg='A v X', target_state='1 v 2', parameter_names=['disjunction_cost'], parameter_text=None, parameter_values=np.arange(0.0, 5.0, 0.01), legend_loc='upper right', output_filename=None, marker="o", linestyle="-"):
+        if parameter_text == None: parameter_text = parameter_name        
+        setup = {'family': 'sans-serif', 'weight':'normal', 'size':18}
+        title_size = 18
+        axis_label_size = 18
+        matplotlib.rc('font', **setup) 
+        matplotlib.rc('xtick', labelsize=14)
+        matplotlib.rc('ytick', labelsize=14)
+        matplotlib.rcParams.update({'font.size': 12})
+        fig = plt.figure(figsize=(13, 9))
         # The first set of colors is good for colorbind people:
         colors = ['#1B9E77', '#D95F02', '#7570B3', '#E7298A', '#66A61E', '#E6AB02', '#A6761D', '#666666'] + matplotlib.colors.cnames.values()
         for lex_index in range(len(self.lexica)):
             paramvals, vals, maxval_markers = zip(*probs[lex_index])
             lex_rep = self.lex2str(self.lexica[lex_index])
-            plt.plot(paramvals, vals, marker="", linestyle="-", label=lex_rep, color=colors[lex_index], linewidth=3)
+            plt.plot(paramvals, vals, marker=marker, linestyle=linestyle, label=lex_rep, color=colors[lex_index], markersize=5)
             # Dots mark max-values in the joint table --- best inferences for the listener:
             dots = [(paramval, val) for paramval, val, marker in probs[lex_index] if marker]
             if dots:           
                 dotsx, dotsy = zip(*dots)
-                plt.plot(dotsx, dotsy, marker="o", linestyle="", color=colors[lex_index],  linewidth=3)    
-        plt.title("Listener hears '%s'\n\n%s" % (msg, self.params2str(exclude=[parameter_name])), fontsize=title_size)
+                plt.plot(dotsx, dotsy, marker="o", linestyle="", color=colors[lex_index], markersize=8)    
+        plt.title("Listener hears '%s'\n\n%s" % (msg, self.params2str(exclude=parameter_names)), fontsize=title_size)
         plt.xlabel(parameter_text, fontsize=axis_label_size)
         plt.ylabel(r"Listener probability for $\langle$Lex, %s$\rangle$" % target_state, fontsize=axis_label_size)
         plt.legend(loc=legend_loc)
         x1,x2,y1,y2 = plt.axis()
         plt.axis((x1, x2, 0.0, 1.0))
-        setattr(self, parameter_name, original)
         if output_filename:
             plt.savefig(output_filename)
         else:
@@ -221,7 +240,7 @@ def explore_hyperparameters(baselexicon={'A': ['1'], 'B': ['2'], 'X':['1', '2']}
 
 if __name__ == '__main__':
     
-    hurford = Experiment(n=2, temperature=1.0, disjunction_cost=1.0, beta=1.0, alpha=1.0, null_cost=5.0)
+    hurford = Experiment(n=2, temperature=1.0, disjunction_cost=0.01, beta=1.0, alpha=1.0, null_cost=5.0)
     hurford.build()
     hurford.display_listener_inference(msg='A v X')
 
@@ -251,3 +270,5 @@ if __name__ == '__main__':
     prob_table = hurford.listener_inference(msg='A v X')
     hurford.show_max_lex_state_values(prob_table)
 
+
+    
