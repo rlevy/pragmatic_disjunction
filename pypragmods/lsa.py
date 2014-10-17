@@ -21,7 +21,8 @@ class Experiment:
                  beta=1.0,
                  baselexicon={'A': ['1'], 'B': ['2'], 'X':['1', '2']},
                  prior=None,
-                 lexprior = None):
+                 lexprior=None,
+                 null_cost=5.0):
         self.n = n
         self.disjunction_cost = disjunction_cost
         self.lexical_costs = lexical_costs
@@ -31,12 +32,14 @@ class Experiment:
         self.baselexicon = baselexicon
         self.prior = prior
         self.lexprior = lexprior
+        self.null_cost = null_cost
 
     def build(self):
         lex = Lexica(baselexicon=self.baselexicon,
                      join_closure=True,
                      disjunction_cost=self.disjunction_cost,
                      nullsem=True,
+                     null_cost=self.null_cost,
                      costs=copy.copy(self.lexical_costs))
         
         self.lexica = lex.lexica2matrices()
@@ -183,12 +186,12 @@ class Experiment:
 
 def explore_hyperparameters(baselexicon={'A': ['1'], 'B': ['2'], 'X':['1', '2']},
                             lexical_costs={'A':0.0, 'B':0.0, 'X':0.0},
-                            msg='A v X'):    
-    temps = np.arange(0.0, 3.2, 0.2)
-    dcosts = np.arange(0.0, 3.2, 0.2)
-    alphas = np.arange(0.0, 3.2, 0.2)
-    betas = np.arange(0.0, 3.2, 0.2)
-    depths = [3]
+                            msg='A v X',
+                            temps=[1.0],
+                            dcosts=np.arange(0.0, 0.21, 0.01),
+                            alphas=np.arange(0.0, 15.0, 1),
+                            betas=np.arange(0.0, 15.0, 1),
+                            depths=[10]):
     results = defaultdict(list)
     for temp, dcost, alpha, beta, depth in product(temps, dcosts, alphas, betas, depths):
         params = {'lambda': temp, 'alpha': alpha, 'beta': beta, 'depth': depth, 'disjunction_cost': dcost}
@@ -203,7 +206,7 @@ def explore_hyperparameters(baselexicon={'A': ['1'], 'B': ['2'], 'X':['1', '2']}
             for i, j in product(range(prob_table.shape[0]), range(prob_table.shape[1])):
                 if prob_table[i, j] == max_prob:
                     max_pair = (i, experiment.states[j])
-        #if max_pair == (0, '1'):
+        params['prob'] = max_prob
         print max_pair, params
         results[max_pair].append(params)
     return results
@@ -214,4 +217,5 @@ if __name__ == '__main__':
     hurford = Experiment(temperature=1.0, disjunction_cost=0.01, beta=1.0, alpha=1.0)
     hurford.build()
     hurford.display_listener_inference(msg='A v X')
-       
+
+    
