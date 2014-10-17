@@ -73,14 +73,21 @@ class Experiment:
             prob_table.append(row)
         return np.array(prob_table)
 
-    def display_listener_inference(self, msg='A v X'):
+    def show_max_lex_state_values(self, joint_prob_table, precision=10):
+        max_prob = np.round(np.max(joint_prob_table), precision)
+        for i, j in product(range(len(self.lexica)), range(len(self.states))):
+            if np.round(joint_prob_table[i, j], precision) == max_prob:
+                print "<Lex%s, %s>: %s" % (i, self.states[j], joint_prob_table[i, j])
+
+    def display_listener_inference(self, msg='A v X', digits=3):
+        colwidth = max([len(x) for x in self.messages + self.states] + [digits]) + 4
         print "--------------------------------------------------"
         print self.params2str()
         prob_table = self.listener_inference(msg=msg)        
-        print "".join([x.rjust(10) for x in [""] + self.states])
+        print "".join([x.rjust(colwidth) for x in [""] + self.states])
         for lex_index in range(len(self.lexica)):
             label = "Lex%s" % lex_index
-            print label.rjust(10), "".join([str(round(x, 3)).rjust(10) for x in prob_table[lex_index]])
+            print label.rjust(colwidth), "".join([str(round(x, digits)).rjust(colwidth) for x in prob_table[lex_index]])
 
     def params2str(self, joiner='; ', exclude=[]):
         vals = []
@@ -214,8 +221,33 @@ def explore_hyperparameters(baselexicon={'A': ['1'], 'B': ['2'], 'X':['1', '2']}
 
 if __name__ == '__main__':
     
-    hurford = Experiment(temperature=1.0, disjunction_cost=0.01, beta=1.0, alpha=1.0)
+    hurford = Experiment(n=2, temperature=1.0, disjunction_cost=1.0, beta=1.0, alpha=1.0, null_cost=5.0)
     hurford.build()
     hurford.display_listener_inference(msg='A v X')
 
+    print "======================================================================"    
+
+    hurford = Experiment(n=2, temperature=1.0, disjunction_cost=1.0, beta=1.0, alpha=1.0, null_cost=5.0,
+                         baselexicon={'A': ['1'], 'B': ['2'], 'C': ['3'], 'D': ['4'], 'X': ['1', '2', '3', '4']},
+                         lexical_costs={'A':0.0, 'B':0.0, 'C':0.0, 'D':0.0, 'X':0.0})
+    hurford.build()
+    print hurford.params2str()
+    prob_table = hurford.listener_inference(msg='A v X')
+    hurford.show_max_lex_state_values(prob_table)
+
+    print "======================================================================"
+
+    hurford = Experiment(n=2, temperature=2.0, disjunction_cost=0.01, beta=1.0, alpha=1.0, null_cost=5.0)
+    hurford.build()
+    hurford.display_listener_inference(msg='A v X')
     
+    print "======================================================================"
+
+    hurford = Experiment(n=2, temperature=2.4, disjunction_cost=0.00, beta=1.9, alpha=0.6, null_cost=5.0,
+                         baselexicon={'A': ['1'], 'B': ['2'], 'C': ['3'], 'D': ['4'], 'X': ['1', '2', '3', '4']},
+                         lexical_costs={'A':0.0, 'B':0.0, 'C':0.0, 'D':0.0, 'X':0.0})
+    hurford.build()
+    print hurford.params2str()
+    prob_table = hurford.listener_inference(msg='A v X')
+    hurford.show_max_lex_state_values(prob_table)
+
