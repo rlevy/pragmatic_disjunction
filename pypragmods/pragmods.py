@@ -101,7 +101,7 @@ class Pragmod:
 
     def S(self, lis):
         """Bayesian speaker incorporating costs."""
-        return rownorm(np.exp(self.temperature * (safelog(lis.T)-self.costs)))        
+        return rownorm(np.exp(self.temperature * ((self.alpha * safelog(lis.T)) - self.costs)))
     
     def s1(self, lex):
         """Convenience function for S(l0(lex))"""
