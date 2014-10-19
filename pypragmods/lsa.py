@@ -1,7 +1,7 @@
 import os
 import numpy as np
 from pragmods import Pragmod, display_matrix
-from lexica import Lexica
+from lexica import Lexica, DISJUNCTION_SIGN
 import copy
 import csv
 from itertools import product
@@ -9,6 +9,7 @@ from collections import defaultdict
 import matplotlib.pyplot as plt
 import matplotlib
 import matplotlib.font_manager as font_manager
+import matplotlib.patches as mpatches
 
 
 class Experiment:
@@ -114,25 +115,25 @@ class Experiment:
             return sorted(x, cmp=(lambda x, y: cmp(len(x), len(y))))
         entries = []
         for p_index, p in enumerate(sorted(self.baselexicon.keys())):
-            sem = [s for i, s in enumerate(self.states) if lexicon[p_index][i] > 0.0]            
+            sem = [s for i, s in enumerate(self.states) if lexicon[p_index][i] > 0.0 and not DISJUNCTION_SIGN in s]
             entry = p + "={" + ",".join(state_sorter(sem)) + "}"
             entries.append(entry)
         return "; ".join(entries)
 
-    def plot_listener_inference_depth_values(self, msg='A v X', target_state='1 v 2', n_values=np.arange(1, 5, 1), legend_loc='upper right', output_filename=None):
-        self.plot_listener_inference_parameter_space(msg=msg, target_state=target_state, parameter_name='n', parameter_text='Depth', parameter_values=n_values, legend_loc=legend_loc, output_filename=output_filename)
+    def plot_listener_inference_depth_values(self, msg='A v X', target_state='1 v 2', n_values=np.arange(1, 5, 1), legend_loc='upper right', output_filename=None, progress_report=True):
+        self.plot_listener_inference_parameter_space(msg=msg, target_state=target_state, parameter_name='n', parameter_text='Depth', parameter_values=n_values, legend_loc=legend_loc, output_filename=output_filename, progress_report=progress_report)
 
-    def plot_listener_inference_beta_values(self, msg='A v X', target_state='1 v 2', beta_values=np.arange(0.01, 5.0, 0.01), legend_loc='upper right', output_filename=None): 
-        self.plot_listener_inference_parameter_space(msg=msg, target_state=target_state, parameter_name='beta', parameter_text=r"$\beta$", parameter_values=beta_values, legend_loc=legend_loc, output_filename=output_filename)
+    def plot_listener_inference_beta_values(self, msg='A v X', target_state='1 v 2', beta_values=np.arange(0.01, 5.0, 0.01), legend_loc='upper right', output_filename=None, progress_report=True): 
+        self.plot_listener_inference_parameter_space(msg=msg, target_state=target_state, parameter_name='beta', parameter_text=r"$\beta$", parameter_values=beta_values, legend_loc=legend_loc, output_filename=output_filename, progress_report=progress_report)
 
-    def plot_listener_inference_alpha_values(self, msg='A v X', target_state='1 v 2', alpha_values=np.arange(0.01, 5.0, 0.01), legend_loc='upper right', output_filename=None):
-        self.plot_listener_inference_parameter_space(msg=msg, target_state=target_state, parameter_name='alpha', parameter_text=r"$\alpha$", parameter_values=alpha_values, legend_loc=legend_loc, output_filename=output_filename)
+    def plot_listener_inference_alpha_values(self, msg='A v X', target_state='1 v 2', alpha_values=np.arange(0.01, 5.0, 0.01), legend_loc='upper right', output_filename=None, progress_report=True):
+        self.plot_listener_inference_parameter_space(msg=msg, target_state=target_state, parameter_name='alpha', parameter_text=r"$\alpha$", parameter_values=alpha_values, legend_loc=legend_loc, output_filename=output_filename, progress_report=progress_report)
 
-    def plot_listener_inference_disjunction_costs(self, msg='A v X', target_state='1 v 2', disjunction_cost_values=np.arange(0.0, 5.0, 0.01), legend_loc='upper right', output_filename=None): 
-        self.plot_listener_inference_parameter_space(msg=msg, target_state=target_state, parameter_name='disjunction_cost', parameter_values=disjunction_cost_values, legend_loc=legend_loc, output_filename=output_filename)
+    def plot_listener_inference_disjunction_costs(self, msg='A v X', target_state='1 v 2', disjunction_cost_values=np.arange(0.0, 5.0, 0.01), legend_loc='upper right', output_filename=None, progress_report=True): 
+        self.plot_listener_inference_parameter_space(msg=msg, target_state=target_state, parameter_name='disjunction_cost', parameter_values=disjunction_cost_values, legend_loc=legend_loc, output_filename=output_filename, progress_report=progress_report)
 
-    def plot_listener_inference_lambda_values(self, msg='A v X', target_state='1 v 2', lambda_values=np.arange(0.01, 5.0, 0.01), legend_loc='upper right', output_filename=None): 
-        self.plot_listener_inference_parameter_space(msg=msg, target_state=target_state, parameter_name='temperature', parameter_text=r"$\lambda$", parameter_values=lambda_values, legend_loc=legend_loc, output_filename=output_filename)
+    def plot_listener_inference_lambda_values(self, msg='A v X', target_state='1 v 2', lambda_values=np.arange(0.01, 5.0, 0.01), legend_loc='upper right', output_filename=None, progress_report=True): 
+        self.plot_listener_inference_parameter_space(msg=msg, target_state=target_state, parameter_name='temperature', parameter_text=r"$\lambda$", parameter_values=lambda_values, legend_loc=legend_loc, output_filename=output_filename, progress_report=progress_report)
 
     def plot_alpha_beta_ratio_space(self, msg='A v X', target_state='1 v 2', alpha_values=np.arange(0.0, 15.0, 1.0), beta_values=np.arange(0.0, 15.0, 1.0), legend_loc='upper right',  output_filename=None):
         probs = defaultdict(list)
@@ -157,7 +158,7 @@ class Experiment:
         self.beta = beta_original
         self.lex_plot(probs, msg=msg, target_state=target_state, parameter_names=['alpha', 'beta'], parameter_text=r"$\log(\beta/\alpha)$", legend_loc=legend_loc, output_filename=output_filename, marker=".", linestyle="")
        
-    def plot_listener_inference_parameter_space(self, msg='A v X', target_state='1 v 2', parameter_name='disjunction_cost',  parameter_text=None, parameter_values=np.arange(0.0, 5.0, 0.01), legend_loc='upper right',  output_filename=None):    
+    def plot_listener_inference_parameter_space(self, msg='A v X', target_state='1 v 2', parameter_name='disjunction_cost',  parameter_text=None, parameter_values=np.arange(0.0, 5.0, 0.01), legend_loc='upper right',  output_filename=None, progress_report=True):    
         probs = defaultdict(list)
         # Store the original to respect the problem:
         original = getattr(self, parameter_name)
@@ -165,7 +166,8 @@ class Experiment:
             setattr(self, parameter_name, paramval)
             self.build()
             target_state_index = self.states.index(target_state)
-            self.display_listener_inference(msg=msg)             
+            if progress_report:
+                self.display_listener_inference(msg=msg)             
             prob_table = self.listener_inference(msg=msg)
             for lex_index in range(len(self.lexica)):
                 prob = prob_table[lex_index][target_state_index]
@@ -178,8 +180,8 @@ class Experiment:
         # Plot:        
         self.lex_plot(probs, msg=msg, target_state=target_state, parameter_names=[parameter_name], parameter_text=parameter_text, legend_loc=legend_loc, output_filename=output_filename)
 
-    def lex_plot(self, probs, msg='A v X', target_state='1 v 2', parameter_names=['disjunction_cost'], parameter_text=None, parameter_values=np.arange(0.0, 5.0, 0.01), legend_loc='upper right', output_filename=None, marker="o", linestyle="-"):
-        if parameter_text == None: parameter_text = parameter_name        
+    def lex_plot(self, probs, msg='A v X', target_state='1 v 2', parameter_names=['disjunction_cost'], parameter_text=None, parameter_values=np.arange(0.0, 5.0, 0.01), legend_loc='upper right', output_filename=None, marker="o", linestyle="-", markersize=0):
+        if parameter_text == None: parameter_text = "; ".join(parameter_names)
         setup = {'family': 'sans-serif', 'weight':'normal', 'size':18}
         title_size = 18
         axis_label_size = 18
@@ -187,15 +189,17 @@ class Experiment:
         matplotlib.rc('xtick', labelsize=14)
         matplotlib.rc('ytick', labelsize=14)
         matplotlib.rcParams.update({'font.size': 12})
-        fig = plt.figure(figsize=(13, 9))
+        fig = plt.figure(figsize=(16, 9))
         # The first set of colors is good for colorbind people:
         colors = ['#1B9E77', '#D95F02', '#7570B3', '#E7298A', '#66A61E', '#E6AB02', '#A6761D', '#666666'] + matplotlib.colors.cnames.values()
         for lex_index in range(len(self.lexica)):
             paramvals, vals, maxval_markers = zip(*probs[lex_index])
             lex_rep = self.lex2str(self.lexica[lex_index])
-            plt.plot(paramvals, vals, marker=marker, linestyle=linestyle, label=lex_rep, color=colors[lex_index], markersize=5)
+            plt.plot(paramvals, vals, marker=marker, linestyle=linestyle, label=lex_rep, color=colors[lex_index], markersize=markersize, linewidth=3)
+        for lex_index in range(len(self.lexica)):
+            paramvals, vals, maxval_markers = zip(*probs[lex_index]) 
             # Dots mark max-values in the joint table --- best inferences for the listener:
-            dots = [(paramval, val) for paramval, val, marker in probs[lex_index] if marker]
+            dots = [(paramval, val) for paramval, val, max_marker in probs[lex_index] if max_marker]
             if dots:           
                 dotsx, dotsy = zip(*dots)
                 plt.plot(dotsx, dotsy, marker="o", linestyle="", color=colors[lex_index], markersize=8)    
@@ -203,6 +207,7 @@ class Experiment:
         plt.xlabel(parameter_text, fontsize=axis_label_size)
         plt.ylabel(r"Listener probability for $\langle$Lex, %s$\rangle$" % target_state, fontsize=axis_label_size)
         plt.legend(loc=legend_loc)
+        plt.text(0.01, 0.95, 'dots mark max values', fontsize=14)
         x1,x2,y1,y2 = plt.axis()
         plt.axis((x1, x2, 0.0, 1.0))
         if output_filename:
