@@ -21,8 +21,8 @@ class Lexica:
                  costs=defaultdict(float),
                  disjunction_cost=0.01,
                  conjunction_cost=0.01,
-                 null_cost=5.0
-                 ):
+                 null_cost=5.0,
+                 unknown_word=None):
         self.baselexicon = baselexicon
         self.messages = sorted(self.baselexicon.keys())
         self.atomic_states = sorted(list(set(reduce((lambda x,y : x + y), self.baselexicon.values()))))
@@ -35,16 +35,25 @@ class Lexica:
         self.disjunction_cost = disjunction_cost
         self.conjunction_cost = conjunction_cost
         self.null_cost = null_cost
+        self.unknown_word = unknown_word
         self.lexica = self.get_lexica()
 
     def cost_vector(self):
         return np.array([self.costs[msg] for msg in self.messages])
         
     def get_lexica(self):
-        lexica = []        
-        enrichments = [self.powerset(self.baselexicon[msg]) for msg in self.messages]        
+        lexica = []
+        enrichments = [self.powerset(self.baselexicon[msg]) for msg in self.messages]
         for x in product(*enrichments):
             lexica.append(dict(zip(self.messages, x)))
+        # If there's an unknown word, require it to have an atomic meaning in each lexicon:
+        new_lexica = []
+        if self.unknown_word and self.unknown_word in self.messages:
+            for lex in lexica:                
+                if len(lex[self.unknown_word]) == 1:
+                    new_lexica.append(lex)
+            lexica = new_lexica
+        # Close the lexica:
         if self.join_closure:
             lexica = self.add_join_closure(lexica)
         if self.meet_closure:
@@ -69,8 +78,8 @@ class Lexica:
     def add_meet_closure(self, lexica):
         return self.add_closure(lexica=lexica, connective=CONJUNCTION_SIGN, combo_func=(lambda x,y : x & y), cost_value=self.conjunction_cost)    
 
-    def add_closure(self, lexica=None, connective=None, combo_func=None, cost_value=None):
-        complex_msgs = [connective.join(sorted(cm)) for cm in self.powerset(self.messages, minsize=1)]
+    def add_closure(self, lexica=None, connective=None, combo_func=None, cost_value=None):         
+        complex_msgs = [connective.join(sorted(cm)) for cm in self.powerset(self.messages, minsize=1)]        
         for i, lex in enumerate(lexica):
             for cm in complex_msgs:
                 # Get all the worlds consistent with the complex message:
