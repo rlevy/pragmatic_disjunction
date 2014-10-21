@@ -23,7 +23,8 @@ class Experiment:
                  baselexicon={'A': ['1'], 'B': ['2'], 'X':['1', '2']},
                  prior=None,
                  lexprior=None,
-                 null_cost=5.0):
+                 null_cost=5.0,
+                 unknown_word=None):
         self.n = n
         self.disjunction_cost = disjunction_cost
         self.lexical_costs = lexical_costs
@@ -34,6 +35,7 @@ class Experiment:
         self.prior = prior
         self.lexprior = lexprior
         self.null_cost = null_cost
+        self.unknown_word = unknown_word
 
     def build(self):
         lex = Lexica(baselexicon=self.baselexicon,
@@ -41,7 +43,8 @@ class Experiment:
                      disjunction_cost=self.disjunction_cost,
                      nullsem=True,
                      null_cost=self.null_cost,
-                     costs=copy.copy(self.lexical_costs))
+                     costs=copy.copy(self.lexical_costs),
+                     unknown_word=self.unknown_word)
         
         self.lexica = lex.lexica2matrices()
         self.states = lex.states
@@ -275,5 +278,21 @@ if __name__ == '__main__':
     prob_table = hurford.listener_inference(msg='A v X')
     hurford.show_max_lex_state_values(prob_table)
 
+    print "======================================================================"
 
-    
+    hurford = Experiment(n=10, temperature=2.0, disjunction_cost=0.1, beta=1.0, alpha=1.0, null_cost=5.0,
+                         baselexicon={'A': ['1'], 'B': ['2'], 'C': ['3'], 'D': ['4'], 'X': ['1', '2', '3', '4']},
+                         lexical_costs={'A':0.0, 'B':0.0, 'C':0.0, 'D':0.0, 'X':0.0},
+                         unknown_word='X')
+    hurford.build()
+    langs = hurford.langs
+    msg_index = hurford.messages.index('A v X')
+    lis_index = 2
+    header = [""] + ["Lex%s" % i for i in range(len(hurford.lexica))]
+    print "".join([str(x).rjust(8) for x in header])
+    for i in range(2, len(langs), 2):
+        lang = langs[i]
+        row = list(np.round(np.sum(lang, axis=2)[:, msg_index], 3))
+        row = ["L%s" % lis_index] + row
+        print "".join([str(x).rjust(8) for x in row])
+        lis_index += 1     
