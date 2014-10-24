@@ -21,6 +21,9 @@ matplotlib.rcParams.update({'font.size': 12})
 # The first set of colors is good for colorbind people:
 colors = ['#1B9E77', '#D95F02', '#7570B3', '#E7298A', '#66A61E', '#E6AB02', '#A6761D', '#666666'] + matplotlib.colors.cnames.values()
 
+fig_width = 18
+fig_height = 12
+
 class Experiment:
     def __init__(self,
                  n=3,
@@ -209,7 +212,7 @@ class Experiment:
         setattr(self, parameter_name, original)
         # Plotting:              
         if parameter_text == None: parameter_text = parameter_name
-        fig = plt.figure(figsize=(16, 9))
+        fig = plt.figure(figsize=(fig_width, fig_height))   
         for msg_index, msg in enumerate(self.messages):
             paramvals, vals = zip(*probs[msg_index])
             plt.plot(paramvals, vals, marker="", linestyle="-", label=msg, color=colors[msg_index], markersize=0, linewidth=3)
@@ -238,6 +241,7 @@ class Experiment:
                   'temperature': r'$\lambda$',
                   'disjunction_cost': r'cost($\vee$)',
                   'lexical_costs': r'costs',
+                  'null_cost': r'cost$(\emptyset)$',
                   'alpha': r'$\alpha$',
                   'beta': r'$\beta$'}
         for x in sorted(params):
@@ -279,7 +283,7 @@ class Experiment:
                  linestyle="-",
                  markersize=0):
         if parameter_text == None: parameter_text = "; ".join(parameter_names)
-        fig = plt.figure(figsize=(16, 9))       
+        fig = plt.figure(figsize=(fig_width, fig_height))     
         for lex_index in range(len(self.lexica)):
             paramvals, vals, maxval_markers = zip(*probs[lex_index])
             lex_rep = self.lex2str(self.lexica[lex_index])
