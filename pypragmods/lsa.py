@@ -11,18 +11,24 @@ import matplotlib
 import matplotlib.font_manager as font_manager
 import matplotlib.patches as mpatches
 
-setup = {'family': 'sans-serif', 'weight':'normal', 'size':18}
+######################################################################
+##### PLOT PARAMETERS
+
 title_size = 18
 axis_label_size = 18
+setup = {'family': 'sans-serif', 'weight':'normal', 'size':18}
 matplotlib.rc('font', **setup) 
 matplotlib.rc('xtick', labelsize=14)
 matplotlib.rc('ytick', labelsize=14)
 matplotlib.rcParams.update({'font.size': 12})
+
 # The first set of colors is good for colorbind people:
 colors = ['#1B9E77', '#D95F02', '#7570B3', '#E7298A', '#66A61E', '#E6AB02', '#A6761D', '#666666'] + matplotlib.colors.cnames.values()
 
 fig_width = 18
 fig_height = 12
+
+######################################################################
 
 class Experiment:
     def __init__(self,
@@ -129,6 +135,7 @@ class Experiment:
         probs = defaultdict(list)
         # Store the original to respect the problem:
         original = getattr(self, parameter_name)
+        # Calculate and organize the values:
         for paramval in parameter_values:           
             setattr(self, parameter_name, paramval)
             self.build()
@@ -146,16 +153,32 @@ class Experiment:
                 probs[lex_index].append((paramval, prob, maxval))
         # Restore the original:
         setattr(self, parameter_name, original)
-        # Plot:        
-        self.lex_plot(probs,
-                      observation=msg,
-                      target=target_state,
-                      action_specification='Listener hears',
-                      parameter_names=[parameter_name],
-                      parameter_text=parameter_text,
-                      legend_loc=legend_loc,
-                      output_filename=output_filename)
-            
+        # Plot:               
+        if parameter_text == None: parameter_text = parameter_names
+        fig = plt.figure(figsize=(fig_width, fig_height))     
+        for lex_index in range(len(self.lexica)):
+            paramvals, vals, maxval_markers = zip(*probs[lex_index])
+            lex_rep = self.lex2str(self.lexica[lex_index])
+            plt.plot(paramvals, vals, marker="", linestyle="-", label=lex_rep, color=colors[lex_index], markersize=0, linewidth=3)
+        for lex_index in range(len(self.lexica)):
+            paramvals, vals, maxval_markers = zip(*probs[lex_index]) 
+            # Dots mark max-values in the joint table --- best inferences for the listener:
+            dots = [(paramval, val) for paramval, val, max_marker in probs[lex_index] if max_marker]
+            if dots:           
+                dotsx, dotsy = zip(*dots)
+                plt.plot(dotsx, dotsy, marker="o", linestyle="", color=colors[lex_index], markersize=8)    
+        plt.title("Listener hears '%s'\n\n%s" % (msg, self.params2str(exclude=[parameter_name])), fontsize=title_size)
+        plt.xlabel(parameter_text, fontsize=axis_label_size)
+        plt.ylabel(r"Listener probability for $\langle$Lex, %s$\rangle$" % target_state, fontsize=axis_label_size)
+        plt.legend(loc=legend_loc)
+        plt.text(0.01, 0.95, 'dots mark max values', fontsize=14)
+        x1,x2,y1,y2 = plt.axis()
+        plt.axis((x1, x2, 0.0, 1.0))
+        if output_filename:
+            plt.savefig(output_filename)
+        else:
+            plt.show()
+                
     ######################################################################
     ##### SPEAKER PERSPECTIVE
             
@@ -200,6 +223,7 @@ class Experiment:
         probs = defaultdict(list)
         # Store the original to respect the problem:
         original = getattr(self, parameter_name)
+        # Calculate and organize the values:
         for paramval in parameter_values:           
             setattr(self, parameter_name, paramval)
             self.build()
@@ -209,6 +233,7 @@ class Experiment:
             for msg_index, msg in enumerate(self.messages):
                 prob = prob_table[msg_index, lexicon]
                 probs[msg_index].append((paramval, prob))
+        # Restore the original parameter setting:
         setattr(self, parameter_name, original)
         # Plotting:              
         if parameter_text == None: parameter_text = parameter_name
@@ -216,6 +241,7 @@ class Experiment:
         for msg_index, msg in enumerate(self.messages):
             paramvals, vals = zip(*probs[msg_index])
             plt.plot(paramvals, vals, marker="", linestyle="-", label=msg, color=colors[msg_index], markersize=0, linewidth=3)
+        # Annotations:
         lex_rep = self.lex2str(self.lexica[lexicon])
         plt.title("Speaker observes <%s, Lexicon: %s> \n\n%s" % (state, lex_rep, self.params2str(exclude=[parameter_name])), fontsize=title_size)
         plt.xlabel(parameter_text, fontsize=axis_label_size)
@@ -266,57 +292,17 @@ class Experiment:
             entries.append(entry)
         return "; ".join(entries)
 
-    ######################################################################
-    ##### GENERIC PLOTTING
-    
-    def lex_plot(self,
-                 probs,
-                 observation='A v X',
-                 target='1 v 2',
-                 action_specification='Listener hears',
-                 parameter_names=['disjunction_cost'],
-                 parameter_text=None,
-                 parameter_values=np.arange(0.0, 5.0, 0.01),
-                 legend_loc='upper right',
-                 output_filename=None,
-                 marker="o",
-                 linestyle="-",
-                 markersize=0):
-        if parameter_text == None: parameter_text = "; ".join(parameter_names)
-        fig = plt.figure(figsize=(fig_width, fig_height))     
-        for lex_index in range(len(self.lexica)):
-            paramvals, vals, maxval_markers = zip(*probs[lex_index])
-            lex_rep = self.lex2str(self.lexica[lex_index])
-            plt.plot(paramvals, vals, marker=marker, linestyle=linestyle, label=lex_rep, color=colors[lex_index], markersize=markersize, linewidth=3)
-        for lex_index in range(len(self.lexica)):
-            paramvals, vals, maxval_markers = zip(*probs[lex_index]) 
-            # Dots mark max-values in the joint table --- best inferences for the listener:
-            dots = [(paramval, val) for paramval, val, max_marker in probs[lex_index] if max_marker]
-            if dots:           
-                dotsx, dotsy = zip(*dots)
-                plt.plot(dotsx, dotsy, marker="o", linestyle="", color=colors[lex_index], markersize=8)    
-        plt.title("%s '%s'\n\n%s" % (action_specification, observation, self.params2str(exclude=parameter_names)), fontsize=title_size)
-        plt.xlabel(parameter_text, fontsize=axis_label_size)
-        plt.ylabel(r"Listener probability for $\langle$Lex, %s$\rangle$" % target, fontsize=axis_label_size)
-        plt.legend(loc=legend_loc)
-        plt.text(0.01, 0.95, 'dots mark max values', fontsize=14)
-        x1,x2,y1,y2 = plt.axis()
-        plt.axis((x1, x2, 0.0, 1.0))
-        if output_filename:
-            plt.savefig(output_filename)
-        else:
-            plt.show()
 
 ######################################################################
             
-def explore_hyperparameters(baselexicon={'A': ['1'], 'B': ['2'], 'X':['1', '2']},
-                            lexical_costs={'A':0.0, 'B':0.0, 'X':0.0},
-                            msg='A v X',
-                            temps=[1.0],
-                            dcosts=np.arange(0.0, 0.21, 0.01),
-                            alphas=np.arange(0.0, 15.0, 1),
-                            betas=np.arange(0.0, 15.0, 1),
-                            depths=[10]):
+def listener_explore_hyperparameters(baselexicon={'A': ['1'], 'B': ['2'], 'X':['1', '2']},
+                                     lexical_costs={'A':0.0, 'B':0.0, 'X':0.0},
+                                     msg='A v X',
+                                     temps=[1.0],
+                                     dcosts=np.arange(0.0, 0.21, 0.01),
+                                     alphas=np.arange(0.0, 15.0, 1),
+                                     betas=np.arange(0.0, 15.0, 1),
+                                     depths=[10]):
     results = defaultdict(list)
     for temp, dcost, alpha, beta, depth in product(temps, dcosts, alphas, betas, depths):
         params = {'lambda': temp, 'alpha': alpha, 'beta': beta, 'depth': depth, 'disjunction_cost': dcost}
@@ -336,6 +322,36 @@ def explore_hyperparameters(baselexicon={'A': ['1'], 'B': ['2'], 'X':['1', '2']}
         results[max_pair].append(params)
     return results
 
+def speaker_explore_hyperparameters(baselexicon={'A': ['1'], 'B': ['2'], 'X':['1', '2']},
+                                    lexical_costs={'A':0.0, 'B':0.0, 'X':0.0},
+                                    state='1',
+                                    lexicon=0,
+                                    temps=[1.0],
+                                    dcosts=np.arange(0.0, 0.21, 0.01),
+                                    alphas=np.arange(0.0, 15.0, 1),
+                                    betas=np.arange(0.0, 15.0, 1),
+                                    depths=[10]):
+    results = defaultdict(list)
+    for temp, dcost, alpha, beta, depth in product(temps, dcosts, alphas, betas, depths):
+        params = {'lambda': temp, 'alpha': alpha, 'beta': beta, 'depth': depth, 'disjunction_cost': dcost}
+        experiment = Experiment(baselexicon=baselexicon, lexical_costs=lexical_costs, n=depth, temperature=temp, alpha=alpha, beta=beta, disjunction_cost=dcost)
+        experiment.build()
+        prob_table = experiment.speaker_behavior(state=state)
+        probs = prob_table[ : , lexicon]
+        sorted_probs = sorted(probs)
+        max_msg = None
+        max_prob = sorted_probs[-1]
+        # No ties allowed!
+        if max_prob != sorted_probs[-2]:
+            for i in range(len(probs)):
+                if probs[i] == max_prob:
+                    max_msg = experiment.messages[i]
+        params['prob'] = max_prob
+        print max_msg, params
+        results[max_msg].append(params)
+    return results
+
+######################################################################
 
 if __name__ == '__main__':
    
