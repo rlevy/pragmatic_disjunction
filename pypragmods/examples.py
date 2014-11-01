@@ -2,7 +2,7 @@ import numpy as np
 from pragmods import Pragmod, display_matrix
 from lexica import Lexica
 
-def display_all_models(mod, n=2, display=True):        
+def display_all_models(mod, n=2, display=True):
     print '**********************************************************************'
     print 'Lexical uncertainty model'
     mod.run_uncertainty_model(n=n, display=display)
@@ -13,12 +13,14 @@ def display_all_models(mod, n=2, display=True):
     print 'Anxiety/expertise model'        
     mod.run_expertise_model(n=n, display=display)
         
-def scalars(n=2):
+def scalars(n=3):
     """Scalar example without and with disjunction; compare with Bergen et al.'s figure 5 and figure 9"""
-    baselexicon = {'some': ['w_SOMENOTALL', 'w_ALL'], 'all': ['w_ALL']}
+    baselexicon = {'some': [r'$w_{\exists\neg\forall}$', r'$w_{\forall}$'], 'all': [r'$w_{\forall}$']}
     basic_lexica = Lexica(baselexicon=baselexicon)
-    disjunctive_lexica = Lexica(baselexicon=baselexicon, join_closure=True)
-    for lexica, label in ((basic_lexica, 'basic_lexica'), (disjunctive_lexica, 'disjunctive_lexica')):
+    disjunctive_lexica = Lexica(baselexicon=baselexicon, join_closure=True, disjunction_cost=0.1)
+    disjunctive_lexica.display()
+    for lexica, label in (#(basic_lexica, 'basic_lexica')
+                          (disjunctive_lexica, 'disjunctive_lexica'),):
         print "\n\n", label    
         mod = Pragmod(lexica=lexica.lexica2matrices(),
                       messages=lexica.messages,
@@ -27,26 +29,38 @@ def scalars(n=2):
                       prior=np.repeat(1.0/len(lexica.states), len(lexica.states)),
                       lexprior=np.repeat(1.0/len(lexica), len(lexica)),
                       temperature=1.0)
-        display_all_models(mod, n=n)
+        mod.plot_expertise_listener(output_filename='/Volumes/CHRIS/Documents/research/hurford/definitional-disjunction/pragmatic_disjunction/paper/fig/scalar-expertise-listener-marginalized.pdf', n=n)
+        #mod.plot_expertise_speaker(output_filename='/Volumes/CHRIS/Documents/research/hurford/definitional-disjunction/pragmatic_disjunction/paper/fig/scalar-expertise-speaker.pdf', n=n)
+        mod.plot_expertise_speaker(lexsum=True,
+                                  output_filename='/Volumes/CHRIS/Documents/research/hurford/definitional-disjunction/pragmatic_disjunction/paper/fig/scalar-expertise-speaker-lexsum.pdf',
+                                  n=n)
+        #display_all_models(mod, n=n)
 
 def m_implicature_bergen_etal2014(n=2):
     """Settings for Bergen et al.'s figure 6. Seems to reproduce the effects they report."""
-    lexica = Lexica(baselexicon={'expensive': ['w_RARE', 'w_FREQ'], 'cheap': ['w_RARE', 'w_FREQ']},
+    lexica = Lexica(baselexicon={'expensive': [r'$w_{RARE}$', r'$w_{FREQ}$'], 'cheap': [r'$w_{RARE}$', r'$w_{FREQ}$']},
                     costs={'expensive':2.0, 'cheap':1.0},
-                    null_cost=5.0)    
+                    null_cost=5.0)
+    lexica.display()   
     mod = Pragmod(lexica=lexica.lexica2matrices(),
                   messages=lexica.messages,
                   meanings=lexica.states,
                   costs=lexica.cost_vector(),
                   prior=np.array([2.0/3.0, 1.0/3.0]),
                   lexprior=np.repeat(1.0/len(lexica), len(lexica)),
-                  temperature=10.0)
+                  temperature=1.0,
+                  alpha=3.0)
+    mod.plot_expertise_listener(output_filename='/Volumes/CHRIS/Documents/research/hurford/definitional-disjunction/pragmatic_disjunction/paper/fig/manner-expertise-listener-marginalized.pdf', n=n)
+    mod.plot_expertise_speaker(output_filename='/Volumes/CHRIS/Documents/research/hurford/definitional-disjunction/pragmatic_disjunction/paper/fig/manner-expertise-speaker.pdf', n=n)
+    mod.plot_expertise_speaker(lexsum=True,
+                                  output_filename='/Volumes/CHRIS/Documents/research/hurford/definitional-disjunction/pragmatic_disjunction/paper/fig/manner-expertise-speaker-lexsum.pdf',
+                                  n=n)
     display_all_models(mod, n=n)  
 
 def m_implicature_smith_etal(n=2):
     """Settings for Smith et al.'s 2013 ex from p. 5, though the code does 
     not reproduce the numbers they provide, for unknown reasons."""
-    lexica = Lexica(baselexicon={'expensive': ['w_RARE', 'w_FREQ'], 'cheap': ['w_RARE', 'w_FREQ']},
+    lexica = Lexica(baselexicon={'expensive': [r'$w_{RARE}$', r'$w_{FREQ}$'], 'cheap': [r'$w_{RARE}$', r'$w_{FREQ}$']},
                     costs={'expensive':1.0, 'cheap':0.5},
                     nullsem=False,
                     block_ineffability=True)
@@ -56,7 +70,7 @@ def m_implicature_smith_etal(n=2):
                   costs=lexica.cost_vector(),
                   prior=np.array([0.8, 0.2]),
                   lexprior=np.repeat(1.0/len(lexica), len(lexica)),
-                  temperature=3.0)
+                  temperature=1.0)
     display_all_models(mod, n=n)
 
     
@@ -113,8 +127,8 @@ def expert_disjunction(n=2):
                                       
 if __name__ == '__main__':    
 
-    #scalars(n=3)
-    #m_implicature_bergen_etal2014()
+    scalars(n=3)
+    #m_implicature_bergen_etal2014(n=3)
     #m_implicature_smith_etal(n=3)
     #expert_disjunction(n=25)
 

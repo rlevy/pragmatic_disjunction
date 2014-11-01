@@ -1,6 +1,9 @@
 #/usr/bin/env python
 
+import copy
 import numpy as np
+
+import matplotlib.pyplot as plt
 
 def rownorm(mat):
     """Row normalization of a matrix"""
@@ -194,4 +197,91 @@ class Pragmod:
         cnames = ['Lex%s' % i for i in range(len(self.lexica))]
         display_matrix(mat, display=display, title='S%s' % title, rnames=self.meanings, cnames=cnames, digits=digits)
     
+    def plot_expertise_iteration(self):
+        fig, ax = plt.subplots(4, len(self.lexica)+1)
+        fig.set_figheight(20)
+        fig.set_figwidth(35)
+        for lexindex, lex in enumerate(self.lexica):            
+            self.plot_listener_matrix(self.l0(lex), ax[0][lexindex], lex=lex)
+            self.plot_speaker_matrix(self.s1(lex), ax[1][lexindex], lex=None)
+            self.plot_listener_matrix(self.l1(lex), ax[2][lexindex], lex=None)
+        langs = self.UncertaintyAnxietyListener(marginalize=False)
+        for lexindex, lex in enumerate(langs):
+            self.plot_listener_matrix(lex, ax[3][lexindex], lex=None)
+        self.plot_listener_matrix( self.UncertaintyAnxietyListener(marginalize=True), ax[3][len(self.lexica)], lex=None)
+        print self.ExpertiseSpeaker(langs)
+        plt.savefig('/Volumes/CHRIS/Desktop/temp.png')
 
+    def plot_expertise_listener(self, n=3, output_filename=None):
+        fig, ax = plt.subplots(1,1)
+        fig.set_figheight(6)
+        fig.set_figwidth(8)
+        langs = self.run_expertise_model(n=n)
+        final_listener = langs[-1]
+        marginalized = np.sum(final_listener, axis=0)
+        self.plot_listener_matrix(marginalized, ax, lex=None)
+        if output_filename:
+            plt.savefig(output_filename)
+        else:
+            plt.show()
+
+    def plot_expertise_speaker(self, n=3, output_filename=None, lexsum=False):        
+        langs = self.run_expertise_model(n=n)
+        final_speaker = langs[-2]
+        if lexsum:
+            spk = np.zeros((len(self.messages), len(self.meanings)))
+            for j, u in enumerate(final_speaker): 
+                spk[j] += np.sum(u, axis=1) 
+            fig, ax = plt.subplots()
+            fig.set_figheight(6)
+            fig.set_figwidth(8)
+            self.plot_speaker_matrix(rownorm(spk.T), ax, lex=None)
+        else:
+            final_speaker = final_speaker.T
+            fig, ax = plt.subplots(1,len(self.lexica))
+            fig.set_figheight(6)
+            fig.set_figwidth(8*len(self.lexica))
+            for lexindex in range(len(self.lexica)):
+                self.plot_speaker_matrix(final_speaker[lexindex], ax[lexindex], lex=self.lexica[lexindex])
+        if output_filename:
+             plt.savefig(output_filename)
+        else:
+            plt.show()
+        
+    def plot_listener_matrix(self, mat, ax, lex=None):
+        self.plot_matrix(mat, ax, lex=lex, outerlabels=self.messages, innerlabels=self.meanings)
+
+    def plot_speaker_matrix(self, mat, ax, lex=None):
+        self.plot_matrix(mat, ax, lex=lex, outerlabels=self.meanings, innerlabels=self.messages, initial_color_index=len(self.messages)+1)
+
+    def plot_matrix(self, mat, ax, lex=None, outerlabels=None, innerlabels=None, width=0.2, initial_color_index=0):
+        from lsa import colors
+        from lexica import DISJUNCTION_SIGN
+        m, n = mat.shape
+        barsetwidth = width*n
+        ind = np.arange(0.0, (barsetwidth+width)*m, barsetwidth+width)
+        ind = ind[::-1]        
+        for j in range(n-1, -1, -1):
+            xpos = ind+(width*j)
+            vals = mat[:, j]        
+            ax.barh(xpos, vals, width, color=colors[initial_color_index+j], label=innerlabels[j])
+            for i in range(m):
+                ax.text(0.01, xpos[i]+(width/2.0), innerlabels[j], rotation='horizontal', ha='left', va='center')
+        ax.set_yticks(ind+barsetwidth/2.0)
+        ax.set_yticklabels(outerlabels)
+        if lex != None:
+            ax.set_title(self.lex2str(lex))
+                
+    def lex2str(self, lexicon_or_lexicon_index):
+        from lexica import DISJUNCTION_SIGN
+        lexicon = lexicon_or_lexicon_index
+        if isinstance(lexicon, int):
+            lexicon = self.lexica[lexicon_or_lexicon_index]            
+        def state_sorter(x):
+            return sorted(x, cmp=(lambda x, y: cmp(len(x), len(y))))
+        entries = []
+        for p_index, p in enumerate(self.messages):
+            sem = [s for i, s in enumerate(self.meanings) if lexicon[p_index][i] > 0.0 and not DISJUNCTION_SIGN in s]
+            entry = p + "={" + ",".join(state_sorter(sem)) + "}"
+            entries.append(entry)
+        return "; ".join(entries)

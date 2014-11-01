@@ -1,6 +1,6 @@
 \documentclass{article}
 
-\input{pre-levy-potts-pragdisj}
+\input{preamble}
 
 \begin{document}
 
@@ -158,13 +158,13 @@
     is intrinsic to the phenomena and to our model.
   \end{examples}
 
-\item What's more, for any two nouns $N_{1}$ and $N_{2}$ that one
-  believes to be in a proper entailment relation, a Web search for
+\item However, we can say that, for any two nouns $N_{1}$ and $N_{2}$
+  one believes to be in a proper entailment relation, a Web search for
   ``$N_{1}$ or $N_{2}$'' will generally yield well-formed
-  counterexamples. We have checked that all of the examples discussed
-  in \citealt{Hurford:1974} and \citealt{Singh:2008} are attested in
-  fluent English text on the Web. These are included in the corpus
-  linked in \eg{ourcorpus}.
+  counterexamples, as will ``$N_{2}$ or $N_{1}$''. We have checked
+  that all of the examples discussed in \citealt{Hurford:1974} and
+  \citealt{Singh:2008} are attested in fluent English text on the
+  Web. These are included in the corpus linked in \eg{ourcorpus}.
 
 \item It is an important feature of these data that there is often
   considerably uncertainty about whether the two terms are truly in an
@@ -314,11 +314,11 @@
 
 \begin{examples}
 \item
-\begin{examples}
+  \begin{examples}
   \item $\States$ is a set of states (worlds, referents, propositions, etc.).
   \item $\Messages$ is a set of messages.
-  \item $\Lex: \Messages \mapsto \wp(\States)$ is a semantic
-    interpretation function.
+  \item $\Lex: \Messages \mapsto \wp(\States)$ is a semantic interpretation function.
+  \item $\LexSet = \set{\Lex' : \Lex'(\msg) \subseteq \Lex(\msg), \forall \msg \in \Messages}$
   \item $\Prior : \States \mapsto [0,1]$ is a prior probability
     distribution over states.    
   \item $\Costs : \Messages \mapsto \Reals$ is a cost function on messages.
@@ -346,7 +346,7 @@
   $\mspace{-4mu}\begin{array}[t]{r c l}
   \ListenerK(\state, \Lex \given \msg) 
   &=&
-  \sum_{\Lex} \listenerOne(\state \given \msg, \Lex) \ListenerK(\Lex \given \msg) 
+  \sum_{\Lex \in \LexSet} \listenerOne(\state \given \msg, \Lex) \ListenerK(\Lex \given \msg) 
   \\
   \ListenerK(\Lex \given \msg) 
   &\propto& 
@@ -369,23 +369,151 @@
 
 \subsection{Illustrative examples}\label{sec:illustrations}
 
+\begin{examples}
+\item These initial examples are meant to show how the model works.
+  They have been done elsewhere, but it seems reviewing them using our
+  full model to ensure that the results are preserved.
+
+\item Because closure under disjunction is crucial to our analysis,
+  all of the examples do such closures. (This is another respect in
+  which we are doing more than just repeating examples that have been
+  done in other papers.)
+\end{examples}
+
+\newpage
+
 \subsubsection{Scalar implicature}\label{sec:scalar}
+
+\newcommand{\scalarstate}[1]{w_{#1}}
+\newcommand{\wALL}{\scalarstate{\forall}}
+\newcommand{\wSOMENOTALL}{\scalarstate{\exists\neg\forall}}
+
+\newcommand{\scalarmsg}[1]{\word{#1}}
+\newcommand{\mAll}{\scalarmsg{all}}
+\newcommand{\mSome}{\scalarmsg{some}}
+\newcommand{\mSomevAll}{\scalarmsg{some or all}}
+
+\begin{examples}
+\item $\States = \set{\wALL, \wSOMENOTALL}$; $\Messages = \set{\mAll, \mSome}$; $\Lex = [\mAll \mapsto \set{\wALL}, \mSome \mapsto \set{\wALL,\wSOMENOTALL}]$
+\item Flat prior; all $0$ costs; disjunction cost $0.1$; $\alpha = 1$; $\beta = 1$; $\gamma = 1$  
+\item Lexica with disjunctive closure of states and messages:
+  \setlength{\arraycolsep}{2pt}
+  \[
+  \left[
+    \begin{array}[c]{l@{ \ \mapsto \ } l}
+      \mAll & \set{\wALL} \\
+      \mSome & \set{\wSOMENOTALL,\wALL} \\
+      \mSomevAll & \set{\wSOMENOTALL, \wALL} \\
+    \end{array}
+  \right]
+  \hfill
+  \left[
+  \begin{array}[c]{l@{ \ \mapsto \ } l}
+    \mAll & \set{\wALL} \\
+    \mSome & \set{\wALL} \\
+    \mSomevAll & \set{\wALL} \\
+  \end{array}
+  \right]
+  \hfill
+  \left[
+  \begin{array}[c]{l@{ \ \mapsto \ } l}
+    \mAll & \set{\wALL} \\
+    \mSome & \set{\wSOMENOTALL} \\
+    \mSomevAll & \set{\wSOMENOTALL, \wALL} \\
+  \end{array}
+  \right]
+  \]
+\end{examples}
+
+\begin{examples}
+\item $\ListenerK[3]$ after marginalization over lexica
+
+\includegraphics[width=0.5\textwidth]{fig/scalar-expertise-listener-marginalized}
+
+\item $\SpeakerK[3]$
+
+  $\mspace{-60mu}$
+  \includegraphics[width=1.2\textwidth]{fig/scalar-expertise-speaker}
+
+\item $\SpeakerK[3]$ summed over lexica and renormalized:
+
+  \includegraphics[width=0.5\textwidth]{fig/scalar-expertise-speaker-lexsum}
+\end{examples}
 
 \subsubsection{Markedness implicature}\label{sec:markedness}
 
-The basic converational implicature (exluding \word{and}) was already
-derived by \citealt{Bergen:Goodman:Levy:2012}; our contribution is to
-extend this to the effects of HG ``violations'' and to characterizing
-where and how definitional disjunction arises.
+\newcommand{\mSHORT}{\textsc{SHORT}}
+\newcommand{\mLONG}{\textsc{long}}
 
-\citet{bergen-levy-goodman:2014} show how (i)--(ii) suffice to account
-for the Q- cases of one-way semantic inclusion described above; we
-show how they also suffice to account for the I- cases.  We show that
-adding (iii) preserves these results and permits definitional
-disjunction to arise under precisely the circumstances described
-above. On this analysis, the known disjunct serves as a \tech{focal
-  point} that the speaker and listener can coordinate on for the
-meaning of the unknown disjunct.
+\newcommand{\mannerstate}[1]{w_{\textsc{#1}}}
+\newcommand{\wFREQ}{\mannerstate{freq}}
+\newcommand{\wRARE}{\mannerstate{rare}}
+
+
+\newcommand{\mannerlex}[2]{
+  \left[
+    \begin{array}[c]{l@{ \ \mapsto \ } l}
+      \mSHORT & \set{#1} \\
+      \mLONG & \set{#2}
+    \end{array}
+  \right]}
+
+\begin{examples}
+\item $\States = \set{\wFREQ,\wRARE}$ 
+\item $\Messages = \set{\mSHORT, \mLONG}$
+\item $\Lex = [\mSHORT \mapsto \set{\wFREQ,\wRARE}, \mLONG \mapsto \set{\wFREQ,\wRARE}]$
+\item $\Prior = [\wFREQ \mapsto 2/3, \wRARE \mapsto 1/3]$
+\item $\Costs = [\mSHORT \mapsto 1, \mLONG \mapsto 2]$
+\item $\alpha = 3$; $\beta = 1$; $\gamma = 1$  
+\item Lexica:
+  \[
+  \setlength{\arraycolsep}{2pt} 
+  \begin{array}[c]{l l l}
+  \mannerlex{\wFREQ,\wRARE}{\wFREQ,\wRARE}
+  &
+  \mannerlex{\wFREQ,\wRARE}{\wFREQ}
+  &
+  \mannerlex{\wFREQ,\wRARE}{\wRARE}
+  \\[4ex]
+  \mannerlex{\wFREQ}{\wFREQ,\wRARE}
+  &
+  \mannerlex{\wFREQ}{\wFREQ}
+  &
+  \mannerlex{\wFREQ}{\wRARE}
+  \\[4ex]
+  \mannerlex{\wRARE}{\wFREQ,\wRARE}
+  &
+  \mannerlex{\wRARE}{\wFREQ}
+  &
+  \mannerlex{\wRARE}{\wRARE}
+  \end{array}
+  \]
+\end{examples}
+
+\begin{examples}
+\item $\ListenerK[3]$ after marginalization over lexica
+
+\includegraphics[width=0.5\textwidth]{fig/manner-expertise-listener-marginalized}
+
+\item $\SpeakerK[3]$ summed over lexica and renormalized:
+
+  \includegraphics[width=0.5\textwidth]{fig/manner-expertise-speaker-lexsum}
+\end{examples}
+
+
+% The basic converational implicature (exluding \word{and}) was already
+% derived by \citealt{Bergen:Goodman:Levy:2012}; our contribution is to
+% extend this to the effects of HG ``violations'' and to characterizing
+% where and how definitional disjunction arises.
+
+% \citet{bergen-levy-goodman:2014} show how (i)--(ii) suffice to account
+% for the Q- cases of one-way semantic inclusion described above; we
+% show how they also suffice to account for the I- cases.  We show that
+% adding (iii) preserves these results and permits definitional
+% disjunction to arise under precisely the circumstances described
+% above. On this analysis, the known disjunct serves as a \tech{focal
+%   point} that the speaker and listener can coordinate on for the
+% meaning of the unknown disjunct.
 
 \subsubsection{Scalar implicture of disjunction}\label{sec:scalar-disj}
 
