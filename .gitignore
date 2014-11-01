@@ -8,7 +8,11 @@
 *_region_.tex
 *.pyc
 *.csv
+*.tui
+*.top
+*.mp
 *.Rapp.history
 definitional_disjunction.pdf
 levy-potts-lsa2015-abstract.pdf
+levy-potts-pragdisj-outline.pdf
 pypragmods/.ipynb*
