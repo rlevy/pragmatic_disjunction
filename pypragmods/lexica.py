@@ -18,6 +18,7 @@ class Lexica:
                  join_closure=False,
                  meet_closure=False,
                  block_ineffability=False,
+                 block_trivial_messages=True,
                  costs=defaultdict(float),
                  disjunction_cost=0.01,
                  conjunction_cost=0.01,
@@ -31,6 +32,7 @@ class Lexica:
         self.join_closure = join_closure
         self.meet_closure = meet_closure
         self.block_ineffability = block_ineffability
+        self.block_trivial_messages = block_trivial_messages
         self.costs = costs
         self.disjunction_cost = disjunction_cost
         self.conjunction_cost = conjunction_cost
@@ -86,7 +88,7 @@ class Lexica:
                 vals = reduce(combo_func, [set(lex[word]) for word in cm.split(connective)])
                 # Get the powerset of that set of worlds:
                 vals = self.powerset(vals, minsize=1)
-                # Create the new value, containing worlds and "disjoined worlds":
+                # Create the new value, containing worlds and "conjoined worlds":
                 lex[cm] = [connective.join(sorted(sem)) for sem in vals]
                 args = cm.split(connective)
                 signs = len(args)-1                
@@ -111,8 +113,9 @@ class Lexica:
                     if d in lex[msg]:
                         mat[i,j] = 1.0
             minval = 1 if self.nullsem else 0
-            if not (self.block_ineffability and minval in np.sum(mat, axis=0)):                
-                mats.append(mat)
+            if not (self.block_ineffability and minval in np.sum(mat, axis=0)):
+                if not (self.block_trivial_messages and 0.0 in np.sum(mat, axis=1)):               
+                    mats.append(mat)
         return mats    
     
     def powerset(self, x, minsize=1, maxsize=None):

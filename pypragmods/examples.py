@@ -2,45 +2,31 @@ import numpy as np
 from pragmods import Pragmod, display_matrix
 from lexica import Lexica
 
-def display_all_models(mod, n=2, display=True):
-    print '**********************************************************************'
-    print 'Lexical uncertainty model'
-    mod.run_uncertainty_model(n=n, display=display)
-    print '**********************************************************************'        
-    print 'Social anxiety model'        
-    mod.run_anxiety_model(n=n, display=display)
-    print '**********************************************************************'
-    print 'Anxiety/expertise model'        
-    mod.run_expertise_model(n=n, display=display)
-        
 def scalars(n=3):
     """Scalar example without and with disjunction; compare with Bergen et al.'s figure 5 and figure 9"""
     baselexicon = {'some': [r'$w_{\exists\neg\forall}$', r'$w_{\forall}$'], 'all': [r'$w_{\forall}$']}
     basic_lexica = Lexica(baselexicon=baselexicon)
-    disjunctive_lexica = Lexica(baselexicon=baselexicon, join_closure=True, disjunction_cost=0.1)
-    disjunctive_lexica.display()
-    for lexica, label in (#(basic_lexica, 'basic_lexica')
-                          (disjunctive_lexica, 'disjunctive_lexica'),):
-        print "\n\n", label    
-        mod = Pragmod(lexica=lexica.lexica2matrices(),
-                      messages=lexica.messages,
-                      meanings=lexica.states,
-                      costs=lexica.cost_vector(),                     
-                      prior=np.repeat(1.0/len(lexica.states), len(lexica.states)),
-                      lexprior=np.repeat(1.0/len(lexica), len(lexica)),
-                      temperature=1.0)
-        mod.plot_expertise_listener(output_filename='/Volumes/CHRIS/Documents/research/hurford/definitional-disjunction/pragmatic_disjunction/paper/fig/scalar-expertise-listener-marginalized.pdf', n=n)
-        #mod.plot_expertise_speaker(output_filename='/Volumes/CHRIS/Documents/research/hurford/definitional-disjunction/pragmatic_disjunction/paper/fig/scalar-expertise-speaker.pdf', n=n)
-        mod.plot_expertise_speaker(lexsum=True,
-                                  output_filename='/Volumes/CHRIS/Documents/research/hurford/definitional-disjunction/pragmatic_disjunction/paper/fig/scalar-expertise-speaker-lexsum.pdf',
-                                  n=n)
-        #display_all_models(mod, n=n)
+    lexica = Lexica(baselexicon=baselexicon, join_closure=True, disjunction_cost=0.1)
+    lexica.display()    
+    mod = Pragmod(lexica=lexica.lexica2matrices(),
+                  messages=lexica.messages,
+                  meanings=lexica.states,
+                  costs=lexica.cost_vector(),
+                  prior=np.repeat(1.0/len(lexica.states), len(lexica.states)),
+                  lexprior=np.repeat(1.0/len(lexica), len(lexica)),
+                  temperature=1.0)
+    mod.plot_expertise_listener(output_filename='../paper/fig/scalar-expertise-listener-marginalized.pdf', n=n)
+    mod.plot_expertise_speaker(output_filename='../paper/fig/scalar-expertise-speaker.pdf', n=n)
+    mod.plot_expertise_speaker(output_filename='../paper/fig/scalar-expertise-speaker-lexsum.pdf', n=n, lexsum=True)
 
-def m_implicature_bergen_etal2014(n=2):
+
+def manner(n=3):
     """Settings for Bergen et al.'s figure 6. Seems to reproduce the effects they report."""
-    lexica = Lexica(baselexicon={'expensive': [r'$w_{RARE}$', r'$w_{FREQ}$'], 'cheap': [r'$w_{RARE}$', r'$w_{FREQ}$']},
-                    costs={'expensive':2.0, 'cheap':1.0},
-                    null_cost=5.0)
+    lexica = Lexica(baselexicon={'SHORT': [r'$w_{RARE}$', r'$w_{FREQ}$'], r'long': [r'$w_{RARE}$', r'$w_{FREQ}$']},
+                    costs={'SHORT':1.0, r'long':2.0},
+                    null_cost=5.0,
+                    join_closure=False,
+                    disjunction_cost=0.1)
     lexica.display()   
     mod = Pragmod(lexica=lexica.lexica2matrices(),
                   messages=lexica.messages,
@@ -50,85 +36,40 @@ def m_implicature_bergen_etal2014(n=2):
                   lexprior=np.repeat(1.0/len(lexica), len(lexica)),
                   temperature=1.0,
                   alpha=3.0)
-    mod.plot_expertise_listener(output_filename='/Volumes/CHRIS/Documents/research/hurford/definitional-disjunction/pragmatic_disjunction/paper/fig/manner-expertise-listener-marginalized.pdf', n=n)
-    mod.plot_expertise_speaker(output_filename='/Volumes/CHRIS/Documents/research/hurford/definitional-disjunction/pragmatic_disjunction/paper/fig/manner-expertise-speaker.pdf', n=n)
-    mod.plot_expertise_speaker(lexsum=True,
-                                  output_filename='/Volumes/CHRIS/Documents/research/hurford/definitional-disjunction/pragmatic_disjunction/paper/fig/manner-expertise-speaker-lexsum.pdf',
-                                  n=n)
-    display_all_models(mod, n=n)  
+    mod.plot_expertise_listener(output_filename='../paper/fig/manner-expertise-listener-marginalized.pdf', n=n)
+    mod.plot_expertise_speaker(output_filename='../paper/fig/manner-expertise-speaker.pdf', n=n)
+    mod.plot_expertise_speaker(output_filename='../paper/fig/manner-expertise-speaker-lexsum.pdf', n=n, lexsum=True)
 
-def m_implicature_smith_etal(n=2):
-    """Settings for Smith et al.'s 2013 ex from p. 5, though the code does 
-    not reproduce the numbers they provide, for unknown reasons."""
-    lexica = Lexica(baselexicon={'expensive': [r'$w_{RARE}$', r'$w_{FREQ}$'], 'cheap': [r'$w_{RARE}$', r'$w_{FREQ}$']},
-                    costs={'expensive':1.0, 'cheap':0.5},
-                    nullsem=False,
-                    block_ineffability=True)
+def disjunction(n=3):
+    """Settings for Bergen et al.'s figure 6. Seems to reproduce the effects they report."""
+    lexica = Lexica(baselexicon={'p': [r'$w_1$', r'$w_2$'], 'q':[r'$w_2$', r'$w_3$']},
+                    disjunction_cost=0.1,
+                    conjunction_cost=0.1,
+                    null_cost=5.0,                    
+                    join_closure=True,
+                    meet_closure=False,
+                    block_trivial_messages=True,
+                    block_ineffability=False)
+    
+    lexica.display()   
     mod = Pragmod(lexica=lexica.lexica2matrices(),
                   messages=lexica.messages,
                   meanings=lexica.states,
                   costs=lexica.cost_vector(),
-                  prior=np.array([0.8, 0.2]),
-                  lexprior=np.repeat(1.0/len(lexica), len(lexica)),
-                  temperature=1.0)
-    display_all_models(mod, n=n)
-
-    
-def expert_disjunction(n=2):
-    lexica = Lexica(
-        baselexicon={
-            'A': ['w1'], 
-            'B': ['w2'], 
-            'C': ['w3'],
-            'D': ['w4'],
-            'X': ['w1', 'w2', 'w3', 'w4']},
-        join_closure=True,
-        disjunction_cost=0.001,
-        null_cost=4.0)
-
-    # The unknown word has an atomic meaning:
-    mats = lexica.lexica2matrices()    
-    # mats = [mat for mat in mats if np.sum(mat[4]) == 1]
-    #print len(mats)
-    #for mat in mats:
-    #    display_matrix(mat, rnames=lexica.messages, cnames=lexica.states)
-            
-    mod = Pragmod(lexica=mats,
-                  messages=lexica.messages,
-                  meanings=lexica.states,
-                  costs=lexica.cost_vector(),
                   prior=np.repeat(1.0/len(lexica.states), len(lexica.states)),
-                  lexprior=np.repeat(1.0/len(mats), len(mats)),
-                  temperature=2.0,
-                  alpha=1.0,
-                  beta=1.0)
-    langs = mod.run_expertise_model(n=n, display=False)
+                  lexprior=np.repeat(1.0/len(lexica), len(lexica)),
+                  temperature=1.0,
+                  alpha=5.0)
+    mod.plot_expertise_listener(output_filename='../paper/fig/scalardisj-expertise-listener-marginalized.pdf', n=n)
+    mod.plot_expertise_speaker(output_filename='../paper/fig/scalardisj-expertise-speaker.pdf', n=n)
+    mod.plot_expertise_speaker(output_filename='../paper/fig/scalardisj-expertise-speaker-lexsum.pdf', n=n, lexsum=True)
 
-    # Reproduce Roger's "key speaker result":
-    print "======================================================================"
-    print """Reproduce Roger's "key speaker result" """
-    print "".join([x.rjust(10) for x in ["Spk", "A", "X", "A v X"]])
-    index = 2
-    for i in range(1, len(langs), 2):
-        vals = [langs[i][j][0][0] for j in [0,4,5]]
-        print ('S%i' % index).rjust(10), "".join([str(round(x, 3)).rjust(10) for x in vals])
-        index += 1
 
-    # Corresponding key listener result:
-    print "======================================================================"
-    print 'Corresponding key listener result (same, mutatis mutandis, for <Lex1, B>, <Lex2, C>, <Lex3, D>)'
-    print "".join([x.rjust(10) for x in ["Lis", "A", "X", "A v X"]])
-    index = 2
-    for i in range(0, len(langs), 2):
-        vals = [langs[i][0][j][0] for j in [0,4,5]]
-        print ('L%i, Lex0' % index).rjust(10), "".join([str(round(x, 3)).rjust(10) for x in vals])
-        index += 1
         
                                       
 if __name__ == '__main__':    
 
-    scalars(n=3)
-    #m_implicature_bergen_etal2014(n=3)
-    #m_implicature_smith_etal(n=3)
-    #expert_disjunction(n=25)
+    #scalars(n=3)
+    manner(n=3)
+    #disjunction(n=3)
 

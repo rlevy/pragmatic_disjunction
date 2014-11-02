@@ -4,13 +4,13 @@
 
 \begin{document}
 
-%=====================================================================
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\title{Coordinating on context and construal with disjunctive utterances}
+\title{Negotiating lexical uncertainty and expertise with disjunctive utterances}
 \author{Roger Levy and Christopher Potts}
 \maketitle
 
-%=====================================================================
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Background, claims, and approach}\label{sec:introduction}
 
@@ -22,7 +22,7 @@
 
 \item \posscitet{Hurford:1974} generalization (HG) is a direct
   statement of the overall communicative pressure. It says that,
-  subject to certain exceptions, \word{X or Y} is felicitious only if
+  subject to certain exceptions, \word{X or Y} is felicitous only if
   the meanings of \word{X} and \word{Y} are disjoint.
 
 \item The most widely studied instance of this is that \word{X or Y}
@@ -41,15 +41,14 @@
 \item Subsumptive disjunctions are more routine that HG would seem to
   suggest. We have collected a large corpus of counterexamples. A few:
   \word{canoe or boat}, \word{Paris or France}, \word{China or
-    Beijing}, \word{writer or playwright} and \word{tired or
-    exhausted}.  They seem to be easy to find.  See also
-  \citet{Chemla-HurfordCounts} for quantative study of similar
-  patterns.
+    Beijing}, \word{writer or playwright}, \word{tired or exhausted}.
+  They seem to be easy to find.  See also \citet{Chemla-HurfordCounts}
+  for quantitative study of similar patterns.
 
 \item The truth behind HG is that subsumptive examples reliably signal
-  that we can broadly refer to as \tech{exclusivizing}, in keeping
-  with the intuition behind HG.  The examples seem to be motivated by
-  a wide range of factors centering around the speaker's desire to
+  what we broadly refer to as \tech{exclusivizing}, in keeping with
+  the intuition behind HG.  The examples seem to be motivated by a
+  wide range of factors centering around the speaker's desire to
   highlight a subcategory.
 
 \item Definitional disjunctions seem like maximal violations of HG,
@@ -60,11 +59,11 @@
 
 \item Summarizing the empirical picture, we find a tension. On the one
   hand, \word{X or Y} is typically construed (and intended) as
-  involving semantically disjoint \word{X} and \word{Y}, and that
+  involving semantically disjoint \word{X} and \word{Y}, and
   violations of this at the level of literal content give rise to rich
   conversational implicatures. On the other hand, disjunction can be
   used to signal that the speaker regards the two disjuncts as
-  synonymous, a direct countervention of the broader norms.
+  synonymous.
 
 \item The puzzle deepens when we see that the empirical picture,
   including the definitional disjunction readings, is not a quirk of
@@ -77,8 +76,8 @@
 \item We seek to capture the full range of behavior within a single
   recursive Bayesian model of pragmatic reasoning.  These models find
   their conceptual origins \posscitet{Lewis69} work on signaling
-  systems, and their technical details build on ideas the iterated
-  best response models of \citet{Jaeger:2007} and
+  systems, and their technical details build on ideas from the
+  iterated best response models of \citet{Jaeger:2007} and
   \citet{Franke09DISS}. They have been shown to achieve tight
   correlations with experimental data (e.g.,
   \citealt{Frank:Goodman:2012}) and to contribute to artificial agents
@@ -90,13 +89,13 @@
   \begin{examples}
   \item It lets speakers communicate, not just about the world, but
     also about the language \citep{Smith:Goodman:Frank:2013}. This
-    allows us to probe for inferences about the lexicon involving
-    exclusivization and definition that do not impact the overall
-    denotation of the disjunctive phrase.
+    allows us to probe for inferences about the lexicon that do not
+    impact the overall denotation of the disjunctive phrase (crucial
+    for exclusivization inferences).
 
   \item Following \citet{Bergen:Goodman:Levy:2012} and
-    \citet{Smith:Goodman:Frank:2013}, the crucial ``lexical
-    uncertainty'' property of our model is that it allows a flexible
+    \citet{Smith:Goodman:Frank:2013}, the crucial \textbf{lexical
+      uncertainty} property of our model is that it allows a flexible
     relationship between an atomic expression's literal meaning and
     its context-specific ``refined'' meaning (e.g., the literal
     meaning of \word{boat} includes \word{canoe}, but one of its
@@ -115,8 +114,7 @@
 
 \end{examples}
 
-%=====================================================================
-%=====================================================================
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{A closer look at the phenomena}\label{sec:data}
 
@@ -161,20 +159,24 @@
 \item However, we can say that, for any two nouns $N_{1}$ and $N_{2}$
   one believes to be in a proper entailment relation, a Web search for
   ``$N_{1}$ or $N_{2}$'' will generally yield well-formed
-  counterexamples, as will ``$N_{2}$ or $N_{1}$''. We have checked
-  that all of the examples discussed in \citealt{Hurford:1974} and
-  \citealt{Singh:2008} are attested in fluent English text on the
-  Web. These are included in the corpus linked in \eg{ourcorpus}.
+  counterexamples, as will ``$N_{2}$ or $N_{1}$''.%  We have checked
+  % that all of the examples discussed in \citealt{Hurford:1974} and
+  % \citealt{Singh:2008} are attested in fluent English text on the
+  % Web. These are included in the corpus linked in \eg{ourcorpus}.
+  %
+  % We could do this, but I am not sure of the value. A lot of 
+  % Singh's examples seem contrived, but for irrelevant reasons.
 
-\item It is an important feature of these data that there is often
-  considerably uncertainty about whether the two terms are truly in an
-  entailment relation. For instance, where \eg{franceorparis} leaves
-  little room to negotiate the meaning of the terms in any clear
-  sense, \eg{churchorsynagogue} is much less clear: some speakers have
-  firm judgments that \word{church} and \word{synagogue} exclude each
-  other, but the many occurrences of ``synagogues and other churches''
-  in real text indicate that this is not a universally shared view of
-  the lexicon.
+\item\label{exclusive} It is an important feature of these data that
+  there is often considerable uncertainty about whether the two terms
+  are truly in an entailment relation. For instance, where
+  \subeg{exclusive}{franceorparis} leaves little room to negotiate the
+  meaning of the terms in any clear sense,
+  \subeg{exclusive}{churchorsynagogue} is much less clear: some
+  speakers have firm judgments that \word{church} and \word{synagogue}
+  exclude each other, but the many occurrences of ``synagogues and
+  other churches'' in real text indicate that this is not a
+  universally shared view of the lexicon.
 
   \begin{examples}
   \item\label{franceorparis} ``The nuptials will take place in either
@@ -238,26 +240,31 @@
   sense of overlap is extensional, then even examples like
   \word{doctor or lawyer} will be counterexamples. If the sense of
   overlap is definitional, then it is extremely hard to figure out
-  what criteria should be used to decide particular cases. However,
-  our account does not require us to sort these issues out. Rather, it
-  simply makes predictions about how lexical uncertainty will relate
-  to potential lexical overlap between disjuncts.
+  what criteria should be used to decide particular cases. 
+
+\item However, our account does not require us to sort these issues
+  out. Rather, it simply makes predictions about how lexical
+  uncertainty will relate to potential lexical overlap between
+  disjuncts. We are broadly in agreement with
+  \citeauthor{Singh:2008}'s intuition that disjunctions tend to lead
+  to lexical exclusivization inferences, where the disjuncts are in
+  entailment or just overlap relations.
 \end{examples}
  
-%=====================================================================
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Definitional disjunctions}\label{sec:data:definitional}
 
 \begin{examples}
 \item Attested in Chinese, Finnish, German, Hebrew, Ilokano, Japanese,
-  Russian, and Tagolog. This suggests that the origins are rooted in
+  Russian, and Tagalog. This suggests that the origins are rooted in
   the meaning of disjunction and general pragmatic forces working on
   that meaning.
 
 \item Contextual requirements: 
 
   \begin{examples}
-  \item The speaker is mutally and publicly known to be an expert in
+  \item The speaker is mutually and publicly known to be an expert in
     the relevant domain.
 
   \item The speaker is mutually and publicly known to believe the
@@ -306,9 +313,11 @@
   the concept to something more refined than mere \word{wine lover}.)
 \end{examples}
 
-%=====================================================================
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Model}\label{sec:model}
+
+%=====================================================================
 
 \subsection{Definition}\label{sec:definition}
 
@@ -324,12 +333,13 @@
   \item $\Costs : \Messages \mapsto \Reals$ is a cost function on messages.
   \end{examples}
 
-
-\item\label{l0} $\listenerZero(\state \given \msg, \Lex) \propto 
+\item\label{l0}%
+  $\listenerZero(\state \given \msg, \Lex) \propto
   \frac{\mathbb{I}(\state \in \Lex(\msg))}{|\Lex(\msg)|}
   \Prior(\state)$
 
-\item\label{s1} $\speakerOne(\msg \given \state, \Lex) \propto
+\item\label{s1}% 
+  $\speakerOne(\msg \given \state, \Lex) \propto
   \exp
   \left(
     \log\left(\alpha\,\listenerZero(\state \given \msg, \Lex) \right)
@@ -337,7 +347,8 @@
     \gamma\,\Costs(\msg)
   \right)$
 
-\item\label{l1} $\listenerOne(\state \given \msg, \Lex) \propto 
+\item\label{l1}% 
+  $\listenerOne(\state \given \msg, \Lex) \propto 
   \speakerOne(\msg \given \state, \Lex)
   \Prior(\state)$
 
@@ -347,13 +358,13 @@
   \ListenerK(\state, \Lex \given \msg) 
   &=&
   \sum_{\Lex \in \LexSet} \listenerOne(\state \given \msg, \Lex) \ListenerK(\Lex \given \msg) 
-  \\
+  \\[1ex]
   \ListenerK(\Lex \given \msg) 
   &\propto& 
   \Prior(\Lex) \sum_{\state\in\States} \SpeakerK(\msg \given \state)\Prior(\state)
   \end{array}$
 
-\item\label{Sk}
+\item\label{Sk}%
   $\SpeakerK(\msg \given \state, \Lex) \propto 
   \exp
   \left(
@@ -366,6 +377,16 @@
   \right)$
 \end{examples}
 
+%=====================================================================
+
+\subsection{Returning to simple state/message signaling}
+
+\begin{examples}
+\item\label{lisnorm} $\ListenerK(\state \given \msg)  = \sum_{\Lex \in \LexSet} \ListenerK(\state, \Lex \given \msg)$
+\item\label{spknorm} $\SpeakerK(\msg \given \state) \propto \sum_{\Lex \in \LexSet} \SpeakerK(\msg \given \state, \Lex)$
+\end{examples}
+
+%=====================================================================
 
 \subsection{Illustrative examples}\label{sec:illustrations}
 
@@ -374,13 +395,16 @@
   They have been done elsewhere, but it seems reviewing them using our
   full model to ensure that the results are preserved.
 
-\item Because closure under disjunction is crucial to our analysis,
-  all of the examples do such closures. (This is another respect in
-  which we are doing more than just repeating examples that have been
-  done in other papers.)
+% \item Because closure under disjunction is crucial to our analysis, we
+%   do this for all our examples. (This is another respect in which we
+%   are doing more than just repeating examples that have been done in
+%   other papers.) 
+%%
+%%   We could see this through, but it's hard to make sense of it for
+%%   the Manner case.
 \end{examples}
 
-\newpage
+%=====================================================================
 
 \subsubsection{Scalar implicature}\label{sec:scalar}
 
@@ -388,62 +412,58 @@
 \newcommand{\wALL}{\scalarstate{\forall}}
 \newcommand{\wSOMENOTALL}{\scalarstate{\exists\neg\forall}}
 
-\newcommand{\scalarmsg}[1]{\word{#1}}
+\newcommand{\scalarmsg}[1]{\text{#1}}
 \newcommand{\mAll}{\scalarmsg{all}}
 \newcommand{\mSome}{\scalarmsg{some}}
 \newcommand{\mSomevAll}{\scalarmsg{some or all}}
 
-\begin{examples}
-\item $\States = \set{\wALL, \wSOMENOTALL}$; $\Messages = \set{\mAll, \mSome}$; $\Lex = [\mAll \mapsto \set{\wALL}, \mSome \mapsto \set{\wALL,\wSOMENOTALL}]$
-\item Flat prior; all $0$ costs; disjunction cost $0.1$; $\alpha = 1$; $\beta = 1$; $\gamma = 1$  
-\item Lexica with disjunctive closure of states and messages:
-  \setlength{\arraycolsep}{2pt}
-  \[
+\newcommand{\scalarlex}[3]{
   \left[
     \begin{array}[c]{l@{ \ \mapsto \ } l}
-      \mAll & \set{\wALL} \\
-      \mSome & \set{\wSOMENOTALL,\wALL} \\
-      \mSomevAll & \set{\wSOMENOTALL, \wALL} \\
+      \mAll & \set{#1} \\
+      \mSome & \set{#2} \\
+      \mSomevAll & \set{#3} \\
     \end{array}
-  \right]
-  \hfill
-  \left[
-  \begin{array}[c]{l@{ \ \mapsto \ } l}
-    \mAll & \set{\wALL} \\
-    \mSome & \set{\wALL} \\
-    \mSomevAll & \set{\wALL} \\
-  \end{array}
-  \right]
-  \hfill
-  \left[
-  \begin{array}[c]{l@{ \ \mapsto \ } l}
-    \mAll & \set{\wALL} \\
-    \mSome & \set{\wSOMENOTALL} \\
-    \mSomevAll & \set{\wSOMENOTALL, \wALL} \\
-  \end{array}
-  \right]
-  \]
+  \right]}
+
+\begin{examples}
+\item
+  \begin{examples}
+  \item $\States = \set{\wALL, \wSOMENOTALL}$; $\Messages = \set{\mAll, \mSome}$; $\Lex = [\mAll \mapsto \set{\wALL}, \mSome \mapsto \set{\wALL,\wSOMENOTALL}]$
+  \item Flat prior; all $0$ costs; disjunction cost $0.1$; $\alpha = 1$; $\beta = 1$; $\gamma = 1$  
+  \item Lexica with disjunctive closure of states and messages:
+    \setlength{\arraycolsep}{2pt}
+    \[
+    \scalarlex{\wALL}{\wSOMENOTALL,\wALL}{\wSOMENOTALL, \wALL}
+    \hfill
+    \scalarlex{\wALL}{\wALL}{\wALL}
+    \hfill
+    \scalarlex{\wALL}{\wSOMENOTALL}{\wSOMENOTALL, \wALL} 
+    \]
+  \end{examples}
 \end{examples}
 
 \begin{examples}
-\item $\ListenerK[3]$ after marginalization over lexica
+\item $\ListenerK[3]$ after marginalization over lexica as in \eg{lisnorm} \\[-0.25ex]
+  \includegraphics[width=0.6\textwidth]{fig/scalar-expertise-listener-marginalized}
 
-\includegraphics[width=0.5\textwidth]{fig/scalar-expertise-listener-marginalized}
+\item $\SpeakerK[3]$'s message behavior given state--lexicon pairs:
 
-\item $\SpeakerK[3]$
+  \vspace{-4pt}
 
-  $\mspace{-60mu}$
-  \includegraphics[width=1.2\textwidth]{fig/scalar-expertise-speaker}
+  $\mspace{-140mu}$
+  \includegraphics[width=1.4\textwidth]{fig/scalar-expertise-speaker}
 
-\item $\SpeakerK[3]$ summed over lexica and renormalized:
-
-  \includegraphics[width=0.5\textwidth]{fig/scalar-expertise-speaker-lexsum}
+\item $\SpeakerK[3]$ summed over lexica and renormalized as in \eg{spknorm} \\[-0.25ex]
+  \includegraphics[width=0.6\textwidth]{fig/scalar-expertise-speaker-lexsum}
 \end{examples}
+
+%=====================================================================
 
 \subsubsection{Markedness implicature}\label{sec:markedness}
 
-\newcommand{\mSHORT}{\textsc{SHORT}}
-\newcommand{\mLONG}{\textsc{long}}
+\newcommand{\mSHORT}{\text{SHORT}}
+\newcommand{\mLONG}{\text{long}}
 
 \newcommand{\mannerstate}[1]{w_{\textsc{#1}}}
 \newcommand{\wFREQ}{\mannerstate{freq}}
@@ -459,89 +479,311 @@
   \right]}
 
 \begin{examples}
-\item $\States = \set{\wFREQ,\wRARE}$ 
-\item $\Messages = \set{\mSHORT, \mLONG}$
-\item $\Lex = [\mSHORT \mapsto \set{\wFREQ,\wRARE}, \mLONG \mapsto \set{\wFREQ,\wRARE}]$
-\item $\Prior = [\wFREQ \mapsto 2/3, \wRARE \mapsto 1/3]$
-\item $\Costs = [\mSHORT \mapsto 1, \mLONG \mapsto 2]$
-\item $\alpha = 3$; $\beta = 1$; $\gamma = 1$  
-\item Lexica:
-  \[
-  \setlength{\arraycolsep}{2pt} 
-  \begin{array}[c]{l l l}
-  \mannerlex{\wFREQ,\wRARE}{\wFREQ,\wRARE}
-  &
-  \mannerlex{\wFREQ,\wRARE}{\wFREQ}
-  &
-  \mannerlex{\wFREQ,\wRARE}{\wRARE}
-  \\[4ex]
-  \mannerlex{\wFREQ}{\wFREQ,\wRARE}
-  &
-  \mannerlex{\wFREQ}{\wFREQ}
-  &
-  \mannerlex{\wFREQ}{\wRARE}
-  \\[4ex]
-  \mannerlex{\wRARE}{\wFREQ,\wRARE}
-  &
-  \mannerlex{\wRARE}{\wFREQ}
-  &
-  \mannerlex{\wRARE}{\wRARE}
-  \end{array}
-  \]
+\item 
+  \begin{examples}
+  \item $\States = \set{\wFREQ,\wRARE}$ 
+  \item $\Messages = \set{\mSHORT, \mLONG}$
+  \item $\Lex = [\mSHORT \mapsto \set{\wFREQ,\wRARE}, \mLONG \mapsto \set{\wFREQ,\wRARE}]$
+  \item $\Prior = [\wFREQ \mapsto 2/3, \wRARE \mapsto 1/3]$
+  \item $\Costs = [\mSHORT \mapsto 1, \mLONG \mapsto 2]$
+  \item $\alpha = 3$; $\beta = 1$; $\gamma = 1$  
+  \item Lexica:
+    \[
+    \setlength{\arraycolsep}{2pt} 
+    \begin{array}[c]{l l l}
+      \mannerlex{\wFREQ,\wRARE}{\wFREQ,\wRARE}
+      &
+      \mannerlex{\wFREQ,\wRARE}{\wFREQ}
+      &
+      \mannerlex{\wFREQ,\wRARE}{\wRARE}
+      \\[4ex]
+      \mannerlex{\wFREQ}{\wFREQ,\wRARE}
+      &
+      \mannerlex{\wFREQ}{\wFREQ}
+      &
+      \mannerlex{\wFREQ}{\wRARE}
+      \\[4ex]
+      \mannerlex{\wRARE}{\wFREQ,\wRARE}
+      &
+      \mannerlex{\wRARE}{\wFREQ}
+      &
+      \mannerlex{\wRARE}{\wRARE}
+    \end{array}
+    \]
+  \end{examples}
 \end{examples}
 
 \begin{examples}
-\item $\ListenerK[3]$ after marginalization over lexica
+\item $\ListenerK[3]$ after marginalization over lexica as in \eg{lisnorm} \\
+  \includegraphics[width=0.7\textwidth]{fig/manner-expertise-listener-marginalized}
 
-\includegraphics[width=0.5\textwidth]{fig/manner-expertise-listener-marginalized}
-
-\item $\SpeakerK[3]$ summed over lexica and renormalized:
-
-  \includegraphics[width=0.5\textwidth]{fig/manner-expertise-speaker-lexsum}
+\item $\SpeakerK[3]$ summed over lexica and renormalized as in \eg{spknorm} \\
+  \includegraphics[width=0.7\textwidth]{fig/manner-expertise-speaker-lexsum}
 \end{examples}
 
+%=====================================================================
+\newpage
 
-% The basic converational implicature (exluding \word{and}) was already
-% derived by \citealt{Bergen:Goodman:Levy:2012}; our contribution is to
-% extend this to the effects of HG ``violations'' and to characterizing
-% where and how definitional disjunction arises.
+\subsubsection{Scalar implicature of disjunction}\label{sec:scalar-disj}
 
-% \citet{bergen-levy-goodman:2014} show how (i)--(ii) suffice to account
-% for the Q- cases of one-way semantic inclusion described above; we
-% show how they also suffice to account for the I- cases.  We show that
-% adding (iii) preserves these results and permits definitional
-% disjunction to arise under precisely the circumstances described
-% above. On this analysis, the known disjunct serves as a \tech{focal
-%   point} that the speaker and listener can coordinate on for the
-% meaning of the unknown disjunct.
+\begin{examples}
+\item 
+  \begin{examples}
+  \item 
+    $\Lex$:
+    $\begin{array}[c]{r *{4}{c}}
+      \toprule
+                    & p      & q      & p \word{ or } q & p \word{ and } q \\
+      \midrule
+      w_{1}          & \True    & \False & \True     & \False \\
+      w_{2}          & \True    & \True  & \True     & \True  \\
+      w_{3}           & \False  & \True  & \True     & \False \\
+      \bottomrule
+    \end{array}$
+  \item $\alpha = 3$ (it's important that this be high for exclusivization)
+  \item Disjunction cost: $0.1$; $\beta = 1$; $\gamma = 1$  
+  \end{examples}
+\end{examples}
 
-\subsubsection{Scalar implicture of disjunction}\label{sec:scalar-disj}
+\noindent
+\begin{minipage}[c]{0.48\linewidth}
+  \begin{examples}
+  \item $\ListenerK[3]$ after marginalization 
+    
+    \vspace{-4pt}
+
+     $\mspace{-70mu}$\includegraphics[width=1.2\textwidth]{fig/scalardisj-expertise-listener-marginalized}
+  \end{examples}
+\end{minipage}
+\hfill
+\begin{minipage}[c]{0.48\linewidth}
+  \begin{examples}
+  \item $\SpeakerK[3]$ summed over lexica
+    
+    \vspace{-4pt}
+
+    $\mspace{-70mu}$\includegraphics[width=1.2\textwidth]{fig/scalardisj-expertise-speaker-lexsum}
+  \end{examples}
+\end{minipage}
+
+\begin{examples}
+\item Summary of the above via max associations:
+
+  \begin{minipage}[t]{0.45\linewidth}
+    Listener
+
+    \vspace{2pt}
+  
+    $\begin{array}[t]{r @{ \ \Rightarrow \ } l}
+      \toprule
+      \text{Message} & \text{Inference} \\
+      \midrule
+      p &  w_{1}\\
+      q & w_{3} \\
+      p \word{ or } q & w_{1} \vee w_{3} \\
+      \bottomrule
+    \end{array}$
+  \end{minipage}
+  \hfill
+  \begin{minipage}[t]{0.45\linewidth}
+    Speaker
+
+    \vspace{2pt}
+
+    $\begin{array}[t]{r @{ \ \Rightarrow \ } l}
+      \toprule
+      \text{Observation} & \text{Best message} \\
+      \midrule
+      w_{1} & p \\
+      w_{2} & \set{p, q} \\
+      w_{3} & q  \\      
+      \bottomrule
+    \end{array}$
+  \end{minipage}    
+\end{examples}
 
 %=====================================================================
 
 \section{Analysis}\label{sec:analysis}
 
+\begin{examples}
+\item Throughout, let \word{X} be the unknown term.
+
+\item From the listener's perspective, we are concerned to see when
+  \word{A or X} gives rise to the inference that $\sem{A} \cap \sem{X}
+  = \emptyset$ (Hurfordian reading) and when \word{A or X} gives rise
+  to the inference that $\sem{A} = \sem{X}$.
+\end{examples}
+
+\newcommand{\smallhurfordlex}[3]{
+  \left[
+    \begin{array}[c]{l@{ \ \mapsto \ }r l@{ \ \mapsto \ }r l@{ \ \mapsto \ }r}
+      A & \set{#1} &
+      B & \set{#2} &
+      X & \set{#3}
+    \end{array}
+  \right]}
+
+%=====================================================================
+
 \subsection{Subsumptive disjunctions}\label{sec:analysis:subsumptive}
+
+\begin{examples}
+\item From the listener's perspective, we are concerned to see when
+  \word{A or X} gives rise to the lexical inference that $\sem{A} \cap
+  \sem{X} = \emptyset$. We assume that the overall meaning will be
+  $\sem{A} \cup \sem{X}$, i.e., that the relevant information concerns
+  just the lexical inference.
+
+\item Here's a scenario in which the exclusivization inference arises:
+
+  \begin{examples}
+  \item $\States = \set{w_{1}, w_{2}, w_{3}}$;  $\Messages = \set{A, B, X}$
+  \item $\Lex = [A \mapsto \set{w_{1}}, B \mapsto \set{w_{2}}, X \mapsto \set{w_{1}, w_{2}}]$
+  \item Priors are flat. $\alpha = 2$; $\beta = 1$; $\gamma = 1$. Disjunction cost: $1$. $n = 3$. 
+  \end{examples}
+
+\item The listener's best guess inference, upon hearing \word{A or X},
+  is that the speaker's state is $w_{1} \vee w_{2}$ and that the
+  lexicon is the one where $A$ and $X$ are disjoint. Here's the joint
+  probability table:
+  \[
+  \renewcommand{\arraystretch}{2}
+  \begin{array}[c]{l r r r}
+    \toprule
+            & w_{1} & w_{2} & w_{1} \vee w_{2} \\
+    \midrule
+    \smallhurfordlex{w_{1}}{w_{2}}{w_{1}, w_{2}} & 0 & 0 & 0.16 \\
+    \smallhurfordlex{w_{1}}{w_{2}}{w_{2}} & 0 & 0 & \graycell{0.47} \\
+    \smallhurfordlex{w_{1}}{w_{2}}{w_{1}} & 0 & 0 & 0.38 \\
+    \bottomrule
+  \end{array}
+  \]
+
+\item The above parameters deliver the same result with the the
+  lexicon size increased (same pattern: each lexical item denotes its
+  own world and $X$ denotes the union of all the worlds). This is
+  unwieldy to visualize, but the important thing is that the best
+  lexicon is always a Hurfordian one. Here's the best lexical
+  inference with five atomic messages and four atomic states:
+  \[
+  \left[
+    \begin{array}[c]{l@{ \ \mapsto \ }l}
+      A & \set{w_{1}} \\
+      B & \set{w_{2}} \\
+      C & \set{w_{3}} \\
+      D & \set{w_{4}} \\
+      X & \set{w_{2}, w_{3}, w_{4}}
+    \end{array}
+  \right]
+  \]
+  This is the `minimal' Hurfordian lexicon: the listener doesn't infer
+  anything about $X$ except that it is disjoint from $A$.    
+\end{examples}
+
+%=====================================================================
 
 \subsection{Definitional disjunctions}\label{sec:analysis:definitional}
 
 \begin{examples}
-\item The definitional interpretation of disjunctions such as can fall
-  out of our model when the following conditions hold:
-%
-  \begin{itemize}
-  \item it is common ground that one of the disjuncts is a
-    \emph{novel} term whose meaning is known to the speaker but not to
-    the listener, and that the other is known to both the speaker and
-    the listener; and
-  \item value is placed on the successful transmission from the
-    speaker to the listener not only of the reference of the
-    disjunction but also of the meaning of the novel term.
-  \end{itemize}
-  % 
-  Under these circumstances, the meaning of the known disjunct serves
-  as a \emph{focal point} that the speaker and listener can coordinate
-  on for the meaning of the unknown word.
+\item From the listener's perspective, we are concerned to see when
+  \word{A or X} is interpreted as equivalent to $\sem{A}$.
+
+\item From the speaker's perspective, we want to know what happens
+  when the speaker favors a lexicon in which $\sem{A}=\sem{X}$ and
+  observes a state equivalent to the literal meaning of $\sem{A}$.
+  When will such a speaker produce \word{A or X}.
+
+\item Here's an example in which these two perspectives are
+  complementary. To achieve it, we have to substantially raise
+  $\alpha$ and $\beta$ and lower disjunction costs:
+
+  \begin{examples}
+  \item $\States = \set{w_{1}, w_{2}, w_{3}}$;  $\Messages = \set{A, B, X}$
+  \item $\Lex = [A \mapsto \set{w_{1}}, B \mapsto \set{w_{2}}, X \mapsto \set{w_{1}, w_{2}}]$
+  \item Priors are flat. $\alpha = 5$; $\beta = 7$; $\gamma = 1$. Disjunction cost: $0.01$. $n = 3$. 
+  \end{examples}
+
+\item The listener's best guess inference, upon hearing \word{A or X},
+  is that the speaker's state is $w_{1} \vee w_{2}$ and that the
+  lexicon is $\Lex_{1}$. Here's the joint probability table:
+  \[
+  \renewcommand{\arraystretch}{2}
+  \begin{array}[c]{l r r r}
+    \toprule
+            & w_{1} & w_{2} & w_{1} \vee w_{2} \\
+    \midrule
+    \smallhurfordlex{w_{1}}{w_{2}}{w_{1}, w_{2}} & 0 & 0 & 0 \\
+    \smallhurfordlex{w_{1}}{w_{2}}{w_{2}}        & 0 & 0 & 0 \\
+    \smallhurfordlex{w_{1}}{w_{2}}{w_{1}}        & \graycell{0.88} & 0 & 0.12\\
+    \bottomrule
+  \end{array}
+  \]
+
+\item The above parameters deliver the same result with the the
+  lexicon size increased. Here's the best lexical inference with five
+  atomic messages and four atomic states --- in this way, the 
+  listener has learned that $A$ and $X$ are synonymous:
+  \[
+  \left[
+    \begin{array}[c]{l@{ \ \mapsto \ }l}
+      A & \set{w_{1}} \\
+      B & \set{w_{2}} \\
+      C & \set{w_{3}} \\
+      D & \set{w_{4}} \\
+      X & \set{w_{1}}
+    \end{array}
+  \right]
+  \]  
+
+\item If we assume that the unknown term has an atomic meaning, then
+  we can strengthen the inference (and generate it under a wider range
+  of parameters settings).  Under these circumstances, the meaning of
+  the known disjunct serves as a \emph{focal point} that the speaker
+  and listener can coordinate on for the meaning of the unknown word.
+\end{examples}
+
+%=====================================================================
+
+\subsection{Characterization}\label{sec:analysis:characterization}
+
+\begin{examples}
+\item The basic characterization is that definitional reading arise
+  when disjunction costs are low and $\beta$ is high. Conversely,
+  Hurfordian reading arise when disjunction cost are high and $\alpha$
+  and $\beta$ are relatively close.
+  
+\item The intuition: where costs are high, the disjunction has to be
+  justified. Letting the two terms overlap reduces the justification,
+  whereas exclusivizing provides justification. 
+
+\item However, this needs to be qualified by the speaker's desire to
+  communicate about the lexicon. If $\beta$ is high, then it might be
+  worth paying the disjunction costs for the sake of teaching the
+  listener about the lexicon, even if this involves a huge penalty in
+  terms of informativity (since definitional readings convey only
+  a single term's worth of information).
+
+\item Hurfordian readings arise in a much wider range of parameters
+  settings, that is contexts, because they survive high definitional
+  costs are long as they can be justified.
+
+\item Definitional readings exist mainly in the space of low
+  disjunction and high $\beta$. This is more rarefied. We believe this
+  is reflected in the data: definitional readings are relatively
+  infrequent and delicate.
+
+\item Here's a plot that does a good job of conveying the above.  It's
+  for a relatively large lexicon: five atomic lexical items and five
+  atomic states. (Smaller examples can be hard to interpret, since the
+  model's overall pressure to achieve separating equilibria can
+  create associations that we wouldn't expect to see in a more complex
+  setting like, well, English.) The x-axis is $\log(\beta/\alpha)$, so
+  $0.$ marks the points where $\beta = \alpha$. The y-axis is 
+  the cost of disjunction (assuming $\gamma=1.0$).
+
+  \includegraphics[width=1.2\textwidth]{fig/lex5-alpha-beta-gamma}
+
 \end{examples}
 
 %=====================================================================

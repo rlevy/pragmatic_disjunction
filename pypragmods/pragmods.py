@@ -3,6 +3,7 @@
 import copy
 import numpy as np
 
+import matplotlib
 import matplotlib.pyplot as plt
 
 def rownorm(mat):
@@ -13,7 +14,7 @@ def colnorm(mat):
     """Column normalization of a matrix"""    
     return np.divide(mat, np.sum(mat, axis=0))
 
-def safelog(vals):
+def safelog(vals):           
     with np.errstate(divide='ignore'):
         return np.log(vals)
 
@@ -195,27 +196,12 @@ class Pragmod:
 
     def display_lex_matrix(self, mat, display=True, title='', digits=4):
         cnames = ['Lex%s' % i for i in range(len(self.lexica))]
-        display_matrix(mat, display=display, title='S%s' % title, rnames=self.meanings, cnames=cnames, digits=digits)
-    
-    def plot_expertise_iteration(self):
-        fig, ax = plt.subplots(4, len(self.lexica)+1)
-        fig.set_figheight(20)
-        fig.set_figwidth(35)
-        for lexindex, lex in enumerate(self.lexica):            
-            self.plot_listener_matrix(self.l0(lex), ax[0][lexindex], lex=lex)
-            self.plot_speaker_matrix(self.s1(lex), ax[1][lexindex], lex=None)
-            self.plot_listener_matrix(self.l1(lex), ax[2][lexindex], lex=None)
-        langs = self.UncertaintyAnxietyListener(marginalize=False)
-        for lexindex, lex in enumerate(langs):
-            self.plot_listener_matrix(lex, ax[3][lexindex], lex=None)
-        self.plot_listener_matrix( self.UncertaintyAnxietyListener(marginalize=True), ax[3][len(self.lexica)], lex=None)
-        print self.ExpertiseSpeaker(langs)
-        plt.savefig('/Volumes/CHRIS/Desktop/temp.png')
+        display_matrix(mat, display=display, title='S%s' % title, rnames=self.meanings, cnames=cnames, digits=digits)     
 
     def plot_expertise_listener(self, n=3, output_filename=None):
         fig, ax = plt.subplots(1,1)
-        fig.set_figheight(6)
-        fig.set_figwidth(8)
+        fig.set_figheight(len(self.meanings)*len(self.messages)*0.75)
+        fig.set_figwidth(14)
         langs = self.run_expertise_model(n=n)
         final_listener = langs[-1]
         marginalized = np.sum(final_listener, axis=0)
@@ -233,13 +219,13 @@ class Pragmod:
             for j, u in enumerate(final_speaker): 
                 spk[j] += np.sum(u, axis=1) 
             fig, ax = plt.subplots()
-            fig.set_figheight(6)
-            fig.set_figwidth(8)
+            fig.set_figheight(len(self.meanings)*len(self.messages)*0.75)
+            fig.set_figwidth(14)
             self.plot_speaker_matrix(rownorm(spk.T), ax, lex=None)
         else:
             final_speaker = final_speaker.T
             fig, ax = plt.subplots(1,len(self.lexica))
-            fig.set_figheight(6)
+            fig.set_figheight(5)
             fig.set_figwidth(8*len(self.lexica))
             for lexindex in range(len(self.lexica)):
                 self.plot_speaker_matrix(final_speaker[lexindex], ax[lexindex], lex=self.lexica[lexindex])
@@ -249,14 +235,18 @@ class Pragmod:
             plt.show()
         
     def plot_listener_matrix(self, mat, ax, lex=None):
-        self.plot_matrix(mat, ax, lex=lex, outerlabels=self.messages, innerlabels=self.meanings)
+        from lexica import DISJUNCTION_SIGN 
+        msgs = [m.replace(DISJUNCTION_SIGN, ' or ') for m in self.messages] 
+        self.plot_matrix(mat, ax, lex=lex, outerlabels=msgs, innerlabels=self.meanings)
 
     def plot_speaker_matrix(self, mat, ax, lex=None):
-        self.plot_matrix(mat, ax, lex=lex, outerlabels=self.meanings, innerlabels=self.messages, initial_color_index=len(self.messages)+1)
+        from lexica import DISJUNCTION_SIGN 
+        msgs = [m.replace(DISJUNCTION_SIGN, ' or ') for m in self.messages] 
+        self.plot_matrix(mat, ax, lex=lex, outerlabels=self.meanings, innerlabels=msgs, initial_color_index=len(self.messages)+1)
 
     def plot_matrix(self, mat, ax, lex=None, outerlabels=None, innerlabels=None, width=0.2, initial_color_index=0):
         from lsa import colors
-        from lexica import DISJUNCTION_SIGN
+        from lexica import DISJUNCTION_SIGN              
         m, n = mat.shape
         barsetwidth = width*n
         ind = np.arange(0.0, (barsetwidth+width)*m, barsetwidth+width)
@@ -266,9 +256,10 @@ class Pragmod:
             vals = mat[:, j]        
             ax.barh(xpos, vals, width, color=colors[initial_color_index+j], label=innerlabels[j])
             for i in range(m):
-                ax.text(0.01, xpos[i]+(width/2.0), innerlabels[j], rotation='horizontal', ha='left', va='center')
+                ax.text(0.01, xpos[i]+(width/2.0), innerlabels[j], rotation='horizontal', ha='left', va='center', fontsize=18)
         ax.set_yticks(ind+barsetwidth/2.0)
-        ax.set_yticklabels(outerlabels)
+        ax.set_yticklabels(outerlabels, fontsize=24)
+        ax.set_ylim([min(xpos), max(ind+barsetwidth+width)])
         if lex != None:
             ax.set_title(self.lex2str(lex))
                 
