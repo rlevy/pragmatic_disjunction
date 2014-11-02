@@ -196,7 +196,10 @@ class Pragmod:
 
     def display_lex_matrix(self, mat, display=True, title='', digits=4):
         cnames = ['Lex%s' % i for i in range(len(self.lexica))]
-        display_matrix(mat, display=display, title='S%s' % title, rnames=self.meanings, cnames=cnames, digits=digits)     
+        display_matrix(mat, display=display, title='S%s' % title, rnames=self.meanings, cnames=cnames, digits=digits)
+
+    ##################################################################
+    ##### Plotting functions
 
     def plot_expertise_listener(self, n=3, output_filename=None):
         fig, ax = plt.subplots(1,1)

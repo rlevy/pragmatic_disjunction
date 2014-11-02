@@ -97,28 +97,7 @@ class Experiment:
             row = np.array([final_lis_lang[lex_index][msg_index][j] for j in range(len(self.states))])
             prob_table.append(row)
         return np.array(prob_table)
-
-    def plot_listener_inference(self, msg='A v X', width=0.2, initial_color_index=0):
-        fig, ax = plt.subplots(1,1)
-        fig.set_figheight(len(self.states)*len(self.messages)*0.75)
-        fig.set_figwidth(14)
-        innerlabels = self.states
-        outerlabels = ["Lex%s" % (i+1) for i in range(len(self.lexica))]
-        mat = self.listener_inference(msg=msg)
-        m, n = mat.shape
-        barsetwidth = width*n
-        ind = np.arange(0.0, (barsetwidth+width)*m, barsetwidth+width)
-        ind = ind[::-1]        
-        for j in range(n-1, -1, -1):
-            xpos = ind+(width*j)
-            vals = mat[:, j]        
-            ax.barh(xpos, vals, width, color=colors[initial_color_index+j], label=innerlabels[j])
-            for i in range(m):
-                ax.text(0.01, xpos[i]+(width/2.0), innerlabels[j], rotation='horizontal', ha='left', va='center', fontsize=18)
-        ax.set_yticks(ind+barsetwidth/2.0)
-        ax.set_yticklabels(outerlabels, fontsize=24)
-        ax.set_ylim([min(xpos), max(ind+barsetwidth+width)])             
-        
+            
     def show_max_lex_state_values(self, joint_prob_table, precision=10):
         max_prob = np.round(np.max(joint_prob_table), precision)
         for i, j in product(range(len(self.lexica)), range(len(self.states))):
