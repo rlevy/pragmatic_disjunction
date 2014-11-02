@@ -93,5 +93,10 @@
 \newcommand{\SpeakerK}[1][k]{S_{#1}}
 \newcommand{\ListenerK}[1][k]{L_{#1}}
 
+\newcommand{\nullmsg}{\mathbf{0}}
 
+%=====================================================================
+%============================ annotations ============================
 
+\let\oldmarginpar\marginpar
+\renewcommand{\marginpar}[1]{\oldmarginpar[\color{red}\raggedright\scriptsize #1]{\color{red}\raggedright\scriptsize #1}}

@@ -75,7 +75,7 @@
 
 \item We seek to capture the full range of behavior within a single
   recursive Bayesian model of pragmatic reasoning.  These models find
-  their conceptual origins \posscitet{Lewis69} work on signaling
+  their conceptual origins in \posscitet{Lewis69} work on signaling
   systems, and their technical details build on ideas from the
   iterated best response models of \citet{Jaeger:2007} and
   \citet{Franke09DISS}. They have been shown to achieve tight
@@ -94,12 +94,12 @@
     for exclusivization inferences).
 
   \item Following \citet{Bergen:Goodman:Levy:2012} and
-    \citet{Smith:Goodman:Frank:2013}, the crucial \textbf{lexical
-      uncertainty} property of our model is that it allows a flexible
-    relationship between an atomic expression's literal meaning and
-    its context-specific ``refined'' meaning (e.g., the literal
-    meaning of \word{boat} includes \word{canoe}, but one of its
-    context-specific refinements might exclude it).
+    \citet{Smith:Goodman:Frank:2013}, the \textbf{lexical uncertainty}
+    property of our model is that it allows a flexible relationship
+    between an atomic expression's literal meaning and its
+    context-specific refined meaning (e.g., the literal meaning of
+    \word{boat} includes \word{canoe}, but one of its context-specific
+    refinements might exclude it).
   % \item Refined meanings are preserved through semantic composition
   %   Speakers and listeners start with probability distributions over
   %   possible refinements of each literal meaning, and can coordinate
@@ -140,11 +140,15 @@
   \end{examples}
 
 \item The dataset includes 86 cases where the left disjunct entails
-  the right, and 75 in which the right entails the left.  
+  the right, and 75 in which the right entails the left. (These
+  numbers need to be updated; we'll be adding more examples.)
 
 \item We don't have a rigorous sampling procedure, so we are not sure
   we can probe this distribution for tendencies, but it does show that
-  both directions are attested.  
+  both directions are attested.
+
+  \marginpar{We could consider doing something systematic with
+    countries and their major cities using Google N-grams.}
 
 \item The obstacles to a rigorous sampling procedure are numerous:   
   \begin{examples}
@@ -157,9 +161,9 @@
   \end{examples}
 
 \item However, we can say that, for any two nouns $N_{1}$ and $N_{2}$
-  one believes to be in a proper entailment relation, a Web search for
-  ``$N_{1}$ or $N_{2}$'' will generally yield well-formed
-  counterexamples, as will ``$N_{2}$ or $N_{1}$''.%  We have checked
+  one believes to be in an overlap or proper entailment relation, a
+  Web search for ``$N_{1}$ or $N_{2}$'' will generally yield
+  counterexamples, as will ``$N_{2}$ or $N_{1}$''.% We have checked
   % that all of the examples discussed in \citealt{Hurford:1974} and
   % \citealt{Singh:2008} are attested in fluent English text on the
   % Web. These are included in the corpus linked in \eg{ourcorpus}.
@@ -189,8 +193,8 @@
   \word{France} and \word{Paris} invariably stand in an entailment
   relation. In contexts where France is being construed in terms of
   its countryside, or Paris in terms of its particular urban charms,
-  then \word{France} could come to mean something more like
-  \word{Paris outside of France}.
+  \word{France} could come to mean something more like `Paris outside
+  of France'.
 
 \item This lexical uncertainty motivates our own explanation for why
   speakers utter HG-violating disjunctions (as they clearly do; see
@@ -224,7 +228,8 @@
   hedging against the possibility that the listener's view of language
   is such that, at least in the current context, $\sem{A} \cap \sem{a}
   = \emptyset$, or perhaps, more weakly, $ \sem{a} \nsubseteq \sem{A}
-  = \emptyset$.
+  = \emptyset$. We think this is well-aligned with the guiding ideas
+  of \citet{Chemla-HurfordCounts}.
 
 \item An HG-violating disjunction like \word{boat or canoe} is more
   prolix than just \word{boat}, but the meaning of the disjunction
@@ -271,7 +276,9 @@
     listener to be a non-expert in the relevant domain.
 
   \item The speaker is mutually and publically known to have an
-    interest in conveying information about the language itself.
+    interest in conveying information about the language itself,
+    even if this communicative inefficiency in terms of the 
+    information conveyed about the world.
   \end{examples}
 
 \item In some naturalistic uses, definitional disjunction is also seen
@@ -310,7 +317,8 @@
   definition achieves this ideal, especially if connotational meaning
   is included. (Examples: \word{internet or computer network}, and
   even our wine-lover example, where \word{oenophile} seems to elevate
-  the concept to something more refined than mere \word{wine lover}.)
+  the concept to something more refined than \word{wine lover} picks
+  out.)
 \end{examples}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -322,59 +330,62 @@
 \subsection{Definition}\label{sec:definition}
 
 \begin{examples}
-\item
+\item Basic ingredients:
   \begin{examples}
   \item $\States$ is a set of states (worlds, referents, propositions, etc.).
-  \item $\Messages$ is a set of messages.
-  \item $\Lex: \Messages \mapsto \wp(\States)$ is a semantic interpretation function.
-  \item $\LexSet = \set{\Lex' : \Lex'(\msg) \subseteq \Lex(\msg), \forall \msg \in \Messages}$
+  \item $\Messages$ is a set of messages with designated null message $\nullmsg$.
+  \item $\Lex: \Messages \mapsto \wp(\States)$ is a semantic interpretation function. $\Lex'(\nullmsg) = \States$
+  \item $\LexSet = \set{\Lex' : \Lex'(\nullmsg) = \States \text{ and } \forall \msg \in \Messages{-}\set{\nullmsg}, \Lex'(\msg) \subseteq \Lex(\msg)}$
   \item $\Prior : \States \mapsto [0,1]$ is a prior probability
     distribution over states.    
   \item $\Costs : \Messages \mapsto \Reals$ is a cost function on messages.
   \end{examples}
 
-\item\label{l0}%
-  $\listenerZero(\state \given \msg, \Lex) \propto
-  \frac{\mathbb{I}(\state \in \Lex(\msg))}{|\Lex(\msg)|}
-  \Prior(\state)$
+\item Agents
+  \begin{examples}
+  \item\label{l0}%
+    $\listenerZero(\state \given \msg, \Lex) \propto
+    \frac{\mathbb{I}(\state \in \Lex(\msg))}{|\Lex(\msg)|}
+    \Prior(\state)$
 
-\item\label{s1}% 
-  $\speakerOne(\msg \given \state, \Lex) \propto
-  \exp
-  \left(
-    \log\left(\alpha\,\listenerZero(\state \given \msg, \Lex) \right)
-    - 
-    \gamma\,\Costs(\msg)
-  \right)$
+  \item\label{s1}% 
+    $\speakerOne(\msg \given \state, \Lex) \propto
+    \exp
+    \left(
+      \log\left(\alpha\,\listenerZero(\state \given \msg, \Lex) \right)
+      - 
+      \gamma\,\Costs(\msg)
+    \right)$
+    
+  \item\label{l1}% 
+    $\listenerOne(\state \given \msg, \Lex) \propto 
+    \speakerOne(\msg \given \state, \Lex)
+    \Prior(\state)$
 
-\item\label{l1}% 
-  $\listenerOne(\state \given \msg, \Lex) \propto 
-  \speakerOne(\msg \given \state, \Lex)
-  \Prior(\state)$
-
-\item\label{Lk}%
-  \setlength{\arraycolsep}{2pt}%  
-  $\mspace{-4mu}\begin{array}[t]{r c l}
-  \ListenerK(\state, \Lex \given \msg) 
-  &=&
-  \sum_{\Lex \in \LexSet} \listenerOne(\state \given \msg, \Lex) \ListenerK(\Lex \given \msg) 
-  \\[1ex]
-  \ListenerK(\Lex \given \msg) 
-  &\propto& 
-  \Prior(\Lex) \sum_{\state\in\States} \SpeakerK(\msg \given \state)\Prior(\state)
-  \end{array}$
-
-\item\label{Sk}%
-  $\SpeakerK(\msg \given \state, \Lex) \propto 
-  \exp
-  \left(
-    \log
-    \left(\alpha\,\ListenerK[k-1](\state \given \msg, \Lex)\right)
-    - 
-    \beta \log\left(\ListenerK[k-1](\Lex\given\msg)\right)
-    -
-    \gamma\,\Costs(\msg)
-  \right)$
+  \item\label{Lk}%
+    \setlength{\arraycolsep}{2pt}%  
+    $\mspace{-4mu}\begin{array}[t]{r c l}
+      \ListenerK(\state, \Lex \given \msg) 
+      &=&
+      \sum_{\Lex \in \LexSet} \listenerOne(\state \given \msg, \Lex) \ListenerK(\Lex \given \msg) 
+      \\[1ex]
+      \ListenerK(\Lex \given \msg) 
+      &\propto& 
+      \Prior(\Lex) \sum_{\state\in\States} \SpeakerK(\msg \given \state)\Prior(\state)
+    \end{array}$
+    
+  \item\label{Sk}%
+    $\SpeakerK(\msg \given \state, \Lex) \propto 
+    \exp
+    \left(
+      \log
+      \left(\alpha\,\ListenerK[k-1](\state \given \msg, \Lex)\right)
+      - 
+      \beta \log\left(\ListenerK[k-1](\Lex\given\msg)\right)
+      -
+      \gamma\,\Costs(\msg)
+    \right)$
+  \end{examples}
 \end{examples}
 
 %=====================================================================
@@ -392,8 +403,8 @@
 
 \begin{examples}
 \item These initial examples are meant to show how the model works.
-  They have been done elsewhere, but it seems reviewing them using our
-  full model to ensure that the results are preserved.
+  They have been done elsewhere, but it seems worth reviewing them
+  using our full model to ensure that the results are preserved.
 
 % \item Because closure under disjunction is crucial to our analysis, we
 %   do this for all our examples. (This is another respect in which we
@@ -429,7 +440,8 @@
 \begin{examples}
 \item
   \begin{examples}
-  \item $\States = \set{\wALL, \wSOMENOTALL}$; $\Messages = \set{\mAll, \mSome}$; $\Lex = [\mAll \mapsto \set{\wALL}, \mSome \mapsto \set{\wALL,\wSOMENOTALL}]$
+  \item $\States = \set{\wALL, \wSOMENOTALL}$; $\Messages = \set{\mAll, \mSome}$
+  \item $\Lex = [\mAll \mapsto \set{\wALL}, \mSome \mapsto \set{\wALL,\wSOMENOTALL}]$
   \item Flat prior; all $0$ costs; disjunction cost $0.1$; $\alpha = 1$; $\beta = 1$; $\gamma = 1$  
   \item Lexica with disjunctive closure of states and messages:
     \setlength{\arraycolsep}{2pt}
@@ -526,6 +538,9 @@
 
 \subsubsection{Scalar implicature of disjunction}\label{sec:scalar-disj}
 
+\marginpar{We should talk about running this with meet joins. It seems more
+  appropriate but it poses some challenges.}
+
 \begin{examples}
 \item 
   \begin{examples}
@@ -552,7 +567,8 @@
     
     \vspace{-4pt}
 
-     $\mspace{-70mu}$\includegraphics[width=1.2\textwidth]{fig/scalardisj-expertise-listener-marginalized}
+     $\mspace{-90mu}$
+     \includegraphics[width=1.2\textwidth]{fig/scalardisj-expertise-listener-marginalized}
   \end{examples}
 \end{minipage}
 \hfill
@@ -562,7 +578,8 @@
     
     \vspace{-4pt}
 
-    $\mspace{-70mu}$\includegraphics[width=1.2\textwidth]{fig/scalardisj-expertise-speaker-lexsum}
+    $\mspace{-70mu}$
+    \includegraphics[width=1.2\textwidth]{fig/scalardisj-expertise-speaker-lexsum}
   \end{examples}
 \end{minipage}
 
@@ -572,7 +589,7 @@
   \begin{minipage}[t]{0.45\linewidth}
     Listener
 
-    \vspace{2pt}
+    \vspace{-2pt}
   
     $\begin{array}[t]{r @{ \ \Rightarrow \ } l}
       \toprule
@@ -588,7 +605,7 @@
   \begin{minipage}[t]{0.45\linewidth}
     Speaker
 
-    \vspace{2pt}
+    \vspace{-2pt}
 
     $\begin{array}[t]{r @{ \ \Rightarrow \ } l}
       \toprule
@@ -597,6 +614,7 @@
       w_{1} & p \\
       w_{2} & \set{p, q} \\
       w_{3} & q  \\      
+      w_{1} \vee w_{3} & p \word{ or } q \\
       \bottomrule
     \end{array}$
   \end{minipage}    
@@ -612,7 +630,7 @@
 \item From the listener's perspective, we are concerned to see when
   \word{A or X} gives rise to the inference that $\sem{A} \cap \sem{X}
   = \emptyset$ (Hurfordian reading) and when \word{A or X} gives rise
-  to the inference that $\sem{A} = \sem{X}$.
+  to the inference that $\sem{A} = \sem{X}$ (definitional).
 \end{examples}
 
 \newcommand{\smallhurfordlex}[3]{
@@ -755,14 +773,46 @@
   
 \item The intuition: where costs are high, the disjunction has to be
   justified. Letting the two terms overlap reduces the justification,
-  whereas exclusivizing provides justification. 
-
+  whereas exclusivizing provides justification. In other words, the
+  apparently undue prolixity of the disjunction (the more general term
+  would seem to suffice!) generates an inference that we observe in
+  the lexical inferences.
+  
 \item However, this needs to be qualified by the speaker's desire to
   communicate about the lexicon. If $\beta$ is high, then it might be
   worth paying the disjunction costs for the sake of teaching the
   listener about the lexicon, even if this involves a huge penalty in
   terms of informativity (since definitional readings convey only
   a single term's worth of information).
+
+\item Earlier, we gave this charaterization of the contextual
+  requirements for definitional readings. The boldfaced phrases
+  connect these ideas with our model.
+
+  \begin{examples}
+  \item The speaker is mutually and publicly known to be an expert in
+    the relevant domain. \textbf{The speaker observes a lexicon--state
+      pair, and the listener seeks to figure out which one, which
+      entails moving towards the speaker's lexicon.}      
+
+  \item The speaker is mutually and publicly known to believe the
+    listener to be a non-expert in the relevant domain.  \textbf{The
+      speaker has lexical uncertainty --- it doesn't assume a lexicon
+      but rather tries to infer one.}
+
+  \item The speaker is mutually and publically known to have an
+    interest in conveying information about the language itself, even
+    if this communicative inefficiency in terms of the information
+    conveyed about the world.  \textbf{High $\beta$, low disjunction
+      costs.}
+  \end{examples}
+
+\item Additionally, the secondary nature of the definitional
+  information (as compared with \word{oenophile means wine lover}) is
+  captured by the fact that the inference is primarily about the
+  lexicon, rather than about the information conveyed --- after all,
+  absence the lexical inference, \word{A} would have done the same
+  work with lower costs.
 
 \item Hurfordian readings arise in a much wider range of parameters
   settings, that is contexts, because they survive high definitional
@@ -782,6 +832,7 @@
   $0.$ marks the points where $\beta = \alpha$. The y-axis is 
   the cost of disjunction (assuming $\gamma=1.0$).
 
+  $\mspace{-80mu}$
   \includegraphics[width=1.2\textwidth]{fig/lex5-alpha-beta-gamma}
 
 \end{examples}
