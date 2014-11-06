@@ -14,6 +14,7 @@ CONJUNCTION_SIGN = ' & '
 class Lexica:
     def __init__(self,
                  baselexicon=None,
+                 atomic_states=None,
                  nullsem=True,
                  join_closure=False,
                  meet_closure=False,
@@ -26,7 +27,8 @@ class Lexica:
                  unknown_word=None):
         self.baselexicon = baselexicon
         self.messages = sorted(self.baselexicon.keys())
-        self.atomic_states = sorted(list(set(reduce((lambda x,y : x + y), self.baselexicon.values()))))
+        #self.atomic_states = sorted(list(set(reduce((lambda x,y : x + y), self.baselexicon.values()))))
+        self.atomic_states = atomic_states
         self.states = copy(self.atomic_states)
         self.nullsem = nullsem
         self.join_closure = join_closure
@@ -58,15 +60,15 @@ class Lexica:
         # Close the lexica:
         if self.join_closure:
             lexica = self.add_join_closure(lexica)
+            self.messages += [DISJUNCTION_SIGN.join(sorted(set(cm))) for cm in self.powerset(self.baselexicon.keys(), minsize=2)]
         if self.meet_closure:
             lexica = self.add_meet_closure(lexica)
+            self.messages += [CONJUNCTION_SIGN.join(sorted(set(cm))) for cm in self.powerset(self.baselexicon.keys(), minsize=2)]
         # Update the canonical message set and state set; has to be done AFTER all closures!
-        if self.join_closure:
-            self.messages += [DISJUNCTION_SIGN.join(sorted(cm)) for cm in self.powerset(self.baselexicon.keys(), minsize=2)]
-            self.states += [DISJUNCTION_SIGN.join(sorted(sem)) for sem in self.powerset(self.atomic_states, minsize=2)]
-        if self.meet_closure:
-            self.messages += [CONJUNCTION_SIGN.join(sorted(cm)) for cm in self.powerset(self.baselexicon.keys(), minsize=2)]
-            self.states += [CONJUNCTION_SIGN.join(sorted(sem)) for sem in self.powerset(self.atomic_states, minsize=2)]
+        if self.join_closure:            
+            self.states += [DISJUNCTION_SIGN.join(sorted(set(sem))) for sem in self.powerset(self.atomic_states, minsize=2)]
+        if self.meet_closure:            
+            self.states += [CONJUNCTION_SIGN.join(sorted(set(sem))) for sem in self.powerset(self.atomic_states, minsize=2)]           
         # Add nullsem last so that it doesn't participate in any closures (and displays last in matrices):
         if self.nullsem:
             lexica = self.add_nullsem(lexica)
@@ -81,15 +83,21 @@ class Lexica:
         return self.add_closure(lexica=lexica, connective=CONJUNCTION_SIGN, combo_func=(lambda x,y : x & y), cost_value=self.conjunction_cost)    
 
     def add_closure(self, lexica=None, connective=None, combo_func=None, cost_value=None):         
-        complex_msgs = [connective.join(sorted(cm)) for cm in self.powerset(self.messages, minsize=1)]        
+        complex_msgs = [connective.join(sorted(set(cm))) for cm in self.powerset(sorted(self.baselexicon.keys()), minsize=1)] + self.messages
         for i, lex in enumerate(lexica):
             for cm in complex_msgs:
                 # Get all the worlds consistent with the complex message:
                 vals = reduce(combo_func, [set(lex[word]) for word in cm.split(connective)])
-                # Get the powerset of that set of worlds:
-                vals = self.powerset(vals, minsize=1)
+                # Just atomic states to avoid redundancies like 1v2v2v3:
+                vals = [x for x in vals if DISJUNCTION_SIGN not in x and CONJUNCTION_SIGN not in x]
+                if connective == DISJUNCTION_SIGN:
+                    # Get the powerset of that set of worlds:            
+                    vals = self.powerset(vals, minsize=1)
+                else:
+                    vals = [tuple(sorted(set(x))) for x in self.powerset(self.atomic_states, minsize=1) if set(x) & set(vals)]
                 # Create the new value, containing worlds and "conjoined worlds":
-                lex[cm] = [connective.join(sorted(sem)) for sem in vals]
+                if cm not in lex: lex[cm] = set([])
+                lex[cm] = list(set(lex[cm]) | set([connective.join(sorted(set(sem))) for sem in vals]))
                 args = cm.split(connective)
                 signs = len(args)-1                
                 self.costs[cm] = (cost_value*signs) + sum(self.costs[word] for word in args)
