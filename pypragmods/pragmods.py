@@ -23,14 +23,15 @@ def display_matrix(mat, display=True, rnames=None, cnames=None, title='', digits
     The display parameter saves a lot of conditionals in the important code"""
     if display:
         mat = np.round(mat, digits)
-        cwidth = 2 + max([len(x) for x in rnames+cnames] + [digits+2])
+        rowlabelwidth = 2 + max([len(x) for x in rnames+cnames] + [digits+2])
+        cwidth = 2 + max([len(x) for x in cnames] + [digits+2])
         # Divider bar of the appropriate width:
         print "-" * (cwidth * (max(len(cnames), len(rnames)) + 1))
         print title
         # Matrix with even-width columns wide enough for the data:
-        print ''.rjust(cwidth) + "".join([str(s).rjust(cwidth) for s in cnames])        
+        print ''.rjust(rowlabelwidth) + "".join([str(s).rjust(cwidth) for s in cnames])        
         for i in range(mat.shape[0]):  
-            print str(rnames[i]).rjust(cwidth) + "".join(str(x).rjust(cwidth) for x in mat[i, :])
+            print str(rnames[i]).rjust(rowlabelwidth) + "".join(str(x).rjust(cwidth) for x in mat[i, :])
     
 ######################################################################
         
@@ -259,10 +260,14 @@ class Pragmod:
             vals = mat[:, j]        
             ax.barh(xpos, vals, width, color=colors[initial_color_index+j], label=innerlabels[j])
             for i in range(m):
-                ax.text(0.01, xpos[i]+(width/2.0), innerlabels[j], rotation='horizontal', ha='left', va='center', fontsize=18)
+                textx = xpos[i]+(width/2.0)
+                ax.text(0.01, textx, innerlabels[j], rotation='horizontal', ha='left', va='center', fontsize=18)
+                if vals[i] > 0.1:
+                    ax.text(vals[i]+0.01, textx, round(vals[i], 2), rotation='horizontal', ha='left', va='center', fontsize=18)
         ax.set_yticks(ind+barsetwidth/2.0)
         ax.set_yticklabels(outerlabels, fontsize=24)
         ax.set_ylim([min(xpos), max(ind+barsetwidth+width)])
+        ax.set_xlim([0.0, 1.0])
         if lex != None:
             ax.set_title(self.lex2str(lex))
                 
