@@ -14,105 +14,57 @@
 
 \section{Background, claims, and approach}\label{sec:introduction}
 
-\begin{examples}
+Natural languages are not fixed across time and across speakers.
+Rather, they are constantly evolving in response to the broader needs
+of their speech communities and the more fleeting demands of specific
+discourse contexts. Discourse participants adjust to each other's
+styles, form temporarily lexical pacts in order to facilitate
+communication and problem solving, and directly and indirectly
+instruct each other about their views of the language itself. These
+dyamics give rise to a rich class of pragmatic inferences about the
+language itself. Phrases like \word{Xs and other Ys} support the
+inference that the speaker regards \word{X} as in some sense included
+in \word{Y}, whereas phrases like \word{X instead of Y} send a signal
+that the two terms are contraries.
 
-\item There are well-known communicative pressures on disjunctive
-  phrases of the form \word{X or Y} to be construed so that the
-  meanings of \word{X} and \word{Y} are disjoint.
+Disjunctive phrases give rise, in different context, to what appear to
+be opposing inferences about language. On the one hand, there is a
+well-known communicative pressure for phrases of the form \word{X or
+  Y} to be construed so that the meanings of \word{X} and \word{Y} are
+disjoint. This is a pressure to \tech{exclusive} the two terms, even
+when this might run contrary to a standard (less context specific)
+understanding of the lexicon.  On the other hand, disjunctions like
+\word{wine lover or oenophile} can be used to convey that the two
+disjuncts are \tech{synonymous}, thereby providing secondary
+definitional information \citep{Horn89,Rohdenburg:1985}. Such readings
+are directly opposed to the exclusivization pressure.  The puzzle
+deepens when we see that the empirical picture, including the
+definitional disjunction readings, is not a quirk of English that we
+could perhaps blame on a nonce ambiguity. It is attested in a wide
+range of typologically and geographically diverse languages. This
+suggests that the full range of readings derives from the literal
+semantics of disjunction and systematic pragmatic pressures.
 
-\item \posscitet{Hurford:1974} generalization (HG) is a direct
-  statement of the overall communicative pressure. It says that,
-  subject to certain exceptions, \word{X or Y} is felicitous only if
-  the meanings of \word{X} and \word{Y} are disjoint.
+We seek to capture the full range of behavior within a single
+recursive Bayesian model of pragmatic reasoning. The model finds its
+conceptual origins in \posscitet{Lewis69} work on signaling systems
+and builds on ideas from the iterated best response models of
+\citet{Jaeger:2007} and \citet{Franke09DISS}. Models of this form have
+been shown to achieve tight correlations with experimental data (e.g.,
+\citealt{Frank:Goodman:2012}) and to offer unified, precise account of
+a wide range of conversational implicatures
+\citep{Bergen:Levy:Goodman:2014}. The crucial feature of our model is
+that it lets discourse participants communicate, not just about the
+world, but also about the language they are using
+\citep{Smith:Goodman:Frank:2013}. In this way, it allows us to
+identify areas of lexical uncertainty and track how discourse
+participants resolve that uncertainty. We show that, within this
+model, both exclusivization readings of disjunction and definitional
+readings of disjunction can co-exist.  The different readings
+naturally emerge depending on specific contextual parameters relating
+to speaker expertise, listener malleability, and information contained
+in the common ground.
 
-\item The most widely studied instance of this is that \word{X or Y}
-  is generally taken to conversationally implicate that its
-  conjunctive counterpart \word{X and Y} is pragmatically inaccessible
-  (false, inappropriate, irrelevant, unknown to the speaker,
-  etc.). The two disjuncts are thus presented as non-overlapping
-  options.
-
-\item However, there are two types of frequent and felicitous
-  disjunctions that violate this preference: what we call
-  \tech{subsumptive disjunctions} like \word{boat or canoe} and
-  \tech{definitional disjunctions} like \word{wine lover or oenophile}
-  \citep{Horn89,Rohdenburg:1985}.
-
-\item Subsumptive disjunctions are more routine that HG would seem to
-  suggest. We have collected a large corpus of counterexamples. A few:
-  \word{canoe or boat}, \word{Paris or France}, \word{China or
-    Beijing}, \word{writer or playwright}, \word{tired or exhausted}.
-  They seem to be easy to find.  See also \citet{Chemla-HurfordCounts}
-  for quantitative study of similar patterns.
-
-\item The truth behind HG is that subsumptive examples reliably signal
-  what we broadly refer to as \tech{exclusivizing}, in keeping with
-  the intuition behind HG.  The examples seem to be motivated by a
-  wide range of factors centering around the speaker's desire to
-  highlight a subcategory.
-
-\item Definitional disjunctions seem like maximal violations of HG,
-  where the entailment runs both directions. However, such examples
-  have different motivations than subsumptive ones. Such readings seem
-  meta-linguistic, in that the speaker seems to be teaching the
-  listener about a word meaning.
-
-\item Summarizing the empirical picture, we find a tension. On the one
-  hand, \word{X or Y} is typically construed (and intended) as
-  involving semantically disjoint \word{X} and \word{Y}, and
-  violations of this at the level of literal content give rise to rich
-  conversational implicatures. On the other hand, disjunction can be
-  used to signal that the speaker regards the two disjuncts as
-  synonymous.
-
-\item The puzzle deepens when we see that the empirical picture,
-  including the definitional disjunction readings, is not a quirk of
-  English that we could perhaps blame on a nonce ambiguity. We know it
-  is attested in a wide range of typologically and geographically
-  diverse languages. This suggests that the full range of readings
-  derives from the literal semantics of disjunction and systematic
-  pragmatic pressures.
-
-\item We seek to capture the full range of behavior within a single
-  recursive Bayesian model of pragmatic reasoning.  These models find
-  their conceptual origins in \posscitet{Lewis69} work on signaling
-  systems, and their technical details build on ideas from the
-  iterated best response models of \citet{Jaeger:2007} and
-  \citet{Franke09DISS}. They have been shown to achieve tight
-  correlations with experimental data (e.g.,
-  \citealt{Frank:Goodman:2012}) and to contribute to artificial agents
-  that communicate effectively with each other to solve a
-  collaborative task \citep{Vogel-etal:2013}.
-
-\item The model's crucial components:
-
-  \begin{examples}
-  \item It lets speakers communicate, not just about the world, but
-    also about the language \citep{Smith:Goodman:Frank:2013}. This
-    allows us to probe for inferences about the lexicon that do not
-    impact the overall denotation of the disjunctive phrase (crucial
-    for exclusivization inferences).
-
-  \item Following \citet{Bergen:Goodman:Levy:2012} and
-    \citet{Smith:Goodman:Frank:2013}, the \textbf{lexical uncertainty}
-    property of our model is that it allows a flexible relationship
-    between an atomic expression's literal meaning and its
-    context-specific refined meaning (e.g., the literal meaning of
-    \word{boat} includes \word{canoe}, but one of its context-specific
-    refinements might exclude it).
-  % \item Refined meanings are preserved through semantic composition
-  %   Speakers and listeners start with probability distributions over
-  %   possible refinements of each literal meaning, and can coordinate
-  %   on the refined meaning intended in a given utterance through
-  %   pragmatic inference.  
-  \end{examples}
-
-\item Within this model, the different readings naturally emerge
-  depending on specific contextual parameters relating to speaker
-  expertise, listener malleability, and information contained in the
-  common ground.
-
-\end{examples}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
