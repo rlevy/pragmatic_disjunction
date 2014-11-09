@@ -17,52 +17,52 @@
 Natural languages are neither fixed across time nor identically
 reproduced in all speakers, but rather continually renegotiated during
 interactions \citep{Clark97}. Discourse participants accommodate to
-each other's usage patterns \citep{Giles:2008,DanLeePan:2012}, form
+each other's usage patterns \citep{Giles:Coupland:Coupland:1991}, form
 temporarily lexical pacts to facilitate communication
-\citep{Clark:Wilkes-Gibbs:1986}, and instruct each other about their
-linguistic views. Some of this communication in language about
-language is direct, as with explicit definitions like
+\citep{Clark:Wilkes-Gibbs:1986,Brennan:Clark:1996}, and instruct each
+other about their linguistic views. Some of this communication in
+language about language is direct, as with explicit definitions like
 \word{`oenophile' means wine lover}, but much of it arrives via
-secondary pragmatic inferences, as when \word{Xs and other Ys} conveys
-that \word{X} is semantically subsumed by \word{Y} \citep{Hearst92,SnowEtAl05}.
+secondary pragmatic inferences, as when \word{X such as Y} conveys
+that \word{X} subsumes \word{Y} \citep{Hearst92,SnowEtAl05}.
 
 Disjunction supports what appear to be opposing inferences about
-language. On the one hand, \word{X or Y} will tend to convey that the
+language. On the one hand, \word{X or Y} tends to convey that the
 meanings of \word{X} and \word{Y} are presumed to be disjoint
 \citep{Hurford:1974}, because the speaker holds such a view of the
-lexicon or because she is worried that the listener might. This
-pressure to exclusivize is robust enough to overcome even seemingly
-non-negotiable aspects of the lexicon, so that ``The nuptials will
-take place in either France or Paris'' can be used to suggest the
-sense `Paris outside of France' for the first disjunct. In these
-cases, disjunction might seem to be a needlessly verbose way of
-conveying the meaning of the more general disjunct, but the costs
-could be worth paying in virtue of the lexical side-effect of
-exclusivization.
+lexicon or is worried that the listener might. This pressure to
+exclusivize is robust enough to overcome even seemingly non-negotiable
+aspects of the lexicon; a medical webpage warns ``If you still have
+symptoms or severe blockage in your arteries, you may need angioplasty
+or surgery'', sending a clear signal that angioplasty and surgery
+are distinct options. Its continuation presupposes just that: 
+``Having one of these procedures may save your leg''. The disjunction
+might seem to be a needlessly verbose way of conveying the meaning of
+the more general disjunct, but the costs could be worth paying in
+virtue of the lexical side-effect of exclusivization.
 
 On the other hand, disjunctions like \word{wine lover or oenophile}
 can be used to convey that the two disjuncts are roughly synonymous
-\citep{Horn89,Rohdenburg:1985}, thereby providing secondary
-definitional information that maximally violates the pressure to
-exclusivize. This inference is more rarefied than the exclusivization
-inference, but it can arise in a broad range of contexts in which such
-definitional information has social or communicative value. It is
-striking that the definitional and exclusivization inferences are
-supported by a single lexical item, and the puzzle deepens when we see
-that the empirical picture is not a quirk of English, but rather one
-that we find in a wide range of typologically and geographically
-diverse languages.
+\citep{Horn89}, thereby providing secondary information that maximally
+violates the pressure to exclusivize. This inference is more rarefied
+than the exclusivization inference, but it can arise in a broad range
+of contexts in which such definitional or identificational information
+has social or communicative value. It is striking that the
+definitional and exclusivization inferences are supported by a single
+lexical item, and the puzzle deepens when we see that the empirical
+picture is not a quirk of English, but rather one that we find in a
+wide range of typologically and geographically diverse languages.
 
 In this paper, we capture both of these classes of inference within a
 single recursive Bayesian model of pragmatic reasoning. The model
 finds its conceptual origins in \posscitet{Lewis69} work on signaling
 systems and builds on ideas from iterated best response models
-\citet{Jaeger:2007,Jaeger:2011,Franke09DISS} and more thoroughly
+\citep{Jaeger:2007,Jaeger:2011,Franke09DISS} and more thoroughly
 probabilistic variants of them
 \citep{CamererHo:2004,Frank:Goodman:2012}. The crucial feature of our
 model is that it lets discourse participants communicate, not just
 about the world, but also about the language they are using
-\citep{Bergen:Goodman:Levy:2012,bergen-levy-goodman:2014}; the
+\citep{Bergen:Goodman:Levy:2012,bergen-levy-goodman:2014}: the
 speaker's intentions in production are characterized in terms of both
 world information and linguistic information, and the listener's
 pragmatic reasoning is cast as a problem of joint inference about the
@@ -72,8 +72,8 @@ both exclusivization and definitional inferences arise naturally from
 the expected semantic content of disjunction, depending on contextual
 parameters relating to speaker expertise, listener malleability, and
 information contained in the common ground. The model thus offers a
-genuinely pragmatic account of these inferences as well as a
-characterization of their stability and their communicative value.
+genuinely pragmatic account of these inferences as well as
+characterizations of their stability and their communicative value.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -93,28 +93,82 @@ one or the other. These findings inform the modeling we describe in
 \subsection{Hurfordian effects}\label{sec:data:overlapping}
 
 \posscitet{Hurford:1974} generalization (HG) is a direct statement of
-the overall communicative pressure to treat disjuncts as exclusive.
-It says that, subject to certain exceptions, \word{X or Y} is
-felicitous only if the meanings of \word{X} and \word{Y} are disjoint.
-\posscitet{Singh:2008} extends this generalization to examples
-involving overlapping but non-entailing disjunctions. 
-
-Such disjunctions are more routine in real usage than HG would seem to
-suggest. We have collected a large corpus of counterexamples,
-available at the following link:
+the overall communicative pressure to treat disjuncts as exclusive:
 %
 \begin{examples}
-\item\label{ourcorpus} Counterexamples to Hurford's constraint: \url{http://goo.gl/VAGqnB}
+\item\label{hg}%
+  ``The joining of two sentences by \word{or} is unacceptable if one
+  sentence entails the other; otherwise the use of \word{or} is
+  acceptable.'' (p.~410)
+\end{examples}
+%
+The generalization is stated in terms of sentences, but Hurford's
+examples, given in \eg{hex} with his original judgments, make it clear
+that he intends it to hold for sub-sentential disjuncts as well (he is
+likely assuming conjunction reduction):
+%
+\begin{examples}
+\item\label{hex}
+  \begin{examples}
+  \item Ivan is an American or Russian.
+  \item The painting is of a man or a woman.
+  \item The value of $x$ is greater than or equal to 6.
+  \item\label{ex-bad1}\bad John is an American or Californian.
+  \item\label{ex-bad2}\bad The painting is of a man or a bachelor.
+  \item\label{ex-bad3}\bad The value of $x$ is greater than or not equal to 6.
+  \end{examples}
+\end{examples}
+
+\citeauthor{Hurford:1974} uses HG to probe the nature and distribution
+of conversational implicatures (see also
+\citealt{Gazdar79b,ChierchiaFoxSpector08}), and \citet{Singh:2008}
+extends it to cases in which the disjuncts are merely overlapping. We
+endorse the guiding insight behind these accounts but reject the
+assumption that HG violations reliably lead to, or even correlate
+with, unacceptability or ungrammaticality. Disjunctions of apparently
+entailing phrases are routine; all of the examples marked as
+ungrammatical in \eg{hex} are easy to find in fluent English text on
+the Web:
+%
+\begin{examples}
+\item\label{hex-good}
+  \begin{examples}
+  %\item ``How much does the average american or californian pay every
+  %  year toward state taxes?''
+  \item ``\ldots and we trust that some of our American or Californian
+    friends will tell us something of its growth of flower and fruit
+    in its native habitats''
+  \item ``It doesn't matter if you ask a boy or a man or a bachelor or
+    even a husband, \ldots''
+  \item ``the effect was greater than, or not equal to, the cause.''
+  \end{examples}
+\end{examples}
+
+We have collected a large corpus of apparent counterexamples,
+available at \url{http://goo.gl/VAGqnB}. Here is a small sample from
+that corpus:
+%
+\begin{examples}
+\item\label{ourcorpus} 
   %
   \begin{examples}
-  \item Stop discrimination of an \highlight{applicant or person} due to their tattoos.
+    %%%%%%%%%% X < Y
+  \item Stop discrimination of an \highlight{applicant or person} due
+    to their tattoos.
   \item Promptly report any \highlight{accident or occurrence}.
-  \item The anchor will lie on the bottom and the \highlight{canoe or boat} will be held by the stream's current.
-  \item I believe that music can \highlight{change or affect} your emotions.
-  \item ``As an \highlight{actor or performer}, you are always worried about what the next job's going to be,'' Hensley says.
-  \item Many state arbitration statutes contemplate motions to \highlight{correct or modify} being made to the tribunal directly.
-  \item James Clifford (1992, 1997) is the writer most associated with making the connection between culture and \highlight{travel or movement}.
-  \item Being a \highlight{captain or officer} is a privilege, and with that privilege comes great responsibility.
+  \item The anchor will lie on the bottom and the \highlight{canoe or
+      boat} will be held by the stream's current.
+  \item ``As an \highlight{actor or performer}, you are always worried
+    about what the next job's going to be,'' Hensley says.
+    %%%%%%%%%%  X > Y
+  \item After the loss of the \highlight{animal or pet}, there are
+    further coping strategies available for the grieving individual.
+  \item Bush was captured slyly removing \highlight{a candy or gum}
+    from his mouth.
+  \item Heroic is not a word one uses often without embarrassment to
+    describe a \highlight{writer or playwright} \ldots
+  \item But he never attended school during his senior year, never
+    attended a \highlight{party or prom}.
   \end{examples}
 \end{examples}
 %
@@ -123,85 +177,95 @@ right, and XXXX in which the right entails the left.  In addition, we
 conjecture that, for any two nouns $N_{1}$ and $N_{2}$ one believes to
 be in an overlap or proper entailment relation, a Web search for
 ``$N_{1}$ or $N_{2}$'' will generally yield counterexamples, as will
-``$N_{2}$ or $N_{1}$''. Ideally, we would develop a rigorous sampling
-procedure to try to determine whether the ratio in our corpus reflects
-the ratio in usage, but we do not see a way to do this. The primary
-obstacle is a deep part of the phenomenon itself: judgments about
-lexical entailment are inherently very messy because of the flexible
-ways in which we refine meanings in context.
+``$N_{2}$ or $N_{1}$''. 
 
-It is in fact an important feature of these data that there is often
-considerable uncertainty about whether the two terms are truly in an
-entailment relation. For instance, where
-\subeg{exclusive}{franceorparis} leaves little room to negotiate the
-meaning of the terms in any clear sense,
-\subeg{exclusive}{churchorsynagogue} is much less clear: some speakers
-have firm judgments that \word{church} and \word{synagogue} exclude
-each other, but the many occurrences of ``synagogues and other
-churches'' in real text indicate that this is not a universally shared
-view of the lexicon.
+\marginpar{Perhaps conduct and footnote an N-grams experiment on place names.}
 
+Of course, one would like to have a more rigorous sampling procedure,
+to evaluate the prevalance of these disjunctions and to probe ordering
+preferences that might relate to the direction of entailment. However,
+we do not see a way to do this accurately. The primary obstacle is, we
+believe, an important property of the phenomenon itself: judgments
+about lexical entailment are inherently very messy because of the
+flexible ways in which people refine meanings in context. As a result,
+there often isn't a single objective answer to the question of whether
+two disjuncts stand in an an entailment
+relation. Example~\eg{churchorsynagogue} illustrates:
+%
 \begin{examples}
-\item\label{exclusive}
-  \begin{examples}
-  \item\label{franceorparis} ``The nuptials will take place in either
-    France or Paris.''
-  \item\label{churchorsynagogue} ``In 1940, 37 percent of us had gone
-    to a church or synagogue in the last week.''
-  \end{examples}
+\item\label{churchorsynagogue} ``In 1940, 37 percent of us had gone to
+  a church or synagogue in the last week.''
 \end{examples}
-
-We should even qualify our assertion that \word{France} and
-\word{Paris} invariably stand in an entailment relation. In contexts
-where France is being construed in terms of its countryside, or Paris
-in terms of its particular urban charms, \word{France} could come to
-mean something more like `Paris outside of France'
-\citep{Rohdenburg:1985}.
+%
+Some speakers have firm judgments that \word{church} and
+\word{synagogue} exclude each other, making this case clearly
+HG-respecting. However, it is easy to find uses of the phrase
+``synagogues and other churches'', which presuppose that a synagogue
+is a kind of church. The important thing for our purposes is that the
+insight behind HG shines through this uncertainty: no matter what
+one's initial view of the lexicon is, disjunctions like \word{church
+  or synagogue} make salient a view of the lexicon in which the terms
+are semantically disjoint. The speaker will be perceived as endorsing
+such a view, at least for the current conversational exchange, and the
+listener can either adopt that assumption or push back.
 
 This lexical uncertainty motivates our own explanation for why
-speakers utter HG-violating disjunctions (as they clearly do; see
-\eg{ourcorpus}).  In broad terms, we say that such examples convey
-that the speaker is treating the two terms as exclusive. The
-motivations for this could simply be that this is how the speaker
-lexicalizes the two terms, which might reflect the listener's lexicon
-or clash with it. In such cases, disjunction is the only way for the
-discourse participants to use the terms to convey their union.
+speakers utter HG-violating disjunctions. In broad terms, we say that
+such examples convey that the speaker is treating the two terms as
+exclusive. There are many potential motivations for this. Perhaps the
+most mundane is that the speaker simply lexicalizes the two terms as
+exclusive. The disjunction is likely to be easily justified in such
+cases, as it might be the most efficient and direct way of identifying
+the union of the two terms.
 
-Some instances are motivated by the speaker seeking to head off an
-unwanted inference that the listener might make. For instance,
-adopting terms from \citet{Levinson00} and others, we might say that
-the speaker is avoiding an I(nformativeness)-implicature: when the
-listener might construe the general term as \emph{limited to} a
-salient or prototypical subkind. For example, where \word{boat} tends
-to identify motorboats, the speaker uses \word{boat or canoe} to
-ensure that canoes are included. Alternatively, the speaker might be
-heading off a Q(uantity)-implicature: where failure to explicitly
-mention a salient or prototypical subkind might trigger an ad-hoc
-scalar implicature of its \emph{exclusion}
-\citep{hirschberg:1985}. (The speaker uses \word{swimwear or bikini}
-to ensure that bikinis are included.)
+\marginpar{Perhaps report on our attempt to reproduce Chemla's result.}
 
-In both cases, the speaker is concerned that $A$ will be construed as
-$\sem{A}-\sem{a}$, so using the disjunction ensures that the overall
-denotation of the disjunction is equivalent to $\sem{A}$ even if the
-listener no matter what. Anticipating our own explanation, we say that
-the speaker is hedging against the possibility that the listener's
-view of language is such that, at least in the current context,
-$\sem{A} \cap \sem{a} = \emptyset$, or perhaps, more weakly, $ \sem{a}
-\nsubseteq \sem{A} = \emptyset$. We think this is well-aligned with
-the guiding ideas of \citet{Chemla-HurfordCounts}.
+More interesting are cases in which the speaker's disjunction seems to
+be part of an attempt to manage the listener's inferences. For
+instance, the speaker who uses the phrase \word{swimwear or bikini}
+might be concerned that using \word{swimwear} alone will trigger an
+ad-hoc scalar implicature \citep{Hirschberg85} excluding the salient
+subkind of bikinis. \citet{Chemla-HurfordCounts} studies this class of
+inferences, presenting suggestive evidence that the frequency of
+disjunctions \word{X or Y} is positively correlated with the
+likelihood that \word{X} converstionally implicates \word{not Y} as
+estimated by the experimental results of \citet{vanTiel-etal:2013}.
+Similarly, the speaker might be seeking to block an implicature that a
+general term is \emph{limited to} a prototypical subkind
+\citep{Levinson00}. For example, where \word{boat} tends to identify
+motorboats, the speaker might use \word{boat or canoe} to ensure that
+canoes are included.  In both of these cases, the speaker is concerned
+that the general term \word{X} will be construed as
+$\sem{\word{X}}-\sem{\word{Y}}$ for some \word{Y}. Thus, \word{X} or
+\word{Y} is a hedge against the possibility that the listener's view
+of language is such that, at least in the current context,
+$\sem{\word{X}} \cap \sem{\word{Y}} = \emptyset$, or, as in
+\posscitet{Singh:2008} account,
+$\sem{\word{Y}} \nsubseteq \sem{\word{X}}$.
 
-An HG-violating disjunction like \word{boat or canoe} is more prolix
-than just \word{boat}, but the meaning of the disjunction includes
-\word{canoe} even if the listener interprets \word{boat} with a
-narrower refined meaning.  A speaker who places sufficiently high
-utility on conveying the broader meaning of \word{boat} will be
-willing to pay the cost of the additional disjunct to forestall
-misinterpretation.
+The above situations place the speaker in a defensive position. Her
+own lexicon might allow her to use just the general term to convey her
+intentions, but she is concerned that the listener will arrive at a
+different conclusion. The costs of disjunction are therefore worth
+paying even if it adds no new information given the speaker's lexicon.
+However, the speaker can play a more active role as well, using
+disjunctions to instruct the listener about the right lexicon. Our
+\secref{sec:introduction} example containing ``you may need
+angioplasty or surgery'' seems to be an instance of this: the
+disjunction conveys secondary information that \word{angioplasty} and
+\word{surgery} will be treated as separate options in the current
+discourse. If HG were adopted as an explicit theoretical constraint,
+then the possibility of doing this would more or less follow --- we
+just require the additional premise that the listener is charitable
+and so will try to find an acceptable construal of the utterance. The
+model we develop in \secref{sec:model} also supports this kind of
+reasoning, but it requires no independent statement of HG.
  
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Definitional effects}\label{sec:data:definitional}
+
+% A Geological History of Manhattan or New York
 
 Definitional uses of disjunction like \word{wine lover or oenophile}
 seem to be rarer and more contextually restricted even than the
