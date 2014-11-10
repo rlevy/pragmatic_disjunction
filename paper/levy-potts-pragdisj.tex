@@ -79,14 +79,11 @@ characterizations of their stability and their communicative value.
 
 \section{Lexical side-effects from disjunction}\label{sec:data}
 
-This section offers more expanded characterizations of the
-exclusivization and definitional uses of disjunction. We seek to
-identify features of the contexts of use, and the resulting
-inferences, that are shared across the two, and to begin to pinpoint
-the features of the context that steer speakers and listeners toward
-one or the other. These findings inform the modeling we describe in
-\dashsecref{sec:model}{sec:analysis}.
-
+This section explores the exclusivization and identificational uses of
+disjunction. Our goal is to more precisely characterize what the
+inferences are like and to begin to characterize which context steer
+speakers and listeners toward one or the other. These findings inform
+the modeling we describe in \dashsecref{sec:model}{sec:analysis}.
 
 %=====================================================================
 
@@ -425,7 +422,6 @@ verbose form, they must be worth paying in virtue of the benefits of
 identifying (for the purposes of the current talk exchange) the
 meanings of the two disjuncts.
 
-
 % There can be uncertainty about whether the listener should regard
 % the disjunction as definitional. We might enter into a blurry area
 % in which the listener is struggling to figure out whether the
@@ -437,17 +433,64 @@ meanings of the two disjuncts.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{A model of communication with anxious experts}\label{sec:model}
+\section{Modeling communication with anxious experts}\label{sec:model}
 
-The model finds its conceptual origins in \posscitet{Lewis69} work on
-signaling systems and builds on ideas from the iterated best response
-models of \citet{Jaeger:2007,Jaeger:2011} and
-\citet{Franke09DISS}. Models of this form have been shown to achieve
-tight correlations with experimental data (e.g.,
-\citealt{Frank:Goodman:2012}) and to offer unified, precise account of
-a wide range of conversational implicatures
-\citep{bergen-levy-goodman:2014}.
+We now present our model of pragmatic reasoning. In this model,
+production and interpretation are based in a recursive process in
+which speaker and listener agents reason about each other reasoning
+about each other.  At the lowest levels of our model, these agents
+communicate using a single lexicon. However, we do not actually assume
+that a single lexicon is mutually and publicly recognized as the set
+of core conventions of the language. Rather, our model aggregates over
+many possible lexica, thereby allowing the agents to negotiate the
+structure of the language itself even as they
+communicate. \Figref{fig:modstruc} summarizes this picture
+schematically; this section is devoted to explicating these agents and
+their relationships.
 
+\begin{figure}[htp]
+  \centering
+  \newcommand{\labelednode}[2]{\put(#1){\makebox(0,0){#2}}}
+  \newcommand{\picarrow}[3][0.9]{\put(#2){\vector(#3){#1}}}
+  \newcommand{\picdownarrow}[1]{\picarrow{#1,0.8}{3,-2}}
+  \newcommand{\picuparrow}[1]{\picarrow{#1,0.2}{3,2}}
+  \setlength{\unitlength}{1cm}
+  \begin{picture}(8,1.5)
+    \labelednode{1,1.5}{\textbf{Fixed $\Lex$}}
+    \labelednode{5.5,1.5}{\textbf{Reasoning about possible $\Lex$}}
+    \labelednode{0,1}{$\listenerZero$}
+    \picdownarrow{0}
+    \labelednode{1,0}{$\speakerOne$}
+    \picuparrow{1}
+    \labelednode{2,1}{$\listenerOne$}
+    \picarrow[0.7]{2.1,1}{1,0}
+    \labelednode{3,1}{$\ListenerK[1]$}
+    \picdownarrow{3}
+    \labelednode{4,0}{$\SpeakerK[2]$}
+    \picuparrow{4}
+    \labelednode{5,1}{$\ListenerK[2]$}
+    \picdownarrow{5}
+    \labelednode{6,0}{$\SpeakerK[3]$}
+    \picuparrow{6}
+    \labelednode{7,1}{$\ListenerK[3]$} 
+    \picdownarrow{7}
+    \labelednode{8,0}{$\ldots$}
+  \end{picture}
+  \caption{Summary of model structure.}
+  \label{fig:modstruc}
+\end{figure}
+
+The core structures of our model are given in \eg{model}.
+Intuitively, we imagine that a speaker and listener are playing a game
+in which the speaker privately observes a state $\state \in \States$
+and produces a message $\msg \in \Messages$ on that basis, given the
+context defined by the signaling system. The listener then uses $\msg$
+to guess a state $\state' \in \States$, and the communication succeeds
+just in case $\state = \state'$. The agents that we define are
+rational in the sense that, by reasoning recursively about each
+other's behaviors, they can increase their chances of success at this
+signaling game.
+%
 \begin{examples}
 \item\label{model}
   \begin{examples}
@@ -457,77 +500,50 @@ a wide range of conversational implicatures
     $\Messages$ is a set of messages containing designated `null' message $\nullmsg$.
   \item\label{lex}%
     $\Lex: \Messages \mapsto \wp(\States)$ is a semantic interpretation function. 
-    $\Lex'(\nullmsg) = \States$
+    $\Lex'(\nullmsg) = \States$.
   \item\label{prior}%
     $\Prior : \States \mapsto [0,1]$ is a prior probability
     distribution over states.    
   \item\label{costs}%
     $\Costs : \Messages \mapsto \Reals$ is a cost function on messages.
-    $\Costs(\nullmsg) > \Costs(\msg), {\forall \msg \in \Messages{-}\set{\nullmsg}}$
-  \item\label{lexset}%
-      $\LexSet = \set{\Lex' : \Lex'(\nullmsg) = \States \text{ and } 
-      \forall \msg \in \Messages{-}\set{\nullmsg}, 
-      \Lex'(\msg) \neq \emptyset \text{ and } 
-      \Lex'(\msg) \subseteq \Lex(\msg)}$
-  \item\label{LexPrior}% 
-    $\LexPrior : \LexSet \mapsto [0,1]$ is a prior
-    probability distribution over lexica.
-  \item\label{temps}%
-    Real-valued learning-rate parameters $\alpha$, $\beta$, and
-    $\gamma$
+    $\Costs(\nullmsg) > \Costs(\msg), {\forall \msg \in \Messages{-}\set{\nullmsg}}$.
   \end{examples}
 \end{examples}
 
-Clauses~\dashsubeg{model}{states}{costs} define a signaling system. We
-imagine that the speaker and listener are playing a game in which the
-speaker privately observes a state $\state \in \States$ and produces a
-message $\msg \in \Messages$ on that basis, given the context defined
-by the signaling system. The listener then uses $\msg$ to guess a
-state $\state' \in \States$, and the communication succeeds just in
-case $\state = \state'$.
+Clause~\subeg{model}{messages} designates a null message $\nullmsg$
+that is true in all states in all lexica. It can be thought of as a
+catch-all for the numerous messages in the language that are not
+discriminating in the context defined by the signaling system.  No
+matter how big and complex the examples, such a message is always
+justified. Introducing $\nullmsg$ also helps ensure that various
+calculations in the model are well-defined. (For alternative methods
+of ensuring definedness, see \citealt{Jaeger:2011} and
+\citealt{bergen-levy-goodman:2014}.)
 
-We assume that the set of messages includes a designated null message
-$\nullmsg$ that is true in all states in all lexica. It can be thought
-of as a catcha-all for the numerous messages in the language that are
-not discriminating in the context defined by the signaling system.  No
-matter how big and complex our examples grow, we assume that such a
-message is always justified. It also helps ensure that various
-calculations in the model are well-defined \citep{Jaeger:2011}.
+%=====================================================================
 
-Throughout this basic game, the two players assume that the lexicon is
-fixed and mutually, publicly known. In \subeg{model}{lexset}, we see a
-first retreat from this assumption. There, we define a set of
-refinements of the origianl $\Lex$. In a sense, this defines the space
-of pragmatic enrichment allowed by the fixed conventions. Here, we
-restrict the lexica to that are refinements of the orginal and assign
-non-empty denotations to every message. This is not a deep assumption
-of the model, though. One could, for instance, define a much larger
-space of lexica and then use the prior $\LexPrior$ to structure
-that space with respect to the agents we define just below.
+\subsection{Simple state/message signaling}\label{sec:rsa}
 
-The parameters in \subeg{model}{temps} control the relative weighting
-of information about the world, information about the lexicon, and
-information about the message costs. We further explicate these
-parameters when defining our agents just below.
-
-
-Our model defines an intuitive hierarchy of agents. The most basic are
-$\listenerZero$, $\speakerOne$, and $\listenerOne$. These agents
-reason in terms of a fixed lexicon $\Lex$, which, for our purposes,
-can be thought of as a standard interpretation function. 
+As \figref{fig:modstruc} shows, our model defines an intuitive hierarchy
+of agents. The most basic are $\listenerZero$, $\speakerOne$, and
+$\listenerOne$. These agents reason in terms of a fixed lexicon
+$\Lex$, which, for our purposes, can be thought of as a standard
+semantic interpretation function, as in \subeg{model}{lex}. These
+agents suffice to define a version of the Rational Speech Acts model
+of \citet{Frank:Goodman:2012} and \citet{Goodman:Stuhlmuller:2013}.
 
 The starting point is $\listenerZero$. This agent simply turns $\Lex$
-into a probabilistic formulation that can be used for decision making
-in the presence of communucative indeterminacy. The first term just
+into a probabilistic formulation that can be used for decision-making
+in the presence of communicative indeterminacy. The first term just
 defines an even distribution over all of the true states $\state$ for
 the given message $\msg$, and the second term incorporates the
 contextual prior distribution over states $\Prior$.
-
+%
 \begin{examples}
 \item\label{l0}%
-    $\listenerZero(\state \given \msg, \Lex) \propto
-    \frac{\Indicator(\state \in \Lex(\msg))}{|\Lex(\msg)|}
-    \Prior(\state)$
+  $\listenerZero(\state \given \msg, \Lex) \propto
+  \frac{\Indicator(\state \in \Lex(\msg))}{|\Lex(\msg)|}
+  \Prior(\state)$
 \end{examples}
 
 This agent is pragmatic only insofar as it incorporates the contextual 
@@ -538,50 +554,144 @@ accordingly. The minimal such speaker is $\speakerOne$, which is
 defined recursively in terms of $\listenerZero$:
 %
 \begin{examples}
-  \item\label{s1}% 
-    $\speakerOne(\msg \given \state, \Lex) \propto
-    \exp
-    \left(
-      \log\left(\alpha\,\listenerZero(\state \given \msg, \Lex) \right)
-      - 
-      \gamma\,\Costs(\msg)
-    \right)$
+\item\label{s1}% 
+  $\speakerOne(\msg \given \state, \Lex) \propto
+  \exp
+  \left(
+    \log\left(\alpha\,\listenerZero(\state \given \msg, \Lex) \right)
+    - 
+    \gamma\,\Costs(\msg)
+  \right)$
 \end{examples}
 %
 Ths definition is a bit cumbersome because of the need to ensure that
-all values are positive. At its heart this agent is parallel to
-$\listenerZero$ in that it combines a conditional distribution and a
-piece of contextual information --- now costs on messages. The result
-is a distribution that one can imagaine serving as the basis for
-decision making: given that the agent would like to convey that a
+all values are positive. At its heart, though, this agent is parallel
+to $\listenerZero$ in that it just combines a conditional distribution
+and a piece of contextual information --- now costs on messages. The
+result is a distribution that one can imagaine serving as the basis
+for decision making: given that the agent would like to convey that a
 certain state holds, which message will do that most effectively for
-the listener? The two positive, real-valued parameters $\alpha$ and
-$\gamma$ control the rate of learning, in a manner similar to
-temperature parameters in reenforcement learning models.
+the $\listenerZero$ listener? The real-valued parameter $\alpha$
+controls the degree to which the speaker tries to capitalize on the
+distinctions encoded by $\listenerZero$.
 
 The first pragmatic listener is $\listenerOne$. It is parallel to
 $\listenerZero$ except that it reasons, not in terms of the original
-lexicon, but rather in terms of $\speakerOne$ reasining about
-$\listenerZero$ reasoning about the lexicon:
+lexicon, but rather in terms of $\speakerOne$ reasoning about
+$\listenerZero$ reasoning about the lexicon. This gives rise to a
+derive, pragmatically-enriched probabilistic interpretation function.
 %
 \begin{examples}
-  \item\label{l1}% 
-    $\listenerOne(\state \given \msg, \Lex) \propto 
-    \speakerOne(\msg \given \state, \Lex)
-    \Prior(\state)$
+\item\label{l1}% 
+  $\listenerOne(\state \given \msg, \Lex) \propto 
+  \speakerOne(\msg \given \state, \Lex)
+  \Prior(\state)$
 \end{examples}
 
-This basic model suffices to derive a range of implicatures involving
-context-dependent reasoning about specific terms and their general
-counterparts. Broadly speaking, such models can achieve variations on
-the theme that using a general term will tend to convey that its
-specific counterpart is inappropriate, creating scalar implicatures.
-The moadels have been shown to achieve good quantitative fits to
-experimental results.  One can also immediately generalize
-$\listenerOne$ and $\speakerOne$ to allow them to recursively respond
-to each other, which generally has the effect of soldifying
-implicatures and predicting new ones that speakers seem less inclined
-to perceive \citep{Vogel-etal:2014}.
+\newcommand{\porq}{p \vee q}
+\newcommand{\pandq}{p \wedge q}
+
+\Figref{fig:rsa-disj} shows how this model derives a basic scalar
+implicature. We've used disjunction to illustrate, but the reasoning
+is actually general across all instances in which a general term $X$
+competes with a specific subterm $Y$. In terms of the communication
+game, suppose the speaker's private state is $w_{2}$. The literal
+listener $\listenerZero$ has only a 50/50 chance of identifying this
+state given the message $\porq$.  However, the first pragmatic
+listener $\listenerOne$, reasoning in terms of $\speakerOne$, has
+already learned to separate $\porq$ and $\pandq$. The nature of
+$\speakerOne$ is equally interesting, as it has achieved a
+production-oriented version of the scalar implicature, as a bias for
+producing $\pandq$ where it is true.
+
+This basic model has been shown to achieve good quantitative fits to
+experimental results
+\citep{Degen:Franke:2012,Stiller:Goodman:Frank:2011}. One can also
+generalize $\listenerOne$ and $\speakerOne$ to allow them to
+recursively respond to each other. This has the effect of soldifying
+implicatures, but it seems also to predict complex ones that speakers
+are less inclined to perceive \citep{Vogel-etal:2014}.
+
+\begin{figure}[htp]
+  \centering
+  \setlength{\arraycolsep}{3pt}  
+  $\begin{array}[b]{c c r@{\hspace{25pt}}l}
+     \begin{array}[c]{r *{3}{r}}
+       \toprule
+       \Lex        & w_{1} & w_{2} & w_{3} \\
+       \midrule
+       \porq    & \True & \True  & \False \\
+       \pandq   & \True & \False & \False  \\
+       \nullmsg & \True & \True  & \True \\
+       \bottomrule
+     \end{array}
+   &
+   \rightarrow
+   &
+   \begin{array}[c]{r *{3}{r}}
+     \toprule
+     \listenerZero & w_{1} & w_{2} & w_{3} \\
+     \midrule
+     \porq    & .5  &  .5  & 0 \\
+     \pandq   & 1   &  0   & 0 \\
+     \nullmsg & .33 & .33  & .33 \\
+     \bottomrule
+   \end{array}
+   &
+   \begin{array}[c]{r *{3}{r}}
+     \toprule
+     \listenerOne & w_{1} & w_{2} & w_{3} \\
+     \midrule
+     \porq    & .31 & .69 & .42 \\
+     \pandq   & 1   &   0 &   0 \\
+     \nullmsg & .11 & .25 & .63 \\
+     \bottomrule
+   \end{array}
+   \\
+   && \searrow & \nearrow
+   \\
+   &&
+   \multicolumn{2}{c}{
+     \begin{array}[c]{r *{4}{r}}
+        \toprule
+        \speakerOne & \porq & \pandq & \nullmsg \\
+        \midrule
+       w_{1} & .27 & .55 & .18 \\
+       w_{2} & .6 &   0 & .4 \\ 
+       w_{3} &   0 &   0 &  1 \\ 
+       \bottomrule
+      \end{array}
+     }
+   \end{array}$   
+   \caption{Illustrating simple state/message signaling with
+     disjunction.  We assume an even prior over states and $0$ costs
+     for all messages. The recursive process separates disjunction
+     (general) and conjunction (specific), thereby creating a pattern
+     characterizable as a scalar implicature.}
+  \label{fig:rsa-disj}
+\end{figure}
+
+%=====================================================================
+
+\subsection{Lexical uncertainty and expertise}\label{sec:full}
+
+The data in \secref{sec:data} show that the lexicon is not known
+precisely, but rather negotiated. We now bring that insight into our
+model.
+%
+\begin{examples}
+\item\label{model-extend}
+  \begin{examples} 
+  \item\label{lexset}%
+      $\LexSet = \set{\Lex' : \Lex'(\nullmsg) = \States \text{ and } 
+      \forall \msg \in \Messages{-}\set{\nullmsg}, 
+      \Lex'(\msg) \neq \emptyset \text{ and } 
+      \Lex'(\msg) \subseteq \Lex(\msg)}$
+  \item\label{LexPrior}% 
+    $\LexPrior : \LexSet \mapsto [0,1]$ is a prior
+    probability distribution over lexica.  
+  \end{examples}
+\end{examples}
 
 The generalization we propose is diffent. Rather than defining further
 recursion based on these lexicon-specific agents, we now open up the
@@ -635,6 +745,9 @@ $\ListenerK[k-1](\Lex\given\msg)$.
     \right)$
 \end{examples}
 
+%=====================================================================
+
+\subsection{A return to simple signaling}\label{sec:return}
 
 The above can be unwieldy to think about because of the lexical
 inferences. To return to the intuitive picture of simple
@@ -652,17 +765,7 @@ of the model's predictions.
   \LexPrior(\Lex)$
 \end{examples}
 
-\begin{figure}[htp]
-  \centering
-  \setlength{\tabcolsep}{2pt}
-  \begin{tabular}[c]{ *{15}{c} }
-   $\listenerZero$ && $\listenerOne$  & $\rightarrow$ & $\ListenerK[1]$ && $\ListenerK[2]$ && $\ListenerK[3]$\\
-   \multicolumn{3}{c}{$\searrow$ $\nearrow$} &&\multicolumn{5}{c}{$\searrow$ $\nearrow$ $\searrow$ $\nearrow$ $\searrow$}\\
-             & $\speakerOne$ &&&& $\SpeakerK[2]$ && $\SpeakerK[3]$ && $\ldots$   
-  \end{tabular}
-  \caption{Summary of model structure}
-  \label{fig:modstruc}
-\end{figure}
+
 
 %=====================================================================
 
