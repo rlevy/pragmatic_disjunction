@@ -90,7 +90,7 @@ one or the other. These findings inform the modeling we describe in
 
 %=====================================================================
 
-\subsection{Hurfordian effects}\label{sec:data:overlapping}
+\subsection{Hurfordian perceptions and intentions}\label{sec:data:overlapping}
 
 \posscitet{Hurford:1974} generalization (HG) is a direct statement of
 the overall communicative pressure to treat disjuncts as exclusive:
@@ -135,12 +135,12 @@ the Web:
   \begin{examples}
   %\item ``How much does the average american or californian pay every
   %  year toward state taxes?''
-  \item ``\ldots and we trust that some of our American or Californian
+  \item ``\ldots and we trust that some of our \highlight{American or Californian}
     friends will tell us something of its growth of flower and fruit
     in its native habitats''
-  \item ``It doesn't matter if you ask a boy or a man or a bachelor or
-    even a husband, \ldots''
-  \item ``the effect was greater than, or not equal to, the cause.''
+  \item ``It doesn't matter if you ask \highlight{a boy or a man or a bachelor or
+    even a husband}, \ldots''
+  \item ``the effect was \highlight{greater than, or not equal to,} the cause.''
   \end{examples}
 \end{examples}
 
@@ -175,38 +175,91 @@ that corpus:
 The dataset includes XXXX cases where the left disjunct entails the
 right, and XXXX in which the right entails the left.  In addition, we
 conjecture that, for any two nouns $N_{1}$ and $N_{2}$ one believes to
-be in an overlap or proper entailment relation, a Web search for
-``$N_{1}$ or $N_{2}$'' will generally yield counterexamples, as will
-``$N_{2}$ or $N_{1}$''. 
+be in an overlap or proper entailment relation, it will generally be
+possible to find a context in which ``$N_{1}$ or $N_{2}$'' and
+``$N_{2}$ or $N_{1}$'' are felicitous, and Web searches will generally
+yield examples.
 
-\marginpar{Perhaps conduct and footnote an N-grams experiment on place names.}
+Eager for a more rigorous assessment of the prevalence of HG-violating
+disjunctions, we conducted a simple experiment. First, we obtained a
+list of countries and their capitals and, to keep the search procedure
+simple, extracted the subset in which the country and capital both
+have single word names. Second, we search for `\emph{country or
+  capital}' and `\emph{capital or country}' in the Google Books
+N-grams data, restricting attention to books after 1960 to try to
+avoid some of the encoding difficulties that plague earlier texts in
+that corpus. The results of this experiment are summarized in
+\tabref{fig:capitals} (the raw data are available at the website
+for this paper).
 
-Of course, one would like to have a more rigorous sampling procedure,
-to evaluate the prevalance of these disjunctions and to probe ordering
-preferences that might relate to the direction of entailment. However,
-we do not see a way to do this accurately. The primary obstacle is, we
-believe, an important property of the phenomenon itself: judgments
-about lexical entailment are inherently very messy because of the
-flexible ways in which people refine meanings in context. As a result,
-there often isn't a single objective answer to the question of whether
-two disjuncts stand in an an entailment
-relation. Example~\eg{churchorsynagogue} illustrates:
+\begin{figure}[tp]
+  \centering
+  \begin{subtable}{0.45\textwidth}
+    \begin{tabular}[c]{r r r}    
+      \toprule
+      & Attested  \\
+      \midrule
+      \emph{country or capital}  & N/TOTAL \\
+      \emph{capital or country}  & N/TOTAL \\
+      \bottomrule
+    \end{tabular}
+    \caption{Percentage attested limiting to cases where both
+      \emph{country} and \emph{capital} are found in the data
+      separately.}
+  \end{subtable}
+  \hfill
+  \begin{subtable}{0.45\textwidth}
+    \begin{tabular}[c]{l}
+      Barplot of \emph{country or capital} \\
+      and \emph{capital or country}\\
+      Summary based on t-test or similar.
+    \end{tabular}
+    \caption{Relative frequencies of the two orders. A Wilcoxon
+      signed-rank test XXXX.}      
+  \end{subtable}
+  \caption{Countries and their capitals in disjunctions.}
+  \label{fig:capitals}
+\end{figure}
+
+Of course, one would like to extend the above experiment to a broader
+and more diverse sample of the lexicon, to get a clearer picture of
+the prevalance of these disjunctions and to probe ordering preferences
+that might relate to the direction of entailment. However, we do not
+see a way to do this accurately. The primary obstacle is, we believe,
+an important property of the phenomenon itself: judgments about
+lexical entailment are inherently very messy because of the flexible
+ways in which people refine meanings in context. As a result, there
+often isn't a single objective answer to the question of whether two
+disjuncts stand in an an entailment relation. For instance, whereas
+\subeg{exclusive}{franceorparis} leaves little room to negotiate the
+meaning of the terms in any clear sense,
+\subeg{exclusive}{churchorsynagogue} is much less clear.
 %
 \begin{examples}
-\item\label{churchorsynagogue} ``In 1940, 37 percent of us had gone to
-  a church or synagogue in the last week.''
+\item\label{exclusive}
+  \begin{examples}
+  \item\label{franceorparis} ``The nuptials will take place in either
+    France or Paris.''
+  \item\label{churchorsynagogue} ``In 1940, 37 percent of us had gone
+    to a church or synagogue in the last week.''
+  \end{examples}
 \end{examples}
 %
 Some speakers have firm judgments that \word{church} and
 \word{synagogue} exclude each other, making this case clearly
 HG-respecting. However, it is easy to find uses of the phrase
 ``synagogues and other churches'', which presuppose that a synagogue
-is a kind of church. The important thing for our purposes is that the
-insight behind HG shines through this uncertainty: no matter what
-one's initial view of the lexicon is, disjunctions like \word{church
-  or synagogue} make salient a view of the lexicon in which the terms
-are semantically disjoint. The speaker will be perceived as endorsing
-such a view, at least for the current conversational exchange, and the
+is a kind of church. And we should take care even with our assertion
+that \word{France} and \word{Paris} invariably stand in an entailment
+relation. In contexts where France is being construed in terms of its
+countryside, or Paris in terms of its particular urban charms,
+\word{France} could come to mean something more like `Paris outside of
+France'. The important thing for our purposes is that the insight
+behind HG shines through this uncertainty: no matter what one's
+initial view of the lexicon is, disjunctions like \word{X or Y} make
+salient a construal of the lexicon in which the disjuncts are
+semantically disjoint. The speaker will be perceived as endorsing such
+a view, at least for the current conversational exchange, and the
 listener can either adopt that assumption or push back.
 
 This lexical uncertainty motivates our own explanation for why
@@ -218,8 +271,6 @@ exclusive. The disjunction is likely to be easily justified in such
 cases, as it might be the most efficient and direct way of identifying
 the union of the two terms.
 
-\marginpar{Perhaps report on our attempt to reproduce Chemla's result.}
-
 More interesting are cases in which the speaker's disjunction seems to
 be part of an attempt to manage the listener's inferences. For
 instance, the speaker who uses the phrase \word{swimwear or bikini}
@@ -227,43 +278,68 @@ might be concerned that using \word{swimwear} alone will trigger an
 ad-hoc scalar implicature \citep{Hirschberg85} excluding the salient
 subkind of bikinis. \citet{Chemla-HurfordCounts} studies this class of
 inferences, presenting suggestive evidence that the frequency of
-disjunctions \word{X or Y} is positively correlated with the
-likelihood that \word{X} converstionally implicates \word{not Y} as
-estimated by the experimental results of \citet{vanTiel-etal:2013}.
-Similarly, the speaker might be seeking to block an implicature that a
-general term is \emph{limited to} a prototypical subkind
-\citep{Levinson00}. For example, where \word{boat} tends to identify
-motorboats, the speaker might use \word{boat or canoe} to ensure that
-canoes are included.  In both of these cases, the speaker is concerned
-that the general term \word{X} will be construed as
+disjunctions \word{X or Y} (\word{X} subsuming \word{Y}) is positively
+correlated with the likelihood that \word{X} conversationally
+implicates \word{not Y} as estimated by the experimental results of
+\citet{vanTiel-etal:2013}.  \citeauthor{Chemla-HurfordCounts}'s
+experiment relies on the page counts in Google search results, which
+are notoriously unreliable \citep{Liberman:2005}, so we reproduced his
+main finding using Google Books data \citep{Michel-etal:2011} and a
+more direct method for assessing the relative frequency of \word{X or
+  Y}. \Figref{fig:chemla} summarizes this experiment, and the raw data
+are available at the website associated with this paper.
+
+\begin{figure}[tp]
+  \centering
+  \includegraphics[width=1\textwidth]{fig/chemla}
+  \caption{A corpus study inspired by \citet{Chemla-HurfordCounts} on
+    the relationship between the probability that \word{X}
+    conversationally implicates \word{not-Y} and the 
+    frequency of disjunctions \word{X or Y} relative to 
+    the more general term \word{X}. A linear regression (blue line)
+    suggests a modest but robust correlation (coef = $6.580^{-06}$; 
+    standard error $3.095^{-06}$; $p = 0.04$; $R^{2} = 0.08$).}
+  \label{fig:chemla}
+\end{figure}
+
+The speaker might wish to block a subtly different kind of implicature
+in a situation in which a general term is prone to being limited to a
+prototypical subkind \citep{Levinson00}. For instance, at a busy
+marina in water-skiing country, \word{boat} might come to identify
+just motorboats. In that case, a speaker might use \word{boat or
+  canoe} or \word{boat or kayak} to ensure that these non-motorized
+cases are included in a rule, lest people assume that these rarer
+kinds of boat are exempt.
+
+In both of these implicature-blocking scenarios, the speaker is
+concerned that the general term \word{X} will be construed as
 $\sem{\word{X}}-\sem{\word{Y}}$ for some \word{Y}. Thus, \word{X} or
 \word{Y} is a hedge against the possibility that the listener's view
 of language is such that, at least in the current context,
 $\sem{\word{X}} \cap \sem{\word{Y}} = \emptyset$, or, as in
 \posscitet{Singh:2008} account,
-$\sem{\word{Y}} \nsubseteq \sem{\word{X}}$.
-
-The above situations place the speaker in a defensive position. Her
-own lexicon might allow her to use just the general term to convey her
-intentions, but she is concerned that the listener will arrive at a
-different conclusion. The costs of disjunction are therefore worth
-paying even if it adds no new information given the speaker's lexicon.
-However, the speaker can play a more active role as well, using
-disjunctions to instruct the listener about the right lexicon. Our
-\secref{sec:introduction} example containing ``you may need
-angioplasty or surgery'' seems to be an instance of this: the
-disjunction conveys secondary information that \word{angioplasty} and
-\word{surgery} will be treated as separate options in the current
-discourse. If HG were adopted as an explicit theoretical constraint,
-then the possibility of doing this would more or less follow --- we
-just require the additional premise that the listener is charitable
-and so will try to find an acceptable construal of the utterance. The
-model we develop in \secref{sec:model} also supports this kind of
-reasoning, but it requires no independent statement of HG.
+$\sem{\word{Y}} \nsubseteq \sem{\word{X}}$. This is a defensive
+position; the speaker's own lexicon might allow her to use just the
+general term to convey her intentions, but she is concerned that the
+listener will arrive at a different conclusion. The costs of
+disjunction are therefore worth paying even if it adds no new
+information given the speaker's lexicon.  However, the speaker can
+play a more active role as well, using disjunctions to instruct the
+listener about the right lexicon. Our \secref{sec:introduction}
+example containing ``you may need angioplasty or surgery'' seems to be
+an instance of this: the disjunction conveys secondary information
+that \word{angioplasty} and \word{surgery} will be treated as separate
+options in the current discourse. If HG were adopted as an explicit
+theoretical constraint, then the possibility of doing this would more
+or less follow --- we just require the additional premise that the
+listener is charitable and so will try to find an acceptable construal
+of the utterance. The model we develop in \secref{sec:model} also
+supports this kind of reasoning, but it requires no independent
+statement of HG.
  
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{Definitional effects}\label{sec:data:definitional}
+\subsection{Definitional and identification}\label{sec:data:definitional}
 
 % A Geological History of Manhattan or New York
 
