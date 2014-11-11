@@ -61,10 +61,10 @@ class Lexica:
         # Close the lexica:
         if self.join_closure:
             lexica = self.add_join_closure(lexica)
-            self.messages += [DISJUNCTION_SIGN.join(sorted(set(cm))) for cm in self.powerset(self.baselexicon.keys(), minsize=2)]
+            #self.messages += [DISJUNCTION_SIGN.join(sorted(set(cm))) for cm in self.powerset(sorted(self.baselexicon.keys()), minsize=2)]
         if self.meet_closure:
             lexica = self.add_meet_closure(lexica)
-            self.messages += [CONJUNCTION_SIGN.join(sorted(set(cm))) for cm in self.powerset(self.baselexicon.keys(), minsize=2)]
+            #self.messages += [CONJUNCTION_SIGN.join(sorted(set(cm))) for cm in self.powerset(sorted(self.baselexicon.keys()), minsize=2)]
         # Update the canonical message set and state set; has to be done AFTER all closures!
         if self.join_closure:            
             self.states += [DISJUNCTION_SIGN.join(sorted(set(sem))) for sem in self.powerset(self.atomic_states, minsize=2)]
@@ -83,8 +83,8 @@ class Lexica:
     def add_meet_closure(self, lexica):
         return self.add_closure(lexica=lexica, connective=CONJUNCTION_SIGN, combo_func=(lambda x,y : x & y), cost_value=self.conjunction_cost)    
 
-    def add_closure(self, lexica=None, connective=None, combo_func=None, cost_value=None):         
-        complex_msgs = [connective.join(sorted(set(cm))) for cm in self.powerset(sorted(self.baselexicon.keys()), minsize=1)] + self.messages
+    def add_closure(self, lexica=None, connective=None, combo_func=None, cost_value=None):
+        complex_msgs = [connective.join(sorted(set(cm))) for cm in self.powerset(sorted(self.baselexicon.keys()), minsize=1)] #+ self.messages
         for i, lex in enumerate(lexica):
             for cm in complex_msgs:
                 # Get all the worlds consistent with the complex message:

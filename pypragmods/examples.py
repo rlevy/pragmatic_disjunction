@@ -80,14 +80,14 @@ def simple_disjunction(n=3):
 def disjunction(n=3):
     """Settings for Bergen et al.'s figure 6. Seems to reproduce the effects they report."""
    # bl = {'p': [r'$w_1$', r'$w_2$'], 'q':[r'$w_2$', r'$w_3$']}
-    bl = {'p': ['1', '2'], 'q':['2', '3']}
+    bl = {'p': ['1', '2'], 'q':['1', '3'], 'p & q': ['1'], 'p v q': ['1', '2', '3']}
     lexica = Lexica(baselexicon=bl,
                     atomic_states=['1', '2', '3'],
                     disjunction_cost=1.0,
                     conjunction_cost=0.0,
                     null_cost=5.0,                    
                     join_closure=True,
-                    meet_closure=True,
+                    meet_closure=False,
                     block_trivial_messages=True,
                     block_ineffability=False)
     
@@ -101,9 +101,9 @@ def disjunction(n=3):
                   prior=np.repeat(1.0/len(lexica.states), len(lexica.states)),
                   lexprior=np.repeat(1.0/len(lexica), len(lexica)),
                   temperature=1.0,
-                  alpha=1.0)
+                  alpha=3.0)
     mod.plot_expertise_listener(output_filename='../paper/fig/scalardisj-expertise-listener-marginalized.pdf', n=n)
-    mod.plot_expertise_speaker(output_filename='../paper/fig/scalardisj-expertise-speaker.pdf', n=n)
+    #mod.plot_expertise_speaker(output_filename='../paper/fig/scalardisj-expertise-speaker.pdf', n=n)
     mod.plot_expertise_speaker(output_filename='../paper/fig/scalardisj-expertise-speaker-lexsum.pdf', n=n, lexsum=True)
 
 
@@ -113,6 +113,6 @@ if __name__ == '__main__':
 
     #scalars(n=3)
     #manner(n=3)
-    #disjunction(n=2)
+    disjunction(n=10)
     #simple_disjunction(n=2)
 

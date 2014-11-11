@@ -204,7 +204,7 @@ class Pragmod:
 
     def plot_expertise_listener(self, n=3, output_filename=None):
         fig, ax = plt.subplots(1,1)
-        fig.set_figheight(len(self.meanings)*len(self.messages)*0.75)
+        fig.set_figheight(len(self.meanings)*len(self.messages)*0.5)
         fig.set_figwidth(14)
         langs = self.run_expertise_model(n=n)
         final_listener = langs[-1]
@@ -223,7 +223,7 @@ class Pragmod:
             for j, u in enumerate(final_speaker): 
                 spk[j] += np.sum(u, axis=1) 
             fig, ax = plt.subplots()
-            fig.set_figheight(len(self.meanings)*len(self.messages)*0.75)
+            fig.set_figheight(len(self.meanings)*len(self.messages)*0.5)
             fig.set_figwidth(14)
             self.plot_speaker_matrix(rownorm(spk.T), ax, lex=None)
         else:
@@ -250,14 +250,13 @@ class Pragmod:
 
     def plot_matrix(self, mat, ax, lex=None, outerlabels=None, innerlabels=None, width=0.2, initial_color_index=0):
         from lsa import colors
-        from lexica import DISJUNCTION_SIGN              
         m, n = mat.shape
         barsetwidth = width*n
-        ind = np.arange(0.0, (barsetwidth+width)*m, barsetwidth+width)
+        ind = np.arange(width, (barsetwidth+width)*m, barsetwidth+width)
         ind = ind[::-1]        
         for j in range(n-1, -1, -1):
             xpos = ind+(width*j)
-            vals = mat[:, j]        
+            vals = mat[:, j]
             ax.barh(xpos, vals, width, color=colors[initial_color_index+j], label=innerlabels[j])
             for i in range(m):
                 textx = xpos[i]+(width/2.0)

@@ -92,12 +92,11 @@ the modeling we describe in \dashsecref{sec:model}{sec:analysis}.
 \posscitet{Hurford:1974} generalization (HG) is a direct statement of
 the overall communicative pressure to treat disjuncts as exclusive:
 %
-\begin{examples}
-\item\label{hg}%
+\begin{quote}
   ``The joining of two sentences by \word{or} is unacceptable if one
   sentence entails the other; otherwise the use of \word{or} is
   acceptable.'' (p.~410)
-\end{examples}
+\end{quote}
 %
 The generalization is stated in terms of sentences, but Hurford's
 examples, given in \eg{hex} with his original judgments, make it clear
@@ -236,9 +235,9 @@ meaning of the terms in any clear sense,
 \item\label{exclusive}
   \begin{examples}
   \item\label{franceorparis} ``The nuptials will take place in either
-    France or Paris.''
+    \highlight{France or Paris}.''
   \item\label{churchorsynagogue} ``In 1940, 37 percent of us had gone
-    to a church or synagogue in the last week.''
+    to a \highlight{church or synagogue} in the last week.''
   \end{examples}
 \end{examples}
 %
@@ -593,9 +592,6 @@ derive, pragmatically-enriched probabilistic interpretation function.
   \Prior(\state)$
 \end{examples}
 
-\newcommand{\porq}{p \vee q}
-\newcommand{\pandq}{p \wedge q}
-
 \Figref{fig:rsa-disj} shows how this model derives a basic scalar
 implicature. We've used disjunction to illustrate, but the reasoning
 is actually general across all instances in which a general term $X$
@@ -724,10 +720,10 @@ of $\porq$ with $w_{2}$ that we see for $\listenerOne$ in
   $\begin{array}[c]{c c c}
      \Lex & \Lex_{2} & \Lex_{3} \\
      \disjlexicon{w_{1}, w_{2}}{w_{1}}
-      & 
-      \disjlexicon{w_{1}}{w_{1}}
-      & 
-      \disjlexicon{w_{2}}{w_{1}}
+     & 
+     \disjlexicon{w_{1}}{w_{1}}
+     & 
+     \disjlexicon{w_{2}}{w_{1}}
   \end{array}$
   \caption{Lexicon set $\LexSet$ for the basic lexicon $\Lex$ in \figref{fig:rsa-disj}.}
   \label{fig:disjlexica}
@@ -867,7 +863,6 @@ the iteration between $\ListenerK[k-1]$ and $\SpeakerK$ could continue.
   \label{fig:full-disj}
 \end{figure}
 
-
 %=====================================================================
 
 \subsection{A return to simple signaling}\label{sec:return}
@@ -880,8 +875,7 @@ predictions. \Figref{fig:simple} by using these equations to reduce
 the middle and right columns of \figref{fig:full-disj} to just 
 state/message relationships. The results closely match those obtained
 from the simpler system (\figref{fig:rsa-disj}).
-
-
+%
 \begin{examples}
 \item\label{lisnorm}% 
   $\ListenerK(\state \given \msg)  = 
@@ -891,7 +885,6 @@ from the simpler system (\figref{fig:rsa-disj}).
   \sum_{\Lex \in \LexSet} \SpeakerK(\msg \given \state, \Lex)
   \LexPrior(\Lex)$
 \end{examples}
-
 
 \begin{figure}[tp]
   \centering
@@ -934,94 +927,72 @@ This initial example is meant to show how the model works and to show
 that we can capture the core scalar implicature that disjunction is
 best known for.
 
-\begin{examples}
-\item 
-  \begin{examples}
-  \item 
-    $\Lex$:
-    $\begin{array}[c]{r *{4}{c}}
-      \toprule
-                    & p      & q      & p \word{ or } q & p \word{ and } q \\
-      \midrule
-      w_{1}          & \True    & \False & \True     & \False \\
-      w_{2}          & \True   & \True  & \True     & \True  \\
-      w_{3}          & \False  & \True  & \True     & \False 
-      \\[2ex]
-      w_{1} \vee w_{2} & \True & \False & \True & \False \\
-      w_{1} \vee w_{3} & \False & \False & \True  & \False \\ 
-      w_{2} \vee w_{3} & \False & \True & \True  & \False \\
-      w_{1} \vee w_{2} \vee w_{3} & \False & \False & \True  & \False 
-      \\[2ex]
-      w_{1} \wedge w_{2}  & \True  & \True & \True & \True\\
-      w_{1} \wedge w_{3}  & \True  & \True & \True & \False\\
-      w_{2} \wedge w_{3}  & \True  & \True & \True & \True\\
-      w_{1} \wedge w_{2} \wedge w_{3} & \True  & \True & \True & \True\\
-      \bottomrule
-    \end{array}$
-  \item $\alpha = 3$ (it's important that this be high for exclusivization)
-  \item Disjunction cost: $0.1$; $\beta = 1$; $\gamma = 1$  
-  \end{examples}
-\end{examples}
+Close the space state under joins, so that, with three atomic worlds,
+we get \figref{fig:closure}.
 
-\noindent
-\begin{minipage}[c]{0.48\linewidth}
-  \begin{examples}
-  \item $\ListenerK[3]$ after marginalization 
+Assume that denotations are closed under joins in all lexica. If an
+expressions basic denotation is $\set{w_{1}, w_{2}}$, then its full
+extension is determined to be $\set{w_{1}, w_{2}, w_{1} \vee w_{2}}$.
+
+The atomic messages are closed under disjunction and conjunction so
+that $\Messages = \set{p, q}$ expands to
+$\Messages = \set{p, q, \porq, \pandq}$. The semantics of these
+operation is as expected: union for disjunction and intersection for
+conjunction. Thus, for example, if $p$'s meaning is
+$\set{w_{1}, w_{2}}$ and $q$'s meaning is $\set{w_{1}, w_{3}}$, then
+$p \vee q$ denotes $\set{w_{1}, w_{2}, w_{3}}$.  After joint closure,
+this denotes the entire state space represented in
+\figref{fig:closure}.
+
+\Figref{fig:compdisj} shows what happens when we run out full model in
+this space. The diagrams summarize the listener and the speaker in
+terms of the simple state/message signaling defined by \eg{lisnorm}
+and \eg{spknorm}. The results again reveal the expected
+exclusivization inferences for disjunction.
+
+\begin{figure}[tp]
+  \centering
+  \newcommand{\labelednode}[2]{\put(#1){\makebox(0,0){#2}}}
+  \newcommand{\picline}[3]{\put(#1){\line(#2){#3}}}
+  \setlength{\unitlength}{1cm}
+  \begin{picture}(5.5,2)   
+    \labelednode{0.5,2}{$w_{1}$}
+    \labelednode{2.75,2}{$w_{2}$}
+    \labelednode{5,2}{$w_{2}$}
     
-    \vspace{-4pt}
+    \picline{0.5,1.2}{0,1}{0.6}
+    \picline{0.75,1.2}{3,1}{1.8}
+    \labelednode{0.5,1}{$w_{1} \vee w_{2}$}
+        
+    \picline{2.5,1.2}{-3,1}{1.8}
+    \picline{3.0,1.2}{3,1}{1.8}
+    \labelednode{2.75,1}{$w_{1} \vee w_{3}$}
 
-     $\mspace{-90mu}$
-     \includegraphics[width=1.2\textwidth]{fig/scalardisj-expertise-listener-marginalized}
-  \end{examples}
-\end{minipage}
-\hfill
-\begin{minipage}[c]{0.48\linewidth}
-  \begin{examples}
-  \item $\SpeakerK[3]$ summed over lexica
+    \picline{5,1.2}{0,1}{0.6}
+    \picline{4.75,1.2}{-3,1}{1.8}
+    \labelednode{5,1}{$w_{2} \vee w_{3}$}
     
-    \vspace{-4pt}
+    \picline{2.5,0.2}{-3,1}{1.8}
+    \picline{2.75,0.2}{0,1}{0.6}
+    \picline{3.0,0.2}{3,1}{1.8}
+    \labelednode{2.75,0}{$w_{1} \vee w_{2} \vee w_{3}$}
+  \end{picture}
+  \caption{State space with disjunctive closure.}
+  \label{fig:closure}
+\end{figure}
 
-    $\mspace{-70mu}$
-    \includegraphics[width=1.2\textwidth]{fig/scalardisj-expertise-speaker-lexsum}
-  \end{examples}
-\end{minipage}
-
-\begin{examples}
-\item Summary of the above via max associations:
-
-  \begin{minipage}[t]{0.45\linewidth}
-    Listener
-
-    \vspace{-2pt}
-  
-    $\begin{array}[t]{r @{ \ \Rightarrow \ } l}
-      \toprule
-      \text{Message} & \text{Inference} \\
-      \midrule
-      p &  w_{1}\\
-      q & w_{3} \\
-      p \word{ or } q & w_{1} \vee w_{3} \\
-      \bottomrule
-    \end{array}$
-  \end{minipage}
+\begin{figure}[tp]
+  \begin{subfigure}{0.48\textwidth}
+    \includegraphics[width=1\textwidth]{fig/scalardisj-expertise-listener-marginalized}
+  \end{subfigure}
   \hfill
-  \begin{minipage}[t]{0.45\linewidth}
-    Speaker
+  \begin{subfigure}{0.48\textwidth}
+    \includegraphics[width=1\textwidth]{fig/scalardisj-expertise-speaker-lexsum}
+  \end{subfigure}
+  \caption{Compositional disjunction results. $\alpha = 3$; $\beta = 1$; $\Costs(\vee) = 1.0$; $n = 10$}
+  \label{fig:compdisj}
+\end{figure}
 
-    \vspace{-2pt}
-
-    $\begin{array}[t]{r @{ \ \Rightarrow \ } l}
-      \toprule
-      \text{Observation} & \text{Best message} \\
-      \midrule
-      w_{1} & p \\
-      w_{2} & \set{p, q} \\
-      w_{3} & q  \\      
-      w_{1} \vee w_{3} & p \word{ or } q \\
-      \bottomrule
-    \end{array}$
-  \end{minipage}    
-\end{examples}
 
 %=====================================================================
 
