@@ -112,3 +112,60 @@
 
 \let\oldmarginpar\marginpar
 \renewcommand{\marginpar}[1]{\oldmarginpar[\color{red}\raggedright\scriptsize #1]{\color{red}\raggedright\scriptsize #1}}
+
+
+%=====================================================================
+%============================== helpers ==============================
+
+\newcommand{\disjlexicon}[2]{
+  \left[
+    \begin{array}[c]{l@{ \ \mapsto \ } l}
+      \porq    & \set{#1} \\
+      \pandq   & \set{#2} \\
+      \nullmsg & \set{w_{1}, w_{2}, w_{3}} \\
+    \end{array}
+  \right]}
+
+\newcommand{\listenerMatrix}[4]{
+  \begin{array}[c]{l *{3}{r}}
+    \toprule
+    #1 & w_{1} & w_{2} & w_{3} \\
+    \midrule
+    \porq    & #2\\
+    \pandq   & #3 \\
+    \nullmsg & #4 \\
+    \bottomrule
+  \end{array}}
+
+\newcommand{\speakerMatrix}[4]{
+  \begin{array}[c]{r *{4}{r}}
+    \toprule
+    #1 & \porq & \pandq & \nullmsg \\
+    \midrule
+    w_{1} & #2 \\
+    w_{2} & #3 \\ 
+    w_{3} & #4 \\ 
+    \bottomrule
+  \end{array}}
+
+\newcommand{\ListenerKMatrix}[4]{
+  \begin{array}[c]{l *{3}{r}}
+  \toprule
+    #1 & w_{1} & w_{2} & w_{3} \\
+    \midrule
+    \Lex_{1}  & #2 \\
+    \Lex_{2}  & #3 \\
+    \Lex_{3}  & #4 \\
+    \bottomrule
+  \end{array}}
+
+\newcommand{\SpeakerKMatrix}[4]{
+  \begin{array}[c]{l *{3}{r}}
+    \toprule
+    \Lex_{#1} & \porq & \pandq & \nullmsg \\
+    \midrule
+    w_{1}  & #2 \\
+    w_{2}  & #3 \\
+    w_{3}  & #4 \\
+    \bottomrule
+  \end{array}}

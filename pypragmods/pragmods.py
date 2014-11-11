@@ -59,19 +59,19 @@ class Pragmod:
     ##################################################################
     ##### Iteration models
 
-    def run_base_model(self, lex, n=2, display=True):
+    def run_base_model(self, lex, n=2, display=True, digits=4):
         """Basic model with a specified messages x meanings matrix of truth values lex"""
-        return self.run(n=n, display=display, initial_listener=self.l0(lex), start_level=0)
+        return self.run(n=n, display=display, digits=digits, initial_listener=self.l0(lex), start_level=0)
     
-    def run_uncertainty_model(self, n=2, display=True):
+    def run_uncertainty_model(self, n=2, display=True, digits=4):
         """The lexical uncertainty model of Bergen et al. 2012, 2014"""
-        return self.run(n=n, display=display, initial_listener=self.UncertaintyListener(), start_level=1)    
+        return self.run(n=n, display=display, digits=digits, initial_listener=self.UncertaintyListener(), start_level=1)    
 
-    def run_anxiety_model(self, n=2, display=True):
+    def run_anxiety_model(self, n=2, display=True, digits=4):
         """One-shot version of the social anxiety model of Smith et al. 2013"""        
-        return self.run(n=n, display=display, initial_listener=self.UncertaintyAnxietyListener(marginalize=True), start_level=1)
+        return self.run(n=n, display=display, digits=digits, initial_listener=self.UncertaintyAnxietyListener(marginalize=True), start_level=1)
 
-    def run(self, lex=None, n=2, display=True, initial_listener=None, start_level=0):
+    def run(self, lex=None, n=2, display=True, initial_listener=None, start_level=0, digits=4):
         """Generic iterator. n is the depth of iteration. initial_listener is one of the
         listener methods, applied to a lexical argument in the case of the base model.
         display=True prints all matrices to standard output. start_level controls which 
@@ -81,16 +81,16 @@ class Pragmod:
             langs.append(self.S(langs[i-1]))
             langs.append(self.L(langs[i]))
         if display:
-            self.display_iteration(langs, start_level=start_level)        
+            self.display_iteration(langs, start_level=start_level, digits=digits)        
         return langs  
 
-    def run_expertise_model(self, n=2, display=True):
+    def run_expertise_model(self, n=2, display=True, digits=4):
         langs = [self.UncertaintyAnxietyListener(marginalize=False)]
         for i in range(1, (n-1)*2, 2):
             langs.append(self.ExpertiseSpeaker(langs[i-1]))
             langs.append(self.ExpertiseListener(langs[i]))
         if display:
-            self.display_expertise_iteration(langs)      
+            self.display_expertise_iteration(langs, digits=digits)      
         return langs  
         
     ##################################################################
@@ -164,29 +164,29 @@ class Pragmod:
     ##################################################################
     ##### Display functions
 
-    def display_expertise_iteration(self, langs):
+    def display_expertise_iteration(self, langs, digits=4):
         print "======================================================================"
-        [self.display_listener_matrix(l, title="1 - Lex%s" % i) for i, l in enumerate(langs[0])]
+        [self.display_listener_matrix(l, title="1 - Lex%s" % i, digits=digits) for i, l in enumerate(langs[0])]
         self.display_listener_matrix(np.sum(langs[0], axis=0), title="1 - marginalized")
         level = 2
         for index in range(1, len(langs), 2):
             print "======================================================================"         
-            [self.display_lex_matrix(l, title="%s - %s" % (level, self.messages[i])) for i, l in enumerate(langs[index])]
+            [self.display_lex_matrix(l, title="%s - %s" % (level, self.messages[i]), digits=digits) for i, l in enumerate(langs[index])]
             spk = np.zeros((len(self.messages), len(self.meanings)))
             for j, u in enumerate(langs[index]): 
                 spk[j] += np.sum(u, axis=1)           
-            self.display_speaker_matrix(rownorm(spk.T), title="%s - marginalized" % level)
+            self.display_speaker_matrix(rownorm(spk.T), title="%s - marginalized" % level, digits=digits)
             print "======================================================================"
-            [self.display_listener_matrix(l, title="%s - Lex%s" % (level, i)) for i, l in enumerate(langs[index+1])]
-            self.display_listener_matrix(np.sum(langs[index+1], axis=0), title="%s - marginalized" % level)
+            [self.display_listener_matrix(l, title="%s - Lex%s" % (level, i), digits=digits) for i, l in enumerate(langs[index+1])]
+            self.display_listener_matrix(np.sum(langs[index+1], axis=0), title="%s - marginalized" % level, digits=digits)
             level += 1
             
-    def display_iteration(self, langs, start_level=0):
-        self.display_listener_matrix(langs[0], title=start_level)        
+    def display_iteration(self, langs, start_level=0, digits=4):
+        self.display_listener_matrix(langs[0], title=start_level, digits=digits)        
         start_level += 1
         display_funcs = (self.display_speaker_matrix, self.display_listener_matrix)
         for i, lang in enumerate(langs[1: ]):
-            display_funcs[i % 2](lang, title=start_level)
+            display_funcs[i % 2](lang, title=start_level, digits=digits)
             if i % 2: start_level += 1
 
     def display_speaker_matrix(self, mat, display=True, title='', digits=4):

@@ -27,8 +27,9 @@ class Lexica:
                  unknown_word=None):
         self.baselexicon = baselexicon
         self.messages = sorted(self.baselexicon.keys())
-        #self.atomic_states = sorted(list(set(reduce((lambda x,y : x + y), self.baselexicon.values()))))
         self.atomic_states = atomic_states
+        if self.atomic_states == None:
+            self.atomic_states = sorted(list(set(reduce((lambda x,y : x + y), self.baselexicon.values()))))
         self.states = copy(self.atomic_states)
         self.nullsem = nullsem
         self.join_closure = join_closure

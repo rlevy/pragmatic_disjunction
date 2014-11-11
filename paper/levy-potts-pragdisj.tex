@@ -336,7 +336,7 @@ statement of HG.
  
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{Definitional and identification}\label{sec:data:definitional}
+\subsection{Definition and identification}\label{sec:data:definitional}
 
 % A Geological History of Manhattan or New York Island
 
@@ -404,8 +404,8 @@ an ambitious undergraduate seeks to convey competence to a professor.
 The uses also arise when the speaker and listener might both be
 experts in the domain and see a value (jointly or just in the current
 speaker's eyes) of using a word in a specialized sense in order to
-name a concept efficiently (e.g. \word{What motivates the snobbish
-  wine lover or `oenophile' and how does he differ from the casuaal
+name a concept efficiently (e.g., \word{What motivates the snobbish
+  wine lover or `oenophile' and how does he differ from the casual
   drinker?}).
 
 For these reasons, we retreat to a more basic characterization: the
@@ -435,20 +435,25 @@ meanings of the two disjuncts.
 
 \section{Modeling communication with anxious experts}\label{sec:model}
 
-We now present our model of pragmatic reasoning. In this model,
-production and interpretation are based in a recursive process in
-which speaker and listener agents reason about each other reasoning
-about each other.  At the lowest levels of our model, these agents
-communicate using a single lexicon. However, we do not actually assume
-that a single lexicon is mutually and publicly recognized as the set
-of core conventions of the language. Rather, our model aggregates over
-many possible lexica, thereby allowing the agents to negotiate the
-structure of the language itself even as they
+We now present our model of pragmatic reasoning. Our presentation is
+somewhat compact. Readers wishing to more fully explore the model are
+referred to the website for this paper, which implements the model,
+provides simple and complex examples, and includes (Python) code for
+all the examples and figures in this paper.
+
+In our model, production and interpretation are based in a recursive
+process in which speaker and listener agents reason about each other
+reasoning about each other.  At the lowest levels of our model, these
+agents communicate using a single lexicon. However, we do not actually
+assume that a single lexicon is mutually and publicly recognized as
+the set of core conventions of the language. Rather, our model
+aggregates over many possible lexica, thereby allowing the agents to
+negotiate the structure of the language itself even as they
 communicate. \Figref{fig:modstruc} summarizes this picture
 schematically; this section is devoted to explicating these agents and
 their relationships.
 
-\begin{figure}[htp]
+\begin{figure}[tp]
   \centering
   \newcommand{\labelednode}[2]{\put(#1){\makebox(0,0){#2}}}
   \newcommand{\picarrow}[3][0.9]{\put(#2){\vector(#3){#1}}}
@@ -612,56 +617,40 @@ recursively respond to each other. This has the effect of soldifying
 implicatures, but it seems also to predict complex ones that speakers
 are less inclined to perceive \citep{Vogel-etal:2014}.
 
-\begin{figure}[htp]
+\begin{figure}[tp]
   \centering
-  \setlength{\arraycolsep}{3pt}  
+  \setlength{\arraycolsep}{3pt} 
   $\begin{array}[b]{c c r@{\hspace{25pt}}l}
-     \begin{array}[c]{r *{3}{r}}
-       \toprule
-       \Lex        & w_{1} & w_{2} & w_{3} \\
-       \midrule
-       \porq    & \True & \True  & \False \\
-       \pandq   & \True & \False & \False  \\
-       \nullmsg & \True & \True  & \True \\
-       \bottomrule
-     \end{array}
-   &
-   \rightarrow
-   &
-   \begin{array}[c]{r *{3}{r}}
-     \toprule
-     \listenerZero & w_{1} & w_{2} & w_{3} \\
-     \midrule
-     \porq    & .5  &  .5  & 0 \\
-     \pandq   & 1   &  0   & 0 \\
-     \nullmsg & .33 & .33  & .33 \\
-     \bottomrule
-   \end{array}
-   &
-   \begin{array}[c]{r *{3}{r}}
-     \toprule
-     \listenerOne & w_{1} & w_{2} & w_{3} \\
-     \midrule
-     \porq    & .31 & .69 & .42 \\
-     \pandq   & 1   &   0 &   0 \\
-     \nullmsg & .11 & .25 & .63 \\
-     \bottomrule
-   \end{array}
+     \listenerMatrix%
+     {\Lex_{1}}%
+     {\True & \True  & \False}
+     {\True & \False & \False}     
+     {\True & \True  & \True}      
+     &
+     \rightarrow
+     &
+     \listenerMatrix%
+     {\listenerZero}%
+     { .5  &  .5 & 0}%
+     {  1 &   0 &  0}%
+     {.33 & .33 & .33}%
+     &
+     \listenerMatrix%
+     {\listenerOne}%
+     {.25 & .75 & 0}%
+     {1 &   0 & 0}%
+     { 0 &   0 & 1}
    \\
    && \searrow & \nearrow
    \\
    &&
    \multicolumn{2}{c}{
-     \begin{array}[c]{r *{4}{r}}
-        \toprule
-        \speakerOne & \porq & \pandq & \nullmsg \\
-        \midrule
-       w_{1} & .27 & .55 & .18 \\
-       w_{2} & .6 &   0 & .4 \\ 
-       w_{3} &   0 &   0 &  1 \\ 
-       \bottomrule
-      \end{array}
-     }
+      \speakerMatrix%
+      {\speakerOne}%
+      {.33 & .67 & 0}%
+      {1 &   0 & 0}%
+      {0 &   0 & 1}
+   }
    \end{array}$   
    \caption{Illustrating simple state/message signaling with
      disjunction.  We assume an even prior over states and $0$ costs
@@ -675,9 +664,12 @@ are less inclined to perceive \citep{Vogel-etal:2014}.
 
 \subsection{Lexical uncertainty and expertise}\label{sec:full}
 
-The data in \secref{sec:data} show that the lexicon is not known
-precisely, but rather negotiated. We now bring that insight into our
-model.
+In the above simple mode, the agents condition on (take as given) a
+fixed, shared lexicon. Howver, the data in \secref{sec:data} show that
+the lexicon is not known precisely, but rather negotiated during
+interactions. We now bring that insight into our model. The first step
+is to define a space of lexica $\LexSet$ and a probability
+distribution over them $\LexPrior$:
 %
 \begin{examples}
 \item\label{model-extend}
@@ -692,44 +684,86 @@ model.
     probability distribution over lexica.  
   \end{examples}
 \end{examples}
+%
+Clause~\subeg{model-extend}{lexset} defines a complete set of
+refinements of a basic lexicon: every lexical item can denote a subset
+of the space it denotes in the focal lexicon $\Lex$, and all
+combinations of these refinements are available. The only requirements
+are that messages always have non-empty denotations and that the null
+message $\nullmsg$ always denotes the full set of states. The
+resulting definition gives us an intuitive, computationally manageable
+space to work with. We should emphasize, though, that these
+assumptions are not essential to our model. In the extreme case, we
+could admit every lexicon derivable from the messages $\Messages$ and
+states $\States$, and then usee the lexicon prior $\LexPrior$ to
+provide some structure to the space --- say, but assigning low but
+non-zero probability to lexica that are not refinements. This is a
+strictly more general perspective than the one given by
+\eg{model-extend}, which can alternatively be seen assigning zero
+probability to lexica not admitted by
+clause~\subeg{model-extend}{lexset}. We do not explore these options
+further in this paper, but see for discussion of non-refinement
+pragmatic enrichment.
 
-The generalization we propose is diffent. Rather than defining further
-recursion based on these lexicon-specific agents, we now open up the
-model to allow for the possibility that the discourse participants are
-negotiating not just what information they exchange but also what
-language they use to exchange it. Our $\ListenerK$ achieves this on
-the listener side; it is based on the social-anxiety listener of
-\citet{Smith:Goodman:Frank:2013}.
+\Figref{fig:disjlexica} shows the set of admissible lexica for the
+initial lexicon $\Lex$ of \figref{fig:rsa-disj}. Since $\pandq$
+already denotes a singleton, it admits no refinements, so its meaning
+is the same in all three lexica. The null message $\nullmsg$ is fixed
+by stipulation. The message of interest is disjunction, since it has
+two refinements in addition to its basic meaning. Even in this simple
+example, one can see how useful biases will start to emerge. For
+instance, $\porq$ has two lexica in which its meaning includes
+$w_{2}$, but just one in which it includes $w_{1}$. This bias is
+already pushing in the direction of the target pragmatic association
+of $\porq$ with $w_{2}$ that we see for $\listenerOne$ in
+\figref{fig:rsa-disj}.
+
+\begin{figure}[tp]
+  \centering
+  \setlength{\arraycolsep}{1pt}    
+  $\begin{array}[c]{c c c}
+     \Lex & \Lex_{2} & \Lex_{3} \\
+     \disjlexicon{w_{1}, w_{2}}{w_{1}}
+      & 
+      \disjlexicon{w_{1}}{w_{1}}
+      & 
+      \disjlexicon{w_{2}}{w_{1}}
+  \end{array}$
+  \caption{Lexicon set $\LexSet$ for the basic lexicon $\Lex$ in \figref{fig:rsa-disj}.}
+  \label{fig:disjlexica}
+\end{figure}
+
+Our first `lexical uncertainty' agent is $\ListenerK[1]$, which is based
+on the model of \citet{Smith:Goodman:Frank:2013}:
 %
 \begin{examples}
-  \item\label{Lk}%
+  \item\label{L1}%
     \setlength{\arraycolsep}{2pt}%  
     $\mspace{-4mu}\begin{array}[t]{r c l}
       \ListenerK(\state, \Lex \given \msg) 
       &=&
-      \sum_{\Lex \in \LexSet} \listenerOne(\state \given \msg, \Lex) \ListenerK(\Lex \given \msg) 
+      \ListenerK(\state \given \msg, \Lex) \ListenerK(\Lex \given \msg) 
       \\[1ex]
       \ListenerK(\Lex \given \msg) 
       &\propto& 
-      \Prior(\Lex) \sum_{\state\in\States} \SpeakerK(\msg \given \state)\Prior(\state)
+      \Prior(\Lex) \sum_{\state\in\States} \SpeakerK(\msg \given \state, \Lex)\Prior(\state)
     \end{array}$
 \end{examples}
 %
-In terms of its form, the most important feature of this model is that
-it makes joint inferences about states and lexica; rather than taking
-the lexicon as given, it tries to make guesses about this based on the
-speaker's message. The second term models this information
-specifically by characterizing the extent to which the speaker's
-message discriminates among lexica. This listener is responding to
-$\listenerOne$ in sense that it sums over all of the
-$\listenerOne(\state\given\msg\Lex)$ inferences for all lexica.
-  
-Our speaker agent responds to this sophisticated joint listener.  We
-assume that the speaker does have a specific lexicon in mind.  More
+This agent is defined for levels $k \geqslant 1$ as long as we assume
+that $\SpeakerK[1] = \speakerOne$ (higher levels use the speaker in
+\eg{Sk}) and
+$\ListenerK[1](\state \given \msg, \Lex) = \listenerOne(\state
+\given \msg, \Lex)$.
+The agent uses the speaker's message to make a joint inference about
+the state and the lexicon. The first term uses a fixed-lexicon
+inference and the second encodes the extent to which the current
+message biases in favor of $\Lex$.
+
+Our `expertise' speaker responds to this lexical uncertainty listener.
+We assume that this speaker does have a specific lexicon in mind.  More
 precisely, this speaker is taken to observe state--lexicon pairs and
-produce messages on that basis. In broad terms, it is similar to
-$\speakerOne$ except that it includes a new term
-$\ListenerK[k-1](\Lex\given\msg)$.
+produce messages on that basis. It is defined for all $k > 1$:
 
 \begin{examples}  
   \item\label{Sk}%
@@ -744,17 +778,110 @@ $\ListenerK[k-1](\Lex\given\msg)$.
       \gamma\,\Costs(\msg)
     \right)$
 \end{examples}
+%
+In broad terms, this agent is similar to $\speakerOne$ except that it
+includes a new term $\ListenerK[k-1](\Lex\given\msg)$ encoding the
+information each message conveys about the lexicon. The relative
+importance of this information is controlled by a new real-valued
+learning-rate parameter $\beta$. The relative weights of $\alpha$ and
+$\beta$ control the relative importance of conveying information about
+the world and information about the lexicon, and much of our
+investigation of disjunction focuses on this relationship.
+
+\Figref{fig:full-disj} shows this model in action on our simple
+disjunctive scalar implicature. The left column gives the
+$\listenerOne$ inferences for the three lexica in
+\figref{fig:disjlexica}. The middle column gives the uncertainty
+listener's joint probabilities given each message. It says, for
+example that the listener's best-guess (highest probability) inference
+given the message $\porq$ is state $w_{2}$ and lexicon $\Lex_{1}$ or
+$\Lex_{3}$. The right column shows the first expertise speaker's
+message probabilities given observed state--lexicon pairs. From here,
+the iteration between $\ListenerK[k-1]$ and $\SpeakerK$ could continue.
+
+\begin{figure}[tp]
+  \centering
+  $\begin{array}{c c c}
+     \listenerOne & \ListenerK[1] & \SpeakerK[2] 
+     \\[1ex]     
+     \listenerMatrix%
+     {\Lex_{1}}%
+     {.25 & .75 & 0}%
+     {1 & 0 & 0}%
+     {0 & 0 & 1}     
+     &
+     \ListenerKMatrix%
+     {\porq}%
+     {.12 & .35 & 0}%
+     {.18 & 0 & 0}
+     {0 & .35 & 0}            
+     &
+     \SpeakerKMatrix%
+     {1}%
+     {.31 & .69 & 0}%
+     {1 & 0 & 0}%
+     {0 & 0 & 1}
+     %
+     \\[8ex]
+     %
+     \listenerMatrix%
+     {\Lex_{2}}%
+     {1 & 0 & 0}%
+     {1 & 0 & 0}%
+     {0 & .5 & .5}%
+     &
+     \ListenerKMatrix%
+     {\pandq}%
+     {.31 & 0 & 0}
+     {.23 & 0 & 0}
+     {.46 & 0 & 0}
+     &
+     \SpeakerKMatrix%
+     {2}%
+     {.18 & .82 & 0}%
+     {.99 & 0 & .01}%
+     {0 & 0 & 1}%       
+     %
+     \\[8ex]
+     %
+     \listenerMatrix%
+     {\Lex_{3}}%
+     {0 & 1 & 0}%
+     {1 & 0 & 0}%
+     {0 & 0 & 1}%
+     &
+     \ListenerKMatrix%
+     {\nullmsg}%
+     {0 & 0 & .25}%
+     {0 & .25 & .25}%  
+     {0 & 0 & .25}%
+     &
+     \SpeakerKMatrix%
+     {3}%
+     {.18 & .82 & 0}%
+     {1 & 0 & 0}%
+     {0 & 0 & 1}%  
+   \end{array}$
+   \caption{Full model inferences for disjunction. $\alpha = 1$
+   $\beta = 1$. $\Costs(\nullmsg) = 5$.}
+  \label{fig:full-disj}
+\end{figure}
+
 
 %=====================================================================
 
 \subsection{A return to simple signaling}\label{sec:return}
 
-The above can be unwieldy to think about because of the lexical
-inferences. To return to the intuitive picture of simple
-state/message signaling, we can sum over lexica, as in 
-\eg{lisnorm} and \eg{spknorm}. Both provide useful summaries
-of the model's predictions.
-%
+The full model can be unwieldy to think about because of the lexicon
+inferences. To return to the intuitive picture of simple state/message
+signaling, we can sum over lexica, as in \eg{lisnorm} and
+\eg{spknorm}. Both provide useful summaries of the model's
+predictions. \Figref{fig:simple} by using these equations to reduce
+the middle and right columns of \figref{fig:full-disj} to just 
+state/message relationships. The results closely match those obtained
+from the simpler system (\figref{fig:rsa-disj}).
+
+
 \begin{examples}
 \item\label{lisnorm}% 
   $\ListenerK(\state \given \msg)  = 
@@ -766,10 +893,42 @@ of the model's predictions.
 \end{examples}
 
 
+\begin{figure}[tp]
+  \centering
+  $\begin{array}[c]{c@{\hspace{45pt}}c}
+     \ListenerK[1](\state\given\msg) & \SpeakerK[2](\msg\given\state) \\[1ex] % & \ListenerK[2](\state\given\msg) \\[1ex]
+     \listenerMatrix%
+     {}%
+     { 0.29 & .71 & 0}
+     { 1 &   0 &  0}
+     {0 &  .25 & .75}
+     & 
+     \speakerMatrix%
+     {}%
+     {.23 &  .77  &   0}%
+     {1   &  0  &     0}%
+     {0   &  0.0  &   1}
+     %
+     % & 
+     %
+     %\listenerMatrix%
+     %{}
+     %{ .18 & .82  &  0}
+     %{1 &   0  &  0}   
+     %{0 &   0  &  1}      
+   \end{array}$
+   \caption{A return to simple signaling. The system on the left is
+     derived from the middle column of \figref{fig:full-disj} using
+     equation~\eg{lisnorm}, and the right column is derived from the
+     right column of \figref{fig:full-disj} using
+     equation~\eg{spknorm}.}
+  \label{fig:simple}
+\end{figure}
+
 
 %=====================================================================
 
-\section{Scalar implicature of disjunction}\label{sec:scalar-disj}
+\section{Compositional disjunction}\label{sec:scalar-disj}
 
 This initial example is meant to show how the model works and to show
 that we can capture the core scalar implicature that disjunction is

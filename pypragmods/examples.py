@@ -15,9 +15,10 @@ def scalars(n=3):
                   prior=np.repeat(1.0/len(lexica.states), len(lexica.states)),
                   lexprior=np.repeat(1.0/len(lexica), len(lexica)),
                   temperature=1.0)
-    mod.plot_expertise_listener(output_filename='../paper/fig/scalar-expertise-listener-marginalized.pdf', n=n)
+    #mod.run_expertise_model(n=n, display=True, digits=4)
+    #mod.plot_expertise_listener(output_filename='../paper/fig/scalar-expertise-listener-marginalized.pdf', n=n)
     mod.plot_expertise_speaker(output_filename='../paper/fig/scalar-expertise-speaker.pdf', n=n)
-    mod.plot_expertise_speaker(output_filename='../paper/fig/scalar-expertise-speaker-lexsum.pdf', n=n, lexsum=True)
+    #mod.plot_expertise_speaker(output_filename='../paper/fig/scalar-expertise-speaker-lexsum.pdf', n=n, lexsum=True)
 
 
 def manner(n=3):
@@ -39,6 +40,42 @@ def manner(n=3):
     mod.plot_expertise_listener(output_filename='../paper/fig/manner-expertise-listener-marginalized.pdf', n=n)
     mod.plot_expertise_speaker(output_filename='../paper/fig/manner-expertise-speaker.pdf', n=n)
     mod.plot_expertise_speaker(output_filename='../paper/fig/manner-expertise-speaker-lexsum.pdf', n=n, lexsum=True)
+
+def simple_disjunction(n=3):    
+    Lex = np.array([[1.0, 1.0, 0.0],
+                    [1.0, 0.0, 0.0],
+                    [1.0, 1.0, 1.0]])
+
+    lexica = [Lex,
+              np.array([[1.0, 0.0, 0.0], [1.0, 0.0, 0.0], [1.0, 1.0, 1.0]]),
+              np.array([[0.0, 1.0, 0.0], [1.0, 0.0, 0.0], [1.0, 1.0, 1.0]])]
+
+    Lex = np.array([[1.0, 1.0],
+                    [1.0, 0.0],
+                    [1.0, 1.0]])
+
+    lexica = [Lex,
+              np.array([[1.0, 0.0], [1.0, 0.0], [1.0, 1.0]]),
+              np.array([[0.0, 1.0], [1.0, 0.0], [1.0, 1.0]])]
+    
+    mod = Pragmod(lexica=lexica,
+                  messages=[r'vee', r'wedge', 'NULL'],
+                  meanings=['w_{1}', 'w_{2}'],
+                  costs=np.array([0.0, 0.0, 5.0]),
+                  prior=np.repeat(1.0/2.0, 2),
+                  lexprior=np.repeat(1.0/3.0, 3),
+                  temperature=1.0,
+                  alpha=1.0,
+                  beta=0.0)
+
+    mod.run_base_model(lexica[1], n=n, display=True, digits=4)
+
+    #for lex in lexica:
+    #    mod.run_base_model(lex, n=2, display=True, digits=2)
+
+    mod.run_expertise_model(n=n, display=True, digits=4)
+
+
 
 def disjunction(n=3):
     """Settings for Bergen et al.'s figure 6. Seems to reproduce the effects they report."""
@@ -76,5 +113,6 @@ if __name__ == '__main__':
 
     #scalars(n=3)
     #manner(n=3)
-    disjunction(n=2)
+    #disjunction(n=2)
+    #simple_disjunction(n=2)
 
