@@ -173,8 +173,9 @@
   \end{array}}
 
 \newcommand{\smallhurfordlex}[3]{
+  \setlength{\arraycolsep}{1pt}
   \left[
-    \begin{array}[c]{l@{ \ \mapsto \ }r l@{ \ \mapsto \ }r l@{ \ \mapsto \ }r}
+    \begin{array}[c]{l@{ \ \mapsto \ }r@{, \ } l@{ \ \mapsto \ }r@{, \ } l@{ \ \mapsto \ }r}
       A & \set{#1} &
       B & \set{#2} &
       X & \set{#3}

@@ -901,7 +901,7 @@ from the simpler system (\figref{fig:rsa-disj}).
      {}%
      {.23 &  .77  &   0}%
      {1   &  0  &     0}%
-     {0   &  0.0  &   1}
+     {0   &  0  &   1}
      %
      % & 
      %
@@ -1087,7 +1087,7 @@ strategy is a stable one in communication, in line with the intuitions
 we described in \secref{sec:data:overlapping}.
 
 \begin{figure}[tp]
-  \centering  
+  \centering
   $\begin{array}[c]{l l r r r}
     \toprule
      & \word{A or X}       & w_{1} & w_{2} & w_{1} \vee w_{2} \\
@@ -1143,47 +1143,64 @@ this inference is mirrored by a speaker preference for producing
 
 \subsection{Definitional disjunctions}\label{sec:analysis:definitional}
 
-\begin{examples}
-\item From the listener's perspective, we are concerned to see when
-  \word{A or X} is interpreted as equivalent to $\sem{A}$.
+The central puzzle of definitional readings is when \word{A or X} is
+intended and construed as equivalent to $\sem{A}$. From the listener's
+perspective, this involves an inference that $\sem{A}=\sem{X}$
+(assuming, as before that $X$ is the unknown term. From the speaker's
+perspective, we want to know when a speaker will favor producing
+\word{A or X} given that she favors a lexicon in which
+$\sem{A}=\sem{X}$ and observes a state equivalent to the literal
+meaning of $\sem{A}$. The full characterization of this phenomenon
+involves a lot of complex factors relating to social status, mutual,
+public knowledge about knowedge, and so forth. We saw in
+\secref{sec:data} that the motivations are diverse and subtle. Our
+goal is to home in on the aspects of the core aspects of these
+inferences.
 
-\item From the speaker's perspective, we want to know what happens
-  when the speaker favors a lexicon in which $\sem{A}=\sem{X}$ and
-  observes a state equivalent to the literal meaning of $\sem{A}$.
-  When will such a speaker produce \word{A or X}.
+\Figref{fig:def} summarizes a context in which the uncertainty
+listener makes a definitional inference. The states and messages are
+as in our Hurfordian example (\figref{fig:hurford}). The contextual
+parameters are different, though: $\beta$ is now larger than $\alpha$,
+encoding the primacy of lexical information over world information
+(though both remain highly relevant), and the cost of disjunction is
+substantially lower: $0.01$. The gray cell marks the listener's
+best joint inference: $w_{1}$, corresponding to the meaning of \word{A},
+and $\Lex_{3}$, where the meaning of $X$ is defined to $\set{w_{1}}$.
 
-\item Here's an example in which these two perspectives are
-  complementary. To achieve it, we have to substantially raise
-  $\alpha$ and $\beta$ and lower disjunction costs:
-
-  \begin{examples}
-  \item $\States = \set{w_{1}, w_{2}, w_{3}}$;  $\Messages = \set{A, B, X}$
-  \item $\Lex = [A \mapsto \set{w_{1}}, B \mapsto \set{w_{2}}, X \mapsto \set{w_{1}, w_{2}}]$
-  \item Priors are flat. $\alpha = 5$; $\beta = 7$; $\gamma = 1$. Disjunction cost: $0.01$. $n = 3$. 
-  \end{examples}
-
-\item The listener's best guess inference, upon hearing \word{A or X},
-  is that the speaker's state is $w_{1} \vee w_{2}$ and that the
-  lexicon is $\Lex_{1}$. Here's the joint probability table:
-  \[
-  \renewcommand{\arraystretch}{2}
-  \begin{array}[c]{l r r r}
+\begin{figure}[tp]
+  \centering
+  $\begin{array}[c]{l l r r r}
     \toprule
-            & w_{1} & w_{2} & w_{1} \vee w_{2} \\
+      & \word{A or X}  & w_{1} & w_{2} & w_{1} \vee w_{2} \\
     \midrule
-    \smallhurfordlex{w_{1}}{w_{2}}{w_{1}, w_{2}} & 0 & 0 & 0 \\
-    \smallhurfordlex{w_{1}}{w_{2}}{w_{2}}        & 0 & 0 & 0 \\
-    \smallhurfordlex{w_{1}}{w_{2}}{w_{1}}        & \graycell{0.88} & 0 & 0.12\\
+    \Lex_{1} & \smallhurfordlex{w_{1}}{w_{2}}{w_{1}, w_{2}} & 0 & 0 & 0 \\[1ex]
+    \Lex_{2} & \smallhurfordlex{w_{1}}{w_{2}}{w_{2}}        & 0 & 0 & 0 \\[1ex]
+    \Lex_{3} & \smallhurfordlex{w_{1}}{w_{2}}{w_{1}}        & \graycell{0.88} & 0 & 0.12\\
     \bottomrule
-  \end{array}
-  \]
+  \end{array}$
+  \caption{Definitional inference.
+    Priors are flat. 
+    $\alpha = 5$; 
+    $\beta = 7$; 
+    $\Costs(\word{or}) = 0.01$; 
+    $n = 3$}
+  \label{fig:def}
+\end{figure}
 
-\item The above parameters deliver the same result with the the
-  lexicon size increased. Here's the best lexical inference with five
-  atomic messages and four atomic states --- in this way, the 
-  listener has learned that $A$ and $X$ are synonymous:
-  \[
-  \left[
+This result is once again paired with a comparable one for the
+speaker: with these contextual settings, where the speaker observes
+observes $w_{1}$ and prefers a lexicon where $X$ and $A$ are
+synonymous, her preferred utterance is \word{A or X}.
+
+Once again, it is worth running the same simulation with a larger
+lexicon. The above parameters deliver the same result with the the
+lexicon size increased to five atomic messages and four atomic states:
+if the listener hears \word{A or X} in this context, she infers
+that the speaker's lexicon is \eg{def-lex-large}
+%
+\begin{examples}
+\item\label{def-lex-large}
+  $\left[
     \begin{array}[c]{l@{ \ \mapsto \ }l}
       A & \set{w_{1}} \\
       B & \set{w_{2}} \\
@@ -1191,15 +1208,56 @@ this inference is mirrored by a speaker preference for producing
       D & \set{w_{4}} \\
       X & \set{w_{1}}
     \end{array}
-  \right]
-  \]  
-
-\item If we assume that the unknown term has an atomic meaning, then
-  we can strengthen the inference (and generate it under a wider range
-  of parameters settings).  Under these circumstances, the meaning of
-  the known disjunct serves as a \emph{focal point} that the speaker
-  and listener can coordinate on for the meaning of the unknown word.
+  \right]$
 \end{examples}
+
+When compared with the Hurfordian inferences illustrated in
+\secref{sec:analysis:subsumptive}, the definitional ones are delicate
+in the sense that they arise only for a relatively narrow range of
+parameter settings. (We quantity this intuitive characterization in
+the next section.) For example, if $\beta$ is too close to $\alpha$,
+or disjunction costs get too high, the listener fails to make the
+inference and the speaker tends to resort to using just \word{A} in
+the relevant contexts. This makes intuitive sense given the nature of
+these parameters --- for example, if the speaker has little interest
+in communicating about the lexicon, or disjunction costs prohibit the
+wastefuless of using \word{A or X} to convey $\sem{A}$, then the
+meanings disappear. 
+
+Nonetheless, it is worth asking whether there are ways in which the
+reading can be made more salient and robust. One important way this
+can be done is by imposing the additional lexical requirement that the
+meaning of $X$ be atomic (as atomic as the known terms in the
+lexicon). This would correspond to a situation in which it was clear
+that $X$ was an alternative for some lexical item. Under these
+circumstances, the meaning of the known disjunct serves as a focal
+point that the speaker and listener can coordinate on for the meaning
+of the unknown word. \Figref{fig:def-focal} is a minimal variant of
+\figref{fig:def} in which this extra lexical requirement has been
+imposed. This removes $\Lex_{1}$ from consideration. The listener
+inference is numerically stronger, and it is paralleled by a similar
+increased probability on the speaker side for producing \word{A or X}
+with definitional intententions. We will explore such contexts in more
+detail in the next section.
+
+\begin{figure}[tp]
+  \centering
+  $\begin{array}[c]{l l r r r}
+    \toprule
+      & \word{A or X}  & w_{1} & w_{2} & w_{1} \vee w_{2} \\
+    \midrule
+    \Lex_{2} & \smallhurfordlex{w_{1}}{w_{2}}{w_{2}}        & 0 & 0 & 0 \\[1ex]
+    \Lex_{3} & \smallhurfordlex{w_{1}}{w_{2}}{w_{1}}        & \graycell{1} & 0 & 0\\
+    \bottomrule
+  \end{array}$
+  \caption{Definitional inference with $X$ constrained to have an atomic meaning. 
+    Priors are flat. 
+    $\alpha = 5$; 
+    $\beta = 7$; 
+    $\Costs(\word{or}) = 0.01$; 
+    $n = 3$.}
+  \label{fig:def-focal}
+\end{figure}
 
 %=====================================================================
 
