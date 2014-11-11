@@ -113,6 +113,6 @@ if __name__ == '__main__':
 
     #scalars(n=3)
     #manner(n=3)
-    disjunction(n=10)
+    disjunction(n=3)
     #simple_disjunction(n=2)
 

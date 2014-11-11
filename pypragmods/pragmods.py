@@ -209,15 +209,15 @@ class Pragmod:
         langs = self.run_expertise_model(n=n)
         final_listener = langs[-1]
         marginalized = np.sum(final_listener, axis=0)
-        self.plot_listener_matrix(marginalized, ax, lex=None)
+        self.plot_listener_matrix(marginalized, ax, lex=None)        
         if output_filename:
-            plt.savefig(output_filename)
+            plt.savefig(output_filename,  bbox_inches='tight')
         else:
             plt.show()
 
     def plot_expertise_speaker(self, n=3, output_filename=None, lexsum=False):        
         langs = self.run_expertise_model(n=n)
-        final_speaker = langs[-2]
+        final_speaker = langs[-2]        
         if lexsum:
             spk = np.zeros((len(self.messages), len(self.meanings)))
             for j, u in enumerate(final_speaker): 
@@ -234,7 +234,7 @@ class Pragmod:
             for lexindex in range(len(self.lexica)):
                 self.plot_speaker_matrix(final_speaker[lexindex], ax[lexindex], lex=self.lexica[lexindex])
         if output_filename:
-             plt.savefig(output_filename)
+             plt.savefig(output_filename, bbox_inches='tight')
         else:
             plt.show()
         
@@ -253,10 +253,13 @@ class Pragmod:
         m, n = mat.shape
         barsetwidth = width*n
         ind = np.arange(width, (barsetwidth+width)*m, barsetwidth+width)
-        ind = ind[::-1]        
+        ind = ind[::-1]
+        shadecolors = ['gray', 'white']
+        for shade_index, i in enumerate(ind):
+            ax.axhspan(i, i+barsetwidth, facecolor=shadecolors[shade_index % 2], alpha=0.2, edgecolor='none')          
         for j in range(n-1, -1, -1):
             xpos = ind+(width*j)
-            vals = mat[:, j]
+            vals = mat[:, j]            
             ax.barh(xpos, vals, width, color=colors[initial_color_index+j], label=innerlabels[j])
             for i in range(m):
                 textx = xpos[i]+(width/2.0)
@@ -266,7 +269,7 @@ class Pragmod:
         ax.set_yticks(ind+barsetwidth/2.0)
         ax.set_yticklabels(outerlabels, fontsize=24)
         ax.set_ylim([min(xpos), max(ind+barsetwidth+width)])
-        ax.set_xlim([0.0, 1.0])
+        ax.set_xlim([0.0, 1.0])        
         if lex != None:
             ax.set_title(self.lex2str(lex))
                 

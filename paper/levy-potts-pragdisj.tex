@@ -131,12 +131,13 @@ the Web:
   \begin{examples}
   %\item ``How much does the average american or californian pay every
   %  year toward state taxes?''
-  \item ``\ldots and we trust that some of our \highlight{American or Californian}
-    friends will tell us something of its growth of flower and fruit
-    in its native habitats''
-  \item ``It doesn't matter if you ask \highlight{a boy or a man or a bachelor or
-    even a husband}, \ldots''
-  \item ``the effect was \highlight{greater than, or not equal to,} the cause.''
+  \item ``\ldots and we trust that some of our \highlight{American or
+      Californian} friends will tell us something of its growth of
+    flower and fruit in its native habitats''
+  \item ``It doesn't matter if you ask \highlight{a boy or a man or a
+      bachelor or even a husband}, \ldots''
+  \item ``the effect was \highlight{greater than, or not equal to,}
+    the cause.''
   \end{examples}
 \end{examples}
 
@@ -918,37 +919,42 @@ from the simpler system (\figref{fig:rsa-disj}).
   \label{fig:simple}
 \end{figure}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%=====================================================================
+\section{Compositional disjunction}\label{sec:composition}
 
-\section{Compositional disjunction}\label{sec:scalar-disj}
+The running example we used in \secref{sec:model} to introduce the
+model is artificial and overly simplisitic in a bunch of ways, the
+most glaring of which is its noncompositional treatment of disjunction
+(and conjunction). Since this paper is largely about disjunction, it's
+important that we get somewhat more serious about that aspect of the
+messaging system.
 
-This initial example is meant to show how the model works and to show
-that we can capture the core scalar implicature that disjunction is
-best known for.
-
-Close the space state under joins, so that, with three atomic worlds,
-we get \figref{fig:closure}.
-
-Assume that denotations are closed under joins in all lexica. If an
-expressions basic denotation is $\set{w_{1}, w_{2}}$, then its full
-extension is determined to be $\set{w_{1}, w_{2}, w_{1} \vee w_{2}}$.
-
-The atomic messages are closed under disjunction and conjunction so
-that $\Messages = \set{p, q}$ expands to
-$\Messages = \set{p, q, \porq, \pandq}$. The semantics of these
-operation is as expected: union for disjunction and intersection for
-conjunction. Thus, for example, if $p$'s meaning is
+To achieve this, we begin from a space of atomic messages and close
+them under disjunction. So, for example, $\set{p, q}$ expands to
+$\Messages = \set{p, q, \porq, \pandq}$. In addition, in order to
+directly model the sort of indeterminacy that disjunction can convey,
+we close the set of atomic states under the join operation.  For the
+set of atomic states $\set{w_{1}, w_{2}, w_{3}}$, this results in the
+semilattice in \figref{fig:closure}. Interpretation via $\Lex$ then
+proceeds as one would expect: disjunction corresponds to union and
+conjunction to intersection. For example, if $p$'s meaning is
 $\set{w_{1}, w_{2}}$ and $q$'s meaning is $\set{w_{1}, w_{3}}$, then
-$p \vee q$ denotes $\set{w_{1}, w_{2}, w_{3}}$.  After joint closure,
-this denotes the entire state space represented in
-\figref{fig:closure}.
+$\porq$ denotes $\set{w_{1}, w_{2}, w_{3}}$.  After join closure, this
+denotes the entire state space represented in
+\figref{fig:closure}. Conversely, $\pandq$ denotes $\set{w_{1}}$,
+which does not change under closure. (We expand the space of meanings
+to include meets, or even to the full double-set lattice with states
+like $w_{1} \vee (w_{2} \wedge w_{3})$, as in
+\citealt{levy-pollard:2001}, but we stick with the join space to keep
+the presentation as simple as possible.)
 
-\Figref{fig:compdisj} shows what happens when we run out full model in
-this space. The diagrams summarize the listener and the speaker in
-terms of the simple state/message signaling defined by \eg{lisnorm}
-and \eg{spknorm}. The results again reveal the expected
-exclusivization inferences for disjunction.
+\Figref{fig:compdisj} shows what happens when we run our full model
+beginning from atomic messages $\set{p,q}$ and atomic states
+$\set{w_{1}, w_{2}, w_{3}}$. The barplots summarize the
+$\ListenerK[3]$ and $\SpeakerK[3]$ inferences using \eg{lisnorm} and
+\eg{spknorm} to return to simple state/message signaling. The results
+again reveal the expected exclusivization inferences for disjunction.
 
 \begin{figure}[tp]
   \centering
@@ -993,96 +999,130 @@ exclusivization inferences for disjunction.
   \label{fig:compdisj}
 \end{figure}
 
-
-%=====================================================================
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Analysis}\label{sec:analysis}
 
+We now show how our model can be used to characterize both the
+Hufordian and definitional capacities of disjunction, as reviewed in
+\secref{sec:data}. We first illustrate the effects using parameters
+chosen by hand, and then we explore the space of parameters to try to
+determine which settings --- which approximations of the context ---
+deliver each of the readings. 
 
-Throughout, we
-assume that the communcative setting is governed by a few overarching
-principles: 
+Throughout, our illustrations, we assume that \word{X} is the target
+for refinement, that is, the general term for Hurfordian inferences
+and the unknown term for definitional ones.  From the listener's
+perspective, we are concerned to see when \word{A or X} gives rise to
+the inference that $\sem{A} \cap \sem{X} = \emptyset$ (Hurfordian
+reading) and when \word{A or X} gives rise to the inference that
+$\sem{A} = \sem{X}$ (definitional).
 
- communication about language is at least somewhat
-important to the discourse participants; 
+It's worth highlighting again the dynamics of the model that
+facilitate these uses. First, we assume that the speaker has a
+preferred lexicon, and that she will choose her messages in part to
+help convey this preference. Of course, the recusive nature of the
+model means that the listener (or, rather, the speaker's expectations
+about the listener) are involved in this planning. Second, we assume
+that the listener is at least somewhat willing to defer to the speaker
+with regard to the best lexicon to use in context. Again, this
+deference is mediated by the recursive nature of the model, which
+defines all aspects of communication as a (boundedly) rational
+collaborative. We take these basic assumptions to be necessary, but
+not sufficient, for communicating in language about language.
 
-Contextual requirements: 
-
-\begin{examples}
-\item The speaker is mutually and publicly known to be an expert in
-  the relevant domain.
-  
-\item The speaker is mutually and publicly known to believe the
-  listener to be a non-expert in the relevant domain.
-  
-\item The speaker is mutually and publically known to have an
-  interest in conveying information about the language itself,
-  even if this communicative inefficiency in terms of the 
-  information conveyed about the world.
-\end{examples}
-
-\begin{examples}
-\item Throughout, let \word{X} be the unknown term.
-
-\item From the listener's perspective, we are concerned to see when
-  \word{A or X} gives rise to the inference that $\sem{A} \cap \sem{X}
-  = \emptyset$ (Hurfordian reading) and when \word{A or X} gives rise
-  to the inference that $\sem{A} = \sem{X}$ (definitional).
-\end{examples}
-
-\newcommand{\smallhurfordlex}[3]{
-  \left[
-    \begin{array}[c]{l@{ \ \mapsto \ }r l@{ \ \mapsto \ }r l@{ \ \mapsto \ }r}
-      A & \set{#1} &
-      B & \set{#2} &
-      X & \set{#3}
-    \end{array}
-  \right]}
+In our model, the importance of lexical communication is set by the
+parameter $\beta$. If this is set to $0$, then all lexical preferences
+are silenced. Where $\beta$ is positive, the ratio of $\alpha$ and
+$\beta$ is a rough guide to the relative importance of communicating
+about the world and communicating about the lexicon (though message
+costs and other facts about context will also play a role).
 
 %=====================================================================
 
-\subsection{Subsumptive disjunctions}\label{sec:analysis:subsumptive}
+\subsection{A Hurfordian context}\label{sec:analysis:subsumptive}
 
-\begin{examples}
-\item From the listener's perspective, we are concerned to see when
-  \word{A or X} gives rise to the lexical inference that $\sem{A} \cap
-  \sem{X} = \emptyset$. We assume that the overall meaning will be
-  $\sem{A} \cup \sem{X}$, i.e., that the relevant information concerns
-  just the lexical inference.
+As we said above, the unknown term is $X$ and, from the listener's
+perspective, we are concerned to see when \word{A or X} gives rise to
+the lexical inference that $\sem{A} \cap \sem{X} = \emptyset$. We
+assume that the overall meaning will be $\sem{A} \cup \sem{X}$, i.e.,
+that the relevant information concerns just the lexical inference.
 
-\item Here's a scenario in which the exclusivization inference arises:
+\Figref{fig:hurford} presents a context in which the listener arrives
+at this conclusion. The context has just three atomic states and three
+basic messages. (To save space, we do not depict the disjunctive
+closure of the states or messages; \secref{sec:composition}.) The
+initial lexicon $\Lex$ gives rise to three refinements, pictured in
+the table in \figref{fig:hurford}. The Hurfordian inference is
+predicted in the following sense: when the listener hears the message
+\word{A or X}, his highest probability inference is that that state is
+$w_{1} \vee w_{2}$ and the lexicon is the one in which
+$\sem{A} \cap \sem{X} = \emptyset$.
 
-  \begin{examples}
-  \item $\States = \set{w_{1}, w_{2}, w_{3}}$;  $\Messages = \set{A, B, X}$
-  \item $\Lex = [A \mapsto \set{w_{1}}, B \mapsto \set{w_{2}}, X \mapsto \set{w_{1}, w_{2}}]$
-  \item Priors are flat. $\alpha = 2$; $\beta = 1$; $\gamma = 1$. Disjunction cost: $1$. $n = 3$. 
-  \end{examples}
+Anticipating the meta-theory we develop in
+\secref{sec:analysis:characterization}, we note that setting
+$\alpha > \beta$ is important for achieving this result. Intuitively,
+this means that world information is valued more than lexical
+information. We also note that the cost of disjunction is relatively
+high. Where costs are high, the disjunction has to be
+justified. Letting the two terms overlap reduces the justification,
+whereas exclusivizing provides justification. In other words, the
+apparently undue prolixity of the disjunction (the more general term
+would seem to suffice!) generates an inference that we observe in the
+lexical inferences.
 
-\item The listener's best guess inference, upon hearing \word{A or X},
-  is that the speaker's state is $w_{1} \vee w_{2}$ and that the
-  lexicon is the one where $A$ and $X$ are disjoint. Here's the joint
-  probability table:
-  \[
-  \renewcommand{\arraystretch}{2}
-  \begin{array}[c]{l r r r}
+Ours is a model of production as well as interpretation, so it's
+important to take the speaker's perspective as well. It's useful that
+the listener makes the desired inference upon hearing \word{A or X},
+but the value of this observation is diminished if the speaker never
+uses this message to signal the relevant state--lexicon pair,
+especially since our corpus work (\secref{sec:data:overlapping})
+suggests that speakers do in fact produce these utterances
+systematically. With the above parameters, our model predicts that
+they will produce such messages. Indeed, in this context, with this
+parameter settings, the speaker's preferred message given observed
+state $w_{1} \vee w_{2}$ and lexicon $\Lex_{1}$ from
+\figref{fig:hurford} is \word{A or X}.  This suggests that the
+strategy is a stable one in communication, in line with the intuitions
+we described in \secref{sec:data:overlapping}.
+
+\begin{figure}[tp]
+  \centering  
+  $\begin{array}[c]{l l r r r}
     \toprule
-            & w_{1} & w_{2} & w_{1} \vee w_{2} \\
+     & \word{A or X}       & w_{1} & w_{2} & w_{1} \vee w_{2} \\
     \midrule
-    \smallhurfordlex{w_{1}}{w_{2}}{w_{1}, w_{2}} & 0 & 0 & 0.16 \\
-    \smallhurfordlex{w_{1}}{w_{2}}{w_{2}} & 0 & 0 & \graycell{0.47} \\
-    \smallhurfordlex{w_{1}}{w_{2}}{w_{1}} & 0 & 0 & 0.38 \\
+    \Lex    & \smallhurfordlex{w_{1}}{w_{2}}{w_{1}, w_{2}} & 0 & 0 & 0.16 \\[1ex]
+    \Lex_{1} & \smallhurfordlex{w_{1}}{w_{2}}{w_{2}} & 0 & 0 & \graycell{0.47} \\[1ex]
+    \Lex_{2} & \smallhurfordlex{w_{1}}{w_{2}}{w_{1}} & 0 & 0 & 0.38 \\
     \bottomrule
-  \end{array}
-  \]
+  \end{array}$
+  \caption{Hurfordian inference.
+    Priors are flat. 
+    $\alpha = 2$; 
+    $\beta = 1$; 
+    $\Costs(\word{or}) = 1$; 
+    $n = 3$}
+  \label{fig:hurford}
+\end{figure}
 
-\item The above parameters deliver the same result with the the
-  lexicon size increased (same pattern: each lexical item denotes its
-  own world and $X$ denotes the union of all the worlds). This is
-  unwieldy to visualize, but the important thing is that the best
-  lexicon is always a Hurfordian one. Here's the best lexical
-  inference with five atomic messages and four atomic states:
-  \[
-  \left[
+The lexicon used in \figref{fig:hurford} is very small, and one might
+wonder whether the Hurfordian inference comes about via a suprious
+process of elimination, given that there are only three atomic
+messages and on has a very general meaning. To address this concern,
+we ran the same simulation with a larger lexicon: five atomic messages
+and four atomic states. This is of course still unrealistically small
+for a natural language lexicon, but it certainly provides a much
+larger space for potential lexical refinements. The Hufordian reading
+arises in this lexicon with the same parameters as in
+\figref{fig:hurford}. This is unwieldy to visualize (there are
+thirteen distinct lexica), but the important thing is that the best
+lexicon is always a Hurfordian one. Here's the best lexical inference
+given the message \word{A or X} from the speaker:
+ 
+\begin{examples}
+\item\label{hurford-lex-large}  
+  $\left[
     \begin{array}[c]{l@{ \ \mapsto \ }l}
       A & \set{w_{1}} \\
       B & \set{w_{2}} \\
@@ -1090,11 +1130,14 @@ Contextual requirements:
       D & \set{w_{4}} \\
       X & \set{w_{2}, w_{3}, w_{4}}
     \end{array}
-  \right]
-  \]
-  This is the `minimal' Hurfordian lexicon: the listener doesn't infer
-  anything about $X$ except that it is disjoint from $A$.    
+  \right]$
 \end{examples}
+%
+This is the `minimal' Hurfordian lexicon: the listener doesn't infer
+anything about $X$ except that it is disjoint from $A$. Once again,
+this inference is mirrored by a speaker preference for producing
+\word{A or X} given observed state $w_{1} \vee w_{2}$ and the lexicon
+\eg{hurford-lex-large}.
 
 %=====================================================================
 
