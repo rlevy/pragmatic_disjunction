@@ -796,6 +796,8 @@ $\Lex_{3}$. The right column shows the first expertise speaker's
 message probabilities given observed state--lexicon pairs. From here,
 the iteration between $\ListenerK[k-1]$ and $\SpeakerK$ could continue.
 
+\marginpar{I'm confused about why speaker uses $\porq$ in $\Lex_{1}/w_{2}$, where it is false!}
+
 \begin{figure}[tp]
   \centering
   $\begin{array}{c c c}
@@ -949,6 +951,8 @@ like $w_{1} \vee (w_{2} \wedge w_{3})$, as in
 \citealt{levy-pollard:2001}, but we stick with the join space to keep
 the presentation as simple as possible.)
 
+\marginpar{Add notes on exploring $\alpha$.}
+
 \Figref{fig:compdisj} shows what happens when we run our full model
 beginning from atomic messages $\set{p,q}$ and atomic states
 $\set{w_{1}, w_{2}, w_{3}}$. The barplots summarize the
@@ -999,6 +1003,9 @@ again reveal the expected exclusivization inferences for disjunction.
   \label{fig:compdisj}
 \end{figure}
 
+\marginpar{\Figref{fig:compdisj} plots do not look good. I will work on them.}
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Analysis}\label{sec:analysis}
@@ -1040,7 +1047,7 @@ costs and other facts about context will also play a role).
 
 %=====================================================================
 
-\subsection{A Hurfordian context}\label{sec:analysis:subsumptive}
+\subsection{Hurfordian contexts}\label{sec:analysis:subsumptive}
 
 As we said above, the unknown term is $X$ and, from the listener's
 perspective, we are concerned to see when \word{A or X} gives rise to
@@ -1141,7 +1148,7 @@ this inference is mirrored by a speaker preference for producing
 
 %=====================================================================
 
-\subsection{Definitional disjunctions}\label{sec:analysis:definitional}
+\subsection{Definitional contexts}\label{sec:analysis:definitional}
 
 The central puzzle of definitional readings is when \word{A or X} is
 intended and construed as equivalent to $\sem{A}$. From the listener's
@@ -1231,14 +1238,14 @@ meaning of $X$ be atomic (as atomic as the known terms in the
 lexicon). This would correspond to a situation in which it was clear
 that $X$ was an alternative for some lexical item. Under these
 circumstances, the meaning of the known disjunct serves as a focal
-point that the speaker and listener can coordinate on for the meaning
-of the unknown word. \Figref{fig:def-focal} is a minimal variant of
-\figref{fig:def} in which this extra lexical requirement has been
-imposed. This removes $\Lex_{1}$ from consideration. The listener
-inference is numerically stronger, and it is paralleled by a similar
-increased probability on the speaker side for producing \word{A or X}
-with definitional intententions. We will explore such contexts in more
-detail in the next section.
+point \citep{Schelling60} that the speaker and listener can coordinate
+on for the meaning of the unknown word. \Figref{fig:def-focal} is a
+minimal variant of \figref{fig:def} in which this extra lexical
+requirement has been imposed. This removes $\Lex_{1}$ from
+consideration. The listener inference is numerically stronger, and it
+is paralleled by a similar increased probability on the speaker side
+for producing \word{A or X} with definitional intententions. We will
+explore such contexts in more detail in the next section.
 
 \begin{figure}[tp]
   \centering
@@ -1263,79 +1270,94 @@ detail in the next section.
 
 \subsection{Characterization}\label{sec:analysis:characterization}
 
-\begin{examples}
-\item The basic characterization is that definitional reading arise
-  when disjunction costs are low and $\beta$ is high. Conversely,
-  Hurfordian reading arise when disjunction cost are high and $\alpha$
-  and $\beta$ are relatively close.
-  
-\item The intuition: where costs are high, the disjunction has to be
-  justified. Letting the two terms overlap reduces the justification,
-  whereas exclusivizing provides justification. In other words, the
-  apparently undue prolixity of the disjunction (the more general term
-  would seem to suffice!) generates an inference that we observe in
-  the lexical inferences.
-  
-\item However, this needs to be qualified by the speaker's desire to
-  communicate about the lexicon. If $\beta$ is high, then it might be
-  worth paying the disjunction costs for the sake of teaching the
-  listener about the lexicon, even if this involves a huge penalty in
-  terms of informativity (since definitional readings convey only
-  a single term's worth of information).
+The above illustrative examples provide initial clues as to how our
+model chaarcterizes Hurfordian and definitional uses from the speaker
+and listener perspectives. The goal of this section is to more
+thoroughly explore the space of options to formulate a meta-theory of
+these behaviors and their relatonships to the facts.
 
-\item Earlier, we gave this charaterization of the contextual
-  requirements for definitional readings. The boldfaced phrases
-  connect these ideas with our model.
+As we discussed at the start of this section, both uses require the
+speaker to be invested in some sense in communicating information
+about the lexicon.  In a similar vein, the listener have some lexical
+uncertainty, or at least be willing to defer to the speaker's
+preferences. Both of these forces are centered around the parameter
+$\beta$, which controls both speaker and listener behavior because of
+the recursive nature of the model. If $\beta$ is set to $0$, then the
+lexica are not distinguished from one another, and we end up with a
+system in which only information about the world is exchanged.
 
-  \begin{examples}
-  \item The speaker is mutually and publicly known to be an expert in
-    the relevant domain. \textbf{The speaker observes a lexicon--state
-      pair, and the listener seeks to figure out which one, which
-      entails moving towards the speaker's lexicon.}      
+\begin{figure}[tp]
+  \centering
+  \includegraphics[width=1\textwidth]{fig/lex5-alpha-beta-gamma}
+  \caption{Hurfordian and definitional contexts with a large
+    lexicon (five atomic lexical items, four atomic states).} 
+  \label{fig:char}
+\end{figure}
 
-  \item The speaker is mutually and publicly known to believe the
-    listener to be a non-expert in the relevant domain.  \textbf{The
-      speaker has lexical uncertainty --- it doesn't assume a lexicon
-      but rather tries to infer one.}
+The above illustrative examples begin to show that $\beta$'s
+relationship to the parameter $\alpha$ and the cost of disjunction are
+what steer the discourse participants to exclusivization or
+identification. \Figref{fig:char} seeks to offer get a fuller picture
+of these dynamics using our larger lexicon setting (five atomic
+messages, four atomic states). The x-axis gives $\log(\beta/\alpha)$
+for values of $\alpha$ and $\beta$ between $0$ and $14$ inclusive. The
+log-scale helps bring out the underlying relationships, and it also
+means that values above $0$ are where $\beta$ is bigger than
+$\alpha$. The y-axis gives the cost of disjunction, ranging from $0$
+to $0.2$. The dots are samples from this space of parameters, with
+green marking strictly dominant Hurford stratgies, orange marking
+strictly dominant definitional strategies, and purple marking cases
+where both strategies are strictly dominant (which is possible because
+we've reduced $\alpha$ and $\beta$ to a single measure in order to
+visualize the space).
 
-  \item The speaker is mutually and publically known to have an
-    interest in conveying information about the language itself, even
-    if this communicative inefficiency in terms of the information
-    conveyed about the world.  \textbf{High $\beta$, low disjunction
-      costs.}
-  \end{examples}
+The picture that emerges from \figref{fig:char} is relatively clear:
+definitional readings exist in a narrow space where $\beta > \alpha$
+and disjunction costs are low. As we said above, this makes intuitive
+sense: where costs are high, the disjunction has to be
+justified. Letting the two terms overlap reduces the justification,
+whereas exclusivizing provides justification with regard to
+$\alpha$. In other words, the apparently undue prolixity of the
+disjunction (the more general term would seem to suffice!) generates
+an inference that we observe in the lexical inferences. However, this
+needs to be qualified by the speaker's desire to communicate about the
+lexicon. If $\beta$ is high, then it might be worth paying the
+disjunction costs for the sake of teaching the listener about the
+lexicon, even if this involves a huge penalty in terms of
+informativity (since definitional readings convey only a single term's
+worth of information).
 
-\item Additionally, the secondary nature of the definitional
-  information (as compared with \word{oenophile means wine lover}) is
-  captured by the fact that the inference is primarily about the
-  lexicon, rather than about the information conveyed --- after all,
-  absence the lexical inference, \word{A} would have done the same
-  work with lower costs.
+From this perspective, it is clear why Hurfordian uses are more
+robust. They arise in a much wider range of parameters settings, that
+is contexts, because they can easily survive high disjunction costs
+--- exclusivization ensure genuine communicative value. In contrast,
+definitional readings exist mainly in the space of low disjunction and
+high $\beta$ because the state information they convey is fully
+encoded in the first disjunct, making the full disjunction an
+inefficient way of conveying world information.
 
-\item Hurfordian readings arise in a much wider range of parameters
-  settings, that is contexts, because they survive high definitional
-  costs are long as they can be justified.
+\marginpar{Run simulations for X atomic and report results.}
 
-\item Definitional readings exist mainly in the space of low
-  disjunction and high $\beta$. This is more rarefied. We believe this
-  is reflected in the data: definitional readings are relatively
-  infrequent and delicate.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\item Here's a plot that does a good job of conveying the above.  It's
-  for a relatively large lexicon: five atomic lexical items and five
-  atomic states. (Smaller examples can be hard to interpret, since the
-  model's overall pressure to achieve separating equilibria can
-  create associations that we wouldn't expect to see in a more complex
-  setting like, well, English.) The x-axis is $\log(\beta/\alpha)$, so
-  $0.$ marks the points where $\beta = \alpha$. The y-axis is 
-  the cost of disjunction (assuming $\gamma=1.0$).
+\section{Conclusion}\label{sec:conclusion}
 
-  $\mspace{-80mu}$
-  \includegraphics[width=1.2\textwidth]{fig/lex5-alpha-beta-gamma}
+Importance of secondary information, lexical negotiations, variable
+expertise.
 
-\end{examples}
+Communicating in language about language. Maybe mention other areas
+where we do those.
 
-%=====================================================================
+Broader perspective on recursive Bayesian models and their role in
+semprag.
+
+Potential to bring in social dimensions, pedagogical dimensions, ...
+
+Perhaps notes about future behavioral experiments --- challenges of
+running them, virtues of having the data, ability of our model to make
+quantitative predictions given measured priors and costs.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \bibliographystyle{apalike}
 \bibliography{levy-potts-pragdisj-bib}
