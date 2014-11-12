@@ -4,6 +4,22 @@ import matplotlib
 import matplotlib.pyplot as plt
 from lsa import *
 
+def listener_runs(baselexicon, unknown_word='X'):
+    lexical_costs = {let:0.0 for let in baselexicon.keys()}
+    results = listener_explore_hyperparameters(baselexicon=baselexicon,
+                                               lexical_costs=lexical_costs,
+                                               msg='A v X',
+                                               temps=[1.0],
+                                               unknown_word=unknown_word,
+                                               dcosts=np.arange(0.0, 0.21, 0.01),
+                                               alphas=np.arange(0.0, 15.0, 1),
+                                               betas=np.arange(0.0, 15.0, 1),
+                                               depths=[10])
+    output_filename = 'paramexplore-defin-lex%s.pickle' % len(baselexicon)
+    if unknown_word:
+        output_filename = output_filename.replace('defin-', 'defin-X-')
+    pickle.dump(results, file(output_filename, 'w'), 2)
+
 
 def speaker_definitional_hyperparameter_runs(baselexicon):
     lexical_costs = {let:0.0 for let in baselexicon.keys()}
@@ -60,6 +76,7 @@ def alpha_beta_gamma_scatterplot(val_lists, xmin=-1.0, xmax=1.0):
     fig, axarray = plt.subplots(nrows=1, ncols=len(val_lists))
     fig.set_figheight(10)
     fig.set_figwidth(len(val_lists)*10)
+    lex_index = 3
     for i, df in enumerate(val_lists):
         ax = axarray[i]
         alpha_beta = [np.log(r['beta']/r['alpha']) for r in df]
@@ -69,14 +86,16 @@ def alpha_beta_gamma_scatterplot(val_lists, xmin=-1.0, xmax=1.0):
         ax.axis((xmin, xmax, 0.0, y2))
         ax.set_xlabel(r'$\log(\beta/\alpha)$')
         ax.set_ylabel('disjunction_cost')   
-        ax.set_title("Lexicon size: %s" % (i+3)) 
+        axarray[i].set_title("Lexicon size = %s" % lex_index)
+        lex_index += 1 
 
 
 def alpha_beta_gamma_scatterplot(param_pairs, logx=True):
     transform = np.log if logx else (lambda x : x)    
     fig, axarray = plt.subplots(nrows=3, ncols=1)
     fig.set_figheight(30)
-    fig.set_figwidth(20)    
+    fig.set_figwidth(20)
+    lex_index = 3   
     for i, params in enumerate(param_pairs):
         hc, defin = params
         ax = axarray[i]
@@ -105,7 +124,7 @@ def alpha_beta_gamma_scatterplot(param_pairs, logx=True):
         else:
             ax.set_xlabel(r'$\beta/\alpha$')
         ax.set_ylabel('disjunction_cost')   
-        ax.set_title("Lexicon size: %s" % (i+3)) 
+        ax.set_title("Lexicon size: %s" % lex_index) ; lex_index += 1 
         ax.legend(bbox_to_anchor=(1.1, 1.1))
         
 def jitter(x):
@@ -125,3 +144,7 @@ if __name__ == '__main__':
     # speaker_definitional_hyperparameter_runs({'A':0.0, 'B':0.0, 'X':0.0})
     # speaker_definitional_hyperparameter_runs({'A': ['1'], 'B': ['2'], 'C': ['3'], 'X': ['1', '2', '3']})
     # speaker_definitional_hyperparameter_runs({'A': ['1'], 'B': ['2'], 'C': ['3'], 'D': ['4'], 'X': ['1', '2', '3', '4']})
+
+    #listener_runs({'A': ['1'], 'B':['2'], 'X': ['1', '2']}, unknown_word='X')
+    #listener_runs({'A': ['1'], 'B': ['2'], 'C': ['3'], 'X': ['1', '2', '3']},  unknown_word='X')
+    #listener_runs({'A': ['1'], 'B': ['2'], 'C': ['3'], 'D': ['4'], 'X': ['1', '2', '3', '4']},  unknown_word='X')

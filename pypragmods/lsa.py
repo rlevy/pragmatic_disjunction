@@ -299,6 +299,7 @@ def listener_explore_hyperparameters(baselexicon={'A': ['1'], 'B': ['2'], 'X':['
                                      lexical_costs={'A':0.0, 'B':0.0, 'X':0.0},
                                      msg='A v X',
                                      temps=[1.0],
+                                     unknown_word=None,
                                      dcosts=np.arange(0.0, 0.21, 0.01),
                                      alphas=np.arange(0.0, 15.0, 1),
                                      betas=np.arange(0.0, 15.0, 1),
@@ -306,7 +307,7 @@ def listener_explore_hyperparameters(baselexicon={'A': ['1'], 'B': ['2'], 'X':['
     results = defaultdict(list)
     for temp, dcost, alpha, beta, depth in product(temps, dcosts, alphas, betas, depths):
         params = {'lambda': temp, 'alpha': alpha, 'beta': beta, 'depth': depth, 'disjunction_cost': dcost}
-        experiment = Experiment(baselexicon=baselexicon, lexical_costs=lexical_costs, n=depth, temperature=temp, alpha=alpha, beta=beta, disjunction_cost=dcost)
+        experiment = Experiment(baselexicon=baselexicon, lexical_costs=lexical_costs, n=depth, temperature=temp, alpha=alpha, beta=beta, disjunction_cost=dcost, unknown_word=unknown_word)
         experiment.build()
         prob_table = experiment.listener_inference(msg=msg)
         sorted_probs = sorted(prob_table.flatten())
