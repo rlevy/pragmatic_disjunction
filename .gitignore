@@ -7,7 +7,7 @@
 *.synctex.gz
 *_region_.tex
 *.pyc
-*.csv
+
 *.tui
 *.top
 *.mp
