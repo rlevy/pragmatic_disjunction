@@ -7,7 +7,7 @@
 \usepackage{colortbl}
 \usepackage{url}
 \usepackage[normalem]{ulem}
-\usepackage{schemata}
+\usepackage{stmaryrd}
 
 \input{../macros}
 
@@ -104,9 +104,10 @@
       \word{X} and \word{Y} are synonymous
     \end{itemize}
     
-  \item Cross-linguistically robust, so we seek a single pragmatic
-    model that can derive both of these meanings from the semantics of
-    disjunction given different contextual assumptions.
+  \item This pattern is cross-linguistically robust, so we seek a
+    single pragmatic model that can derive both of these meanings from
+    the semantics of disjunction given different contextual
+    assumptions.
   \end{itemize}
 }
 
@@ -122,7 +123,9 @@
 
   \begin{minipage}[c]{0.48\linewidth}
     \begin{examples}\setlength{\itemsep}{0pt}
-    \item some of our \highlight{American or Californian} friends
+    %\item some of our \highlight{American or Californian} friends
+    \item the nuptials will take place in either \highlight{France or
+        Paris}
     %\item Stop discrimination of an \highlight{applicant or person}
     %  due to their tattoos.
     %\item Promptly report any \highlight{accident or occurrence}.
@@ -142,8 +145,8 @@
         \toprule
         \multicolumn{2}{c}{\textbf{Our corpus}} \\
         \midrule
-        general or specific & 75 \\
-        specific or general & 86 \\
+        `general or specific' & 75 \\
+        `specific or general' & 86 \\
         \bottomrule
       \end{tabular}
     \end{center}       
@@ -158,8 +161,10 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \headerbox{Disjunctive definition and identification}{name=def,column=0,row=2,span=2,below=hurford}{
-  \textbf{Generalization}: can arise when speaker and listener are 
-  willing to coordinate on the speaker's lexicon
+
+  \textbf{Generalization}: \word{X or Y} can convey $\sem{X}=\sem{Y}$
+  when the speaker is mutually, publicly known to be an expert or
+  would like to establish expertise.
 
   \vspace{6pt}
 
@@ -174,7 +179,7 @@
   \hfill 
   \begin{minipage}[c]{0.48\linewidth}
     \begin{itemize}\setlength{\itemsep}{0pt}
-    \item Motivation: speaker is a known expert and `instructor'; listener is a known non-expert
+    \item Motivation: speaker is a known `instructor'; listener is a known non-expert
     \item Motivation: speaker wishes to display expertise to another expert
     \item Motivation: speaker sees value in (temporarily or permanently) defining a term
     \end{itemize}    
@@ -224,25 +229,32 @@
     \labelednode{0,1.7}{$\spkOneDef$}
     \picarrow{0.2, 1.5}{2,-1}
     
-    \labelednode{2,0.25}{$\lisZeroDef$}
+    \labelednode{2,0.45}{$\lisZeroDef$}
 
      {\color{annotationcolor}      
       \labelednode{12.25,4.7}{\parbox{3.6cm}{suffices for manner implicature and embedded scalar implicature}}
       \picarrow[1]{12.05, 4.7}{-1,0}
       \labelednode{12.25,2.95}{\parbox{3.6cm}{suffices for unembedded scalar implicature}}
       \picarrow[1]{12.05, 2.95}{-1,0}
+      \labelednode{12.25,1.7}{\parbox{3.6cm}{suffices for many kinds of ambiguity avoidance}}
+      \picarrow[1]{12.05, 1.7}{-1,0}
+      \labelednode{12.25,0.45}{\parbox{3.6cm}{literal listener, a simple semantic agent}}
+      \picarrow[1]{12.05, 0.45}{-1,0}
+      
     }
   \end{picture}
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \headerbox{Hurfordian contexts}{name=hurfordmodel,column=2,row=1,span=2,below=model}{  
-  With high disjunction costs, exclusivization maximizes the justification for the long form.
+
+  With high disjunction costs, exclusivization maximizes the
+  justification for the long form.
 
   \vspace{4pt}
 
   
-  \newcommand{\lisMat}[4]{
+  \newcommand{\lismat}[4]{
     {\tiny
     \setlength{\arraycolsep}{1pt}
     \begin{array}[c]{l *{3}{r}}
@@ -250,17 +262,17 @@
       #1 & w_{1} & w_{2} & w_{1}{\vee}w_{2} \\
       \midrule
       A & #2\\
-      B & #3 \\
-      C & #4 \\
+      X & #3 \\
+      A\, \word{or}\, X & #4 \\
       \bottomrule
     \end{array}}}
 
-  \newcommand{\spkMat}[4]{
+  \newcommand{\spkmat}[4]{
     {\tiny
     \setlength{\arraycolsep}{1pt}
     \begin{array}[c]{l *{3}{r}}
       \toprule
-      #1 & A & B & C\\
+      #1 & A & X & A\, \word{or}\, X\\
       \midrule
       w_{1} & #2\\
       w_{2} & #3 \\
@@ -269,21 +281,38 @@
     \end{array}}}
 
 
-\setlength{\tabcolsep}{2pt}
+
+\setlength{\tabcolsep}{0pt}
 \begin{tabular}[c]{cc}  
-  $\begin{array}[c]{c@{ \ \leftarrow \ } c @{ \ \leftarrow \ } c}     
-     \listenerZero  & \speakerOne & \listenerOne \\
-    \lisMat{\LexStar}{0&0&0}{0&0&0}{0&0&0} & \spkMat{\LexStar}{0&0&0}{0&0&0}{0&0&0} & \lisMat{\LexStar}{0&0&0}{0&0&0}{0&0&0} \\[4ex]
-    \lisMat{\Lex_{1}}{0&0&0}{0&0&0}{0&0&0} & \spkMat{\Lex_{1}}{0&0&0}{0&0&0}{0&0&0} & \lisMat{\Lex_{1}}{0&0&0}{0&0&0}{0&0&0} \\[4ex]
-    \lisMat{\Lex_{2}}{0&0&0}{0&0&0}{0&0&0} & \spkMat{\Lex_{2}}{0&0&0}{0&0&0}{0&0&0} & \lisMat{\Lex_{2}}{0&0&0}{0&0&0}{0&0&0}   
+  $\begin{array}[c]{c@{ \ \leftarrow \ } c @{ \ \leftarrow \ } c @{}}     
+     \listenerZero  & \speakerOne & \listenerOne           
+     \\
+     \lismat{\LexStar}{1 & 0 & 0}{.33 & .33 & .33}{.33 & .33 & .33}
+     &
+     \spkmat{\LexStar}{.8 & 0 & 0}{09 & 09 & .45}{03 & 03 & .16}
+     & 
+     \lismat{\LexStar}{1 & 0 & 0}{.14 & .14 & .71}{.14 & .14 & .71}
+     \\ 
+     \lismat{\Lex_{1}}{1 & 0 & 0}{0 & 1 & 0}{.33 & .33 & .33}
+     &
+     \spkmat{\Lex_{1}}{.91 & 0 & 0}{0 & .41 & 0}{04 & 02 & .42}
+     & 
+     \lismat{\Lex_{1}}{1 & 0 & 0}{0 & 1 & 0}{08 & 04 & .89}
+     \\
+     \lismat{\Lex_{2}}{1 & 0 & 0}{1 & 0 & 0}{1 & 0 & 0} 
+     &
+     \spkmat{\Lex_{2}}{.41 & 0 & 0}{.41 & 0 & 0}{.15 & 0 & 0}
+     &                                                              
+     \lismat{\Lex_{2}}{1 & 0 & 0}{1 & 0 & 0}{1 & 0 & 0}
    \end{array}$
   $\leftarrow\cdots$
  &
-  \begin{minipage}[c]{0.48\textwidth}
+  \begin{minipage}[c]{0.4\textwidth}
+    \footnotesize
     \setlength{\arraycolsep}{2pt}
-    $\begin{array}[c]{l l r r r}
+    $\begin{array}[c]{l@{ }l r r r}
        \toprule
-       & \ListenerK[3] \text{ hears } \word{A or X}       & w_{1} & w_{2} & w_{1}{\vee}w_{2} \\
+       & \ListenerK[3] \text{ hears } \word{A\, or\, X}       & w_{1} & w_{2} & w_{1}{\vee}w_{2} \\
        \midrule
        \LexStar & \smallhurfordlex{w_{1}}{w_{2}}{w_{1}, w_{2}} & 0 & 0 & 0.16 \\[1ex]
        \Lex_{1} & \smallhurfordlex{{\color{lexcolor}w_{1}}}{w_{2}}{{\color{lexcolor}w_{2}}} & 0 & 0 & \graycell{0.47} \\[1ex]

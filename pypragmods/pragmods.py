@@ -124,7 +124,7 @@ class Pragmod:
     def UncertaintyAnxietyListener(self, marginalize=False):
         """Social anxiety listener of Smith et al. 2013."""
         lik = self.lex_lik()
-        result = [(self.l1(lex).T * lik[i]).T for i, lex in enumerate(self.lexica)]
+        result = [(self.l1(lex).T * lik[i]).T for i, lex in enumerate(self.lexica)]            
         if marginalize:
             result = np.sum(result, axis=0)
         return result
