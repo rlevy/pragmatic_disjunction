@@ -22,7 +22,7 @@
   \right]}
 
 \definecolor{highlightcolor}{HTML}{D95F02}
-\definecolor{annotationcolor}{HTML}{777777} %1B9E77}
+\definecolor{annotationcolor}{HTML}{777777} 
 \definecolor{worldinfocolor}{HTML}{E7298A}
 \definecolor{lexcolor}{HTML}{D95F02}
 \definecolor{costcolor}{HTML}{A6761D}
@@ -48,7 +48,39 @@
     -
     {\color{costcolor}\gamma\,\Costs(\msg)}
   \right)}
+
+\newcommand{\lismat}[4]{
+  \setlength{\arraycolsep}{1pt}
+  \begin{array}[c]{l *{3}{r}}
+    \toprule
+    #1 & w_{1} & w_{2} & w_{1}{\vee}w_{2} \\
+    \midrule
+    A & #2\\
+    X & #3 \\
+    A\, \word{or}\, X & #4 \\
+    \bottomrule
+  \end{array}}
+
+\newcommand{\spkmat}[4]{
+  \setlength{\arraycolsep}{1pt}
+  \begin{array}[c]{l *{3}{r}}
+    \toprule
+    #1 & A & X & A\, \word{or}\, X\\
+    \midrule
+    w_{1} & #2\\
+    w_{2} & #3 \\
+    w_{1}{\vee}w_{2} & #4 \\
+    \bottomrule
+  \end{array}}
  
+\newcounter{excounter}
+\setcounter{excounter}{0}
+\newcommand{\exitem}[1]{\refstepcounter{excounter}(\theexcounter)\label{#1}}
+
+\definecolor{lightgray}{HTML}{CCCCCC} 
+\renewcommand{\graycell}[1]{\colorbox{lightgray}{#1}}
+
+\newcommand{\whitecell}[1]{\colorbox{white}{#1}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -71,12 +103,15 @@
     headershade=plain,
     background=none,
     bgColorOne=cyan!10!white,
-    headerheight=0.11\textheight
+    headerheight=0.09\textheight
 }
 {} % Eye Catcher
 {Negotiating lexical uncertainty and expertise with disjunction\vspace{0.25em}}
 {Roger Levy and Christopher Potts}
-{\includegraphics[height=0.10\textheight]{stanford}\hspace{-20pt}\includegraphics[height=0.10\textheight]{ucsd}}
+{\includegraphics[height=0.08\textheight]{stanford}
+ \hspace{-10pt}
+ \includegraphics[height=0.08\textheight]{ucsd}
+}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \headerbox{Communicating in language about language}{name=intro,column=0,row=0,span=2}{
@@ -97,50 +132,45 @@
   \item Disjunction supports what appear to be opposing inferences
     about language.
 
+    \vspace{-4pt}
+
     \begin{itemize}\setlength{\itemsep}{0pt}
     \item \textbf{Hurfordian pressure:} \word{X or Y} conveys that \word{X} and
       \word{Y} are disjoint
     \item \textbf{Definitional inference:} \word{X or Y} conveys that
       \word{X} and \word{Y} are synonymous
     \end{itemize}
+
+    \vspace{-4pt}
     
   \item This pattern is cross-linguistically robust, so we seek a
     single pragmatic model that can derive both of these meanings from
     the semantics of disjunction given different contextual
     assumptions.
   \end{itemize}
+
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \headerbox{Hurfordian perceptions and intentions}{name=hurford,column=0,row=2,span=2,below=intro}{
 
   \textbf{Generalization}: \word{X or Y} conveys that the speaker is
-  using a lexicon where \word{X} and \word{Y} are disjoint, or 
-  addresses a speaker concern that the listener is using such a 
+  using a lexicon where \word{X} and \word{Y} are disjoint, or
+  addresses a speaker concern that the listener is using such a
   lexicon.
 
   \vspace{4pt}
 
   \begin{minipage}[c]{0.48\linewidth}
-    \begin{examples}\setlength{\itemsep}{0pt}
-    %\item some of our \highlight{American or Californian} friends
-    \item the nuptials will take place in either \highlight{France or
-        Paris}
-    %\item Stop discrimination of an \highlight{applicant or person}
-    %  due to their tattoos.
-    %\item Promptly report any \highlight{accident or occurrence}.
-    \item the \highlight{canoe or boat} will be held by the stream's
-      current
-    % \item As an \highlight{actor or performer}, you are always
-    %   worried about what the next job's going to be.
-    % \item After the loss of the \highlight{animal or pet}, \ldots    
-    % \item the effect was \highlight{greater than, or not equal to,}
-    %   the cause.
-    \item In 1940, 37\% of us had gone to a \highlight{church or
-        synagogue} in the last week.
-    \end{examples}
+    \renewcommand{\arraystretch}{1.2}
+    \begin{tabular}[c]{r@{ \ } p{0.85\textwidth}}
+    \exitem{1} & the nuptials will take place in either \highlight{France or Paris} \\
+    \exitem{2} & the \highlight{canoe or boat} will be held by the stream's current \\
+    \exitem{3} & In 1940, 37\% of us had gone to a \highlight{church or synagogue} in the last week.
+    \end{tabular}
 
     \begin{center}
+      \renewcommand{\arraystretch}{1}
       \begin{tabular}[c]{r l}
         \toprule
         \multicolumn{2}{c}{\textbf{Our corpus}} \\
@@ -151,12 +181,12 @@
       \end{tabular}
     \end{center}       
   \end{minipage}
-\hfill 
-\begin{minipage}[c]{0.48\linewidth}  
-  \includegraphics[width=1\textwidth]{../fig/chemla.pdf}
+  \hfill 
+  \begin{minipage}[c]{0.48\linewidth}  
+    \includegraphics[width=1\textwidth]{../fig/chemla.pdf} \\    
+    \word{X or Y} usage correlates with \word{X} implicating \word{not Y}
+  \end{minipage}
 
-  \word{X or Y} usage correlates with \word{X} implicating \word{not Y}
-\end{minipage}
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -169,12 +199,13 @@
   \vspace{6pt}
 
   \begin{minipage}[c]{0.48\linewidth}
-    \begin{examples}\setlength{\itemsep}{0pt}
-    \item wine lover or \emph{oenophile}
-    \item A Geological History of Manhattan or New York Island
-    \item New Haven or ``the Elm City''   
-    \item woodchuck or ``land beaver''
-    \end{examples}    
+    \renewcommand{\arraystretch}{1.2}
+    \begin{tabular}[c]{r@{ \ }p{0.85\textwidth}}
+    \exitem{4} & wine lover or \emph{oenophile} \\
+    \exitem{5} & A Geological History of Manhattan or New York Island \\
+    \exitem{6} & New Haven or ``the Elm City''  \\
+    \exitem{7} & woodchuck or ``land beaver''
+    \end{tabular}    
   \end{minipage}
   \hfill 
   \begin{minipage}[c]{0.48\linewidth}
@@ -197,8 +228,11 @@
 \headerbox{Further information}{name=info,column=0,row=3,span=2,below=def}{  
   
   Paper, references, model code, corpus data: \url{http://github.com/cgpotts/pypragmods/}
+
 }
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \headerbox{Modeling communication with anxious experts}{name=model,column=2,row=0,span=2}{
 
@@ -211,7 +245,6 @@
 
     \labelednode{2,7.2}{$\ldots$}
     \picarrow{2, 7.1}{-2,-1}
-
     
     \annotation{4,6.45}{{\color{worldinfocolor}world information} $-$ {\color{lexcolor}lexical preferences} $-$ {\color{costcolor}costs}}
 
@@ -231,7 +264,7 @@
     
     \labelednode{2,0.45}{$\lisZeroDef$}
 
-     {\color{annotationcolor}      
+    {\color{annotationcolor}      
       \labelednode{12.25,4.7}{\parbox{3.6cm}{suffices for manner implicature and embedded scalar implicature}}
       \picarrow[1]{12.05, 4.7}{-1,0}
       \labelednode{12.25,2.95}{\parbox{3.6cm}{suffices for unembedded scalar implicature}}
@@ -239,123 +272,112 @@
       \labelednode{12.25,1.7}{\parbox{3.6cm}{suffices for many kinds of ambiguity avoidance}}
       \picarrow[1]{12.05, 1.7}{-1,0}
       \labelednode{12.25,0.45}{\parbox{3.6cm}{literal listener, a simple semantic agent}}
-      \picarrow[1]{12.05, 0.45}{-1,0}
-      
+      \picarrow[1]{12.05, 0.45}{-1,0}      
     }
   \end{picture}
+
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\headerbox{Hurfordian contexts}{name=hurfordmodel,column=2,row=1,span=2,below=model}{  
-
-  With high disjunction costs, exclusivization maximizes the
-  justification for the long form.
-
-  \vspace{4pt}
-
-  
-  \newcommand{\lismat}[4]{
-    {\tiny
-    \setlength{\arraycolsep}{1pt}
-    \begin{array}[c]{l *{3}{r}}
-      \toprule
-      #1 & w_{1} & w_{2} & w_{1}{\vee}w_{2} \\
-      \midrule
-      A & #2\\
-      X & #3 \\
-      A\, \word{or}\, X & #4 \\
-      \bottomrule
-    \end{array}}}
-
-  \newcommand{\spkmat}[4]{
-    {\tiny
-    \setlength{\arraycolsep}{1pt}
-    \begin{array}[c]{l *{3}{r}}
-      \toprule
-      #1 & A & X & A\, \word{or}\, X\\
-      \midrule
-      w_{1} & #2\\
-      w_{2} & #3 \\
-      w_{1}{\vee}w_{2} & #4 \\
-      \bottomrule
-    \end{array}}}
-
-
-
-\setlength{\tabcolsep}{0pt}
-\begin{tabular}[c]{cc}  
-  $\begin{array}[c]{c@{ \ \leftarrow \ } c @{ \ \leftarrow \ } c @{}}     
-     \listenerZero  & \speakerOne & \listenerOne           
-     \\
-     \lismat{\LexStar}{1 & 0 & 0}{.33 & .33 & .33}{.33 & .33 & .33}
-     &
-     \spkmat{\LexStar}{.8 & 0 & 0}{09 & 09 & .45}{03 & 03 & .16}
-     & 
-     \lismat{\LexStar}{1 & 0 & 0}{.14 & .14 & .71}{.14 & .14 & .71}
-     \\ 
-     \lismat{\Lex_{1}}{1 & 0 & 0}{0 & 1 & 0}{.33 & .33 & .33}
-     &
-     \spkmat{\Lex_{1}}{.91 & 0 & 0}{0 & .41 & 0}{04 & 02 & .42}
-     & 
-     \lismat{\Lex_{1}}{1 & 0 & 0}{0 & 1 & 0}{08 & 04 & .89}
-     \\
-     \lismat{\Lex_{2}}{1 & 0 & 0}{1 & 0 & 0}{1 & 0 & 0} 
-     &
-     \spkmat{\Lex_{2}}{.41 & 0 & 0}{.41 & 0 & 0}{.15 & 0 & 0}
-     &                                                              
-     \lismat{\Lex_{2}}{1 & 0 & 0}{1 & 0 & 0}{1 & 0 & 0}
-   \end{array}$
-  $\leftarrow\cdots$
- &
-  \begin{minipage}[c]{0.4\textwidth}
-    \footnotesize
-    \setlength{\arraycolsep}{2pt}
-    $\begin{array}[c]{l@{ }l r r r}
-       \toprule
-       & \ListenerK[3] \text{ hears } \word{A\, or\, X}       & w_{1} & w_{2} & w_{1}{\vee}w_{2} \\
-       \midrule
-       \LexStar & \smallhurfordlex{w_{1}}{w_{2}}{w_{1}, w_{2}} & 0 & 0 & 0.16 \\[1ex]
-       \Lex_{1} & \smallhurfordlex{{\color{lexcolor}w_{1}}}{w_{2}}{{\color{lexcolor}w_{2}}} & 0 & 0 & \graycell{0.47} \\[1ex]
-       \Lex_{2} & \smallhurfordlex{w_{1}}{w_{2}}{w_{1}} & 0 & 0 & 0.38 \\
-       \bottomrule
-     \end{array}$
-     \phantom{a}~\hfill  
-     $\alpha = 2$; 
-     $\beta = 1$; 
-     $\Costs(\word{or}) = 1$
-   \end{minipage} \\[14ex]
-  Lexicon-specific agents & Joint world--lexicon listener
-  \end{tabular}
-}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\headerbox{Definitional contexts}{name=defmodel,column=2,row=2,span=1,below=hurfordmodel}{
+\headerbox{Definitional contexts}{name=defmodel,column=2,row=2,span=1,below=model}{  
 
   Require low disjunction costs and high $\beta$: the speaker is
   invested in communicating about the lexicon and can tolerate the
   cost of a disjunction that is synonymous with one of its disjuncts.
 
-  \vspace{4pt}
-    
+  \vspace{8pt}
+     
+  \tiny
+  \setlength{\tabcolsep}{2pt}
   \setlength{\arraycolsep}{2pt}
-   $\begin{array}[c]{l@{ }l r r r}
-    \toprule
-      &\ListenerK[3] \text{ hears } \word{A or X}  & w_{1} & w_{2} & w_{1}{\vee}w_{2} \\
-    \midrule
-    \LexStar & \smallhurfordlex{w_{1}}{w_{2}}{w_{1}, w_{2}} & 0 & 0 & 0 \\[1ex]
-    \Lex_{2} & \smallhurfordlex{w_{1}}{w_{2}}{w_{2}}        & 0 & 0 & 0 \\[1ex]
-    \Lex_{3} & \smallhurfordlex{{\color{lexcolor}w_{1}}}{w_{2}}{{\color{lexcolor}w_{1}}}  & \graycell{.88} & 0 & .12\\
-    \bottomrule
-  \end{array}$  
-  \phantom{a}~\hfill
-  $\alpha = 5$; 
-  $\beta = 7$; 
-  $\Costs(\word{or}) = 0.01$
+  \begin{tabular}[c]{@{}  r@{ }c c c  @{}} 
+    \multicolumn{4}{c}{
+      \normalsize
+      $\begin{array}[c]{l@{ }l r r r}
+         \toprule
+         & \ListenerK[2] \text{ hears } \word{A\,or\,X}       & w_{1} & w_{2} & w_{1}{\vee}w_{2} \\
+         \midrule
+         \LexStar & \smallhurfordlex{w_{1}}{w_{2}}{w_{1}, w_{2}}                              & \whitecell{0}   & 0 & .08 \\[1ex]
+         \Lex_{1} & \smallhurfordlex{w_{1}}{w_{2}}{w_{2}}                                     & \whitecell{.07} & 0 & .08 \\[1ex]
+         \Lex_{2} & \smallhurfordlex{{\color{lexcolor}w_{1}}}{w_{2}}{{\color{lexcolor}w_{1}}} &  \graycell{.77} & 0 & .06 \\
+         \bottomrule
+       \end{array}$} \\
+    \multicolumn{4}{r}{\normalsize\phantom{a}~\hfill
+   $\alpha = 5$; 
+   $\beta = 7$; 
+   $\Costs(\word{or}) = .01$} 
+    \\
+    & \multicolumn{3}{c}{$\downarrow$}
+    \\    
+    & \multicolumn{3}{c}{
+    $\begin{array}[c]{r l}
+       \toprule
+       \multicolumn{2}{c}{\SpeakerK[2] \text{ observes } \langle \Lex_{2},w_{1}\rangle} \\
+       \midrule
+       A & \phantom{.0}0 \\
+       X & \phantom{.0}0 \\
+       A\, \word{or}\, X & .05 \\
+       \bottomrule
+     \end{array}$}
+    \\
+    & \multicolumn{3}{c}{$\downarrow$}
+    \\
+    & \multicolumn{3}{c}{
+      $\begin{array}[c]{l@{ }l r r r}
+         \toprule
+         & \ListenerK[1] \text{ hears } \word{A\,or\,X}      & w_{1} & w_{2} & w_{1}{\vee}w_{2} \\
+         \midrule
+         \LexStar & \smallhurfordlex{w_{1}}{w_{2}}{w_{1}, w_{2}} & 0 & 0 & .23 \\[1ex]
+         \Lex_{1} & \smallhurfordlex{w_{1}}{w_{2}}{w_{2}}        & 0 & 0 & .38 \\[1ex]
+         \Lex_{2} & \smallhurfordlex{w_{1}}{w_{2}}{w_{1}}        & .38 & 0 & 0\\
+         \bottomrule
+       \end{array}$}
+    \\
+    & \multicolumn{3}{c}{$\swarrow \hspace{45pt} \downarrow\hspace{45pt} \searrow$}
+    \\
+    $\listenerOne$ & $\lismat{\LexStar}{1 & 0 & 0}{02 & 02 & .96}{.02 & .02 & .96}$ &  $\lismat{\Lex_{1}}{1 & 0 & 0}{0 & 1 & 0}{.01 & 0 & .98}$ & $\lismat{\Lex_{2}}{1 & 0 & 0}{1 & 0 & 0}{1 & 0 & 0}$
+    \\
+    & $\downarrow$ & $\downarrow$ & $\downarrow$
+    \\
+    $\speakerOne$ & $\spkmat{\LexStar}{.98 & 0 & 0}{0 & 0 & .2}{0 & 0 & .2}$ & $\spkmat{\Lex_{1}}{.99 & 0 & 0}{0 & .33 & 0}{0 & 0 & .33}$ & $\spkmat{\Lex_{2}}{.33 & 0 & 0}{.33 & 0 & 0}{.33 & 0 & 0}$
+    \\
+    & $\downarrow$ & $\downarrow$ & $\downarrow$
+    \\
+    $\listenerZero$ & $\lismat{\LexStar}{1 & 0 & 0}{.33 & .33 & .33}{.33 & .33 & .33}$ & $\lismat{\Lex_{1}}{1 & 0 & 0}{0 & 1 & 0}{.33 & .33 & .33}$ & $\lismat{\Lex_{2}}{1 & 0 & 0}{1 & 0 & 0}{1 & 0 & 0}$
+  \end{tabular}
+
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\headerbox{Characterization}{name=char,column=3,row=3,span=1,below=hurfordmodel}{  
-  \includegraphics[width=\textwidth]{../fig/lex5-alpha-beta-gamma.png}
+\headerbox{Hurfordian contexts}{name=hurfordmodel,column=3,row=1,span=1,below=model}{
+  
+  With high disjunction costs, exclusivization maximizes the
+  justification for the long form; the Hurfordian instinct is a
+  rational response to a disjunction that is unduly prolix for many
+  lexica.
+  
+  \vspace{8pt}
+    
+  \setlength{\arraycolsep}{2pt}
+  $\begin{array}[c]{l@{ }l r r r}
+     \toprule
+     & \ListenerK[2] \text{ hears } \word{A\, or\, X}       & w_{1} & w_{2} & w_{1}{\vee}w_{2} \\
+     \midrule
+     \LexStar & \smallhurfordlex{w_{1}}{w_{2}}{w_{1}, w_{2}} & .03 & 0 & \whitecell{.14} \\[1ex]
+     \Lex_{1} & \smallhurfordlex{{\color{lexcolor}w_{1}}}{w_{2}}{{\color{lexcolor}w_{2}}} & .04 & 0 & \graycell{.45} \\[1ex]
+     \Lex_{2} & \smallhurfordlex{w_{1}}{w_{2}}{w_{1}} & .02 & 0 & \whitecell{.32} \\
+     \bottomrule
+   \end{array}$  
+   \phantom{a}~\hfill
+   $\alpha = 2$; 
+   $\beta = 1$; 
+   $\Costs(\word{or}) = 1$
+
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\headerbox{Characterization}{name=char,column=3,row=4,span=1,below=hurfordmodel}{  
+  \includegraphics[width=\textwidth,height=5cm]{../fig/lex5-alpha-beta-gamma.png}
 
   Summarizes a search over many parameter settings using a large
   lexicon and large world space.

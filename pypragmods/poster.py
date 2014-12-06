@@ -6,20 +6,20 @@ import numpy as np
 import lsa
 
 
-hc_small = lsa.Experiment(
+exp = lsa.Experiment(
     n=3, 
     baselexicon={'A': ['1'], 'B': ['2'], 'X':['1', '2']}, 
     lexical_costs={'A':0.0, 'B':0.0, 'X':0.0},
     temperature=1.0, 
-    disjunction_cost=1.0, 
-    beta=1.0, 
-    alpha=2.0, 
+    disjunction_cost=0.01, 
+    beta=7.0, 
+    alpha=5.0, 
     null_cost=5.0)
 
-hc_small.build()
+exp.build()
 
 def lis2latex(mat, msgs):
-    msgs = [hc_small.messages.index(msg) for msg in msgs]    
+    msgs = [exp.messages.index(msg) for msg in msgs]    
     output = ""
     mat = np.round(mat, 2)
     for msg in msgs:
@@ -32,7 +32,7 @@ def lis2latex(mat, msgs):
 
 
 def spk2latex(mat, msgs):
-    msgs = [hc_small.messages.index(msg) for msg in msgs]    
+    msgs = [exp.messages.index(msg) for msg in msgs]    
     output = ""
     mat = np.round(mat, 2)
     for msg in msgs:
@@ -45,11 +45,13 @@ def spk2latex(mat, msgs):
 
 msgs = ['A', 'X', 'A v X']
 
-for lex in hc_small.lexica:
+for lex in exp.lexica:
     print "======================================================================"
     print lis2latex(lex, msgs)
-    print lis2latex(hc_small.model.l0(lex), msgs)
-    print spk2latex(hc_small.model.s1(lex), msgs)        
-    print lis2latex(hc_small.model.l1(lex), msgs)    
+    print lis2latex(exp.model.l0(lex), msgs)
+    print spk2latex(exp.model.s1(lex), msgs)        
+    print lis2latex(exp.model.l1(lex), msgs)    
                     
+    
+
     

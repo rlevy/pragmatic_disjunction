@@ -84,7 +84,7 @@ class Experiment:
                              alpha=self.alpha,
                              beta=self.beta)
 
-        self.langs = self.model.run_expertise_model(n=self.n, display=False)
+        self.langs = self.model.run_expertise_model(n=self.n, display=True)
 
     ######################################################################
     ##### LISTENER PERSPECTIVE
