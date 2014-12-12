@@ -6,8 +6,8 @@ dat$ratio <- dat$GB2.Freq.X.or.Y / dat$GB2.Freq.X
 
 labels = paste(dat$X, 'or', dat$Y)
 
-xlab = "Probability of X implicating not-Y"
-ylab = "P(X or Y) / P(X)"
+xlab = "Probability of X implicating not-Y [from 42]"
+ylab = "P(X or Y) / P(X)  [from Google Books]"
 
 xlab.size = 20
 axis.size = 16
@@ -27,6 +27,7 @@ coord_cartesian(ylim = c(-0.0003, 0.0015)) +
 theme(axis.title.x = element_text(face="bold", colour="#990000", size=xlab.size), axis.text.x=element_text(size=axis.size)) +
 theme(axis.title.y = element_text(face="bold", colour="#990000", size=xlab.size), axis.text.y=element_text(size=axis.size))
 
+ggsave(file="chemla-poster.pdf", width=11, height=8)
 
 fit = lm(ratio ~ p,dat)
 
