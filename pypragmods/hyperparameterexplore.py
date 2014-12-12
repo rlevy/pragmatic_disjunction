@@ -90,15 +90,21 @@ def alpha_beta_gamma_scatterplot(val_lists, xmin=-1.0, xmax=1.0):
         lex_index += 1 
 
 
-def alpha_beta_gamma_scatterplot(param_pairs, logx=True):
+def alpha_beta_gamma_scatterplot(param_pairs, logx=True, title=True, output_filename=None):
     transform = np.log if logx else (lambda x : x)    
-    fig, axarray = plt.subplots(nrows=3, ncols=1)
-    fig.set_figheight(30)
-    fig.set_figwidth(20)
-    lex_index = 3   
+    fig, axarray = plt.subplots(nrows=len(param_pairs), ncols=1)
+    fig.set_figheight(len(param_pairs)*10)
+    fig.set_figwidth(16)
+    lex_index = 3
+
+    labsize = 24    
+    
     for i, params in enumerate(param_pairs):
         hc, defin = params
-        ax = axarray[i]
+        try:
+            ax = axarray[i]
+        except:
+            ax = axarray
         # Hurfordian:
         h_ba = [r['beta']/r['alpha'] for r in hc]
         h_g = [r['disjunction_cost'] for r in hc]
@@ -114,18 +120,26 @@ def alpha_beta_gamma_scatterplot(param_pairs, logx=True):
         # Plotting:
         for i, vals in enumerate(((h_ba, h_g, 'Hurfordian'), (d_ba, d_g, 'Definitional'), (b_ba, b_g, 'Both'))):
             x, y, label = vals
-            ax.plot(jitter(transform(x)), jitter(y), linestyle="", marker=".", label=label, markersize=8, color=colors[i])
+            ax.plot(jitter(transform(x)), jitter(y), linestyle="", marker=".", label=label, markersize=15, color=colors[i])
         # In case we want to specify the axis limits:
         x1,x2,y1,y2 = ax.axis()
         ax.axis((x1, x2, y1, y2))
         # Labeling:
         if logx:
-            ax.set_xlabel(r'$\log(\beta/\alpha)$')
+            ax.set_xlabel(r'$\log(\beta/\alpha)$', fontsize=labsize)
         else:
-            ax.set_xlabel(r'$\beta/\alpha$')
-        ax.set_ylabel('disjunction_cost')   
-        ax.set_title("Lexicon size: %s" % lex_index) ; lex_index += 1 
-        ax.legend(bbox_to_anchor=(1.1, 1.1))
+            ax.set_xlabel(r'$\beta/\alpha$', fontsize=labsize)
+        ax.set_ylabel(r'$C(or)$', fontsize=labsize)
+        if title:
+            ax.set_title("Lexicon size: %s" % lex_index) ; lex_index += 1 
+        #ax.legend(bbox_to_anchor=(1.0, 1.0), fontsize=16)
+        ax.legend(loc='upper left', bbox_to_anchor=(0,1.1), ncol=3, fontsize=labsize)
+        plt.setp(ax.get_xticklabels(), fontsize=18)
+        plt.setp(ax.get_yticklabels(), fontsize=18)
+        if output_filename:
+            plt.savefig(output_filename, bbox_inches='tight')
+        else:
+            plt.show()
         
 def jitter(x):
     """Jitter while respecting the data bounds"""
