@@ -8,6 +8,7 @@
 \usepackage{url}
 \usepackage[normalem]{ulem}
 \usepackage{stmaryrd}
+\usepackage{natbib}
 
 \input{../macros}
 
@@ -27,8 +28,9 @@
 \definecolor{lexcolor}{HTML}{D95F02}
 \definecolor{costcolor}{HTML}{A6761D}
 
+
 \definecolor{defcolor}{HTML}{D95F02}
-\definecolor{hurfordcolor}{HTML}{33FF33}
+\definecolor{hurfordcolor}{HTML}{00CC33}
 \newcommand{\hurford}[1]{{\relax\color{hurfordcolor}#1}}
 \newcommand{\definitional}[1]{\relax{\color{defcolor}#1}}
 
@@ -127,11 +129,13 @@
   \begin{itemize}\setlength{\itemsep}{0pt}
   \item Languages are neither fixed across time nor identically
     reproduced in all speakers, but rather continually renegotiated
-    during interactions.
+    during interactions \cite{Clark97}.
 
-  \item People accommodate to each other's usage patterns, form
-    temporarily lexical pacts, and instruct each other about their
-    linguistic views.
+  \item People accommodate to each other's usage patterns
+    \cite{Giles:Coupland:Coupland:1991}, form temporarily lexical
+    pacts \cite{Clark:Wilkes-Gibbs:1986,Brennan:Clark:1996}, and
+    instruct each other about their linguistic views
+    \cite{Hearst92,SnowEtAl05}.
 
   \item Some of this communication in language about language is
     direct, as with explicit definitions, but much of it arrives via
@@ -143,10 +147,10 @@
     \vspace{-4pt}
 
     \begin{itemize}\setlength{\itemsep}{0pt}
-    \item \textbf{Hurfordian pressure:} \word{X or Y} conveys that \word{X} and
-      \word{Y} are disjoint
-    \item \textbf{Definitional inference:} \word{X or Y} conveys that
-      \word{X} and \word{Y} are synonymous
+    \item \textbf{Hurfordian pressure \cite{Hurford:1974}:} \word{X or
+        Y} conveys that \word{X} and \word{Y} are disjoint
+    \item \textbf{Definitional inference \cite{Horn89}:} \word{X or Y}
+      conveys that \word{X} and \word{Y} are synonymous
     \end{itemize}
 
     \vspace{-4pt}
@@ -177,22 +181,29 @@
     \exitem{3} & In 1940, 37\% of us had gone to a \hurford{church or synagogue} in the last week.
     \end{tabular}
 
-    \begin{center}
+    \begin{center}      
+      \begin{tabular}[c]{@{} p{3cm} @{}} 
+        No clear evidence for ordering restrictions or preferences
+        deriving from the entailment relation:
+      \end{tabular}
       \renewcommand{\arraystretch}{1}
-      \begin{tabular}[c]{r l}
+      \begin{tabular}[c]{l r}
         \toprule
         \multicolumn{2}{c}{\textbf{Our corpus}} \\
+        Disjunct order & Exs. \\
         \midrule
-        `general or specific' & 75 \\
-        `specific or general' & 86 \\
+        {}[general] or [specific] & 75 \\
+        {}[specific] or [general] & 86 \\
         \bottomrule
-      \end{tabular}
+      \end{tabular}      
     \end{center}       
   \end{minipage}
   \hfill 
-  \begin{minipage}[c]{0.48\linewidth}  
-    \includegraphics[width=1\textwidth]{../fig/chemla.pdf} \\    
-    \word{X or Y} usage correlates with \word{X} implicating \word{not Y}
+  \begin{minipage}[c]{0.45\linewidth}  
+    \includegraphics[width=1\textwidth]{chemla-poster.pdf} \\
+    The frequency of \word{X or Y} usage correlates with the
+    prevalence of \word{X} implicating \word{not Y}
+    \cite{Chemla-HurfordCounts}.
   \end{minipage}
 
 }
@@ -212,7 +223,7 @@
     \exitem{4} & She's a \definitional{wine lover or \emph{oenophile}} \\
     \exitem{5} & Title: \definitional{A Geological History of Manhattan or New York Island} \\
     \exitem{6} & Welcome to \definitional{New Haven or ``the Elm City''}  \\
-    \exitem{7} & It's a \definitional{woodchuck or ``land beaver''}
+    \exitem{7} & It's a \definitional{woodchuck, or land beaver.}
     \end{tabular}    
   \end{minipage}
   \hfill 
@@ -273,14 +284,14 @@
     \labelednode{2,0.45}{$\lisZeroDef$}
 
     {\color{annotationcolor}      
-      \labelednode{12.25,4.7}{\parbox{3.6cm}{suffices for manner implicature and embedded scalar implicature}}
-      \picarrow[1]{12.05, 4.7}{-1,0}
-      \labelednode{12.25,2.95}{\parbox{3.6cm}{suffices for unembedded scalar implicature}}
-      \picarrow[1]{12.05, 2.95}{-1,0}
-      \labelednode{12.25,1.7}{\parbox{3.6cm}{suffices for many kinds of ambiguity avoidance}}
-      \picarrow[1]{12.05, 1.7}{-1,0}
-      \labelednode{12.25,0.45}{\parbox{3.6cm}{literal listener, a simple semantic agent}}
-      \picarrow[1]{12.05, 0.45}{-1,0}      
+      \labelednode{11.75,4.7}{\parbox{4cm}{suffices for manner implicature and embedded scalar implicature \cite{Smith:Goodman:Frank:2013,bergen-levy-goodman:2014}}}
+      \picarrow[1]{11.55, 4.7}{-1,0}
+      \labelednode{11.75,2.95}{\parbox{3.8cm}{suffices for unembedded scalar implicature \cite{Frank:Goodman:2012}}}
+      \picarrow[1]{11.55, 2.95}{-1,0}
+      \labelednode{11.75,1.7}{\parbox{3.8cm}{suffices for many kinds of ambiguity avoidance}}
+      \picarrow[1]{11.55, 1.7}{-1,0}
+      \labelednode{11.75,0.45}{\parbox{3.8cm}{literal listener, a simple semantic agent}}
+      \picarrow[1]{11.55, 0.45}{-1,0}      
     }
   \end{picture}
 
@@ -381,20 +392,33 @@
    $\beta = 1$; 
    $\Costs(\word{or}) = 1$
 
+   \vspace{-6pt}
+
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \headerbox{Characterization}{name=char,column=3,row=4,span=1,below=hurfordmodel}{  
-  \includegraphics[width=\textwidth,height=5cm]{../fig/lex5-alpha-beta-gamma.png}
+  \includegraphics[width=1\textwidth]{paramexplore.pdf}
+
+  \vspace{-4pt}
 
   Summarizes a search over many parameter settings using a large
-  lexicon and large world space.
+  lexicon and large world space. % Definitional readings become
+  % more prominent if the unknown word is constrained to have an
+  % atomic meaning.
 
 }
-
-
-
 \end{poster}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\footnotesize
+\setlength{\bibsep}{0pt}
+\nocite{*}
+\bibliographystyle{plain}
+\bibliography{../levy-potts-pragdisj-bib}
+
 \end{document}
 
 
