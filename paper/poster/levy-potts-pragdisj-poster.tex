@@ -37,7 +37,7 @@
 \renewcommand{\highlight}[1]{{\color{highlightcolor}#1}}
 
 \newcommand{\lisZeroDef}{\listenerZero(\state \given \msg, \Lex) \propto \frac{\Indicator(\state \in \Lex(\msg))}{|\Lex(\msg)|}\Prior(\state)}
-\newcommand{\spkOneDef}{\speakerOne(\msg \given \state, \Lex) \propto \exp\left(\log\left(\alpha\,\listenerZero(\state \given \msg, \Lex) \right)- \gamma\,\Costs(\msg)\right)}
+\newcommand{\spkOneDef}{\speakerOne(\msg \given \state, \Lex) \propto \exp\left(\log\left(\alpha\,\listenerZero(\state \given \msg, \Lex) \right)- \Costs(\msg)\right)}
 \newcommand{\lisOneDef}{\listenerOne(\state \given \msg, \Lex) \propto \speakerOne(\msg \given \state, \Lex)\Prior(\state)}
 \newcommand{\LisOneDef}{%
   \setlength{\arraycolsep}{1pt}%
@@ -53,7 +53,7 @@
     -
     {\color{lexcolor}\beta \log\left(\ListenerK[1](\Lex\given\msg)\right)}
     -
-    {\color{costcolor}\gamma\,\Costs(\msg)}
+    {\color{costcolor}\Costs(\msg)}
   \right)}
 
 \newcommand{\lismat}[4]{
@@ -64,7 +64,7 @@
     \midrule
     A & #2\\
     X & #3 \\
-    A\, \word{or}\, X & #4 \\
+    A\,\word{or}\,X & #4 \\
     \bottomrule
   \end{array}}
 
@@ -72,7 +72,7 @@
   \setlength{\arraycolsep}{1pt}
   \begin{array}[c]{l *{3}{r}}
     \toprule
-    #1 & A & X & A\, \word{or}\, X\\
+    #1 & A & X & A\,\word{or}\,X\\
     \midrule
     w_{1} & #2\\
     w_{2} & #3 \\
@@ -288,15 +288,20 @@
     
     \labelednode{2,0.45}{$\lisZeroDef$}
 
-    {\color{annotationcolor}      
-      \labelednode{11.75,4.7}{\parbox{3.9cm}{suffices for manner implicature and embedded scalar implicature \cite{Smith:Goodman:Frank:2013,bergen-levy-goodman:2014}}}
-      \picarrow[1]{11.55, 4.7}{-1,0}
-      \labelednode{11.75,2.95}{\parbox{3.9cm}{suffices for unembedded scalar implicature \cite{Frank:Goodman:2012}}}
-      \picarrow[1]{11.55, 2.95}{-1,0}
-      \labelednode{11.75,1.7}{\parbox{3.9cm}{suffices for many kinds of ambiguity avoidance}}
-      \picarrow[1]{11.55, 1.7}{-1,0}
-      \labelednode{11.75,0.45}{\parbox{3.9cm}{literal listener; interpretive semantics with priors}}
-      \picarrow[1]{11.55, 0.45}{-1,0}      
+    {\color{annotationcolor}   
+      \labelednode{12.2,6.45}{\parbox{3.9cm}{Rich secondary meanings about language}}
+      \picarrow[1]{12,  6.45}{-1,0}
+  
+      \labelednode{12.2,4.7}{\parbox{3.9cm}{suffices for manner implicature and embedded scalar implicature \cite{Smith:Goodman:Frank:2013,bergen-levy-goodman:2014}}}
+      \picarrow[1]{12,  4.7}{-1,0}
+      \labelednode{12.2,2.95}{\parbox{3.9cm}{suffices for unembedded scalar implicature \cite{Frank:Goodman:2012}}}
+      \picarrow[1]{12,  2.95}{-1,0}
+      \labelednode{12.2,1.7}{\parbox{3.9cm}{suffices for many kinds of ambiguity avoidance}}
+      \picarrow[1]{12,  1.7}{-1,0}
+      \labelednode{12.2,0.45}{\parbox{3.9cm}{literal listener; interpretive semantics with priors}}
+      \picarrow[1]{12,  0.45}{-1,0}  
+
+      
     }
   \end{picture}
 
@@ -321,9 +326,9 @@
          \toprule
          & \ListenerK[2] \text{ hears } \word{A\,or\,X}       & w_{1} & w_{2} & w_{1}{\vee}w_{2} \\
          \midrule
-         \LexStar & \smallhurfordlex{w_{1}}{w_{2}}{w_{1}, w_{2}}                              & \whitecell{0}   & 0 & .08 \\[1ex]
-         \Lex_{1} & \smallhurfordlex{w_{1}}{w_{2}}{w_{2}}                                     & \whitecell{.07} & 0 & .08 \\[1ex]
-         \Lex_{2} & \smallhurfordlex{\definitional{\mathbf{w_{1}}}}{w_{2}}{\definitional{\mathbf{w_{1}}}} &  \graycell{.77} & 0 & .06 \\
+         \LexStar & \smallhurfordlex{w_{1}}{w_{2}}{w_{1}, w_{2}}                                          & \whitecell{0}   & 0 & .08 \\[1ex]
+         \Lex_{1} & \smallhurfordlex{w_{1}}{w_{2}}{w_{2}}                                                 & \whitecell{.01} & 0 & .08 \\[1ex]
+         \Lex_{2} & \smallhurfordlex{\definitional{\mathbf{w_{1}}}}{w_{2}}{\definitional{\mathbf{w_{1}}}} & \graycell{.77}  & 0 & .06 \\
          \bottomrule
        \end{array}$} \\
     \multicolumn{4}{r}{\normalsize\phantom{a}~\hfill
@@ -333,16 +338,24 @@
     \\
     & \multicolumn{3}{c}{$\downarrow$}
     \\    
-    & \multicolumn{3}{c}{
-    $\begin{array}[c]{r l}
+    & 
+    $\SpeakerK[2] \text{ observes } \langle \Lex_{2},w_{1}\rangle$
+    &
+    $\begin{array}[c]{c c c}
        \toprule
-       \multicolumn{2}{c}{\SpeakerK[2] \text{ observes } \langle \Lex_{2},w_{1}\rangle} \\
+       A & X & A\,\word{or}\,X \\
        \midrule
-       A & \phantom{.0}0 \\
-       X & \phantom{.0}0 \\
-       A\, \word{or}\, X & .05 \\
+       .07 & .48 & .45 \\
        \bottomrule
-     \end{array}$}
+     \end{array}$
+    &
+    {\color{gray}
+    $\left(
+      \begin{tabular}[c]{@{} p{2cm} @{}}
+        bias against A\,\word{or}\,X is gone by $\SpeakerK[3]$
+      \end{tabular}
+    \right)$
+    }
     \\
     & \multicolumn{3}{c}{$\downarrow$}
     \\
@@ -359,11 +372,11 @@
     \\
     & \multicolumn{3}{c}{$\swarrow \hspace{45pt} \downarrow\hspace{45pt} \searrow$}
     \\
-    $\listenerOne$ & $\lismat{\LexStar}{1 & 0 & 0}{02 & 02 & .96}{.02 & .02 & .96}$ &  $\lismat{\Lex_{1}}{1 & 0 & 0}{0 & 1 & 0}{.01 & 0 & .98}$ & $\lismat{\Lex_{2}}{1 & 0 & 0}{1 & 0 & 0}{1 & 0 & 0}$
+    $\listenerOne$ & $\lismat{\LexStar}{1 & 0 & 0}{.02 & .02 & .96}{.02 & .02 & .96}$ &  $\lismat{\Lex_{1}}{1 & 0 & 0}{0 & 1 & 0}{.01 & 0 & .99}$ & $\lismat{\Lex_{2}}{1 & 0 & 0}{1 & 0 & 0}{1 & 0 & 0}$
     \\
     & $\downarrow$ & $\downarrow$ & $\downarrow$
     \\
-    $\speakerOne$ & $\spkmat{\LexStar}{.98 & 0 & 0}{0 & 0 & .2}{0 & 0 & .2}$ & $\spkmat{\Lex_{1}}{.99 & 0 & 0}{0 & .33 & 0}{0 & 0 & .33}$ & $\spkmat{\Lex_{2}}{.33 & 0 & 0}{.33 & 0 & 0}{.33 & 0 & 0}$
+    $\speakerOne$ & $\spkmat{\LexStar}{.98 & 0 & 0}{0 & 0 & 0}{0 & .2 & .2}$ & $\spkmat{\Lex_{1}}{.99 & 0 & 0}{0 & .33 & 0}{0 & 0 & .33}$ & $\spkmat{\Lex_{2}}{.33 & .33 & .33}{0 & 0 & 0}{0 & 0 & 0}$
     \\
     & $\downarrow$ & $\downarrow$ & $\downarrow$
     \\
@@ -385,11 +398,11 @@
   \setlength{\arraycolsep}{2pt}
   $\begin{array}[c]{l@{ }l r r r}
      \toprule
-     & \ListenerK[2] \text{ hears } \word{A\, or\, X}       & w_{1} & w_{2} & w_{1}{\vee}w_{2} \\
+     & \ListenerK[2] \text{ hears } \word{A\,or\,X}       & w_{1} & w_{2} & w_{1}{\vee}w_{2} \\
      \midrule
-     \LexStar & \smallhurfordlex{w_{1}}{w_{2}}{w_{1}, w_{2}} & .03 & 0 & \whitecell{.14} \\[1ex]
+     \LexStar & \smallhurfordlex{w_{1}}{w_{2}}{w_{1}, w_{2}}                                & .02 & 0 & \whitecell{.32} \\[1ex]
      \Lex_{1} & \smallhurfordlex{\hurford{\mathbf{w_{1}}}}{w_{2}}{\hurford{\mathbf{w_{2}}}} & .04 & 0 & \graycell{.45} \\[1ex]
-     \Lex_{2} & \smallhurfordlex{w_{1}}{w_{2}}{w_{1}} & .02 & 0 & \whitecell{.32} \\
+     \Lex_{2} & \smallhurfordlex{w_{1}}{w_{2}}{w_{1}}                                       & .03 & 0 & \whitecell{.14} \\
      \bottomrule
    \end{array}$  
    \phantom{a}~\hfill
