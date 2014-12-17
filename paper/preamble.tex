@@ -38,6 +38,78 @@
 %\renewcommand{\graycell}[1]{\colorbox{lightgray}{#1}}
 \newcommand{\whitecell}[1]{\colorbox{white}{#1}}
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Macros for the simple illustration of the model:
+
+\newcommand{\examplelistener}[4][]{
+  \setlength{\arraycolsep}{4pt}
+  \begin{array}[c]{*{3}{r}}
+    \toprule
+    #1           & w_{1} & w_{2} \\
+    \midrule
+    \word{cheap} & #2 \\
+    \word{free}  & #3 \\
+    \nullmsg     & #4 \\
+    \bottomrule
+  \end{array}}
+
+\newcommand{\examplejoint}[4]{
+  \setlength{\arraycolsep}{10pt}
+  \begin{array}[c]{*{3}{r}}
+    \toprule
+    #1 & w_{1} & w_{2} \\
+    \midrule
+    \LexStar & #2 \\
+    \Lex_{1} & #3 \\
+    \Lex_{2} & #4 \\
+    \bottomrule
+  \end{array}}
+
+\newcommand{\examplelex}[2][]{\examplelistener[#1]{#2}{\True & \False}{\True & \True}}
+
+\newcommand{\examplespeaker}[3][]{
+  \setlength{\arraycolsep}{4pt}
+  \begin{array}[c]{*{4}{r}}
+    \toprule
+    #1           & \word{cheap} & \word{free} & \nullmsg \\
+    \midrule
+    w_{1} & #2 \\
+    w_{2} & #3 \\
+    \bottomrule
+  \end{array}}
+
+\newcommand{\exampleSpeaker}[3]{
+  \setlength{\arraycolsep}{4pt}
+  \begin{array}[c]{*{4}{r}}
+    \toprule
+    #1 & \word{cheap} & \word{free} & \nullmsg \\
+    \midrule
+    w_{1} & #2 \\
+    w_{2} & #3 \\
+    \bottomrule
+  \end{array}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Macros for the closure example:
+
+\newcommand{\closurelex}[6][1]{
+  \renewcommand{\arraystretch}{1}
+  \begin{array}[c]{*{8}{r}}
+    \toprule
+    &w_{1}&w_{2}&w_{3}&w_{1}{\vee}w_{2}&w_{1}{\vee}w_{3}&w_{2}{\vee}w_{3}&w_{1}{\vee}w_{2}{\vee}w_{3}\\
+    \midrule
+    p      & #2 \\
+    q      & #4 \\
+    \pandq & #3 \\
+    \porq  & #5 \\
+    \nullmsg & #6 \\
+    \bottomrule
+  \end{array}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Macros for the Hurfordian and definitional examples
+
 \newcommand{\lismat}[4]{
   \setlength{\arraycolsep}{1pt}
   \begin{array}[c]{l *{3}{r}}
@@ -71,16 +143,4 @@
     \end{array}
   \right]}
 
-\newcommand{\closurelex}[6][1]{
-  \renewcommand{\arraystretch}{1}
-  \begin{array}[c]{*{8}{r}}
-    \toprule
-    &w_{1}&w_{2}&w_{3}&w_{1}{\vee}w_{2}&w_{1}{\vee}w_{3}&w_{2}{\vee}w_{3}&w_{1}{\vee}w_{2}{\vee}w_{3}\\
-    \midrule
-    p      & #2 \\
-    q      & #4 \\
-    \pandq & #3 \\
-    \porq  & #5 \\
-    \nullmsg & #6 \\
-    \bottomrule
-  \end{array}}
+
