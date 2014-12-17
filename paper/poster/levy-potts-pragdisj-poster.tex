@@ -37,7 +37,7 @@
 \renewcommand{\highlight}[1]{{\color{highlightcolor}#1}}
 
 \newcommand{\lisZeroDef}{\listenerZero(\state \given \msg, \Lex) \propto \frac{\Indicator(\state \in \Lex(\msg))}{|\Lex(\msg)|}\Prior(\state)}
-\newcommand{\spkOneDef}{\speakerOne(\msg \given \state, \Lex) \propto \exp\left(\log\left(\alpha\,\listenerZero(\state \given \msg, \Lex) \right)- \Costs(\msg)\right)}
+\newcommand{\spkOneDef}{\speakerOne(\msg \given \state, \Lex) \propto \exp\left(\alpha\log\left(\listenerZero(\state \given \msg, \Lex) \right)- \Costs(\msg)\right)}
 \newcommand{\lisOneDef}{\listenerOne(\state \given \msg, \Lex) \propto \speakerOne(\msg \given \state, \Lex)\Prior(\state)}
 \newcommand{\LisOneDef}{%
   \setlength{\arraycolsep}{1pt}%
@@ -48,10 +48,9 @@
   }
 \newcommand{\SpkTwoDef}{\SpeakerK[2](\msg \given \state, \Lex) \propto 
   \exp\left(
-    \log
-    \left({\color{worldinfocolor}\alpha\,\ListenerK[1](\state \given \msg, \Lex)}\right)
+    {\color{worldinfocolor}\alpha\log\left(\ListenerK[1](\state \given \msg, \Lex)\right)}
     -
-    {\color{lexcolor}\beta \log\left(\ListenerK[1](\Lex\given\msg)\right)}
+    {\color{lexcolor}\beta\log\left(\ListenerK[1](\Lex\given\msg)\right)}
     -
     {\color{costcolor}\Costs(\msg)}
   \right)}
@@ -90,6 +89,8 @@
 \newcommand{\whitecell}[1]{\colorbox{white}{#1}}
 
 \renewcommand{\state}{w}
+
+\newcommand{\XorY}{\word{X\,or\/Y}}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -147,9 +148,8 @@
     \vspace{-5pt}
 
     \begin{itemize}\setlength{\itemsep}{0pt}
-    \item \textbf{Hurfordian pressure \cite{Hurford:1974}:} \word{X or
-        Y} conveys that \word{X} and \word{Y} are disjoint
-    \item \textbf{Definitional inference \cite{Horn89}:} \word{X or Y}
+    \item \textbf{Hurfordian pressure \cite{Hurford:1974}:} \XorY\ conveys that \word{X} and \word{Y} are disjoint
+    \item \textbf{Definitional inference \cite{Horn89}:} \XorY\
       conveys that \word{X} and \word{Y} are synonymous
     \end{itemize}
 
@@ -166,8 +166,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \headerbox{Hurfordian perceptions and intentions}{name=hurford,column=0,row=2,span=2,below=intro}{
 
-  \textbf{Generalization}: \word{X or Y} conveys that the speaker is
-  using a lexicon in which \word{X} and \word{Y} are disjoint, or it
+  \textbf{Generalization}: \XorY\ usually conveys that the speaker is
+  using a lexicon in which $\sem{X}$ and $\sem{Y}$ are disjoint, or it
   addresses a speaker concern that the listener is using such a
   lexicon.
 
@@ -206,9 +206,8 @@
     
     \vspace{-12pt}
 
-    The frequency of \word{X or Y} correlates with the
-    prevalence of \word{X} implicating \word{not Y}
-    \cite{Chemla-HurfordCounts}.
+    The frequency of \XorY\ correlates with the prevalence of \word{X}
+    implicating \word{not Y} \cite{Chemla-HurfordCounts}.
   \end{minipage}
 
 }
@@ -216,7 +215,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \headerbox{Disjunctive definition and identification}{name=def,column=0,row=2,span=2,below=hurford}{
 
-  \textbf{Generalization}: \word{X or Y} can convey $\sem{X}\approx\sem{Y}$
+  \textbf{Generalization}: \XorY\ can convey $\sem{X}\approx\sem{Y}$
   when the speaker is mutually, publicly known to be an expert or
   would like to establish expertise.
 
@@ -270,7 +269,7 @@
     \labelednode{2,7.2}{$\ldots$}
     \picarrow{2, 7.1}{-2,-1}
     
-    \annotation{4,6.45}{{\color{worldinfocolor}world information} $-$ {\color{lexcolor}lexical preferences} $-$ {\color{costcolor}costs}}
+    \annotation{3.5,6.45}{{\color{worldinfocolor}world information} $-$ {\color{lexcolor}lexical preferences} $-$ {\color{costcolor}costs}}
 
     \labelednode{0,5.95}{$\SpkTwoDef$}
     \picarrow{0.2, 5.75}{2,-1}
@@ -289,7 +288,7 @@
     \labelednode{2,0.45}{$\lisZeroDef$}
 
     {\color{annotationcolor}   
-      \labelednode{12.2,6.45}{\parbox{3.9cm}{Rich secondary meanings about language}}
+      \labelednode{12.2,6.45}{\parbox{3.9cm}{rich secondary meanings about language}}
       \picarrow[1]{12,  6.45}{-1,0}
   
       \labelednode{12.2,4.7}{\parbox{3.9cm}{suffices for manner implicature and embedded scalar implicature \cite{Smith:Goodman:Frank:2013,bergen-levy-goodman:2014}}}
@@ -298,7 +297,7 @@
       \picarrow[1]{12,  2.95}{-1,0}
       \labelednode{12.2,1.7}{\parbox{3.9cm}{suffices for many kinds of ambiguity avoidance}}
       \picarrow[1]{12,  1.7}{-1,0}
-      \labelednode{12.2,0.45}{\parbox{3.9cm}{literal listener; interpretive semantics with priors}}
+      \labelednode{12.2,0.45}{\parbox{3.9cm}{literal listener: interpretive semantics with priors}}
       \picarrow[1]{12,  0.45}{-1,0}  
 
       

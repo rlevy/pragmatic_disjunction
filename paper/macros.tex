@@ -2,20 +2,20 @@
 %========================= cross-references ==========================
 
 % Flexible sec/fig/tbl/def cross-refs.
-\newcommand{\Secref}[1]{Sec.~\ref{#1}}
-\newcommand{\secref}[1]{sec.~\ref{#1}}
-\newcommand{\dashsecref}[2]{secs.~\ref{#1}--\ref{#2}}
+\newcommand{\Secref}[1]{Section~\ref{#1}}
+\newcommand{\secref}[1]{section~\ref{#1}}
+\newcommand{\dashsecref}[2]{sections~\ref{#1}--\ref{#2}}
 
 \newcommand{\Defref}[1]{Def.~\ref{#1}}
 \newcommand{\defref}[1]{def.~\ref{#1}}
 \newcommand{\Defrefc}[2]{\Defref{#1}, clause~\ref{#2}}
 \newcommand{\defrefc}[2]{\defref{#1}, clause~\ref{#2}}
 
-\newcommand{\Figref}[1]{Fig.~\ref{#1}}
-\newcommand{\figref}[1]{fig.~\ref{#1}}
-\newcommand{\dashfigref}[2]{figs.~\ref{#1}--\ref{#2}}
-\newcommand{\Tabref}[1]{Tab.~\ref{#1}}
-\newcommand{\tabref}[1]{tab.~\ref{#1}}
+\newcommand{\Figref}[1]{Figure~\ref{#1}}
+\newcommand{\figref}[1]{figure~\ref{#1}}
+\newcommand{\dashfigref}[2]{figures~\ref{#1}--\ref{#2}}
+\newcommand{\Tabref}[1]{Table~\ref{#1}}
+\newcommand{\tabref}[1]{table~\ref{#1}}
 
 % Examples:
 \newcommand{\eg}[1]{(\ref{#1})}
@@ -42,7 +42,8 @@
 
 \newcommand{\word}[1]{\emph{#1}}
 \newcommand{\tech}[1]{\textbf{#1}}
-\newcommand{\highlight}[1]{\uline{#1}}
+\definecolor{maroon}{HTML}{990000}
+\newcommand{\highlight}[1]{{\color{maroon}#1}}
 
 % Gray table cell:
 \newcommand{\graycell}[1]{{\cellcolor[gray]{.8}#1}}
@@ -108,25 +109,28 @@
     \end{array}
   \right]}
 
-\newcommand{\listenerMatrix}[4]{
-  \begin{array}[c]{l *{3}{r}}
+\newcommand{\listenerMatrix}[6]{
+  \begin{array}[c]{l *{4}{r}}
     \toprule
-    #1 & w_{1} & w_{2} & w_{3} \\
+    #1 & w_{1} & w_{2} & w_{3} & w_{4} \\
     \midrule
-    \porq    & #2\\
-    \pandq   & #3 \\
-    \nullmsg & #4 \\
+    p        & #2 \\
+    q        & #3 \\              
+    \pandq    & #4 \\
+    \porq   & #5 \\
+    \nullmsg & #6 \\
     \bottomrule
   \end{array}}
 
-\newcommand{\speakerMatrix}[4]{
-  \begin{array}[c]{r *{4}{r}}
+\newcommand{\speakerMatrix}[5]{
+  \begin{array}[c]{r *{5}{r}}
     \toprule
-    #1 & \porq & \pandq & \nullmsg \\
+    #1 & p & q & \pandq & \porq & \nullmsg \\
     \midrule
     w_{1} & #2 \\
     w_{2} & #3 \\ 
     w_{3} & #4 \\ 
+    w_{3} & #5 \\ 
     \bottomrule
   \end{array}}
 

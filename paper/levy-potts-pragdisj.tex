@@ -6,11 +6,9 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\title{Negotiating lexical uncertainty and expertise with disjunctive utterances}
-\author{Roger Levy and Christopher Potts}
+\title{Negotiating lexical uncertainty and expertise with disjunction}
+\author{Christopher Potts and Roger Levy}
 \maketitle
-
-\marginpar{In this draft, all plots are temporary and all the numerical values need to be regenerated programmatically to avoid typos.}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -44,17 +42,18 @@ conveying the meaning of the more general disjunct, but the costs
 could be worth paying in virtue of the lexical side-effect of
 exclusivization.
 
-On the other hand, disjunctions like \word{wine lover or oenophile}
-can be used to convey that the two disjuncts are roughly synonymous
-\citep{Horn89}, thereby providing secondary information that maximally
-violates the pressure to exclusivize. This inference is more rarefied
-than the exclusivization inference, but it can arise in a broad range
-of contexts in which such definitional or identificational information
-has social or communicative value. It is striking that the
-definitional and exclusivization inferences are supported by a single
-lexical item, and the puzzle deepens when we see that the empirical
-picture is not a quirk of English, but rather one found in a wide
-range of typologically and geographically diverse languages.
+In apparent opposition to exclusivization, disjunctions like
+\word{wine lover or oenophile} can be used to convey that the two
+disjuncts are roughly synonymous \citep{Horn89}, thereby providing
+secondary information that maximally violates the pressure to
+exclusivize. This inference is more rarefied than the exclusivization
+inference, but it can arise in a broad range of contexts in which such
+definitional or identificational information has social or
+communicative value. It is striking that both the definitional and
+exclusivization inferences are supported by a single lexical item, and
+the puzzle deepens when we see that the empirical picture is not a
+quirk of English, but rather one found in a wide range of
+typologically and geographically diverse languages.
 
 In this paper, we capture both of these classes of inference within a
 single recursive Bayesian model of pragmatic reasoning. The model
@@ -76,18 +75,20 @@ the expected semantic content of disjunction, depending on contextual
 parameters relating to speaker expertise, listener malleability, and
 information contained in the common ground. The model thus offers a
 genuinely pragmatic account of these inferences as well as
-characterizations of their stability and their communicative value.
+characterizations of their stability and communicative
+value.\footnote{Implementations of our model and related models, and
+  all the code and data used in this paper, are available at
+  \url{https://github.com/cgpotts/pypragmods/}.}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Lexical side-effects from disjunction}\label{sec:data}
 
-This section explores the exclusivization and identificational or
-definitional uses of disjunction. Our goal is to more precisely
-characterize what the inferences are like and to begin to characterize
-which contexts steer speakers and listeners toward one or the
-other. These findings inform the modeling we describe in
-\dashsecref{sec:model}{sec:analysis}.
+This section explores the exclusivization and definitional uses of
+disjunction. Our goal is to more precisely characterize what the
+inferences are like and to begin to understand which contexts steer
+speakers and listeners toward one or the other. These findings inform
+the modeling we describe in \dashsecref{sec:model}{sec:analysis}.
 
 %=====================================================================
 
@@ -121,14 +122,13 @@ likely assuming conjunction reduction):
 
 \citeauthor{Hurford:1974} uses HG to probe the nature and distribution
 of conversational implicatures (see also
-\citealt{Gazdar79b,ChierchiaFoxSpector08}), and \citet{Singh:2008}
-extends it to cases in which the disjuncts are merely overlapping. We
-endorse the guiding insight behind these accounts but reject the
-assumption that HG violations reliably lead to, or even correlate
-with, unacceptability or ungrammaticality. Disjunctions of apparently
+\citealt{Gazdar79b,ChierchiaFoxSpector08}).\citet{Singh:2008} extends
+it to cases in which the disjuncts are merely overlapping. We endorse
+the guiding insight behind these accounts but reject the assumption
+that HG violations reliably lead to, or even correlate with,
+unacceptability or ungrammaticality. Disjunctions of apparently
 entailing phrases are routine; all of the examples marked as
-ungrammatical in \eg{hex} are easy to find in fluent English text on
-the Web:
+ungrammatical in \eg{hex} are found in fluent English text on the Web:
 %
 \begin{examples}
 \item\label{hex-good}
@@ -146,7 +146,7 @@ the Web:
 \end{examples}
 
 We have collected a large corpus of apparent counterexamples,
-available at \url{http://goo.gl/VAGqnB}. Here is a small sample from
+available at the website for this paper. Here is a small sample from
 that corpus:
 %
 \begin{examples}
@@ -173,75 +173,26 @@ that corpus:
   \end{examples}
 \end{examples}
 
-\marginpar{I plan to expand the corpus.}
+The dataset includes 90 cases where the left disjunct entails the
+right, and 79 in which the right entails the left.  However, we
+caution against using these counts to make inferences about the
+general frequency of apparent HG violations or the relative prevalence
+of the two disjunct orders. We created the corpus using heuristic
+techniques based on WordNet and ad hoc Web searches, so it can provide
+only a glimpse of what is possible.  In addition, we have found that,
+for any two nouns $N_{1}$ and $N_{2}$ one believes to be in an overlap
+or proper entailment relation, it is generally possible to find a
+context in which ``$N_{1}$ or $N_{2}$'' and ``$N_{2}$ or $N_{1}$'' are
+felicitous, and Web searches will generally yield examples.
 
-The dataset includes \textnote{XXXX} cases where the left disjunct
-entails the right, and \textnote{XXXX} in which the right entails the
-left.  In addition, we conjecture that, for any two nouns $N_{1}$ and
-$N_{2}$ one believes to be in an overlap or proper entailment
-relation, it will generally be possible to find a context in which
-``$N_{1}$ or $N_{2}$'' and ``$N_{2}$ or $N_{1}$'' are felicitous, and
-Web searches will generally yield examples.
-
-Eager for a more rigorous assessment of the prevalence of HG-violating
-disjunctions, we conducted a simple experiment. First, we obtained a
-list of countries and their capitals and, to keep the search procedure
-simple, extracted the subset in which the country and capital both
-have single word names. Second, we search for `\emph{country or
-  capital}' and `\emph{capital or country}' in the Google Books
-N-grams data, restricting attention to books after 1960 to try to
-avoid some of the encoding difficulties that plague earlier texts in
-that corpus. The results of this experiment are summarized in
-\tabref{fig:capitals} (the raw data are available at the website
-for this paper). \marginpar{Expand when we have Google Books results.}
-
-\begin{figure}[tp]
-  \centering
-  \begin{subtable}{0.45\textwidth}
-    \centering
-    \begin{tabular}[c]{r r r}    
-      \toprule
-      & Attested  \\
-      \midrule
-      \emph{country or capital}  & 10/126 \\
-      \emph{capital or country}  & 24/126 \\
-      either order               & 24/126 \\
-      \bottomrule
-    \end{tabular}
-    \caption{\textnote{Pilot WEB-1T counts. Need to rerun with Google Books.}
-      Percentage attested limiting to cases where both
-      \emph{country} and \emph{capital} are found in the data
-      separately. Striking: if \emph{capital or country} is seen, then
-      so is \emph{country or capital}, but not the reverse. Also, 
-      \emph{capital or country} always outnumbers \emph{country or capital}.}
-  \end{subtable}
-  \hfill
-  \begin{subtable}{0.45\textwidth}
-    \centering
-    \textnote{Web-1T data have too many zeros to support this
-      analysis. Perhaps Google Books will be better.}
-    \begin{tabular}[c]{l}      
-      Boxplot of (\emph{country or capital})/\emph{country} \\
-      and (\emph{capital or country})/\emph{capital}\\     
-    \end{tabular}
-    \caption{Relative frequencies of the two orders. A Wilcoxon
-      signed-rank test XXXX.}      
-  \end{subtable}
-  \caption{Countries and their capitals in disjunctions.}
-  \label{fig:capitals}
-\end{figure}
-
-Of course, one would like to extend the above experiment to a broader
-and more diverse sample of the lexicon, to get a clearer picture of
-the prevalence of these disjunctions and to more deeply probe any
-ordering preferences that might relate to the direction of
-entailment. However, we do not see a way to do this accurately. The
-primary obstacle is, we believe, an important property of the
-phenomenon itself: judgments about lexical entailment are inherently
-very messy because of the flexible ways in which people refine
-meanings in context. As a result, there often isn't a single objective
-answer to the question of whether two disjuncts stand in an an
-entailment relation. For instance, whereas
+Of course, one would like to have a comprehensive picture of the
+distribution of HG violations. However, we do not see a way to do this
+systematically for the entire lexicon. The primary obstacle is, we
+believe, an important property of the phenomenon itself: judgments
+about lexical entailment are inherently messy because of the flexible
+ways in which people refine meanings in context. As a result, there
+often isn't a single objective answer to the question of whether two
+disjuncts stand in an an entailment relation. For instance, whereas
 \subeg{exclusive}{franceorparis} leaves little room to negotiate the
 meaning of the terms in any clear sense,
 \subeg{exclusive}{churchorsynagogue} is much less clear.
@@ -257,21 +208,22 @@ meaning of the terms in any clear sense,
 \end{examples}
 %
 Some speakers have firm judgments that \word{church} and
-\word{synagogue} exclude each other, making this case clearly
-HG-respecting. However, it is easy to find uses of the phrase
-``synagogues and other churches'', which presuppose that a synagogue
-is a kind of church. And we should take care even with our assertion
-that \word{France} and \word{Paris} invariably stand in an entailment
-relation. In contexts where France is being construed in terms of its
-countryside, or Paris in terms of its particular urban charms,
-\word{France} could come to mean something more like `Paris outside of
-France'. The important thing for our purposes is that the insight
-behind HG shines through this uncertainty: no matter what one's
-initial view of the lexicon is, disjunctions like \word{X or Y} make
-salient a construal of the lexicon in which the disjuncts are
-semantically disjoint. The speaker will be perceived as endorsing such
-a view, at least for the current conversational exchange, and the
-listener can either adopt that assumption or push back.
+\word{synagogue} exclude each other, making
+\subeg{exclusive}{churchorsynagogue} clearly HG-respecting. However,
+it is easy to find uses of the phrase ``synagogues and other
+churches'', which presuppose that a synagogue is a kind of church. And
+we should take care even with our assertion that \word{France} and
+\word{Paris} invariably stand in an entailment relation. In contexts
+where France is being construed in terms of its countryside, or Paris
+in terms of its particular urban charms, \word{France} could come to
+mean something more like `Paris outside of France'. The important
+thing for our purposes is that the insight behind HG shines through
+this uncertainty: no matter what one's initial view of the lexicon is,
+disjunctions like \word{X or Y} make salient a construal of the
+lexicon in which the disjuncts are semantically disjoint. The speaker
+will be perceived as endorsing such a view, at least for the current
+conversational exchange, and the listener can either adopt that
+assumption or push back.
 
 This lexical uncertainty motivates our own explanation for why
 speakers utter HG-violating disjunctions. In broad terms, we say that
@@ -287,45 +239,86 @@ be part of an attempt to manage the listener's inferences. For
 instance, the speaker who uses the phrase \word{swimwear or bikini}
 might be concerned that using \word{swimwear} alone will trigger an
 ad-hoc scalar implicature \citep{Hirschberg85} excluding the salient
-subkind of bikinis. \citet{Chemla-HurfordCounts} studies this class of
-inferences, presenting suggestive evidence that the frequency of
-disjunctions \word{X or Y} (\word{X} subsuming \word{Y}) is positively
-correlated with the likelihood that \word{X} conversationally
-implicates \word{not Y} as estimated by the experimental results of
-\citet{vanTiel-etal:2013}.  \citeauthor{Chemla-HurfordCounts}'s
-experiment relies on the page counts in Google search results, which
-are notoriously unreliable \citep{Liberman:2005}, so we reproduced his
-main finding using Google Books data \citep{Michel-etal:2011} and a
-more direct method for assessing the relative frequency of \word{X or
-  Y}. \Figref{fig:chemla} summarizes this experiment, and the raw data
-are available at the website associated with this paper.
+subkind of bikinis. The HG violation then serves to cancel or block
+this unwanted inference. \citet{Chemla-HurfordCounts} studies this
+class of inferences, presenting suggestive evidence that the frequency
+of disjunctions \word{X or Y} (\word{X} subsuming \word{Y}) is
+positively correlated with the likelihood that \word{X}
+conversationally implicates \word{not Y} as estimated by the
+experimental results of \citet{vanTiel-etal:2013}. This connection is
+anticipated by \posscitet{Hurford:1974} own analysis of disjunctions
+of scalar terms that seem to violate his generalization, but
+\citeauthor{Chemla-HurfordCounts} data suggest that it holds quite
+widely in the lexicon.
+
+\newcommand{\ChemlaIndependent}{\texttt{ProbDisj}}
+\newcommand{\CountGB}{\emph{Count}}
+
+\citeauthor{Chemla-HurfordCounts}'s experiment relies on the hit
+counts in Google search results, which are notoriously unreliable
+\citep{Liberman:2005}, so we reproduced his main finding using the
+Google Books data set \citep{Michel-etal:2011}, pooling all the
+English-language tables and restricting attention to books from 1960
+or later to avoid the encoding difficulties that plague earlier texts
+in that corpus. We also use a slightly more direct method than
+\citeauthor{Chemla-HurfordCounts}: we fit a simple linear regression
+in which the probability of $X$ implicating $Y$ is used to predict the
+relative frequency of \word{X or Y}. The implicature probabilities are
+from \posscitet{vanTiel-etal:2013} results, and the relative
+frequencies are given by
+$\CountGB(\word{X}) / \CountGB(\word{X or Y})$, where
+$\CountGB(\varphi)$ is the token count for the word or phrase
+$\varphi$ in our Google Books subcorpus. Our rationale (defined by
+\citeauthor{Chemla-HurfordCounts}) is that the prevance of the
+implicature will positively correlate with the frequency of the
+disjunction. All other things being equal, the more likely the
+implicature, the more need there will be to block it. And this is what
+we find; the linear regression is significant ($p = 0.04$), suggesting
+a systematic relationship. \Figref{fig:chemla} summarizes this
+experiment.
 
 \begin{figure}[tp]
   \centering
-  \includegraphics[width=1\textwidth]{fig/chemla}
-  \caption{A corpus study inspired by \citet{Chemla-HurfordCounts} on
-    the relationship between the probability that \word{X}
-    conversationally implicates \word{not-Y} and the 
-    frequency of disjunctions \word{X or Y} relative to 
-    the more general term \word{X}. A linear regression (blue line)
-    suggests a modest but robust correlation (coef = $6.580^{-06}$; 
-    standard error $3.095^{-06}$; $p = 0.04$; $R^{2} = 0.08$).
-  \textnote{Need to do more to make this model summary interpretable.}}
+  \includegraphics[width=1\textwidth]{fig/disjunction-and-implicature}
+  \caption{The relative frequency of \word{X or Y} is predicted by the
+    probability of $X$ implicating \word{not Y}.  All the data points
+    are given (red dots) and included in the analysis. For the sake of
+    readability, only a subset of the associated disjunctions are
+    printed.}
   \label{fig:chemla}
 \end{figure}
 
-The speaker might wish to block a subtly different kind of implicature
-in a situation in which a general term is prone to being limited to a
-prototypical subkind \citep{Levinson00}. For instance, at a busy
-marina in water-skiing country, \word{boat} might come to identify
-just motorboats. In that case, a speaker wishing to state a rule or
-regulation about all watercraft might use \word{boat or canoe} or
-\word{boat or kayak} to ensure that these non-motorized cases are
-included, lest people assume (or act as if they can assume) that these
-rarer kinds of boat are exempt.
+Blocking a potential scalar implicatures is just one of the
+motivations a speaker might have for uttering a disjunction that
+superficially violates HG. The I-implicatures studied by
+\citet{Levinson00} can also be motivating factors: the speaker is
+compelled to say as a little as possible, and the listener is advised
+to seek out specific interpretations. As a corollory of this, general
+terms are often prone to being restricted to salient or prototypical
+subkinds. For instance, at a busy marina in water-skiing country,
+\word{boat} might come to identify just motorboats. In that context, a
+speaker wishing to state a rule or regulation about all watercraft
+might use \word{boat or canoe} or \word{boat or kayak} to ensure that
+these non-motorized cases are included, lest people assume (or act as
+if they can assume) that these rarer kinds of boat are exempt.
 
-In both of these implicature-blocking scenarios, the speaker is
-concerned that the general term \word{X} will be construed as
+% Eager for a more rigorous assessment of the prevalence of
+% HG-violating disjunctions, we conducted a simple experiment. First,
+% we obtained a list of countries and their capitals and, to keep the
+% search procedure simple, extracted the subset in which the country
+% and capital both have single word names. Second, we searched for
+% `\emph{country or capital}' and `\emph{capital or country}' in the
+% Google Books N-grams data, restricting attention to books after 1960
+% to try to avoid some of the encoding difficulties that plague
+% earlier texts in that corpus. Of the 128
+% $\set{\word{`country'}, \word{`capital'}}$ cases in which both
+% \word{`country'} and \word{`capital'} are attested in the data, 11
+% are attested in the form \word{`country' or `capital'} and 11 are
+% attested in the form \word{`capital' or `country'}. The two sets are
+% nearly coextensive.
+
+In these implicature-blocking scenarios, the speaker is concerned that
+the general term \word{X} will be construed as
 $\sem{\word{X}}-\sem{\word{Y}}$ for some \word{Y}. Thus, \word{X} or
 \word{Y} is a hedge against the possibility that the listener's view
 of language is such that, at least in the current context,
@@ -393,13 +386,11 @@ seems apt in a context in which the speaker wishes to use
 \word{oenophile} to elevate the concept to something more specific (or
 pretentious) than \word{wine lover} picks out. Similarly, the book
 title \emph{A Geological History of Manhattan or New York Island}
-seems to identify Manhattan and New York Island while at the same time
+identifies Manhattan with New York Island while at the same time
 acknowledging the different histories and connotations of the two
 disjuncts.
 
-\marginpar{I hope to expand our corpus with more examples. Such an expansion could be mentioned here.}
-
-The speaker's motivations for using definitional disjunction are quite
+The speaker's motivations for using definitional disjunction are
 varied. Such readings seem to arise most easily when the speaker is
 mutually and publicly known to be a expert in the domain covered by
 the terms and the listener is mutually and publicly known to be
@@ -417,14 +408,13 @@ are ignorant; rather, such a use would seem to presuppose only that
 spectrum, the listener might actually be presumed to know the term,
 but the speaker sees social value in conveying that she shares this
 view. This could be because the speaker would like to display
-expertise, as when an ambitious undergraduate seeks to convey
-competence to a professor.  The uses also arise when the speaker and
-listener might both be experts in the domain and see a value (jointly
-or just in the current speaker's eyes) of using a word in a
-specialized sense in order to name a concept efficiently (e.g., the
-hypothetical academic paper title \word{What motivates the snobbish
-  wine lover or `oenophile' and how does he differ from the casual
-  drinker?}).
+expertise, as when an ambitious student seeks to convey competence to
+a professor. The uses also arise when the speaker and listener might
+both be experts in the domain and see a value (jointly or just in the
+current speaker's eyes) of using a word in a specialized sense in
+order to name a concept efficiently (e.g., the hypothetical academic
+paper title \word{What motivates the snobbish wine lover or
+  `oenophile' and how does he differ from the casual drinker?}).
 
 For these reasons, we retreat to a more basic characterization: the
 discourse participants must have a mutual interest in communicating
@@ -449,8 +439,8 @@ somewhat compact. Readers wishing to more fully explore the model are
 referred to the website for this paper, which provides implementations
 of this model (as well as those of \citealt{Frank:Goodman:2012},
 \citealt{bergen-levy-goodman:2014}, and
-\citealt{Smith:Goodman:Frank:2013}) and works through simple and complex
-examples using the code.
+\citealt{Smith:Goodman:Frank:2013}) and includes code for calculating
+all of the examples we review here.
 
 In our model, production and interpretation are based in a recursive
 process in which speaker and listener agents reason about each other
@@ -522,7 +512,7 @@ signaling game.
     distribution over states.    
   \item\label{costs}%
     $\Costs : \Messages \mapsto \Reals$ is a cost function on messages.
-    $\Costs(\nullmsg) > \Costs(\msg), {\forall \msg \in \Messages{-}\set{\nullmsg}}$.
+    %$\Costs(\nullmsg) > \Costs(\msg), {\forall \msg \in \Messages{-}\set{\nullmsg}}$.
   \end{examples}
 \end{examples}
 
@@ -577,9 +567,9 @@ defined recursively in terms of $\listenerZero$:
   $\speakerOne(\msg \given \state, \Lex) \propto
   \exp
   \left(
-    \log\left(\alpha\,\listenerZero(\state \given \msg, \Lex) \right)
+    \alpha\log\left(\listenerZero(\state \given \msg, \Lex) \right)
     - 
-    \gamma\,\Costs(\msg)
+    \Costs(\msg)
   \right)$
 \end{examples}
 %
@@ -621,18 +611,14 @@ $w_{2}$. The nature of $\speakerOne$ is equally interesting, as it has
 achieved a production-oriented version of the scalar implicature --- a
 bias for producing $\pandq$ whenever it is true.
 
-\marginpar{More refs for this para.}
-
 This basic model has been shown to achieve good quantitative fits to
 experimental results
 \citep{Degen:Franke:2012,Stiller:Goodman:Frank:2011} and to contribute
 to artificial agents that communicate effectively with each other to
 solve a collaborative task \citep{Vogel-etal:2013}. One can also
 generalize $\listenerOne$ and $\speakerOne$ to allow them to
-recursively respond to each other. This has the effect of solidifying
-implicatures, but it seems also to predict complex ones that speakers
-are less inclined to perceive \citep{Vogel-etal:2014}. In our model,
-there is no further recursion of these agents.
+recursively respond to each other. In our model, there is no further
+recursion of these agents lexicon-specific agents.
 
 \begin{figure}[tp]
   \centering
@@ -640,23 +626,29 @@ there is no further recursion of these agents.
   $\begin{array}[b]{c c r@{\hspace{25pt}}l}
      \listenerMatrix%
      {\LexStar}%
-     {\True & \True  & \False}
-     {\True & \False & \False}     
-     {\True & \True  & \True}      
+     {\True & \True  & \False & \False}%
+     {\True & \False & \True  & \False}%     
+     {\True & \False & \False & \False}%  
+     {\True & \True  & \True  & \False}% 
+     {\True & \True  & \True  & \True}%  
      &
      \rightarrow
      &
      \listenerMatrix%
      {\listenerZero}%
-     { .5 &  .5 &   0}%
-     {  1 &   0 &   0}%
-     {.33 & .33 & .33}%
+     { .5 &  .5 &   0 & 0}%
+     { .5 &   0 &  .5 & 0}%
+     {1   &   0 &   0 & 0}%     
+     {.33 & .33 & .33 & 0}%
+     {.25 & .25 & .25 & .25}%
      &
      \listenerMatrix%
      {\listenerOne}%
-     {.25 & \graycell{.75} & 0}%
-     {  1 &              0 & 0}%
-     {  0 &              0 & 1}
+     { .29 & \graycell{.71} &   0 & 0}%
+     { .29 &   0 & \graycell{.71} & 0}%
+     {\graycell{1} &   0 &   0 & 0}%     
+     { .17 & \graycell{.41} & \graycell{.41} & 0}%
+     {   0 &   0 &   0 & \graycell{1}}%
    \\
    && \searrow & \nearrow
    \\
@@ -664,9 +656,10 @@ there is no further recursion of these agents.
    \multicolumn{2}{c}{
       \speakerMatrix%
       {\speakerOne}%
-      {.33 & \graycell{.67} & 0}%
-      {  1 &              0 & 0}%
-      {  0 &              0 & 1}
+      {.29 & .29 & .36 & .06 & 0}%
+      {.82 & 0   &   0 & .18 & 0}%
+      {  0 & .82 &   0 & .18 & 0}%                              
+      {  0 &   0 &   0 &   0 & 1}%
    }
    \end{array}$   
    \caption{Simple state/message signaling with
@@ -681,7 +674,7 @@ there is no further recursion of these agents.
 
 %=====================================================================
 
-\subsection{Lexical uncertainty and expertise}\label{sec:full}
+\subsection{Compositional lexical uncertainty}\label{sec:lex}
 
 In the above simple model, the agents condition on (take as given) a
 fixed, shared lexicon. However, the data in \secref{sec:data} show that
@@ -694,10 +687,12 @@ distribution over them $\LexPrior$:
 \item\label{model-extend}
   \begin{examples} 
   \item\label{lexset}%
-      $\LexSet = \set{\Lex' : \Lex'(\nullmsg) = \States \text{ and } 
-      \forall \msg \in \Messages{-}\set{\nullmsg}, 
-      \Lex'(\msg) \neq \emptyset \text{ and } 
-      \Lex'(\msg) \subseteq \LexStar(\msg)}$
+      $\LexSet = 
+      \set{\Lex' : 
+        \Lex'(\nullmsg) = \States \mathbin{\&}
+        \forall \msg \in \Messages{\negthinspace-\negthinspace}\set{\nullmsg}, 
+        \Lex'(\msg) \neq \emptyset \mathbin{\&}
+        \Lex'(\msg) \subseteq \LexStar(\msg)}$
   \item\label{LexPrior}% 
     $\LexPrior : \LexSet \mapsto [0,1]$ is a prior
     probability distribution over lexica.  
@@ -753,6 +748,10 @@ of $\porq$ with $w_{2}$ that we see for $\listenerOne$ in
   \label{fig:disjlexica}
 \end{figure}
 
+%=====================================================================
+
+\subsection{Anxious expert agents}\label{sec:full}
+
 Our first `lexical uncertainty' agent is $\ListenerK[1]$, which is based
 on the model of \citet{Smith:Goodman:Frank:2013}:
 %
@@ -788,14 +787,13 @@ produce messages on that basis. It is defined for all $k > 1$:
 \begin{examples}  
   \item\label{Sk}%
     $\SpeakerK(\msg \given \state, \Lex) \propto 
-    \exp
+    \exp\negthinspace%
     \left(
-      \log
-      \left(\alpha\,\ListenerK[k-1](\state \given \msg, \Lex)\right)
+      \alpha\log\left(\ListenerK[k-1](\state \given \msg, \Lex)\right)
       - 
-      \beta \log\left(\ListenerK[k-1](\Lex\given\msg)\right)
+      \beta\log\left(\ListenerK[k-1](\Lex\given\msg)\right)
       -
-      \gamma\,\Costs(\msg)
+      \Costs(\msg)
     \right)$
 \end{examples}
 %
@@ -822,67 +820,68 @@ continue.
 
 \begin{figure}[tp]
   \centering
-  $\begin{array}{c c c}
-     \listenerOne & \ListenerK[1] & \SpeakerK[2] 
-     \\[1ex]     
-     \listenerMatrix%
-     {\LexStar}%
-     {.25 & .75 & 0}%
-     {1 & 0 & 0}%
-     {0 & 0 & 1}     
-     &
-     \ListenerKMatrix%
-     {\porq}%
-     {.12 & .35 & 0}%
-     {.18 & 0 & 0}
-     {0 & .35 & 0}            
-     &
-     \SpeakerKMatrix%
-     {1}%
-     {.31 & .69 & 0}%
-     {1 & 0 & 0}%
-     {0 & 0 & 1}
-     %
-     \\[8ex]
-     %
-     \listenerMatrix%
-     {\Lex_{1}}%
-     {1 & 0 & 0}%
-     {1 & 0 & 0}%
-     {0 & .5 & .5}%
-     &
-     \ListenerKMatrix%
-     {\pandq}%
-     {.31 & 0 & 0}
-     {.23 & 0 & 0}
-     {.46 & 0 & 0}
-     &
-     \SpeakerKMatrix%
-     {2}%
-     {.18 & .82 & 0}%
-     {.99 & 0 & .01}%
-     {0 & 0 & 1}%       
-     %
-     \\[8ex]
-     %
-     \listenerMatrix%
-     {\Lex_{2}}%
-     {0 & 1 & 0}%
-     {1 & 0 & 0}%
-     {0 & 0 & 1}%
-     &
-     \ListenerKMatrix%
-     {\nullmsg}%
-     {0 & 0 & .25}%
-     {0 & .25 & .25}%  
-     {0 & 0 & .25}%
-     &
-     \SpeakerKMatrix%
-     {3}%
-     {.18 & .82 & 0}%
-     {1 & 0 & 0}%
-     {0 & 0 & 1}%  
-   \end{array}$
+FIGURE
+  % $\begin{array}{c c c}
+  %    \listenerOne & \ListenerK[1] & \SpeakerK[2] 
+  %    \\[1ex]     
+  %    \listenerMatrix%
+  %    {\LexStar}%
+  %    {.25 & .75 & 0}%
+  %    {1 & 0 & 0}%
+  %    {0 & 0 & 1}     
+  %    &
+  %    \ListenerKMatrix%
+  %    {\porq}%
+  %    {.12 & .35 & 0}%
+  %    {.18 & 0 & 0}
+  %    {0 & .35 & 0}            
+  %    &
+  %    \SpeakerKMatrix%
+  %    {1}%
+  %    {.31 & .69 & 0}%
+  %    {1 & 0 & 0}%
+  %    {0 & 0 & 1}
+  %    %
+  %    \\[8ex]
+  %    %
+  %    \listenerMatrix%
+  %    {\Lex_{1}}%
+  %    {1 & 0 & 0}%
+  %    {1 & 0 & 0}%
+  %    {0 & .5 & .5}%
+  %    &
+  %    \ListenerKMatrix%
+  %    {\pandq}%
+  %    {.31 & 0 & 0}
+  %    {.23 & 0 & 0}
+  %    {.46 & 0 & 0}
+  %    &
+  %    \SpeakerKMatrix%
+  %    {2}%
+  %    {.18 & .82 & 0}%
+  %    {.99 & 0 & .01}%
+  %    {0 & 0 & 1}%       
+  %    %
+  %    \\[8ex]
+  %    %
+  %    \listenerMatrix%
+  %    {\Lex_{2}}%
+  %    {0 & 1 & 0}%
+  %    {1 & 0 & 0}%
+  %    {0 & 0 & 1}%
+  %    &
+  %    \ListenerKMatrix%
+  %    {\nullmsg}%
+  %    {0 & 0 & .25}%
+  %    {0 & .25 & .25}%  
+  %    {0 & 0 & .25}%
+  %    &
+  %    \SpeakerKMatrix%
+  %    {3}%
+  %    {.18 & .82 & 0}%
+  %    {1 & 0 & 0}%
+  %    {0 & 0 & 1}%  
+  %  \end{array}$
    \caption{Full model inferences for disjunction. $\alpha = 1$
    $\beta = 1$. $\Costs(\nullmsg) = 5$.
    \textnote{I'm confused about why speaker uses $\porq$ in $\Lex_{1}/w_{2}$, where it is false!}}
@@ -914,28 +913,28 @@ results closely match those obtained from the simpler system
 
 \begin{figure}[tp]
   \centering
-  $\begin{array}[c]{c@{\hspace{45pt}}c}
-     \ListenerK[1](\state\given\msg) & \SpeakerK[2](\msg\given\state) \\[1ex] % & \ListenerK[2](\state\given\msg) \\[1ex]
-     \listenerMatrix%
-     {}%
-     { 0.29 & .71 & 0}
-     { 1 &   0 &  0}
-     {0 &  .25 & .75}
-     & 
-     \speakerMatrix%
-     {}%
-     {.23 &  .77  &   0}%
-     {1   &  0  &     0}%
-     {0   &  0  &   1}
-     %
-     % & 
-     %
-     %\listenerMatrix%
-     %{}
-     %{ .18 & .82  &  0}
-     %{1 &   0  &  0}   
-     %{0 &   0  &  1}      
-   \end{array}$
+  % $\begin{array}[c]{c@{\hspace{45pt}}c}
+  %    \ListenerK[1](\state\given\msg) & \SpeakerK[2](\msg\given\state) \\[1ex] % & \ListenerK[2](\state\given\msg) \\[1ex]
+  %    \listenerMatrix%
+  %    {}%
+  %    { 0.29 & .71 & 0}
+  %    { 1 &   0 &  0}
+  %    {0 &  .25 & .75}
+  %    & 
+  %    \speakerMatrix%
+  %    {}%
+  %    {.23 &  .77  &   0}%
+  %    {1   &  0  &     0}%
+  %    {0   &  0  &   1}
+  %    %
+  %    % & 
+  %    %
+  %    %\listenerMatrix%
+  %    %{}
+  %    %{ .18 & .82  &  0}
+  %    %{1 &   0  &  0}   
+  %    %{0 &   0  &  1}      
+  %  \end{array}$
    \caption{A return to simple signaling. The system on the left is
      derived from the middle column of \figref{fig:full-disj} using
      equation~\eg{lisnorm}, and the system on the right is derived
@@ -1024,23 +1023,20 @@ when it comes to pragmatically enriching the speaker's messages.
   \label{fig:closure}
 \end{figure}
 
-\begin{figure}[tp]
-  \begin{subfigure}{0.48\textwidth}
-    \includegraphics[width=1\textwidth]{fig/scalardisj-expertise-listener-marginalized}
-    \caption{$\ListenerK[3]$}
-  \end{subfigure}
-  \hfill
-  \begin{subfigure}{0.48\textwidth}
-    \includegraphics[width=1\textwidth]{fig/scalardisj-expertise-speaker-lexsum}
-    \caption{$\SpeakerK[3]$}
-  \end{subfigure}
-  \caption{Compositional disjunction results. $\alpha = 3$; $\beta = 1$; $\Costs(\vee) = 1.0$.
-    \textnote{These plots do not look good. I will work on them.}}
-  \label{fig:compdisj}
-\end{figure}
-
-\marginpar{}
-
+% \begin{figure}[tp]
+%   \begin{subfigure}{0.48\textwidth}
+%     \includegraphics[width=1\textwidth]{fig/scalardisj-expertise-listener-marginalized}
+%     \caption{$\ListenerK[3]$}
+%   \end{subfigure}
+%   \hfill
+%   \begin{subfigure}{0.48\textwidth}
+%     \includegraphics[width=1\textwidth]{fig/scalardisj-expertise-speaker-lexsum}
+%     \caption{$\SpeakerK[3]$}
+%   \end{subfigure}
+%   \caption{Compositional disjunction results. $\alpha = 3$; $\beta = 1$; $\Costs(\vee) = 1.0$.
+%     \textnote{These plots do not look good. I will work on them.}}
+%   \label{fig:compdisj}
+% \end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -1213,20 +1209,66 @@ $\set{w_{1}}$.
 
 \begin{figure}[tp]
   \centering
-  $\begin{array}[c]{l l r r r}
-    \toprule
-      & \word{A or X}  & w_{1} & w_{2} & w_{1} \vee w_{2} \\
-    \midrule
-    \LexStar & \smallhurfordlex{w_{1}}{w_{2}}{w_{1}, w_{2}} & 0 & 0 & 0 \\[1ex]
-    \Lex_{2} & \smallhurfordlex{w_{1}}{w_{2}}{w_{2}}        & 0 & 0 & 0 \\[1ex]
-    \Lex_{3} & \smallhurfordlex{w_{1}}{w_{2}}{w_{1}}        & \graycell{0.88} & 0 & 0.12\\
-    \bottomrule
-  \end{array}$
-  \caption{Definitional inference for $\ListenerK[3]$.
+  \setlength{\tabcolsep}{4pt}
+  \setlength{\arraycolsep}{2pt}
+  \begin{tabular}[c]{@{}  r@{ }c c c  @{}} 
+    \multicolumn{4}{c}{
+      \normalsize
+      $\begin{array}[c]{l@{ }l r r r}
+         \toprule
+         & \ListenerK[2] \text{ hears } \word{A\,or\,X}       & w_{1} & w_{2} & w_{1}{\vee}w_{2} \\
+         \midrule
+         \LexStar & \smallhurfordlex{w_{1}}{w_{2}}{w_{1}, w_{2}}                                          & \whitecell{0}   & 0 & .08 \\[1ex]
+         \Lex_{1} & \smallhurfordlex{w_{1}}{w_{2}}{w_{2}}                                                 & \whitecell{.01} & 0 & .08 \\[1ex]
+         \Lex_{2} & \smallhurfordlex{\definitional{\mathbf{w_{1}}}}{w_{2}}{\definitional{\mathbf{w_{1}}}} & \graycell{.77}  & 0 & .06 \\
+         \bottomrule
+       \end{array}$}
+    \\
+    & \multicolumn{3}{c}{$\downarrow$}
+    \\    
+    & 
+    $\SpeakerK[2] \text{ observes } \langle \Lex_{2},w_{1}\rangle$
+    &
+    $\begin{array}[c]{c c c}
+       \toprule
+       A & X & A\,\word{or}\,X \\
+       \midrule
+       .07 & .48 & .45 \\
+       \bottomrule
+     \end{array}$
+    &    
+    \\
+    & \multicolumn{3}{c}{$\downarrow$}
+    \\
+    & \multicolumn{3}{c}{
+      $\begin{array}[c]{l@{ }l r r r}
+         \toprule
+         & \ListenerK[1] \text{ hears } \word{A\,or\,X}      & w_{1} & w_{2} & w_{1}{\vee}w_{2} \\
+         \midrule
+         \LexStar & \smallhurfordlex{w_{1}}{w_{2}}{w_{1}, w_{2}} & 0 & 0 & .23 \\[1ex]
+         \Lex_{1} & \smallhurfordlex{w_{1}}{w_{2}}{w_{2}}        & 0 & 0 & .38 \\[1ex]
+         \Lex_{2} & \smallhurfordlex{w_{1}}{w_{2}}{w_{1}}        & .38 & 0 & 0\\
+         \bottomrule
+       \end{array}$}
+    \\
+    & \multicolumn{3}{c}{$\swarrow \hspace{45pt} \downarrow\hspace{45pt} \searrow$}
+    \\
+    $\listenerOne$ & $\lismat{\LexStar}{1 & 0 & 0}{.02 & .02 & .96}{.02 & .02 & .96}$ &  $\lismat{\Lex_{1}}{1 & 0 & 0}{0 & 1 & 0}{.01 & 0 & .99}$ & $\lismat{\Lex_{2}}{1 & 0 & 0}{1 & 0 & 0}{1 & 0 & 0}$
+    \\
+    & $\downarrow$ & $\downarrow$ & $\downarrow$
+    \\
+    $\speakerOne$ & $\spkmat{\LexStar}{.98 & 0 & 0}{0 & 0 & 0}{0 & .2 & .2}$ & $\spkmat{\Lex_{1}}{.99 & 0 & 0}{0 & .33 & 0}{0 & 0 & .33}$ & $\spkmat{\Lex_{2}}{.33 & .33 & .33}{0 & 0 & 0}{0 & 0 & 0}$
+    \\
+    & $\downarrow$ & $\downarrow$ & $\downarrow$
+    \\
+    $\listenerZero$ & $\lismat{\LexStar}{1 & 0 & 0}{.33 & .33 & .33}{.33 & .33 & .33}$ & $\lismat{\Lex_{1}}{1 & 0 & 0}{0 & 1 & 0}{.33 & .33 & .33}$ & $\lismat{\Lex_{2}}{1 & 0 & 0}{1 & 0 & 0}{1 & 0 & 0}$
+  \end{tabular}
+  \caption{Definitional inference.
     Priors are flat. 
     $\alpha = 5$; 
     $\beta = 7$; 
-    $\Costs(\word{or}) = 0.01$}
+    $\Costs(\word{or}) = 0.01$.
+    $\SpeakerK[2]$ is biased against \word{A or X}, but this bias is gone by $\SpeakerK[3]$.}
   \label{fig:def}
 \end{figure}
 
@@ -1323,9 +1365,9 @@ system in which only information about the world is exchanged.
 
 \begin{figure}[tp]
   \centering
-  \includegraphics[width=1\textwidth]{fig/lex5-alpha-beta-gamma}
-  \caption{Hurfordian and definitional contexts with a large
-    lexicon (five atomic lexical items, four atomic states).} 
+  \includegraphics[width=1\textwidth]{fig/paramexplore-lex5}
+  \caption{Hurfordian and definitional contexts with a large lexicon
+    (five atomic lexical items, four atomic states).}
   \label{fig:char}
 \end{figure}
 
@@ -1400,9 +1442,10 @@ salient.
 
 \begin{figure}[tp]
   \centering
-  \includegraphics[width=1\textwidth]{fig/lex5-alpha-beta-gamma-X}
-  \caption{A focal point unknown word. Hurfordian and definitional contexts with 
-    lexicon (five atomic lexical items, four atomic states).} 
+  \includegraphics[width=1\textwidth]{fig/paramexplore-lex5-focal}
+  \caption{A focal point unknown word. Hurfordian and definitional
+    contexts with lexicon (five atomic lexical items, four atomic
+    states).}
   \label{fig:char-focal}
 \end{figure}
 

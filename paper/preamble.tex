@@ -9,9 +9,10 @@
 \usepackage{natbib}
 \usepackage[normalem]{ulem}
 \usepackage{examples-slim}
-\usepackage{color}
+\usepackage{xcolor}
 \usepackage{graphicx}
 \usepackage{float}
+\usepackage{multirow}
 \usepackage{booktabs}
 \usepackage{colortbl}
 \usepackage{caption}
@@ -22,3 +23,41 @@
 \bibpunct[; ]{(}{)}{;}{a}{}{,}  % natbib citation style
 
 \input{macros}
+
+\definecolor{highlightcolor}{HTML}{D95F02}
+\definecolor{annotationcolor}{HTML}{777777} 
+\definecolor{worldinfocolor}{HTML}{E7298A}
+\definecolor{lexcolor}{HTML}{D95F02}
+\definecolor{costcolor}{HTML}{A6761D}
+\definecolor{defcolor}{HTML}{D95F02}
+\definecolor{hurfordcolor}{HTML}{00CC33}
+\newcommand{\hurford}[1]{{\relax\color{hurfordcolor}#1}}
+\newcommand{\definitional}[1]{\relax{\color{defcolor}#1}}
+
+\definecolor{lightgray}{HTML}{CCCCCC} 
+%\renewcommand{\graycell}[1]{\colorbox{lightgray}{#1}}
+\newcommand{\whitecell}[1]{\colorbox{white}{#1}}
+
+\newcommand{\lismat}[4]{
+  \setlength{\arraycolsep}{1pt}
+  \begin{array}[c]{l *{3}{r}}
+    \toprule
+    #1 & w_{1} & w_{2} & w_{1}{\vee}w_{2} \\
+    \midrule
+    A & #2\\
+    X & #3 \\
+    A\,\word{or}\,X & #4 \\
+    \bottomrule
+  \end{array}}
+
+\newcommand{\spkmat}[4]{
+  \setlength{\arraycolsep}{1pt}
+  \begin{array}[c]{l *{3}{r}}
+    \toprule
+    #1 & A & X & A\,\word{or}\,X \\
+    \midrule
+    w_{1} & #2\\
+    w_{2} & #3 \\
+    w_{1}{\vee}w_{2} & #4 \\
+    \bottomrule      
+  \end{array}}                   
