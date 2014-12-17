@@ -61,3 +61,26 @@
     w_{1}{\vee}w_{2} & #4 \\
     \bottomrule      
   \end{array}}                   
+
+\renewcommand{\disjlexicon}[2]{
+  \renewcommand{\arraystretch}{1}
+  \left[   
+    \begin{array}[c]{l@{ \ \mapsto \ } l}
+      p   & \set{#1} \\
+      q  & \set{#2} \\
+    \end{array}
+  \right]}
+
+\newcommand{\closurelex}[6][1]{
+  \renewcommand{\arraystretch}{1}
+  \begin{array}[c]{*{8}{r}}
+    \toprule
+    &w_{1}&w_{2}&w_{3}&w_{1}{\vee}w_{2}&w_{1}{\vee}w_{3}&w_{2}{\vee}w_{3}&w_{1}{\vee}w_{2}{\vee}w_{3}\\
+    \midrule
+    p      & #2 \\
+    q      & #4 \\
+    \pandq & #3 \\
+    \porq  & #5 \\
+    \nullmsg & #6 \\
+    \bottomrule
+  \end{array}}

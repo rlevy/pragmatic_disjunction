@@ -626,29 +626,29 @@ recursion of these agents lexicon-specific agents.
   $\begin{array}[b]{c c r@{\hspace{25pt}}l}
      \listenerMatrix%
      {\LexStar}%
-     {\True & \True  & \False & \False}%
-     {\True & \False & \True  & \False}%     
-     {\True & \False & \False & \False}%  
-     {\True & \True  & \True  & \False}% 
-     {\True & \True  & \True  & \True}%  
+     {\True & \True  & \False}%
+     {\True & \False & \True}%     
+     {\True & \False & \False}%  
+     {\True & \True  & \True}% 
+     {\True & \True  & \True}%  
      &
      \rightarrow
      &
      \listenerMatrix%
      {\listenerZero}%
-     { .5 &  .5 &   0 & 0}%
-     { .5 &   0 &  .5 & 0}%
-     {1   &   0 &   0 & 0}%     
-     {.33 & .33 & .33 & 0}%
-     {.25 & .25 & .25 & .25}%
+     { .5 &  .5 &   0}%
+     { .5 &   0 &  .5}%
+     {1   &   0 &   0}%     
+     {.33 & .33 & .33}%
+     {.33 & .33 & .33}%
      &
      \listenerMatrix%
      {\listenerOne}%
-     { .29 & \graycell{.71} &   0 & 0}%
-     { .29 &   0 & \graycell{.71} & 0}%
-     {\graycell{1} &   0 &   0 & 0}%     
-     { .17 & \graycell{.41} & \graycell{.41} & 0}%
-     {   0 &   0 &   0 & \graycell{1}}%
+     { .3 & \graycell{.7} &   0}%
+     { .3 &   0 & \graycell{.7}}%
+     {\graycell{1} &   0 &   0}%     
+     { .17 & \graycell{.41} & \graycell{.41}}%
+     { .17 & \graycell{.41} & \graycell{.41}}%
    \\
    && \searrow & \nearrow
    \\
@@ -656,25 +656,24 @@ recursion of these agents lexicon-specific agents.
    \multicolumn{2}{c}{
       \speakerMatrix%
       {\speakerOne}%
-      {.29 & .29 & .36 & .06 & 0}%
-      {.82 & 0   &   0 & .18 & 0}%
-      {  0 & .82 &   0 & .18 & 0}%                              
-      {  0 &   0 &   0 &   0 & 1}%
+      {.33 & .33 & .25 & .08 & 0}%
+      {.8 & 0   &   0 & .2 & 0}%
+      {  0 & .8 &   0 & .2 & 0}%
    }
    \end{array}$   
-   \caption{Simple state/message signaling with
-     disjunction. $\Prior(w_{i}) = 1/3$ for all states
-     $w_{i} \in \States$, and $\Costs(\msg) = 0$ for all messages
-     $\msg \in \Messages$.  $\alpha = 1$. The recursive process
-     separates disjunction (general) and conjunction (specific),
-     thereby creating a pattern characterizable as a scalar
-     implicature.}
+   \caption{Simple state/message signaling with disjunction. 
+     $\Prior(w_{i}) = 1/3$ for all states $w_{i} \in \States$,
+     $\Costs(\vee) = \Costs(\wedge) = 1$, and 
+     $\alpha = 1$. 
+     Listener $\listenerOne$'s best inferences are in gray. 
+     The recursive process separates disjunction and conjunction, and 
+     it also separates disjunction from each of its disjuncts.}
   \label{fig:rsa-disj}
 \end{figure}
 
 %=====================================================================
 
-\subsection{Compositional lexical uncertainty}\label{sec:lex}
+\subsection{Anxious expert agents}\label{sec:full}
 
 In the above simple model, the agents condition on (take as given) a
 fixed, shared lexicon. However, the data in \secref{sec:data} show that
@@ -732,25 +731,6 @@ $w_{2}$, but just one in which it includes $w_{1}$. This bias is
 already pushing in the direction of the target pragmatic association
 of $\porq$ with $w_{2}$ that we see for $\listenerOne$ in
 \figref{fig:rsa-disj}.
-
-\begin{figure}[tp]
-  \centering
-  \setlength{\arraycolsep}{1pt}    
-  $\begin{array}[c]{c c c}
-     \LexStar & \Lex_{1} & \Lex_{2} \\
-     \disjlexicon{w_{1}, w_{2}}{w_{1}}
-     & 
-     \disjlexicon{w_{1}}{w_{1}}
-     & 
-     \disjlexicon{w_{2}}{w_{1}}
-  \end{array}$
-  \caption{Lexicon set $\LexSet$ for the basic lexicon $\Lex$ in \figref{fig:rsa-disj}.}
-  \label{fig:disjlexica}
-\end{figure}
-
-%=====================================================================
-
-\subsection{Anxious expert agents}\label{sec:full}
 
 Our first `lexical uncertainty' agent is $\ListenerK[1]$, which is based
 on the model of \citet{Smith:Goodman:Frank:2013}:
@@ -818,76 +798,6 @@ message probabilities given observed state--lexicon pairs. From here,
 the iteration between $\ListenerK[k-1]$ and $\SpeakerK$ could
 continue.
 
-\begin{figure}[tp]
-  \centering
-FIGURE
-  % $\begin{array}{c c c}
-  %    \listenerOne & \ListenerK[1] & \SpeakerK[2] 
-  %    \\[1ex]     
-  %    \listenerMatrix%
-  %    {\LexStar}%
-  %    {.25 & .75 & 0}%
-  %    {1 & 0 & 0}%
-  %    {0 & 0 & 1}     
-  %    &
-  %    \ListenerKMatrix%
-  %    {\porq}%
-  %    {.12 & .35 & 0}%
-  %    {.18 & 0 & 0}
-  %    {0 & .35 & 0}            
-  %    &
-  %    \SpeakerKMatrix%
-  %    {1}%
-  %    {.31 & .69 & 0}%
-  %    {1 & 0 & 0}%
-  %    {0 & 0 & 1}
-  %    %
-  %    \\[8ex]
-  %    %
-  %    \listenerMatrix%
-  %    {\Lex_{1}}%
-  %    {1 & 0 & 0}%
-  %    {1 & 0 & 0}%
-  %    {0 & .5 & .5}%
-  %    &
-  %    \ListenerKMatrix%
-  %    {\pandq}%
-  %    {.31 & 0 & 0}
-  %    {.23 & 0 & 0}
-  %    {.46 & 0 & 0}
-  %    &
-  %    \SpeakerKMatrix%
-  %    {2}%
-  %    {.18 & .82 & 0}%
-  %    {.99 & 0 & .01}%
-  %    {0 & 0 & 1}%       
-  %    %
-  %    \\[8ex]
-  %    %
-  %    \listenerMatrix%
-  %    {\Lex_{2}}%
-  %    {0 & 1 & 0}%
-  %    {1 & 0 & 0}%
-  %    {0 & 0 & 1}%
-  %    &
-  %    \ListenerKMatrix%
-  %    {\nullmsg}%
-  %    {0 & 0 & .25}%
-  %    {0 & .25 & .25}%  
-  %    {0 & 0 & .25}%
-  %    &
-  %    \SpeakerKMatrix%
-  %    {3}%
-  %    {.18 & .82 & 0}%
-  %    {1 & 0 & 0}%
-  %    {0 & 0 & 1}%  
-  %  \end{array}$
-   \caption{Full model inferences for disjunction. $\alpha = 1$
-   $\beta = 1$. $\Costs(\nullmsg) = 5$.
-   \textnote{I'm confused about why speaker uses $\porq$ in $\Lex_{1}/w_{2}$, where it is false!}}
-  \label{fig:full-disj}
-\end{figure}
-
 %=====================================================================
 
 \subsection{A return to simple signaling}\label{sec:return}
@@ -911,41 +821,42 @@ results closely match those obtained from the simpler system
   \LexPrior(\Lex)$
 \end{examples}
 
-\begin{figure}[tp]
-  \centering
-  % $\begin{array}[c]{c@{\hspace{45pt}}c}
-  %    \ListenerK[1](\state\given\msg) & \SpeakerK[2](\msg\given\state) \\[1ex] % & \ListenerK[2](\state\given\msg) \\[1ex]
-  %    \listenerMatrix%
-  %    {}%
-  %    { 0.29 & .71 & 0}
-  %    { 1 &   0 &  0}
-  %    {0 &  .25 & .75}
-  %    & 
-  %    \speakerMatrix%
-  %    {}%
-  %    {.23 &  .77  &   0}%
-  %    {1   &  0  &     0}%
-  %    {0   &  0  &   1}
-  %    %
-  %    % & 
-  %    %
-  %    %\listenerMatrix%
-  %    %{}
-  %    %{ .18 & .82  &  0}
-  %    %{1 &   0  &  0}   
-  %    %{0 &   0  &  1}      
-  %  \end{array}$
-   \caption{A return to simple signaling. The system on the left is
-     derived from the middle column of \figref{fig:full-disj} using
-     equation~\eg{lisnorm}, and the system on the right is derived
-     from the right column of \figref{fig:full-disj} using
-     equation~\eg{spknorm}.}
-  \label{fig:simple}
-\end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Compositional disjunction}\label{sec:composition}
+\section{Compositional lexical uncertainty}\label{sec:composition}
+
+\begin{figure}[tp]
+  \centering
+  \newcommand{\labelednode}[2]{\put(#1){\makebox(0,0){#2}}}
+  \newcommand{\picline}[3]{\put(#1){\line(#2){#3}}}
+  \setlength{\unitlength}{1cm}
+  \begin{picture}(5.5,2)   
+    \labelednode{0.5,2}{$w_{1}$}
+    \labelednode{2.75,2}{$w_{2}$}
+    \labelednode{5,2}{$w_{3}$}
+    
+    \picline{0.5,1.2}{0,1}{0.6}
+    \picline{0.75,1.2}{3,1}{1.8}
+    \labelednode{0.5,1}{$w_{1} \vee w_{2}$}
+        
+    \picline{2.5,1.2}{-3,1}{1.8}
+    \picline{3.0,1.2}{3,1}{1.8}
+    \labelednode{2.75,1}{$w_{1} \vee w_{3}$}
+
+    \picline{5,1.2}{0,1}{0.6}
+    \picline{4.75,1.2}{-3,1}{1.8}
+    \labelednode{5,1}{$w_{2} \vee w_{3}$}
+    
+    \picline{2.5,0.2}{-3,1}{1.8}
+    \picline{2.75,0.2}{0,1}{0.6}
+    \picline{3.0,0.2}{3,1}{1.8}
+    \labelednode{2.75,0}{$w_{1} \vee w_{2} \vee w_{3}$}
+  \end{picture}
+  \caption{State space with disjunctive closure.}
+  \label{fig:closure}
+\end{figure}
+
 
 The running example we used in \secref{sec:model} to introduce the
 model is artificial and overly simplistic in a number of ways, the
@@ -994,49 +905,31 @@ when it comes to pragmatically enriching the speaker's messages.
 
 \begin{figure}[tp]
   \centering
-  \newcommand{\labelednode}[2]{\put(#1){\makebox(0,0){#2}}}
-  \newcommand{\picline}[3]{\put(#1){\line(#2){#3}}}
-  \setlength{\unitlength}{1cm}
-  \begin{picture}(5.5,2)   
-    \labelednode{0.5,2}{$w_{1}$}
-    \labelednode{2.75,2}{$w_{2}$}
-    \labelednode{5,2}{$w_{2}$}
-    
-    \picline{0.5,1.2}{0,1}{0.6}
-    \picline{0.75,1.2}{3,1}{1.8}
-    \labelednode{0.5,1}{$w_{1} \vee w_{2}$}
-        
-    \picline{2.5,1.2}{-3,1}{1.8}
-    \picline{3.0,1.2}{3,1}{1.8}
-    \labelednode{2.75,1}{$w_{1} \vee w_{3}$}
+  $\closurelex
+  {.25 & \graycell{.51} & 0 & .24 & 0 & 0 & 0}
+  {\graycell{1} & 0 & 0 & 0 & 0 & 0 & 0}
+  {.25 & 0 & \graycell{.51} & 0 & .24 & 0 & 0}
+  {.04 & .06 & .06 & .18 & .18 & \graycell{.28} & .21}
+  {0 & .12 & .12 & .16 & .16 & .2 & .24}$
 
-    \picline{5,1.2}{0,1}{0.6}
-    \picline{4.75,1.2}{-3,1}{1.8}
-    \labelednode{5,1}{$w_{2} \vee w_{3}$}
-    
-    \picline{2.5,0.2}{-3,1}{1.8}
-    \picline{2.75,0.2}{0,1}{0.6}
-    \picline{3.0,0.2}{3,1}{1.8}
-    \labelednode{2.75,0}{$w_{1} \vee w_{2} \vee w_{3}$}
-  \end{picture}
-  \caption{State space with disjunctive closure.}
-  \label{fig:closure}
+$\begin{array}[c]{ *{6}{r} }
+\toprule
+  & p & q & \pandq & \porq & \nullmsg \\
+\midrule
+w_{1} & \graycell{.29} & \graycell{.29} & .4 & .02 & 0 \\
+w_{2} & \graycell{.96} & 0   & 0  & .04 & 0 \\
+w_{3} & 0   & \graycell{.96} & 0  & .04 & 0 \\
+w_{1}{\vee}w_{2} & \graycell{.79} & 0   & 0  & .2  & .01 \\
+w_{1}{\vee}w_{3} & 0   & \graycell{.79} & 0 & .2  & .01 \\
+w_{2}{\vee}w_{3} & 0   & 0   & 0 & \graycell{.95} & .05 \\
+w_{1}{\vee}w_{2}{\vee}w_{3} & 0   & 0   & 0 & \graycell{.93} & .07 \\
+\bottomrule
+\end{array}$
+   \caption{Simple signaling for compositional disjunction}
+  \label{fig:compdisj}
 \end{figure}
 
-% \begin{figure}[tp]
-%   \begin{subfigure}{0.48\textwidth}
-%     \includegraphics[width=1\textwidth]{fig/scalardisj-expertise-listener-marginalized}
-%     \caption{$\ListenerK[3]$}
-%   \end{subfigure}
-%   \hfill
-%   \begin{subfigure}{0.48\textwidth}
-%     \includegraphics[width=1\textwidth]{fig/scalardisj-expertise-speaker-lexsum}
-%     \caption{$\SpeakerK[3]$}
-%   \end{subfigure}
-%   \caption{Compositional disjunction results. $\alpha = 3$; $\beta = 1$; $\Costs(\vee) = 1.0$.
-%     \textnote{These plots do not look good. I will work on them.}}
-%   \label{fig:compdisj}
-% \end{figure}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -1080,106 +973,6 @@ costs and other facts about context will also play a role).
 
 %=====================================================================
 
-\subsection{Hurfordian contexts}\label{sec:analysis:subsumptive}
-
-As we said above, the unknown term is $X$ and, from the listener's
-perspective, we are concerned to see when \word{A or X} gives rise to
-the lexical inference that $\sem{A} \cap \sem{X} = \emptyset$. We
-assume that the overall meaning will be $\sem{A} \cup \sem{X}$, i.e.,
-that the relevant information concerns just the lexical inference.
-
-\Figref{fig:hurford} presents a context in which the listener arrives
-at this conclusion. The context has just three atomic states and three
-basic messages. The initial lexicon $\LexStar$ gives rise to three
-refinements, pictured in the table in \figref{fig:hurford}. (To save
-space, we do not depict the disjunctive closure of the states or
-messages; \secref{sec:composition}.)  The Hurfordian inference is
-predicted in the following sense: when the listener hears the message
-\word{A or X}, his highest probability inference is that that state is
-$w_{1} \vee w_{2}$ and the lexicon is the one in which
-$\sem{A} \cap \sem{X} = \emptyset$.
-
-Anticipating the meta-theory we develop in
-\secref{sec:analysis:characterization}, we note that setting
-$\alpha > \beta$ is important for achieving this result. Intuitively,
-this means that world information is valued more than lexical
-information. We also note that the cost of disjunction is relatively
-high. Where costs are high, the disjunction has to be
-justified. Letting the two terms overlap reduces the justification,
-whereas exclusivizing provides justification. In other words, the
-apparently undue prolixity of the disjunction (the more general term
-would seem to suffice!) generates an inference that we observe in the
-lexical inferences.
-
-Ours is a model of production as well as interpretation, so it's
-important to take the speaker's perspective as well. It's useful that
-the listener makes the desired inference upon hearing \word{A or X},
-but the value of this observation is diminished if the speaker never
-uses this message to signal the relevant state--lexicon pair,
-especially since our corpus work (\secref{sec:data:overlapping})
-suggests that speakers do in fact produce these utterances
-systematically. With the above parameters, our model predicts that
-they will produce such messages. Indeed, in this context, with this
-parameter settings, the speaker's preferred message given observed
-state $w_{1} \vee w_{2}$ and lexicon $\Lex_{1}$ from
-\figref{fig:hurford} is \word{A or X}.  This suggests that the
-strategy is a stable one in communication, in line with the intuitions
-we described in \secref{sec:data:overlapping}.
-
-\begin{figure}[tp]
-  \centering
-  $\begin{array}[c]{l l r r r}
-    \toprule
-     & \word{A or X}       & w_{1} & w_{2} & w_{1} \vee w_{2} \\
-    \midrule
-    \LexStar & \smallhurfordlex{w_{1}}{w_{2}}{w_{1}, w_{2}} & 0 & 0 & 0.16 \\[1ex]
-    \Lex_{1} & \smallhurfordlex{w_{1}}{w_{2}}{w_{2}} & 0 & 0 & \graycell{0.47} \\[1ex]
-    \Lex_{2} & \smallhurfordlex{w_{1}}{w_{2}}{w_{1}} & 0 & 0 & 0.38 \\
-    \bottomrule
-  \end{array}$
-  \caption{Hurfordian inference for $\ListenerK[3]$.
-    Priors are flat. 
-    $\alpha = 2$; 
-    $\beta = 1$; 
-    $\Costs(\word{or}) = 1$}
-  \label{fig:hurford}
-\end{figure}
-
-The lexicon used in \figref{fig:hurford} is very small, and one might
-wonder whether the Hurfordian inference comes about via a spurious
-process of elimination, given that there are only three atomic
-messages and one has a very general meaning. To address this concern,
-we ran the same simulation with a larger lexicon: five atomic messages
-and four atomic states. This is of course still unrealistically small
-for a natural language lexicon, but it certainly provides a much
-larger space for potential lexical refinements. The Hurfordian reading
-arises in this lexicon with the same parameters as in
-\figref{fig:hurford}. This is unwieldy to visualize (there are
-fourteen distinct lexica), but the important thing is that the best
-lexicon is always a Hurfordian one. Here's the best lexical inference
-given the message \word{A or X} from the speaker:
- 
-\begin{examples}
-\item\label{hurford-lex-large}  
-  $\left[
-    \begin{array}[c]{l@{ \ \mapsto \ }l}
-      A & \set{w_{1}} \\
-      B & \set{w_{2}} \\
-      C & \set{w_{3}} \\
-      D & \set{w_{4}} \\
-      X & \set{w_{2}, w_{3}, w_{4}}
-    \end{array}
-  \right]$
-\end{examples}
-%
-This is the `minimal' Hurfordian lexicon: the listener doesn't infer
-anything about $X$ except that it is disjoint from $A$. Once again,
-this inference is mirrored by a speaker preference for producing
-\word{A or X} given observed state $w_{1} \vee w_{2}$ and the lexicon
-\eg{hurford-lex-large}.
-
-%=====================================================================
-
 \subsection{Definitional contexts}\label{sec:analysis:definitional}
 
 The central puzzle of definitional readings is when \word{A or X} is
@@ -1213,7 +1006,6 @@ $\set{w_{1}}$.
   \setlength{\arraycolsep}{2pt}
   \begin{tabular}[c]{@{}  r@{ }c c c  @{}} 
     \multicolumn{4}{c}{
-      \normalsize
       $\begin{array}[c]{l@{ }l r r r}
          \toprule
          & \ListenerK[2] \text{ hears } \word{A\,or\,X}       & w_{1} & w_{2} & w_{1}{\vee}w_{2} \\
@@ -1342,6 +1134,110 @@ explore such contexts in more detail in the next section.
     $\Costs(\word{or}) = 0.01$}
   \label{fig:def-focal}
 \end{figure}
+
+%=====================================================================
+
+\subsection{Hurfordian contexts}\label{sec:analysis:subsumptive}
+
+As we said above, the unknown term is $X$ and, from the listener's
+perspective, we are concerned to see when \word{A or X} gives rise to
+the lexical inference that $\sem{A} \cap \sem{X} = \emptyset$. We
+assume that the overall meaning will be $\sem{A} \cup \sem{X}$, i.e.,
+that the relevant information concerns just the lexical inference.
+
+\Figref{fig:hurford} presents a context in which the listener arrives
+at this conclusion. The context has just three atomic states and three
+basic messages. The initial lexicon $\LexStar$ gives rise to three
+refinements, pictured in the table in \figref{fig:hurford}. (To save
+space, we do not depict the disjunctive closure of the states or
+messages; \secref{sec:composition}.)  The Hurfordian inference is
+predicted in the following sense: when the listener hears the message
+\word{A or X}, his highest probability inference is that that state is
+$w_{1} \vee w_{2}$ and the lexicon is the one in which
+$\sem{A} \cap \sem{X} = \emptyset$.
+
+Anticipating the meta-theory we develop in
+\secref{sec:analysis:characterization}, we note that setting
+$\alpha > \beta$ is important for achieving this result. Intuitively,
+this means that world information is valued more than lexical
+information. We also note that the cost of disjunction is relatively
+high. Where costs are high, the disjunction has to be
+justified. Letting the two terms overlap reduces the justification,
+whereas exclusivizing provides justification. In other words, the
+apparently undue prolixity of the disjunction (the more general term
+would seem to suffice!) generates an inference that we observe in the
+lexical inferences.
+
+Ours is a model of production as well as interpretation, so it's
+important to take the speaker's perspective as well. It's useful that
+the listener makes the desired inference upon hearing \word{A or X},
+but the value of this observation is diminished if the speaker never
+uses this message to signal the relevant state--lexicon pair,
+especially since our corpus work (\secref{sec:data:overlapping})
+suggests that speakers do in fact produce these utterances
+systematically. With the above parameters, our model predicts that
+they will produce such messages. Indeed, in this context, with this
+parameter settings, the speaker's preferred message given observed
+state $w_{1} \vee w_{2}$ and lexicon $\Lex_{1}$ from
+\figref{fig:hurford} is \word{A or X}.  This suggests that the
+strategy is a stable one in communication, in line with the intuitions
+we described in \secref{sec:data:overlapping}.
+
+\renewcommand{\graycell}[1]{\colorbox{lightgray}{#1}}
+
+\begin{figure}[tp]
+\centering
+\setlength{\tabcolsep}{4pt}
+\setlength{\arraycolsep}{2pt}
+$\begin{array}[c]{l@{ }l r r r}
+\toprule
+& \ListenerK[2] \text{ hears } \word{A\,or\,X}       & w_{1} & w_{2} & w_{1}{\vee}w_{2} \\
+\midrule
+\LexStar & \smallhurfordlex{w_{1}}{w_{2}}{w_{1}, w_{2}}                                & .02 & 0 & \whitecell{.32} \\[1ex]
+\Lex_{1} & \smallhurfordlex{\hurford{\mathbf{w_{1}}}}{w_{2}}{\hurford{\mathbf{w_{2}}}} & .04 & 0 & \graycell{.45} \\[1ex]
+\Lex_{2} & \smallhurfordlex{w_{1}}{w_{2}}{w_{1}}                                       & .03 & 0 & \whitecell{.14} \\
+\bottomrule
+\end{array}$
+\caption{Hurfordian inference for $\ListenerK[3]$.
+Priors are flat. 
+$\alpha = 2$; 
+$\beta = 1$; 
+$\Costs(\word{or}) = 1$}
+\label{fig:hurford}
+\end{figure}
+
+The lexicon used in \figref{fig:hurford} is very small, and one might
+wonder whether the Hurfordian inference comes about via a spurious
+process of elimination, given that there are only three atomic
+messages and one has a very general meaning. To address this concern,
+we ran the same simulation with a larger lexicon: five atomic messages
+and four atomic states. This is of course still unrealistically small
+for a natural language lexicon, but it certainly provides a much
+larger space for potential lexical refinements. The Hurfordian reading
+arises in this lexicon with the same parameters as in
+\figref{fig:hurford}. This is unwieldy to visualize (there are
+fourteen distinct lexica), but the important thing is that the best
+lexicon is always a Hurfordian one. Here's the best lexical inference
+given the message \word{A or X} from the speaker:
+ 
+\begin{examples}
+\item\label{hurford-lex-large}  
+  $\left[
+    \begin{array}[c]{l@{ \ \mapsto \ }l}
+      A & \set{w_{1}} \\
+      B & \set{w_{2}} \\
+      C & \set{w_{3}} \\
+      D & \set{w_{4}} \\
+      X & \set{w_{2}, w_{3}, w_{4}}
+    \end{array}
+  \right]$
+\end{examples}
+%
+This is the `minimal' Hurfordian lexicon: the listener doesn't infer
+anything about $X$ except that it is disjoint from $A$. Once again,
+this inference is mirrored by a speaker preference for producing
+\word{A or X} given observed state $w_{1} \vee w_{2}$ and the lexicon
+\eg{hurford-lex-large}.
 
 %=====================================================================
 
