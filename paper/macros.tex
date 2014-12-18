@@ -45,9 +45,6 @@
 \definecolor{maroon}{HTML}{990000}
 \newcommand{\highlight}[1]{{\color{maroon}#1}}
 
-% Gray table cell:
-\newcommand{\graycell}[1]{{\cellcolor[gray]{.8}#1}}
-
 %=====================================================================
 %============================== judgments ============================
 
@@ -97,10 +94,28 @@
 \newcommand{\textnote}[1]{{\color{red}#1}}
 
 %=====================================================================
+%============================== colors ===============================
+
+\definecolor{lightgray}{HTML}{CCCCCC} 
+
+\definecolor{highlightcolor}{HTML}{D95F02}
+\definecolor{annotationcolor}{HTML}{777777} 
+\definecolor{worldinfocolor}{HTML}{E7298A}
+\definecolor{lexcolor}{HTML}{D95F02}
+\definecolor{costcolor}{HTML}{A6761D}
+\definecolor{defcolor}{HTML}{D95F02}
+%\definecolor{hurfordcolor}{HTML}{00CC33}
+\definecolor{hurfordcolor}{HTML}{1B9E77}
+\newcommand{\hurford}[1]{{\relax\color{hurfordcolor}#1}}
+\newcommand{\definitional}[1]{\relax{\color{defcolor}#1}}
+
+\newcommand{\graycell}[1]{{\cellcolor[gray]{.8}#1}}
+
+%=====================================================================
 %============================== helpers ==============================
 
-\newcommand{\porq}{p \vee q}
-\newcommand{\pandq}{p \wedge q}
+\newcommand{\porq}{p\,\word{or}\,q}
+\newcommand{\pandq}{p\,\&\,q}
 
 \newcommand{\disjlexicon}[2]{
   \left[
@@ -157,7 +172,7 @@
     \bottomrule
   \end{array}}
 
-\newcommand{\smallhurfordlex}[3]{
+\newcommand{\smalldisjlex}[3]{
   \setlength{\arraycolsep}{1pt}
   \left[
     \begin{array}[c]{l@{ \ \mapsto \ }r@{, \ } l@{ \ \mapsto \ }r@{, \ } l@{ \ \mapsto \ }r}
@@ -166,3 +181,7 @@
       X & \set{#3}
     \end{array}
   \right]}
+
+\newcommand{\smalldisjlexTargetDef}{\smalldisjlex{\definitional{\mathbf{w_{1}}}}{w_{2}}{\definitional{\mathbf{w_{1}}}}}
+
+\newcommand{\smalldisjlexTargetHuford}{\smalldisjlex{\hurford{\mathbf{w_{1}}}}{w_{2}}{\hurford{\mathbf{w_{2}}}}}
