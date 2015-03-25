@@ -28,7 +28,7 @@
 
 \title{Negotiating Lexical Uncertainty and Expertise\\ with Disjunction}				%TITLE HERE
 \author{\sc Christopher Potts and Roger Levy\\ 						%AUTHOR HERE
-{\it Stanford University and UC San Diego}\footnote{For help with the data, we thank Arto Antilla, James Collins, Itamar Francez, Kumiko Fukumora, Justine Kao, and Natalia Roudakova.
+{\it Stanford University and UC San Diego}\footnote{For help with the data, we thank Arto Antilla, James Collins, Itamar Francez, Kumiko Fukumora, Justine Kao, Natalia Roudakova, and Rob Voigt. 
 Thanks also to Larry Horn and audiences at the 2015 LSA Annual Meeting and ESSLLI 2014. This research was supported in part by NSF IIS 1159679 and ONR N00014-10-1-0109.}} %AFFILIATION HERE
 \date{}
 
@@ -379,16 +379,64 @@ HG.
 Disjunctions like \word{wine lover or oenophile} seem to fly in the
 face of the Hurfordian pressure reviewed just above. Rather than
 avoiding overlap, they seem to embrace it, conveying something
-approximating identity. These readings seem to be more contextually
-restricted even than HG-violating disjunctions, and speakers often
-(but not always) signal them with ad hoc prosody, italics, quotation
-marks, and other devices. However, it would be a mistake to dismiss
-them as an idiosyncrasy of English, since these uses are widely
-attested in typologically diverse languages (we have examples from
-Chinese, German, Hebrew, Ilokano, Japanese, Russian, and
-Tagalog). Even languages that seem to have a dedicated `definitional'
-or `metalinguistic \word{or}' (e.g., Finnish, Italian) seem also to
-allow the regular \word{or} to play this role.
+approximating identity.
+
+Definitional disjunctions are even more contextually restricted than
+HG-violating disjunctions, so generalizing about their usage
+conditions is difficult.  The examples in \eg{ted} were obtained by
+annotating the disjunctive clauses in a sample of 98 TED talks. These
+talks seem ideal for finding definitional uses, because the speakers
+are experts with broadly pedagogical aims. In addition, videos of the
+talks are available online, which made it possible for us to use
+intonation and other cues to try to verify that the speakers had
+definitional intentions. These seven examples were drawn from a set of
+344 disjunctive clauses, for a rate of only about 2\%, despite the
+context being conducive to such uses. The examples are given with the
+punctuation from the transcripts that TED provides.
+%
+\begin{exe}
+  \ex\label{ted}
+  \begin{xlist}
+    \ex \ldots more disorder, or ``entropy,'' over their lifetimes 
+    
+    (Alex Wisssner Gross, `A new equation for intelligence', 5:51)
+
+    \ex \ldots by the gametes, or the sperm and the eggs.
+
+    (Carin Bondar, `The birds and the bees are just the beginning', 3:02)
+
+    \ex This is Toxoplasma gondii, or Toxo, for short, \ldots
+
+    (Ed Yong, `Zombie roaches and other parasite tales', 9:33)
+
+    \ex the Carnegie Airborne Observatory, or CAO
+
+    (Greg Asner, `Ecology from the air', 2:22)
+
+    \ex We call this project VocaliD, or vocal I.D., \ldots
+
+    (Rupal Patel, `Synthetic voices, as unique fingerprints', 3:52)
+
+    \ex they can self-renew or make more of themselves \ldots
+
+    (Siddharthan Chandran, `Can the damaged brain repair itself?', 8:05)
+
+    \ex the endogenous stem cells, or precursor cells,
+
+    (Siddharthan Chandran, `Can the damaged brain repair itself?', 14:48)
+  \end{xlist}
+\end{exe}
+
+As these examples suggest, speakers often (but not always) signal
+definitional intentions with ad hoc prosody, italics, quotation marks,
+and other devices, which points to the marked nature of the
+usage. However, it would be a mistake to dismiss definitional uses as
+an idiosyncrasy of English. These uses are widely attested in
+typologically diverse languages (we have examples from Chinese,
+German, Hebrew, Ilokano, Japanese, Russian, and Tagalog). Even
+languages that seem to have a dedicated `definitional' or
+`metalinguistic \word{or}' (e.g., Finnish, Italian) seem also to allow
+the regular \word{or} to play this role.
 
 For our purposes, the most important property of these uses is that
 they convey a meaning that is secondary to the main content of the
@@ -1090,7 +1138,7 @@ of production, we want to know when a speaker will favor producing
 \word{A or X} given that she favors a lexicon in which
 $\sem{A}=\sem{X}$ and observes a state equivalent to the literal
 meaning of $\sem{A}$. The full characterization of this phenomenon
-involves a lot of complex factors relating to social status, mutual,
+involves many complex factors relating to social status, mutual,
 public knowledge about knowledge, and so forth. We saw in
 \secref{sec:data} that the motivations are diverse and subtle. Our
 goal is to home in on the core aspects of these inferences.
@@ -1106,7 +1154,7 @@ world information (though both remain highly relevant), and the cost
 of disjunction is low: $0.01$.
 
 The progression from bottom to top in \figref{fig:def} helps explain
-how the model arises at definitional construals and intentions.  At
+how the model arrives at definitional construals and intentions.  At
 $\ListenerK[1]$, the listener is undecided about whether the
 disjunction is definitional or Hurfordian. The information contained
 in the lexicon-specific reasoning patterns is enough to create a bias
@@ -1114,8 +1162,8 @@ away from $\LexStar$, but it is not enough to break the asymmetry
 between the remaining inferences. At $\SpeakerK[2]$, the effects of
 the high $\beta$ parameter are beginning to be felt. This speaker is
 biased away from using \word{A or X} to convey a definitional
-intention. It's slight, but it is enough to break the asymmetry
-for $\ListenerK[2]$, which is strongly biased toward definitional
+intention. It's slight, but it is enough to break the asymmetry for
+$\ListenerK[2]$, which is strongly biased toward definitional
 construals. Finally, $\SpeakerK[3]$ follows suit, preferring to use
 the disjunction when in a definitional state.
 
@@ -1238,11 +1286,16 @@ make the inference and the speaker tends to resort to using just
 the nature of these parameters. For example, if the speaker has little
 interest in communicating about the lexicon, or disjunction costs
 prohibit the wastefulness of using \word{A or X} to convey $\sem{A}$,
-then the meanings disappear.
+then the meanings disappear. 
 
 Nonetheless, it is worth asking whether there are ways in which the
-reading can be made more salient and robust. One important way this
-can be done is by imposing the additional lexical requirement that the
+reading can be made more salient and robust. We have found that the
+rate of definitional intentions and perceptions is increased as we
+raise the prior expectation in favor of lexica in which the unknown
+term has a maximally general meaning; this corresponds intuitively to
+situations in which there is a mutual prior expectation that the word
+is unknown. In addition, we can further encourage pedagogical
+expectations by imposing the additional lexical requirement that the
 meaning of $X$ be atomic (as atomic as the known terms in the
 lexicon). This would correspond to a situation in which it was clear
 that $X$ was an alternative for some lexical item. Under these
@@ -1368,7 +1421,7 @@ the speaker blocks a potential inference from a general term to a
 specific salient sub-kind. Our model of anxious experts is able to
 derive both kinds of inferences.
 
-\Figref{fig:qsims} reports on simulations involving the Q-implicture
+\Figref{fig:qsims} reports on simulations involving the Q-implicature
 case. Intuitively, we have a general term like \word{cheap} and a
 specific term like \word{free}. The general term is true in both
 $w_\textsc{general-only}$ and $w_\textsc{specific}$, whereas the
@@ -1453,15 +1506,15 @@ listener's tendency to draw I-implicatures is very high.
   \label{fig:isims}
 \end{figure}
 
-The above simulations show that the model can simiulate not only
+The above simulations show that the model can simulate not only
 implicature inferences but also the kind of behavior that would
-normally be characterized as implicature blocking. This possiblity
+normally be characterized as implicature blocking. This possibility
 arises from the recursive nature of the model, in which pragmatic
 speakers can anticipate the construals of pragmatic listeners and plan
 their own utterances accordingly. We should emphasize also that
 Q-implicature and I-implicature scenarios represented by
 \figref{fig:qsims} and \figref{fig:isims} are just particular
-examples. Since neither kind of implicature is a primative of the
+examples. Since neither kind of implicature is a primitive of the
 model, but rather just emerges from other interactions, we are not
 limited to explanations that fall precisely into one of these two
 categories, which aligns well with our intuitions about the complex
@@ -1504,6 +1557,23 @@ and purple marking cases where both strategies are strictly dominant
 (which is possible because we've reduced $\alpha$ and $\beta$ to a
 single measure in order to visualize the space in two dimensions).
 
+\begin{figure}[tp]
+  \centering
+  \includegraphics[width=0.8\textwidth]{fig/paramexplore-lex5}
+  \caption{Hurfordian and definitional contexts with a large lexicon
+    (five atomic lexical items, four atomic states).}
+  \label{fig:char}
+\end{figure}
+
+\begin{figure}[tp]
+  \centering
+  \includegraphics[width=0.8\textwidth]{fig/paramexplore-lex5-focal}
+  \caption{A focal point unknown word. Hurfordian and definitional
+    contexts with lexicon (five atomic lexical items, four atomic
+    states).}
+  \label{fig:char-focal}
+\end{figure}
+
 The picture that emerges from \figref{fig:char} is relatively clear:
 definitional readings exist in a narrow space where $\beta > \alpha$
 and disjunction costs are low. (Very small lexica and world spaces are
@@ -1517,14 +1587,6 @@ $\beta$ also intrude. If $\beta$ is high, then it might be worth
 paying the disjunction costs for the sake of teaching the listener
 about the lexicon, even if this reduces the amount of information
 conveyed per word.
-
-\begin{figure}[tp]
-  \centering
-  \includegraphics[width=0.9\textwidth]{fig/paramexplore-lex5}
-  \caption{Hurfordian and definitional contexts with a large lexicon
-    (five atomic lexical items, four atomic states).}
-  \label{fig:char}
-\end{figure}
 
 From this perspective, it is clear why Hurfordian uses are more
 robust. They arise in a much wider range of contexts because they can
@@ -1559,14 +1621,6 @@ example, if the speaker is known to be trying to instruct the listener
 about words and concepts --- then definitional readings should be more
 salient.
 
-\begin{figure}[tp]
-  \centering
-  \includegraphics[width=0.9\textwidth]{fig/paramexplore-lex5-focal}
-  \caption{A focal point unknown word. Hurfordian and definitional
-    contexts with lexicon (five atomic lexical items, four atomic
-    states).}
-  \label{fig:char-focal}
-\end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

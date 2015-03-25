@@ -100,12 +100,7 @@ def Q_implicature_simulation(output_filename="fig/Q-implicature-simulation.pdf")
         ax.set_xlabel(r'$L_1(%s \mid \textit{%s})$' % (GENERAL_ONLY_REF, GENERAL_MSG), fontsize=18)
         ax.set_ylabel(r'$S_2(\textit{%s} \mid %s)$' % (DISJ_MSG.replace(' v ', r' or '), DISJ_REF.replace(' v ', r' \vee ')), fontsize=18)        
         ax.set_xlim([0.2, 1.05])   
-        ax.set_ylim([0.0, 1.05])
-        # Failed attempt to add a second axis for costs - duh, these aren't the same for all settings!
-        #ax_twin = ax.twiny()
-        #ax_twin.set_xticks(listener_vals)
-        #ax_twin.set_xticklabels(variables[::-1])
-        #ax_twin.set_xlabel(r'C(\textit{specific})', fontsize=18)       
+        ax.set_ylim([0.0, 1.05])           
     # Save the figure:
     plt.savefig(output_filename, bbox_inches='tight')
 
