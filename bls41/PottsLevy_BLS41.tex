@@ -35,6 +35,8 @@ Thanks also to Larry Horn and audiences at the 2015 LSA Annual Meeting and ESSLL
 %--------------------------------------------------------------------------------------------------------------------------------------------------------
 %DOCUMENT
 
+\newcommand{\technicalTerm}[1]{\textsc{#1}}
+
 \begin{document}
 \maketitle
 \thispagestyle{empty}	
@@ -61,7 +63,7 @@ language. On the one hand, \word{X or Y} tends to convey that the
 meanings of \word{X} and \word{Y} are presumed to be disjoint
 \citep{Hurford:1974}, because the speaker holds such a view of the
 lexicon or is worried that the listener might. This pressure to
-exclusivize is robust enough to overcome even seemingly non-negotiable
+\technicalTerm{exclusivize} is robust enough to overcome even seemingly non-negotiable
 aspects of the lexicon; a medical webpage warns ``If you still have
 symptoms or severe blockage in your arteries, you may need
 \highlight{angioplasty or surgery}'', sending a clear signal that
@@ -76,9 +78,9 @@ In apparent opposition to exclusivization, disjunctions like
 \word{wine lover or oenophile} can be used to convey that the two
 disjuncts are roughly synonymous \citep{Horn89}, thereby providing
 secondary information that maximally violates the pressure to
-exclusivize. This inference is more rarefied than the exclusivization
+exclusivize. This inference is more elusive than the exclusivization
 inference, but it can arise in a broad range of contexts in which such
-definitional or identificational information has social or
+\technicalTerm{definitional} or \technicalTerm{identificational} information has social or
 communicative value. It is striking that both the definitional and
 exclusivization inferences are supported by a single lexical item, and
 the puzzle deepens when we see that the empirical picture is not a
@@ -255,7 +257,7 @@ will be perceived as endorsing such a view, at least for the current
 conversational exchange, and the listener can either adopt that
 assumption or push back.
 
-This lexical uncertainty motivates our own explanation for why
+This \technicalTerm{lexical uncertainty} motivates our own explanation for why
 speakers utter HG-violating disjunctions. In broad terms, we say that
 such examples convey that the speaker is treating the two terms as
 exclusive. There are many potential motivations for this. Perhaps the
@@ -460,27 +462,27 @@ inference might be temporary. For instance, phrases like
 \word{Internet or computer network} seem to use the second phrase as a
 rough-and-ready way of helping the listener bootstrap towards an
 understanding of what the Internet is. Even our wine-lover example
-involves only approximate synonymy; \word{wine lover or oenophile}
-seems apt in a context in which the speaker wishes to use
-\word{oenophile} to elevate the concept to something more specific (or
-pretentious) than \word{wine lover} picks out. Similarly, the book
-title \emph{A Geological History of Manhattan or New York Island}
-identifies Manhattan with New York Island while at the same time
-acknowledging the different histories and connotations of the two
-disjuncts.
+involves only approximate synonymy; according to our
+intuitions,\word{wine lover or oenophile} seems apt in a context in
+which the speaker wishes to use \word{oenophile} to elevate the
+concept to something more specific (or pretentious) than \word{wine
+  lover} picks out. Similarly, the book title \emph{A Geological
+  History of Manhattan or New York Island} identifies Manhattan with
+New York Island while at the same time acknowledging the different
+histories and connotations of the two disjuncts.
 
 The speaker's motivations for using definitional disjunction are
 varied. Such readings seem to arise most easily when the speaker is
-mutually and publicly known to be a expert in the domain covered by
-the terms and the listener is mutually and publicly known to be
-inexpert in that area. In such cases, the speaker can use the
-disjunction to convey information about her preferred lexicon, fairly
-certain that the listener will be receptive. However, while speaker
-expertise seems to be a genuine prerequisite, the listener's knowledge
-seems to impose little on felicitous uses. We find natural uses of
-this strategy when there is no direct information about the listener,
-but rather just a general assumption that one of the terms is
-relatively unknown. For instance, a newspaper article might contain
+mutually and publicly known to have \technicalTerm{expertise} in the
+domain covered by the terms and the listener is mutually and publicly
+known to be inexpert in that area. In such cases, the speaker can use
+the disjunction to convey information about her preferred lexicon,
+fairly certain that the listener will be receptive. However, while
+speaker expertise seems to be a genuine prerequisite, the listener's
+knowledge seems to impose little on felicitous uses. We find natural
+uses of this strategy when there is no direct information about the
+listener, but rather just a general assumption that one of the terms
+is relatively unknown. For instance, a newspaper article might contain
 \word{wine lover or oenophile} without presuming that all its readers
 are ignorant of the terms; rather, such a use would seem to presuppose
 only that \word{oenophile} is relatively unknown, or obscure enough
@@ -496,23 +498,28 @@ order to name a concept efficiently (e.g., the hypothetical academic
 paper title \word{What motivates the snobbish wine lover or
   `oenophile' and how does he differ from the casual drinker?}).
 
-For these reasons, we retreat to a more basic characterization: the
-discourse participants must have a mutual interest in communicating
-about their language and arriving at a refined, perhaps
-context-specific and fleeting, joint understanding of it, and there
-should be a background assumption that speaker and listener are
-willing to coordinate on the lexicon that the speaker seems to be
-using. In addition, we hypothesize that the cost of using a
+For these reasons, we propose the following, more general set of
+desiderata that we believe must hold in order for definitional
+interpretations to be licensed.  First, the discourse participants
+must have a mutual interest in communicating not only about the world
+but also about their language and arriving at a refined -- even if
+context-specific and fleeting -- joint understanding of it. Second,
+the discourse participants should share as a background assumption
+that the speaker and listener are willing to coordinate on the lexicon
+that the speaker seems to be using.  That is, there must be tacit
+agreement between speaker and listener that utterance interpretation
+can proceed on the assumption of speaker expertise in the language of
+the domain of the conversation.  Third and finally, the cost of using a
 disjunction must be fairly small, all things considered, else it is
 hard to see how the speaker could justify using a disjunction \word{X
-  or Y} to convey simply $\sem{\word{X\/}}$. At any rate, whatever the
+  or Y} to convey simply $\sem{\word{X\/}}$.  That is, whatever the
 costs of using the verbose form, they must be worth paying in virtue
 of the benefits of identifying (for the purposes of the current talk
 exchange) the meanings of the two disjuncts.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Modeling communication with anxious experts}\label{sec:model}
+\section{Modeling communication with under conditions of speaker expertise}\label{sec:model}
 
 We now describe our model of pragmatic reasoning. Our presentation is
 somewhat compact. Readers wishing to more fully explore the model are
@@ -746,14 +753,16 @@ further recursion of the agents we define next.
 
 %=====================================================================
 
-\subsection{Anxious experts}\label{sec:full}
+\subsection{Reasoning under lexical uncertainty}\label{sec:full}
 
 In the model defined by $\listenerZero$, $\speakerOne$, and
 $\listenerOne$, the agents condition on (take as given) a fixed,
 shared lexicon. However, the data in \secref{sec:data} show that the
 lexicon is not known precisely, but rather negotiated during
-interactions. We now bring that insight into our model. The first step
-is to define a space of lexica $\LexSet$ and a probability
+interactions. We now bring that insight into our model using the
+lexical uncertainty technique first introduced by
+\citet{Bergen:Goodman:Levy:2012,bergen-levy-goodman:2014}. The first
+step is to define a space of lexica $\LexSet$ and a probability
 distribution over them $\LexPrior$:
 %
 \begin{exe}
@@ -974,12 +983,14 @@ to respect the desired semantic relationships that hold among the
 messages. For example, there would be lexica in which $\porq$ strictly
 entailed $p$. The culprit here is that lexical uncertainty, applied
 naively, does not respect compositional semantics.  To address this,
-we propose to apply uncertainty only to the true lexical items, and
-then close each lexicon under the compositional operations of
-disjunction and conjunction. Thus, in \figref{fig:rsa-disj}, only $p$
-and $q$ can be refined.  This results in nine distinct lexica.  Each
-of these is then expanded to include $\pandq$ and $\porq$, with their
-meanings determined by whatever meanings the atomic expressions have.
+we follow \citet{bergen-levy-goodman:2014} and
+\citet{levy-bergen-goodman:2014SALT} in applying uncertainty only to
+the true lexical items, and then close each lexicon under the
+compositional operations of disjunction and conjunction. Thus, in
+\figref{fig:rsa-disj}, only $p$ and $q$ can be refined.  This results
+in nine distinct lexica.  Each of these is then expanded to include
+$\pandq$ and $\porq$, with their meanings determined by whatever
+meanings the atomic expressions have.  
 
 \begin{figure}[tp]
   \centering
@@ -1029,22 +1040,28 @@ $\Lex(\porq) = \set{w_{1}, w_{2}, w_{3}}$.  After join closure, this
 denotes the entire state space represented in
 \figref{fig:closure}. Conversely, $\pandq$ denotes $\set{w_{1}}$,
 which does not change under closure. (We could expand the space of
-meanings to include meets, or even to the full double-set lattice with
+meanings to include meets, or even to the full Smyth powerlattice with
 states like $w_{1}{\vee} (w_{2}{\wedge} w_{3})$, as in
 \citealt{levy-pollard:2001}, but we stick with the join space to keep
 the presentation as simple as possible.)
 
+Formally, the model we have developed here is an instance of the
+compositional lexical-uncertainty model of
+\citet{bergen-levy-goodman:2014} and
+\citet{levy-bergen-goodman:2014SALT}, with two elaborations: we have
+placed value on transmission of the lexicon from speaker to listener
+(Equation~\ref{Sk}) and specified the structure of world state space
+for the classes of utterances presently under consideration.
 \Figref{fig:compdisj} summarizes how our model behaves in this
-setting. We begin from a base lexicon $\LexStar$ in which
-$\LexStar(p) = \set{w_{1}, w_{2}}$ and
-$\LexStar(q) = \set{w_{1}, w_{3}}$. We apply lexical uncertainty to
-obtain nine distinct lexica, close their state space under joins, and
-close their messages under disjunction and conjunction. We run the
-full model up to level $\ListenerK[2]$, and then marginalize
-$\ListenerK[2]$ and $\SpeakerK[2]$ as in \eg{lisnorm} and
-\eg{spknorm}, respectively. The results are closely aligned with the
-comparable tables in \figref{fig:rsa-disj}, in that we obtain all of
-the interpretive scalar implicatures and predict largely the same
+setting. We begin from a base lexicon $\LexStar$ in which $\LexStar(p)
+= \set{w_{1}, w_{2}}$ and $\LexStar(q) = \set{w_{1}, w_{3}}$. We apply
+lexical uncertainty to obtain nine distinct lexica, close their state
+space under joins, and close their messages under disjunction and
+conjunction. We run the full model up to level $\ListenerK[2]$, and
+then marginalize $\ListenerK[2]$ and $\SpeakerK[2]$ as in \eg{lisnorm}
+and \eg{spknorm}, respectively. The results are closely aligned with
+the comparable tables in \figref{fig:rsa-disj}, in that we obtain all
+of the interpretive scalar implicatures and predict largely the same
 speaker behavior. The one major improvement is that we now directly
 capture the intuition that disjunction can signal speaker uncertainty:
 the speaker's best choice for state $w_{2}{\vee}w_{3}$ is $\porq$.
@@ -1089,11 +1106,18 @@ the speaker's best choice for state $w_{2}{\vee}w_{3}$ is $\porq$.
 
 \section{Analysis}\label{sec:analysis}
 
-We now show how our model can be used to characterize both the
+We now show how our model can be used to characterize a range of
 Hurfordian and definitional capacities of disjunction. We first
-illustrate the effects using parameters chosen by hand, and then we
-explore the space of parameters to try to determine which settings ---
-which approximations of the context --- deliver each of the readings.
+illustrate the effects using parameters chosen by hand, giving an
+example of definitional inference in
+Section~\ref{sec:analysis:definitional} and an example of Hurfordian
+inference in Section~\ref{sec:analysis:subsumptive}.  We then show in
+Section~\ref{sec:defensive-speakers} how our model derives the
+``defensive-speaker'' Hurfordian disjunctions discussed in
+Section~\ref{sec:data:overlapping}.  Finally, in
+Section~\ref{sec:characterization} we explore the space of parameters
+more to try to determine which settings --- which approximations of
+the context --- deliver each type of reading.
 
 Throughout our illustrations, we assume that \word{X} is the target
 for refinement, that is, the general term for Hurfordian inferences
@@ -1117,10 +1141,12 @@ defines all aspects of communication as a (boundedly) rational
 collaboration. We take these basic assumptions to be necessary, but
 not sufficient, for communicating in language about language.
 
-In our model, the importance of lexical communication is governed by
-the parameter $\beta$. If this is set to $0$, then all lexical
-preferences are silenced. Where $\beta$ is positive, the ratio of
-$\alpha$ and $\beta$ is a rough guide to the relative importance of
+In our model, the importance of communicating about the world is
+governed by the parameter $\alpha$, and the importance of lexical
+communication is governed by the parameter $\beta$. If $\beta$ is set
+to $0$, then communication about the lexicon has no intrinsic value to
+the conversational agents.  Where $\beta$ is positive, the ratio of
+$\alpha$ to $\beta$ is a rough guide to the relative importance of
 communicating about the world and communicating about the lexicon
 (though message costs and other facts about context also play a role).
 
@@ -1299,16 +1325,16 @@ expectations by imposing the additional lexical requirement that the
 meaning of $X$ be atomic (as atomic as the known terms in the
 lexicon). This would correspond to a situation in which it was clear
 that $X$ was an alternative for some lexical item. Under these
-circumstances, the meaning of the known disjunct serves as a focal
-point \citep{Schelling60} that the speaker and listener can coordinate
-on for the meaning of the unknown word. \Figref{fig:def-focal} is a
-minimal variant of (the topmost table in) \figref{fig:def} in which
-this extra lexical requirement has been imposed. This removes
-$\LexStar$ from consideration. The listener inference is numerically
-stronger, and it is paralleled by a similar increased probability on
-the speaker side for producing \word{A or X} with definitional
-intentions. We will explore these `focal' contexts in more detail in
-\secref{sec:characterization}.
+circumstances, the meaning of the known disjunct serves as a
+\technicalTerm{focal point} \citep{Schelling60} that the speaker and
+listener can coordinate on for the meaning of the unknown
+word. \Figref{fig:def-focal} is a minimal variant of (the topmost
+table in) \figref{fig:def} in which this extra lexical requirement has
+been imposed. This removes $\LexStar$ from consideration. The listener
+inference is numerically stronger, and it is paralleled by a similar
+increased probability on the speaker side for producing \word{A or X}
+with definitional intentions. We will explore these atomic-meaning,
+focal-point contexts in more detail in \secref{sec:characterization}.
 
 \begin{figure}[tp]
   \centering
@@ -1413,13 +1439,21 @@ this inference is mirrored by a speaker preference for producing
 \word{A or X} given observed state $w_{1} \vee w_{2}$ and the lexicon
 \eg{hurford-lex-large}.
 
-In \secref{sec:data:overlapping}, we identified two kinds of
-implicature inferences that are relevant for HG violations:
-Q-implicatures, in which the speaker blocks a potential upper-bounding
-implicature created by a general term, and I-implicatures, in which
-the speaker blocks a potential inference from a general term to a
-specific salient sub-kind. Our model of anxious experts is able to
-derive both kinds of inferences.
+
+\subsection{Defensive speakers: Q- and I-implicature blocking}
+\label{sec:defensive-speakers}
+
+
+
+In \secref{sec:data:overlapping}, we identified two classes of
+potential implicature inferences that can drive speakers to produce HG
+violations: Q-implicatures, where using only the general term might
+create an upper-bounding inference, and I-implicatures, where using
+only the general term might result in inference of a specific, salient
+sub-kind. As we describe below, our model can derive speakers' use of
+HG violations to block both kinds of implicatures, and sheds light on
+what circumstances favor each type of implicature and defensive
+implicature-blocking behavior on the part of the speaker.
 
 \Figref{fig:qsims} reports on simulations involving the Q-implicature
 case. Intuitively, we have a general term like \word{cheap} and a
@@ -1457,7 +1491,7 @@ implicatures.
 \begin{figure}[tp]
   \centering
   \includegraphics[width=1\textwidth]{fig/Q-implicature-simulation}  
-  \caption{Q-implicature simulations. The x-axis variation is created
+  \caption{Simulations of Q-implicature blocking. The x-axis variation is created
     by varying $\Costs(\word{specific})$ from $1$ to $4$, with lower
     costs corresponding to higher values (more implicature inferences
     from \word{general} to \word{not-specific}).  On the left, we hold
@@ -1495,7 +1529,7 @@ listener's tendency to draw I-implicatures is very high.
 \begin{figure}[tp]
   \centering
   \includegraphics[width=1\textwidth]{fig/I-implicature-simulation}  
-  \caption{I-implicature simulations. The x-axis variation is created
+  \caption{Simulations of I-implicature blocking. The x-axis variation is created
     by varying $\Prior(r_{\word{common}}$ from $0.33$ to $0.99$, with
     higher values for this prior corresponding to higher listener
     inferences (more implicatures from \word{general} to
@@ -1522,7 +1556,7 @@ factors that guide HG violations in communication.
 
 %=====================================================================
 
-\subsection{Characterization}\label{sec:characterization}
+\subsection{Parameter space exploration}\label{sec:characterization}
 
 The above illustrative examples provide initial clues as to how our
 model characterizes Hurfordian and definitional uses from the speaker
@@ -1631,11 +1665,18 @@ language production and construal, especially those of
 \citet{Smith:Goodman:Frank:2013} and \citet{bergen-levy-goodman:2014},
 in order to provide a unified account of two seemingly conflicting
 inferences that disjunction supports --- a pressure to exclusivize the
-disjuncts and a pressure to regard them as synonymous. We showed that,
-in the context of our model, these uses trace to different relative
-priorities of the discourse participants with regard to communicating
-about the language itself, communicating about the world, and avoiding
-or tolerating undue message costs.
+disjuncts and a pressure to regard them as synonymous.  From a single
+model of disjunctive semantics coupled with general principles of
+pragmatic inference, a rich variety of uses of disjunction emerge:
+definitional interpretations
+(Section~\ref{sec:analysis:definitional}), Hurfordian exclusivization
+interpretations (Section~\ref{sec:analysis:subsumptive}), and
+defensive, implicature-blocking speaker behavior
+(Section~\ref{sec:defensive-speakers}).  Each use within this rich
+variety traces to a specific set of relative priorities of the
+discourse participants with regard to communicating about the language
+itself, communicating about the world, and avoiding or tolerating
+undue message costs.
 
 Our most fundamental contributions lie in the structure of the
 pragmatic model. We allow the speaker's communicative intentions to
