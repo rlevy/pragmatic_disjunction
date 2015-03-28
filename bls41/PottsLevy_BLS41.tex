@@ -9,9 +9,16 @@
 \pagestyle{fancy}
 \fancyhf{}
 \fancyhead[LE]{Christopher Potts and Roger Levy}					%ENTER AUTHOR NAME HERE
-\fancyhead[RO]{\it Negotiating lexical uncertainty and expertise with disjunction}   %ENTER TITLE HERE
+\fancyhead[RO]{\it Negotiating lexical uncertainty and speaker expertise with disjunction}   %ENTER TITLE HERE
 
 \input{preamble}
+
+\hypersetup{
+  pdfauthor={Christopher Potts and Roger Levy},
+  pdftitle={Negotiating Lexical Uncertainty and Speaker Expertise with Disjunction},
+  pdfsubject={computational pragmatics},
+  pdfkeywords={conversational implicatures, scalar implicatures, implicature blocking, disjunction, Hurford's constraint, Rational Speech Acts model}
+}
 
 %--------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -26,14 +33,13 @@
 
 %--------------------------------------------------------------------------------------------------------------------------------------------------------
 
-\title{Negotiating Lexical Uncertainty and Speaker Expertise\\ with Disjunction}				%TITLE HERE
+\title{Negotiating Lexical Uncertainty and Speaker Expertise with Disjunction}				%TITLE HERE
 \author{\sc Christopher Potts and Roger Levy\\ 						%AUTHOR HERE
-{\it Stanford University and UC San Diego}\footnote{For help with the data, we thank Arto Antilla, James Collins, Itamar Francez, Kumiko Fukumora, Justine Kao, Natalia Roudakova, and Rob Voigt. 
-Thanks also to Larry Horn and audiences at the 2015 LSA Annual Meeting
-and ESSLLI 2014. This research was supported in part by NSF IIS
-1159679 and ONR N00014-10-1-0109 (CP), and an Alfred P.\ Sloan Foundation
-Research Fellowship and a Fellowship at the Center for Advanced Study
-in the Behavioral Sciences (RL).}} %AFFILIATION HERE
+{\it Stanford University and UC San Diego}%
+\footnote{For help with the data, we thank Arto Anttila, James Collins, Itamar Francez, Kumiko Fukumora, Justine Kao, Natalia Roudakova, and Rob Voigt. 
+Thanks also to Larry Horn and audiences at the 2015 LSA Annual Meeting and ESSLLI 2014. 
+This research was supported in part by NSF~IIS~1159679 and ONR~N00014-10-1-0109 (CP), 
+and an Alfred P.~Sloan Foundation Research Fellowship and a Fellowship at the Center for Advanced Study in the Behavioral Sciences (RL).}} %AFFILIATION HERE
 \date{}
 
 %--------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -44,6 +50,30 @@ in the Behavioral Sciences (RL).}} %AFFILIATION HERE
 \begin{document}
 \maketitle
 \thispagestyle{empty}	
+
+\newcommand{\XorY}{\word{X\,or\,Y}}
+\newcommand{\AorX}{\word{A\,or\,X}}
+
+\begin{abstract}
+  There is a well-known preference for disjunctions \XorY\ to be
+  construed so that \word{X} and \word{Y} are semantically disjoint.
+  However, there are two felicitous usage patterns that violate this
+  preference, both of which involve the speaker using the disjunction
+  to convey information about the language itself.  First,
+  disjunctions of terms in a one-way semantic inclusion relation, such
+  as \word{boat or canoe}, can form part of a speaker strategy to
+  manage lexical uncertainty surrounding the two terms, or block
+  unwanted implicatures that the listener might draw from the general
+  term alone. Second, disjunctions of synonymous terms like \word{wine
+    lover or \textbf{oenophile}} can be used to convey definitional
+  information. We explore both of these uses, relying on corpora to
+  obtain a fuller picture of their motivations and their effects on
+  the listener. In addition, we show how both these uses are predicted
+  by a standard semantics for disjunction and a novel recursive
+  probabilistic model of communication in which speakers and listeners
+  simultaneously exchange information about the world and about the
+  language they are using.
+\end{abstract}
 			
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -63,20 +93,20 @@ secondary pragmatic inferences, as when \word{X such as Y} conveys
 that \word{X} subsumes \word{Y} \citep{Hearst92,SnowEtAl05}.
 
 Disjunction supports what appear to be opposing inferences about
-language. On the one hand, \word{X or Y} tends to convey that the
-meanings of \word{X} and \word{Y} are presumed to be disjoint
+language. On the one hand, \XorY\ tends to convey that the meanings of
+\word{X} and \word{Y} are presumed to be disjoint
 \citep{Hurford:1974}, because the speaker holds such a view of the
 lexicon or is worried that the listener might. This pressure to
-\technicalTerm{exclusivize} is robust enough to overcome even seemingly non-negotiable
-aspects of the lexicon; a medical webpage warns ``If you still have
-symptoms or severe blockage in your arteries, you may need
-\highlight{angioplasty or surgery}'', sending a clear signal that
-angioplasty and surgery are distinct options. Its continuation
-presupposes just that: ``Having one of these procedures may save your
-leg''. The disjunction might seem to be a needlessly verbose way of
-conveying the meaning of the more general disjunct, but the costs
-could be worth paying in virtue of the lexical side-effect of
-exclusivization.
+\technicalTerm{exclusivize} is robust enough to overcome even
+seemingly non-negotiable aspects of the lexicon; a medical webpage
+warns ``If you still have symptoms or severe blockage in your
+arteries, you may need \highlight{angioplasty or surgery}'', sending a
+clear signal that angioplasty and surgery are distinct options. Its
+continuation presupposes just that: ``Having one of these procedures
+may save your leg''. The disjunction might seem to be a needlessly
+verbose way of conveying the meaning of the more general disjunct, but
+the costs could be worth paying in virtue of the lexical side-effect
+of exclusivization.
 
 In apparent opposition to exclusivization, disjunctions like
 \word{wine lover or oenophile} can be used to convey that the two
@@ -84,12 +114,12 @@ disjuncts are roughly synonymous \citep{Horn89}, thereby providing
 secondary information that maximally violates the pressure to
 exclusivize. This inference is more elusive than the exclusivization
 inference, but it can arise in a broad range of contexts in which such
-\technicalTerm{definitional} or \technicalTerm{identificational} information has social or
-communicative value. It is striking that both the definitional and
-exclusivization inferences are supported by a single lexical item, and
-the puzzle deepens when we see that the empirical picture is not a
-quirk of English, but rather one found in a wide range of
-typologically and geographically diverse languages.
+\technicalTerm{definitional} or \technicalTerm{identificational}
+information has social or communicative value. It is striking that
+both the definitional and exclusivization inferences are supported by
+a single lexical item, and the puzzle deepens when we see that the
+empirical picture is not a quirk of English, but rather one found in a
+wide range of typologically and geographically diverse languages.
 
 In this paper, we capture both of these classes of inference within a
 single recursive Bayesian model of pragmatic reasoning. The model
@@ -175,8 +205,8 @@ on the Web:
       Californian} friends will tell us something of its growth of
     flower and fruit in its native habitats''
   \ex ``It doesn't matter if you ask \highlight{a boy or a man or a
-      bachelor or even a husband}, \ldots''
-  \ex ``the effect was \highlight{greater than, or not equal to,}
+      bachelor or even a husband}''
+  \ex ``\ldots the effect was \highlight{greater than, or not equal to,}
     the cause.''
   \end{xlist}
 \end{exe}
@@ -255,20 +285,20 @@ in terms of its particular urban charms, \word{France} could come to
 mean something more like `Paris outside of France'. The important
 thing for our purposes is that the insight behind HG shines through
 this uncertainty: no matter what one's initial view of the lexicon is,
-disjunctions like \word{X or Y} make salient a construal of the
-lexicon in which the disjuncts are semantically disjoint. The speaker
-will be perceived as endorsing such a view, at least for the current
-conversational exchange, and the listener can either adopt that
-assumption or push back.
+disjunctions like \XorY\ make salient a construal of the lexicon in
+which the disjuncts are semantically disjoint. The speaker will be
+perceived as endorsing such a view, at least for the current
+conversation, and the listener can either adopt that assumption or
+push back.
 
-This \technicalTerm{lexical uncertainty} motivates our own explanation for why
-speakers utter HG-violating disjunctions. In broad terms, we say that
-such examples convey that the speaker is treating the two terms as
-exclusive. There are many potential motivations for this. Perhaps the
-most mundane is that the speaker simply lexicalizes the two terms as
-exclusive. The disjunction is likely to be easily justified in such
-cases, as it might be the most efficient and direct way of identifying
-the semantic union of the two terms.
+This \technicalTerm{lexical uncertainty} motivates our own explanation
+for why speakers utter HG-violating disjunctions. In broad terms, we
+say that such examples convey that the speaker is treating the two
+terms as exclusive. There are many potential motivations for
+this. Perhaps the most mundane is that the speaker simply lexicalizes
+the two terms as exclusive. The disjunction is likely to be easily
+justified in such cases, as it might be the most efficient and direct
+way of identifying the semantic union of the two terms.
 
 More interesting are cases in which the speaker's disjunction seems to
 be part of an attempt to manage the listener's inferences. For
@@ -278,14 +308,14 @@ ad-hoc scalar implicature \citep{Hirschberg85} excluding the salient
 subkind of bikinis. The HG violation then serves to cancel or block
 this unwanted inference. \citet{Chemla-HurfordCounts} studies this
 class of inferences, presenting suggestive evidence that the frequency
-of disjunctions \word{X or Y} (\word{X} entailed by \word{Y}) is
-positively correlated with the likelihood that \word{X}
-conversationally implicates \word{not Y} as estimated by the
-experimental results of \citet{vanTiel-etal:2013}. This connection is
-anticipated by \posscitet{Hurford:1974} own analysis of disjunctions
-of scalar terms that seem to violate his generalization, and
-\citeauthor{Chemla-HurfordCounts}'s data suggest that it holds quite
-widely in the lexicon.
+of disjunctions \XorY\ (\word{X} entailed by \word{Y}) is positively
+correlated with the likelihood that \word{X} conversationally
+implicates \word{not Y} as estimated by the experimental results of
+\citet{vanTiel-etal:2013}. This connection is anticipated by
+\posscitet{Hurford:1974} own analysis of disjunctions of scalar terms
+that seem to violate his generalization, and
+\citeauthor{Chemla-HurfordCounts}'s data suggest that it holds widely
+in the lexicon.
 
 \newcommand{\CountGB}{\emph{Count}}
 
@@ -298,10 +328,10 @@ or later to avoid the encoding difficulties that plague earlier texts
 in that corpus. We also use a slightly more direct method than
 \citeauthor{Chemla-HurfordCounts}: we fit a simple linear regression
 in which the probability of $X$ implicating $Y$ is used to predict the
-relative frequency of \word{X or Y}. The implicature probabilities are
+relative frequency of \XorY. The implicature probabilities are
 from \posscitet{vanTiel-etal:2013} results, and the relative
 frequencies are given by
-$\CountGB(\word{X\/}) / \CountGB(\word{X or Y\/})$, where
+$\CountGB(\word{X\/}) / \CountGB(\XorY\,)$, where
 $\CountGB(\varphi)$ is the token count for the word or phrase
 $\varphi$ in our Google Books subcorpus. Our rationale (defined by
 \citeauthor{Chemla-HurfordCounts}) is that the prevalence of the
@@ -314,8 +344,8 @@ experiment.
 
 \begin{figure}[tp]
   \centering
-  \includegraphics[width=0.7\textwidth]{fig/disjunction-and-implicature}
-  \caption{The relative frequency of \word{X or Y} is predicted by the
+  \includegraphics[width=1\textwidth]{fig/disjunction-and-implicature}
+  \caption{The relative frequency of \XorY\ is predicted by the
     probability of $X$ implicating \word{not Y}.  All the data points
     are given (red dots) and included in the analysis. For the sake of
     readability, only a subset of the associated disjunctions are
@@ -359,24 +389,24 @@ In these implicature-blocking scenarios, the speaker is concerned that
 the general term \word{X} will be construed as
 $\sem{\word{X\/}}-\sem{\word{Y\/}}$ for some $\sem{\word{Y\/}}$
 overlapping with $\sem{\word{X\/}}$, and the disjunction hedges
-against that possibility. This is a \technicalTerm{defensive} position; the speaker's
-own lexicon might allow her to use just the general term to convey her
-intentions, but she is concerned that the listener will arrive at a
-different conclusion. The costs of disjunction are therefore worth
-paying even if the disjunction adds no new information given the
-speaker's lexicon.  However, the speaker can play a more active role
-as well, using disjunctions to instruct the listener about the right
-lexicon. Our \secref{sec:introduction} example containing
-``angioplasty or surgery'' seems to be an instance of this: the
-disjunction conveys secondary information that \word{angioplasty} and
-\word{surgery} will be treated as separate options in the discourse
-\citep{Simons:2001}. If HG were adopted as an explicit theoretical
-constraint, then the possibility of doing this would more or less
-follow --- we just require the additional premise that the listener is
-charitable and so will try to find an acceptable construal of the
-utterance. The model we develop in \secref{sec:model} also supports
-this kind of reasoning, but it requires no independent statement of
-HG.
+against that possibility. This is a \technicalTerm{defensive}
+position; the speaker's own lexicon might allow her to use just the
+general term to convey her intentions, but she is concerned that the
+listener will arrive at a different conclusion. The costs of
+disjunction are therefore worth paying even if the disjunction adds no
+new information given the speaker's lexicon.  However, the speaker can
+play a more active role as well, using disjunctions to instruct the
+listener about the right lexicon. Our \secref{sec:introduction}
+example containing ``angioplasty or surgery'' seems to be an instance
+of this: the disjunction conveys secondary information that
+\word{angioplasty} and \word{surgery} will be treated as separate
+options in the discourse \citep{Simons:2001}. If HG were adopted as an
+explicit theoretical constraint, then the possibility of doing this
+would more or less follow --- we would just require the additional
+premise that the listener is charitable and so will try to find an
+acceptable construal of the utterance. The model we develop in
+\secref{sec:model} also supports this kind of reasoning, but it
+requires no independent statement of HG.
  
 %=====================================================================
 
@@ -405,7 +435,7 @@ punctuation from the transcripts that TED provides.
   \begin{xlist}
     \ex \ldots more disorder, or ``entropy,'' over their lifetimes 
     
-    (Alex Wisssner Gross, `A new equation for intelligence', 5:51)
+    (Alex Wissner Gross, `A new equation for intelligence', 5:51)
 
     \ex \ldots by the gametes, or the sperm and the eggs.
 
@@ -423,11 +453,13 @@ punctuation from the transcripts that TED provides.
 
     (Rupal Patel, `Synthetic voices, as unique fingerprints', 3:52)
 
+    \newpage
+
     \ex they can self-renew or make more of themselves \ldots
 
     (Siddharthan Chandran, `Can the damaged brain repair itself?', 8:05)
 
-    \ex the endogenous stem cells, or precursor cells,
+    \ex the endogenous stem cells, or precursor cells, \ldots
 
     (Siddharthan Chandran, `Can the damaged brain repair itself?', 14:48)
   \end{xlist}
@@ -466,14 +498,14 @@ inference might be temporary. For instance, phrases like
 \word{Internet or computer network} seem to use the second phrase as a
 rough-and-ready way of helping the listener bootstrap towards an
 understanding of what the Internet is. Even our wine-lover example
-involves only approximate synonymy; according to our
-intuitions,\word{wine lover or oenophile} seems apt in a context in
-which the speaker wishes to use \word{oenophile} to elevate the
-concept to something more specific (or pretentious) than \word{wine
-  lover} picks out. Similarly, the book title \emph{A Geological
-  History of Manhattan or New York Island} identifies Manhattan with
-New York Island while at the same time acknowledging the different
-histories and connotations of the two disjuncts.
+involves only approximate synonymy; according to our intuitions,
+\word{wine lover or oenophile} seems apt in a context in which the
+speaker wishes to use \word{oenophile} to elevate the concept to
+something more specific (or pretentious) than \word{wine lover} picks
+out. Similarly, the book title \emph{A Geological History of Manhattan
+  or New York Island} identifies Manhattan with New York Island while
+at the same time acknowledging the different histories and
+connotations of the two disjunct terms.
 
 The speaker's motivations for using definitional disjunction are
 varied. Such readings seem to arise most easily when the speaker is
@@ -506,24 +538,24 @@ For these reasons, we propose the following, more general set of
 desiderata that we believe must hold in order for definitional
 interpretations to be licensed.  First, the discourse participants
 must have a mutual interest in communicating not only about the world
-but also about their language and arriving at a refined -- even if
-context-specific and fleeting -- joint understanding of it. Second,
+but also about their language and arriving at a refined --- even if
+context-specific and fleeting --- joint understanding of it. Second,
 the discourse participants should share as a background assumption
 that the speaker and listener are willing to coordinate on the lexicon
 that the speaker seems to be using.  That is, there must be tacit
 agreement between speaker and listener that utterance interpretation
 can proceed on the assumption of speaker expertise in the language of
-the domain of the conversation.  Third and finally, the cost of using a
-disjunction must be fairly small, all things considered, else it is
-hard to see how the speaker could justify using a disjunction \word{X
-  or Y} to convey simply $\sem{\word{X\/}}$.  That is, whatever the
-costs of using the verbose form, they must be worth paying in virtue
-of the benefits of identifying (for the purposes of the current talk
+the domain of the conversation.  Third and finally, the cost of using
+a disjunction must be fairly small, all things considered, else it is
+hard to see how the speaker could justify using a disjunction \XorY\
+to convey simply $\sem{\word{X\/}}$.  That is, whatever the costs of
+using the verbose form, they must be worth paying in virtue of the
+benefits of identifying (for the purposes of the current talk
 exchange) the meanings of the two disjuncts.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Modeling communication with under conditions of speaker expertise}\label{sec:model}
+\section{Modeling communication under conditions of speaker expertise}\label{sec:model}
 
 We now describe our model of pragmatic reasoning. Our presentation is
 somewhat compact. Readers wishing to more fully explore the model are
@@ -689,8 +721,8 @@ reasoning in terms of $\speakerOne$, has a greater chance of success.
 It has already learned to separate the related terms: $\porq$ conveys
 that $\pandq$ is false, and the atomic propositions convey biases not
 present in their disjunction. One can also see that the speaker seeks
-to avoid ambiguities. For instance, where an atomic proposition is
-true, the speaker opts for it, thereby creating less uncertainty in
+to avoid ambiguities. For instance, where a unique atomic proposition
+is true, the speaker opts for it, thereby creating less uncertainty in
 the listener than a disjunction would.
 
 This basic model has been shown to achieve good quantitative fits to
@@ -802,13 +834,13 @@ zero probability to lexica in which $\nullmsg$ is not universal or
 some messages have empty denotations. This is a strictly more general
 perspective than the one given by \eg{model-extend}. We do not explore
 these options further in this paper, but see
-\citealt{Kao:Bergen:Goodman:2014,Kao-etal:2014} and for discussion of
+\citealt{Kao:Bergen:Goodman:2014,Kao-etal:2014} for discussion of
 non-refinement pragmatic enrichment involving non-literal language.
 
 Our first `lexical uncertainty' agent is $\ListenerK[1]$, which is
 based on the model of \citet{Smith:Goodman:Frank:2013}. Given a
-message, this agent makes joint lexicon--state inferences from
-the space $\States \times \LexSet$:
+message, this agent makes joint lexicon--state inferences over the
+space $\States \times \LexSet$:
 %
 \begin{exe}
   \ex\label{L1}%
@@ -827,10 +859,10 @@ the space $\States \times \LexSet$:
 This agent is defined for levels $k \geqslant 1$ as long as we assume
 that $\SpeakerK[1] = \speakerOne$ (higher levels use the speaker in
 \eg{Sk}) and
-$\ListenerK[1](\state \given \msg, \Lex) = \listenerOne(\state \given
-\msg, \Lex)$.
-The first term uses a fixed-lexicon inference and the second encodes
-the extent to which the current message biases in favor of the lexicon $\Lex$.
+$\ListenerK[1](\state \given \msg, \Lex) = \listenerOne(\state \given \msg, \Lex)$.
+The first term uses a fixed-lexicon inference and the second,
+$\ListenerK(\Lex \given \msg)$, encodes the extent to which the
+current message biases in favor of the lexicon $\Lex$.
 
 Our `expertise' speaker responds to this lexical uncertainty listener.
 We assume that this speaker does have a specific lexicon in mind (this
@@ -888,7 +920,7 @@ flat (treats all lexica as identical).
 
 \begin{figure}[htp]
   \centering
-  \renewcommand{\arraystretch}{0.9}
+  \renewcommand{\arraystretch}{0.85}
 
   \newcommand{\singlearrowdivider}{& \multicolumn{3}{c}{\downarrow}}
   \newcommand{\straightarrowdivider}{& \downarrow & \downarrow & \downarrow}
@@ -931,6 +963,25 @@ flat (treats all lexica as identical).
   \label{fig:simple-example}
 \end{figure}
 
+\begin{figure}[tp]
+  \centering
+  \renewcommand{\arraystretch}{0.85}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \centering
+    $\examplelistener{.2 & \graycell{.8}}{\graycell{1} & 0}{0 & \graycell{1}}$
+    \caption{$\ListenerK[2]$}
+  \end{subfigure}
+  \qquad
+  \begin{subfigure}[b]{0.4\textwidth}
+    \centering
+    $\examplespeaker{.23 & \graycell{.77} & 0}{\graycell{.92} & 0 & .08}$
+    \caption{$\SpeakerK[2]$}
+  \end{subfigure}
+  \caption{Return to simple signaling for the simple scalars example
+    in \figref{fig:simple-example}.}
+  \label{fig:marginalized}
+\end{figure}
+
 %=====================================================================
 
 \subsection{A return to simple signaling}\label{sec:return}
@@ -952,24 +1003,6 @@ inferences for $\ListenerK[2]$ and $\SpeakerK[2]$ from
 agents' lexical preferences and inferences, but we do see that they
 are computing scalar inferences in the manner we saw for the simpler
 model in \figref{fig:rsa-disj}.
-
-\begin{figure}[tp]
-  \centering
-  \begin{subfigure}[b]{0.4\textwidth}
-    \centering
-    $\examplelistener{.2 & \graycell{.8}}{\graycell{1} & 0}{0 & \graycell{1}}$
-    \caption{$\ListenerK[2]$}
-  \end{subfigure}
-  \qquad
-  \begin{subfigure}[b]{0.4\textwidth}
-    \centering
-    $\examplespeaker{.23 & \graycell{.77} & 0}{\graycell{.92} & 0 & .08}$
-    \caption{$\SpeakerK[2]$}
-  \end{subfigure}
-  \caption{Return to simple signaling for the simple scalars example
-    in \figref{fig:simple-example}.}
-  \label{fig:marginalized}
-\end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -995,6 +1028,28 @@ compositional operations of disjunction and conjunction. Thus, in
 in nine distinct lexica.  Each of these is then expanded to include
 $\pandq$ and $\porq$, with their meanings determined by whatever
 meanings the atomic expressions have.  
+
+Second, the world space in \figref{fig:rsa-disj} does not create any
+room for the speaker to be uncertain. The pretense is that the speaker
+always observes the state perfectly (up to the level of granularity
+being measured) and then seeks to communicate that observation. This
+gives somewhat unintuitive results for disjunction. Disjunction is
+naturally used to convey speaker uncertainty, but we currently allow
+no room for such uncertainty.  To address this, we close the state
+space under joins.  For the set of atomic states
+$\set{w_{1}, w_{2}, w_{3}}$, this results in the semilattice in
+\figref{fig:closure}. Interpretation via $\Lex$ then proceeds as one
+would expect: disjunction corresponds to union and conjunction to
+intersection. For example, if $\Lex(p) = \set{w_{1}, w_{2}}$ and
+$\Lex(q) = \set{w_{1}, w_{3}}$, then
+$\Lex(\porq) = \set{w_{1}, w_{2}, w_{3}}$.  After join closure, this
+denotes the entire state space represented in
+\figref{fig:closure}. Conversely, $\pandq$ denotes $\set{w_{1}}$,
+which does not change under closure. (We could expand the space of
+meanings to include meets, or even to the full Smyth powerlattice with
+states like $w_{1}{\vee} (w_{2}{\wedge} w_{3})$, as in
+\citealt{levy-pollard:2001}, but we stick with the join space to keep
+the presentation as simple as possible.)
 
 \begin{figure}[tp]
   \centering
@@ -1027,45 +1082,24 @@ meanings the atomic expressions have.
   \label{fig:closure}
 \end{figure}
 
-Second, the world space in \figref{fig:rsa-disj} does not create any
-room for the speaker to be uncertain. The pretense is that the speaker
-always observes the state perfectly (up to the level of granularity
-being measured) and then seeks to communicate that observation. This
-gives somewhat unintuitive results for disjunction. Disjunction is
-naturally used to convey speaker uncertainty, but we currently allow
-no room for such uncertainty.  To address this, we close the state
-space under joins.  For the set of atomic states
-$\set{w_{1}, w_{2}, w_{3}}$, this results in the semilattice in
-\figref{fig:closure}. Interpretation via $\Lex$ then proceeds as one
-would expect: disjunction corresponds to union and conjunction to
-intersection. For example, if $\Lex(p) = \set{w_{1}, w_{2}}$ and
-$\Lex(q) = \set{w_{1}, w_{3}}$, then
-$\Lex(\porq) = \set{w_{1}, w_{2}, w_{3}}$.  After join closure, this
-denotes the entire state space represented in
-\figref{fig:closure}. Conversely, $\pandq$ denotes $\set{w_{1}}$,
-which does not change under closure. (We could expand the space of
-meanings to include meets, or even to the full Smyth powerlattice with
-states like $w_{1}{\vee} (w_{2}{\wedge} w_{3})$, as in
-\citealt{levy-pollard:2001}, but we stick with the join space to keep
-the presentation as simple as possible.)
-
 Formally, the model we have developed here is an instance of the
 compositional lexical-uncertainty model of
 \citet{bergen-levy-goodman:2014} and
 \citet{levy-bergen-goodman:2014SALT}, with two elaborations: we have
 placed value on transmission of the lexicon from speaker to listener
-(Equation~\ref{Sk}) and specified the structure of world state space
-for the classes of utterances presently under consideration.
+(equation~\ref{Sk}) and specified the structure of the state space for
+the classes of utterances presently under consideration.
 \Figref{fig:compdisj} summarizes how our model behaves in this
-setting. We begin from a base lexicon $\LexStar$ in which $\LexStar(p)
-= \set{w_{1}, w_{2}}$ and $\LexStar(q) = \set{w_{1}, w_{3}}$. We apply
-lexical uncertainty to obtain nine distinct lexica, close their state
-space under joins, and close their messages under disjunction and
-conjunction. We run the full model up to level $\ListenerK[2]$, and
-then marginalize $\ListenerK[2]$ and $\SpeakerK[2]$ as in \eg{lisnorm}
-and \eg{spknorm}, respectively. The results are closely aligned with
-the comparable tables in \figref{fig:rsa-disj}, in that we obtain all
-of the interpretive scalar implicatures and predict largely the same
+setting. We begin from a base lexicon $\LexStar$ in which
+$\LexStar(p) = \set{w_{1}, w_{2}}$ and
+$\LexStar(q) = \set{w_{1}, w_{3}}$. We apply lexical uncertainty to
+obtain nine distinct lexica, close their state space under joins, and
+close their messages under disjunction and conjunction. We run the
+full model up to level $\ListenerK[2]$, and then marginalize
+$\ListenerK[2]$ and $\SpeakerK[2]$ as in \eg{lisnorm} and
+\eg{spknorm}, respectively. The results are closely aligned with the
+comparable tables in \figref{fig:rsa-disj}, in that we obtain all of
+the interpretive scalar implicatures and predict largely the same
 speaker behavior. The one major improvement is that we now directly
 capture the intuition that disjunction can signal speaker uncertainty:
 the speaker's best choice for state $w_{2}{\vee}w_{3}$ is $\porq$.
@@ -1108,29 +1142,31 @@ the speaker's best choice for state $w_{2}{\vee}w_{3}$ is $\porq$.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\vspace{-8pt}
+
 \section{Analysis}\label{sec:analysis}
 
 We now show how our model can be used to characterize a range of
 Hurfordian and definitional capacities of disjunction. We first
 illustrate the effects using parameters chosen by hand, giving an
 example of definitional inference in
-Section~\ref{sec:analysis:definitional} and an example of Hurfordian
-inference in Section~\ref{sec:analysis:subsumptive}.  We then show in
-Section~\ref{sec:defensive-speakers} how our model derives the
+\secref{sec:analysis:definitional} and an example of Hurfordian
+inference in \secref{sec:analysis:subsumptive}.  We then show in
+\secref{sec:defensive-speakers} how our model derives the
 ``defensive-speaker'' Hurfordian disjunctions discussed in
-Section~\ref{sec:data:overlapping}.  Finally, in
-Section~\ref{sec:characterization} we explore the space of parameters
-more to try to determine which settings --- which approximations of
+\secref{sec:data:overlapping}.  Finally, in
+\secref{sec:characterization}, we explore the space of parameters more
+fully to try to determine which settings --- which approximations of
 the context --- deliver each type of reading.
 
 Throughout our illustrations, we assume that \word{X} is the target
 for refinement, that is, the general term for Hurfordian inferences
 and the unknown term for definitional ones.  From the listener's
-perspective, we are concerned to see when \word{A or X} gives rise to
+perspective, we are concerned to see when \AorX\ gives rise to
 the inference that $\sem{A} \cap \sem{X} = \emptyset$ (Hurfordian
-reading) and when \word{A or X} gives rise to the inference that
-$\sem{A} = \sem{X}$ (definitional). (We use $\sem{\msg}$ as a
-shorthand for `the listener's construal of the message $\msg$'.)
+reading) and when \AorX\ gives rise to the inference that
+$\sem{A} = \sem{X}$ (definitional). (From now on, we use $\sem{\msg}$
+as a shorthand for `the listener's construal of the message $\msg$'.)
 
 It's worth highlighting again the dynamics of the model that
 facilitate these uses. First, we assume that the speaker has a
@@ -1159,13 +1195,13 @@ communicating about the world and communicating about the lexicon
 \subsection{Definitional contexts}\label{sec:analysis:definitional}
 
 We begin with definitional readings because they more clearly motivate
-the structure of our model. The central question is when \word{A or X}
-is intended and construed as equivalent to $\sem{A}$. From the
-listener's perspective, this involves an inference that (perhaps
-roughly speaking, and perhaps just for the current context)
-$\sem{A}=\sem{X}$, where $X$ is the unknown term. From the perspective
-of production, we want to know when a speaker will favor producing
-\word{A or X} given that she favors a lexicon in which
+the structure of our model. The central question is when
+\AorX\ is intended and construed as equivalent to
+$\sem{A}$. From the listener's perspective, this involves an inference
+that (perhaps roughly speaking, and perhaps just for the current
+context) $\sem{A}=\sem{X}$, where $X$ is the unknown term. From the
+perspective of production, we want to know when a speaker will favor
+producing \AorX\ given that she favors a lexicon in which
 $\sem{A}=\sem{X}$ and observes a state equivalent to the literal
 meaning of $\sem{A}$. The full characterization of this phenomenon
 involves many complex factors relating to social status, mutual,
@@ -1191,8 +1227,8 @@ in the lexicon-specific reasoning patterns is enough to create a bias
 away from $\LexStar$, but it is not enough to break the asymmetry
 between the remaining inferences. At $\SpeakerK[2]$, the effects of
 the high $\beta$ parameter are beginning to be felt. This speaker is
-biased away from using \word{A or X} to convey a definitional
-intention. It's slight, but it is enough to break the asymmetry for
+biased away from using \AorX\ to convey a definitional
+intention. It's slight, but it's enough to break the symmetry for
 $\ListenerK[2]$, which is strongly biased toward definitional
 construals. Finally, $\SpeakerK[3]$ follows suit, preferring to use
 the disjunction when in a definitional state.
@@ -1223,7 +1259,7 @@ the disjunction when in a definitional state.
     \multicolumn{3}{c}{
       \begin{array}[c]{l@{ }l r r r}
          \toprule
-         & \text{ heard } \word{A\,or\,X}       & w_{1} & w_{2} & w_{1}{\vee}w_{2} \\
+         & \text{ heard } \AorX       & w_{1} & w_{2} & w_{1}{\vee}w_{2} \\
          \midrule
          \LexStar & \smalldisjlex{w_{1}}{w_{2}}{w_{1}, w_{2}}  & 0   & 0 & .08 \\[1ex]
          \Lex_{1} & \smalldisjlex{w_{1}}{w_{2}}{w_{2}}         & .01 & 0 & .08 \\[1ex]
@@ -1249,7 +1285,7 @@ the disjunction when in a definitional state.
     \ListenerK[1] & \multicolumn{3}{c}{
       \begin{array}[c]{l@{ }l r r r}
          \toprule
-         & \text{ heard } \word{A\,or\,X}      & w_{1} & w_{2} & w_{1}{\vee}w_{2} \\
+         & \text{ heard } \AorX      & w_{1} & w_{2} & w_{1}{\vee}w_{2} \\
          \midrule
          \LexStar & \smalldisjlex{w_{1}}{w_{2}}{w_{1}, w_{2}} & 0 & 0 & .23 \\[1ex]
          \Lex_{1} & \smalldisjlex{w_{1}}{w_{2}}{w_{2}}        & 0 & 0 & \graycell{.38} \\[1ex]
@@ -1291,7 +1327,7 @@ arises in this lexicon with the same parameters as in
 \figref{fig:def}. This is unwieldy to visualize (there are fourteen
 distinct lexica), but the important thing is that the best lexicon is
 a definitional one. Here's the best lexical inference given the
-message \word{A or X} from the speaker:
+message \AorX\ from the speaker:
 %
 \begin{exe}
 \ex\label{def-lex-large}
@@ -1315,8 +1351,8 @@ make the inference and the speaker tends to resort to using just
 \word{A} in the relevant contexts. This makes intuitive sense given
 the nature of these parameters. For example, if the speaker has little
 interest in communicating about the lexicon, or disjunction costs
-prohibit the wastefulness of using \word{A or X} to convey $\sem{A}$,
-then the meanings disappear. 
+prohibit the wastefulness of using \AorX\ to convey
+$\sem{A}$, then the meanings disappear.
 
 Nonetheless, it is worth asking whether there are ways in which the
 reading can be made more salient and robust. We have found that the
@@ -1336,15 +1372,16 @@ word. \Figref{fig:def-focal} is a minimal variant of (the topmost
 table in) \figref{fig:def} in which this extra lexical requirement has
 been imposed. This removes $\LexStar$ from consideration. The listener
 inference is numerically stronger, and it is paralleled by a similar
-increased probability on the speaker side for producing \word{A or X}
-with definitional intentions. We will explore these atomic-meaning,
-focal-point contexts in more detail in \secref{sec:characterization}.
+increased probability on the speaker side for producing
+\AorX\ with definitional intentions. We will explore these
+atomic-meaning, focal-point contexts in more detail in
+\secref{sec:characterization}.
 
 \begin{figure}[tp]
   \centering
   $\begin{array}[c]{l l r r r}
     \toprule
-      & \word{A or X}  & w_{1} & w_{2} & w_{1} \vee w_{2} \\
+      & \AorX  & w_{1} & w_{2} & w_{1} \vee w_{2} \\
     \midrule
     \Lex_{1} & \smalldisjlex{w_{1}}{w_{2}}{w_{2}}  &              0 & 0 & .04 \\[1ex]
     \Lex_{2} & \smalldisjlexTargetDef             & \graycell{.92} & 0 & .03\\
@@ -1362,12 +1399,12 @@ focal-point contexts in more detail in \secref{sec:characterization}.
 
 \subsection{Hurfordian contexts}\label{sec:analysis:subsumptive}
 
-For Hurfordian readings, we seek to understand where and how \word{A
-  or X} gives rise to the lexical inference that
+For Hurfordian readings, we seek to understand where and how
+\AorX\ gives rise to the inference that
 $\sem{A} \cap \sem{X} = \emptyset$, where $X$ is again the unknown
 word.  We assume that the overall meaning will be
 $\sem{A} \cup \sem{X}$, i.e., that the relevant information concerns
-just the lexical inference.
+just the lexicon.
 
 \Figref{fig:hurford} presents a context in which $\ListenerK[2]$
 arrives at this conclusion. The states and messages are as in our
@@ -1384,7 +1421,7 @@ would seem to suffice!) supports the Hurfordian lexical inference.
 
 Ours is a model of production as well as interpretation, so it's
 important to take the speaker's perspective as well. It's useful that
-the listener makes the desired inference upon hearing \word{A or X},
+the listener makes the desired inference upon hearing \AorX,
 but the value of this observation is diminished if the speaker never
 uses this message to signal the relevant state--lexicon pair,
 especially since our corpus work (\secref{sec:data:overlapping})
@@ -1393,7 +1430,7 @@ systematically. With the above parameters, our model predicts that
 they will produce such messages. Indeed, in this context, with these
 parameters, $\SpeakerK[2]$'s preferred message given observed state
 $w_{1}{\vee} w_{2}$ and lexicon $\Lex_{1}$ from \figref{fig:hurford}
-is \word{A or X}.  This suggests that the strategy is a stable one in
+is \AorX.  This suggests that the strategy is a stable one in
 communication, in line with the intuitions we described in
 \secref{sec:data:overlapping}.
 
@@ -1403,7 +1440,7 @@ communication, in line with the intuitions we described in
 \setlength{\arraycolsep}{2pt}
 $\begin{array}[c]{l@{ }l r r r}
 \toprule
-& \ListenerK[2] \text{ hears } \word{A\,or\,X}       & w_{1} & w_{2} & w_{1}{\vee}w_{2} \\
+& \ListenerK[2] \text{ hears } \AorX       & w_{1} & w_{2} & w_{1}{\vee}w_{2} \\
 \midrule
 \LexStar & \smalldisjlex{w_{1}}{w_{2}}{w_{1}, w_{2}}  & .02 & 0 & .32 \\[1ex]
 \Lex_{1} & \smalldisjlexTargetHuford                 & .04 & 0 & \graycell{.45} \\[1ex]
@@ -1421,7 +1458,7 @@ $\Costs(\word{or}) = 1$}
 Once again, it is worth running the same simulation with a larger
 lexicon. We find that the above parameters deliver the same result
 with the lexicon size increased to five atomic messages and four
-atomic states: if the listener hears \word{A or X} in this context,
+atomic states: if the listener hears \AorX\ in this context,
 she infers that the speaker's lexicon is \eg{hurford-lex-large}.
 %
 \begin{exe}
@@ -1440,24 +1477,24 @@ she infers that the speaker's lexicon is \eg{hurford-lex-large}.
 This is the `minimal' Hurfordian lexicon: the listener doesn't infer
 anything about $X$ except that it is disjoint from $A$. Once again,
 this inference is mirrored by a speaker preference for producing
-\word{A or X} given observed state $w_{1} \vee w_{2}$ and the lexicon
+\AorX\ given observed state $w_{1} \vee w_{2}$ and the lexicon
 \eg{hurford-lex-large}.
 
+%=====================================================================
 
 \subsection{Defensive speakers: Q- and I-implicature blocking}
 \label{sec:defensive-speakers}
-
-
 
 In \secref{sec:data:overlapping}, we identified two classes of
 potential implicature inferences that can drive speakers to produce HG
 violations: Q-implicatures, where using only the general term might
 create an upper-bounding inference, and I-implicatures, where using
-only the general term might result in inference of a specific, salient
+only the general term might result in inference to a specific, salient
 sub-kind. As we describe below, our model can derive speakers' use of
-HG violations to block both kinds of implicatures, and sheds light on
-what circumstances favor each type of implicature and defensive
-implicature-blocking behavior on the part of the speaker.
+HG violations to block both kinds of implicatures. It also sheds light
+on two aspects of these inferences: the circumstances that favor each
+type of implicature, and the nature of defensive implicature-blocking
+behavior on the part of the speaker.
 
 \Figref{fig:qsims} reports on simulations involving the Q-implicature
 case. Intuitively, we have a general term like \word{cheap} and a
@@ -1495,8 +1532,8 @@ implicatures.
 \begin{figure}[tp]
   \centering
   \includegraphics[width=1\textwidth]{fig/Q-implicature-simulation}  
-  \caption{Simulations of Q-implicature blocking. The x-axis variation is created
-    by varying $\Costs(\word{specific})$ from $1$ to $4$, with lower
+  \caption{Simulations of Q-implicature blocking. The x-axis variation is 
+    created by varying $\Costs(\word{specific})$ from $1$ to $4$, with lower
     costs corresponding to higher values (more implicature inferences
     from \word{general} to \word{not-specific}).  On the left, we hold
     $\Costs(\word{or}) =1$ and trace four different values of
@@ -1505,30 +1542,31 @@ implicatures.
   \label{fig:qsims}
 \end{figure}
 
-The key mechanism for the above example is variation in the cost of
-the specific term. To simulate I-implicatures, we instead vary the
-prior likelihood of the referents. \Figref{fig:isims} summarizes the
-picture abstractly. Here, we have a general term like \word{boat} and
-two specific terms like \word{motorboat} and \word{canoe}, referring
-to objects $r_{\textsc{common}}$ and $r_{\textsc{uncommon}}$,
-respectively. This would correspond to a situation where we work at a
-marina that is largely devoted to motorboats, with canoes infrequent
-and not especially salient. As in \figref{fig:qsims}, the x-axis
-tracks the inferences of $\ListenerK[1]$. We are now interested in
-this agent's inference from hearing the general term (\word{boat}) to
-the more frequent subkind as the referent. We obtain this variation by
-varying the prior over $r_{\textsc{common}}$ from $0.33$ to $0.99$.
-The y-axis shows $\SpeakerK[2]$'s responses given the disjunctive
-observation $r_{\textsc{common}} \vee r_{\textsc{uncommon}}$. Dots on
-the lines again correspond to places where violating HG with the
-disjunction \word{general or marked\_specific} (e.g., \word{boat or
-  canoe}) is the preferred utterance. Here again, $\alpha$ and the
-cost of disjunction influence these speaker choices greatly.  For
-instance, $1.06$ is approximately the lowest $\alpha$ that generates
-this behavior, whereas high values of $\alpha$ make it more
-likely. Conversely, high disjunction costs again reduce the number of
-HG-violations by making them worthwhile for the speaker only if the
-listener's tendency to draw I-implicatures is very high.
+The key mechanism for this Q-implicature example is variation in the
+cost of the specific term. To simulate I-implicatures, we instead vary
+the prior likelihood of the referents. \Figref{fig:isims} summarizes
+the picture abstractly. Here, we have a general term like \word{boat}
+and two specific terms like \word{motorboat} and \word{canoe},
+referring to objects $r_{\textsc{common}}$ and
+$r_{\textsc{uncommon}}$, respectively. This would correspond to a
+situation where we work at a marina that is largely devoted to
+motorboats, with canoes infrequent and not especially salient. As in
+\figref{fig:qsims}, the x-axis tracks the inferences of
+$\ListenerK[1]$. We are now interested in this agent's inference from
+hearing the general term (\word{boat}) to the more frequent subkind as
+the referent. We obtain this variation by varying the prior over
+$r_{\textsc{common}}$ from $0.33$ to $0.99$.  The y-axis shows
+$\SpeakerK[2]$'s responses given the disjunctive observation
+$r_{\textsc{common}} \vee r_{\textsc{uncommon}}$. Dots on the lines
+again correspond to places where violating HG with the disjunction
+\word{general or marked\_specific} (e.g., \word{boat or canoe}) is the
+preferred utterance. Here again, $\alpha$ and the cost of disjunction
+influence these speaker choices greatly.  For instance, $1.06$ is
+approximately the lowest $\alpha$ that generates this behavior,
+whereas high values of $\alpha$ make it more likely. Conversely, high
+disjunction costs again reduce the number of HG-violations by making
+them worthwhile for the speaker only if the listener's tendency to
+draw I-implicatures is very high.
 
 \begin{figure}[tp]
   \centering
@@ -1545,11 +1583,11 @@ listener's tendency to draw I-implicatures is very high.
 \end{figure}
 
 The above simulations show that the model can simulate not only
-implicature inferences but also the kind of behavior that would
-normally be characterized as implicature blocking. This possibility
-arises from the recursive nature of the model, in which pragmatic
-speakers can anticipate the construals of pragmatic listeners and plan
-their own utterances accordingly. We should emphasize also that
+implicature inferences but also the behavior that would normally be
+characterized as implicature blocking. This possibility arises from
+the recursive nature of the model, in which pragmatic speakers can
+anticipate the construals of pragmatic listeners and plan their own
+utterances accordingly. We should emphasize also that the
 Q-implicature and I-implicature scenarios represented by
 \figref{fig:qsims} and \figref{fig:isims} are just particular
 examples. Since neither kind of implicature is a primitive of the
@@ -1560,7 +1598,7 @@ factors that guide HG violations in communication.
 
 %=====================================================================
 
-\subsection{Parameter space exploration}\label{sec:characterization}
+\subsection{Parameter-space exploration}\label{sec:characterization}
 
 The above illustrative examples provide initial clues as to how our
 model characterizes Hurfordian and definitional uses from the speaker
@@ -1670,17 +1708,17 @@ language production and construal, especially those of
 in order to provide a unified account of two seemingly conflicting
 inferences that disjunction supports --- a pressure to exclusivize the
 disjuncts and a pressure to regard them as synonymous.  From a single
-model of disjunctive semantics coupled with general principles of
+model of disjunctive semantics, coupled with general principles of
 pragmatic inference, a rich variety of uses of disjunction emerge:
-definitional interpretations
-(Section~\ref{sec:analysis:definitional}), Hurfordian exclusivization
-interpretations (Section~\ref{sec:analysis:subsumptive}), and
-defensive, implicature-blocking speaker behavior
-(Section~\ref{sec:defensive-speakers}).  Each use within this rich
-variety traces to a specific set of relative priorities of the
-discourse participants with regard to communicating about the language
-itself, communicating about the world, and avoiding or tolerating
-undue message costs.
+definitional interpretations (\secref{sec:analysis:definitional}),
+Hurfordian exclusivization interpretations
+(\secref{sec:analysis:subsumptive}), and defensive,
+implicature-blocking speaker behavior involving disjunction 
+(\secref{sec:defensive-speakers}).  Each use within this rich variety
+traces to a specific set of relative priorities of the discourse
+participants with regard to communicating about the language itself,
+communicating about the world, and avoiding or tolerating undue
+message costs.
 
 Our most fundamental contributions lie in the structure of the
 pragmatic model. We allow the speaker's communicative intentions to
@@ -1700,6 +1738,7 @@ hierarchies, and linguistic style.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\section{References}
 \bibliographystyle{language}
 \bibliography{PottsLevy_BLS41-bib.bib}
 
