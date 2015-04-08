@@ -9,9 +9,9 @@
 \pagestyle{fancy}
 \fancyhf{}
 \fancyhead[LE]{Christopher Potts and Roger Levy}					%ENTER AUTHOR NAME HERE
-\fancyhead[RO]{\it Negotiating Lexical Uncertainty and Speaker Expertise with Disjunction}   %ENTER TITLE HERE
+\fancyhead[RO]{\it Negotiating lexical uncertainty and speaker expertise with disjunction}   %ENTER TITLE HERE
 % Temporary page numbers:
-% \fancyfoot[LO, RE]{\thepage}
+\fancyfoot[LO, RE]{\thepage}
 
 \input{preamble}
 
@@ -81,13 +81,13 @@ and an Alfred P.~Sloan Foundation Research Fellowship and a Fellowship at the Ce
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Communicating in Language about Language}\label{sec:introduction}
+\section{Communicating in language about language}\label{sec:introduction}
 
 Natural languages are neither fixed across time nor identically
 reproduced in all speakers, but rather continually renegotiated during
 interactions \citep{Clark97}. Discourse participants accommodate to
 each other's usage patterns \citep{Giles:Coupland:Coupland:1991}, form
-temporary lexical pacts to facilitate communication
+temporarily lexical pacts to facilitate communication
 \citep{Clark:Wilkes-Gibbs:1986,Brennan:Clark:1996}, and instruct each
 other about their linguistic views. Some of this communication in
 language about language is direct, as with explicit definitions like
@@ -118,13 +118,11 @@ secondary information that maximally violates the pressure to
 exclusivize. This inference is more elusive than the exclusivization
 inference, but it can arise in a broad range of contexts in which such
 \technicalTerm{definitional} or \technicalTerm{identificational}
-information has social or communicative value, and there are stable
-orthographic and prosodic devices to helping to signal it. It is
-striking that both the definitional and exclusivization inferences,
-which seem so opposed, are supported by a single lexical item, and the
-puzzle deepens when we see that the empirical picture is not a quirk
-of English, but rather one found in a wide range of typologically and
-geographically diverse languages.
+information has social or communicative value. It is striking that
+both the definitional and exclusivization inferences are supported by
+a single lexical item, and the puzzle deepens when we see that the
+empirical picture is not a quirk of English, but rather one found in a
+wide range of typologically and geographically diverse languages.
 
 In this paper, we capture both of these classes of inference within a
 single recursive Bayesian model of pragmatic reasoning. The model
@@ -135,12 +133,11 @@ probabilistic variants of them
 \citep{CamererHo:2004,Frank:Goodman:2012}. The crucial feature of our
 model is that it lets discourse participants communicate, not just
 about the world, but also about the language they are using
-\citep{Bergen:Goodman:Levy:2012,bergen-levy-goodman:2014}. From the
-speaker's perspective, this means that one's intentions in production
-are characterized in terms of both world information and linguistic
-information. From the listener's perspective, this means that
-pragmatic inference is cast as a problem of joint inference about the
-speaker's intended meaning and the speaker's preferred lexicon
+\citep{Bergen:Goodman:Levy:2012,bergen-levy-goodman:2014}: the
+speaker's intentions in production are characterized in terms of both
+world information and linguistic information, and the listener's
+pragmatic reasoning is cast as a problem of joint inference about the
+speaker's intended meaning and preferred lexicon
 \citep{Smith:Goodman:Frank:2013}. We show that, within this model,
 both exclusivization and definitional inferences arise naturally from
 the expected semantic content of disjunction, depending on contextual
@@ -154,7 +151,7 @@ their stability and communicative value.\footnote{Implementations of
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Lexical Side-Effects from Disjunction}\label{sec:data}
+\section{Lexical side-effects from disjunction}\label{sec:data}
 
 This section explores the exclusivization and definitional uses of
 disjunction. Our goal is to more precisely characterize what the
@@ -164,7 +161,7 @@ the modeling we describe in \dashsecref{sec:model}{sec:analysis}.
 
 %=====================================================================
 
-\subsection{Hurfordian Perceptions and Intentions}\label{sec:data:overlapping}
+\subsection{Hurfordian perceptions and intentions}\label{sec:data:overlapping}
 
 \posscitet{Hurford:1974} generalization (HG) is a direct statement of
 the overall communicative pressure to treat disjuncts as exclusive:
@@ -291,10 +288,9 @@ in terms of its particular urban charms, \word{France} could come to
 mean something more like `Paris outside of France'. The important
 thing for our purposes is that the insight behind HG shines through
 this uncertainty: no matter what one's initial view of the lexicon is,
-a speaker's use of a disjunction \XorY\ raises the likelihood that the
-the disjuncts are semantically disjoint in her currently preferred
-lexicon. The speaker will be perceived as endorsing such an
-opinionated view of the language, at least for the current
+disjunctions like \XorY\ make salient a construal of the lexicon in
+which the disjuncts are semantically disjoint. The speaker will be
+perceived as endorsing such a view, at least for the current
 conversation, and the listener can either adopt that assumption or
 push back.
 
@@ -312,7 +308,7 @@ be part of an attempt to manage the listener's inferences. For
 instance, a speaker who uses the phrase \word{swimwear or bikini}
 might be concerned that using \word{swimwear} alone will trigger an
 ad-hoc scalar implicature \citep{Hirschberg85} excluding the salient
-sub-kind of bikinis. The HG violation then serves to cancel or block
+subkind of bikinis. The HG violation then serves to cancel or block
 this unwanted inference. \citet{Chemla-HurfordCounts} studies this
 class of inferences, presenting suggestive evidence that the frequency
 of disjunctions \XorY\ (\word{X} entailed by \word{Y}) is positively
@@ -321,8 +317,8 @@ implicates \word{not Y} as estimated by the experimental results of
 \citet{vanTiel-etal:2013}. This connection is anticipated by
 \posscitet{Hurford:1974} own analysis of disjunctions of scalar terms
 that seem to violate his generalization, and
-\citeauthor{Chemla-HurfordCounts}'s data suggest that it holds for a
-broad range of such cases.
+\citeauthor{Chemla-HurfordCounts}'s data suggest that it holds widely
+in the lexicon.
 
 \newcommand{\CountGB}{\emph{Count}}
 
@@ -367,16 +363,30 @@ superficially violates HG. The I-implicatures studied by
 compelled to say as a little as possible, and the listener is advised
 to seek out specific interpretations. As a corollary of this, general
 terms are often prone to being restricted to salient or prototypical
-sub-kinds. For instance, at a busy marina in water-skiing country,
+subkinds. For instance, at a busy marina in water-skiing country,
 \word{boat} might come to identify just motorboats. In that context, a
 speaker wishing to state a rule or regulation about all watercraft
 might use \word{boat or canoe} or \word{boat or kayak} to ensure that
 these non-motorized cases are included, lest people assume (or feel
 licensed to act as if they can assume) that these rarer kinds of boat
-are exempt. Such inferences often resemble scalar inferences, but a
-generalized notion of prior likelihood steers the calculation to a
-specific sub-kind among potentially many that might be at the same
-semantic or conceptual level.
+are exempt.
+
+%\marginpar{I cut the country/capital data, but it could be added. Even though it is sparse, it contains interesting patterns relating to the frequency of the two terms and the ratios of their frequencies. (E.g., low ratios correlate with disjunction usage).}
+
+% Eager for a more rigorous assessment of the prevalence of
+% HG-violating disjunctions, we conducted a simple experiment. First,
+% we obtained a list of countries and their capitals and, to keep the
+% search procedure simple, extracted the subset in which the country
+% and capital both have single word names. Second, we searched for
+% `\emph{country or capital}' and `\emph{capital or country}' in the
+% Google Books N-grams data, restricting attention to books after 1960
+% to try to avoid some of the encoding difficulties that plague
+% earlier texts in that corpus. Of the 128
+% $\set{\word{`country'}, \word{`capital'}}$ cases in which both
+% \word{`country'} and \word{`capital'} are attested in the data, 11
+% are attested in the form \word{`country' or `capital'} and 11 are
+% attested in the form \word{`capital' or `country'}. The two sets are
+% nearly coextensive.
 
 In these implicature-blocking scenarios, the speaker is concerned that
 the general term \word{X} will be construed as
@@ -403,7 +413,7 @@ requires no independent statement of HG.
  
 %=====================================================================
 
-\subsection{Definition and Identification}\label{sec:data:definitional}
+\subsection{Definition and identification}\label{sec:data:definitional}
 
 Disjunctions like \word{wine lover or oenophile} seem to fly in the
 face of the Hurfordian pressure reviewed just above. Rather than
@@ -442,9 +452,11 @@ punctuation from the transcripts that TED provides.
 
     (Greg Asner, `Ecology from the air', 2:22)
 
-    \ex We call this project VocaliD [\textipa{v@Uk\ae lIdi}], or vocal I.D., \ldots
+    \ex We call this project VocaliD, or vocal I.D., \ldots
 
-    (Rupal Patel, `Synthetic voices, as unique fingerprints', 3:50)
+    (Rupal Patel, `Synthetic voices, as unique fingerprints', 3:52)
+
+    \newpage
 
     \ex they can self-renew or make more of themselves \ldots
 
@@ -511,24 +523,19 @@ uses of this strategy when there is no direct information about the
 listener, but rather just a general assumption that one of the terms
 is relatively unknown. For instance, a newspaper article might contain
 \word{wine lover or oenophile} without presuming that all its readers
-are ignorant of the term; rather, such a use would seem to presuppose
+are ignorant of the terms; rather, such a use would seem to presuppose
 only that \word{oenophile} is relatively unknown, or obscure enough
 that it's useful to reinvoke its definition. At the the other end of
 the spectrum, the listener might actually be presumed to know the
 term, but the speaker sees social value in conveying that she shares
 this view. This could be because the speaker would like to display
-expertise, as when an ambitious pupil seeks to convey competence to a
-teacher. Similarly, a speaker of Australian English might use a phrase
-like \word{lift or elevator} with an American colleague to signal a
-willingness (or ironic lack thereof) to use the American form
-\word{elevator}.\footnote{Our thanks to James Collins for bringing
-  such uses to our attention.}  And definitional uses also arise when
-the speaker and listener might both be experts in the domain and see
-value (jointly or just in the current speaker's eyes) in using a word
-in a specialized sense in order to name a concept efficiently (e.g.,
-the hypothetical academic paper title \word{What motivates the
-  snobbish wine lover or `oenophile' and how does he differ from the
-  casual drinker?}).
+expertise, as when an ambitious student seeks to convey competence to
+a professor. The uses also arise when the speaker and listener might
+both be experts in the domain and see value (jointly or just in the
+current speaker's eyes) in using a word in a specialized sense in
+order to name a concept efficiently (e.g., the hypothetical academic
+paper title \word{What motivates the snobbish wine lover or
+  `oenophile' and how does he differ from the casual drinker?}).
 
 For these reasons, we propose the following, more general set of
 desiderata that we believe must hold in order for definitional
@@ -541,17 +548,17 @@ that the speaker and listener are willing to coordinate on the lexicon
 that the speaker seems to be using.  That is, there must be tacit
 agreement between speaker and listener that utterance interpretation
 can proceed on the assumption of speaker expertise in the language of
-the domain of the conversation.  Third and finally, the cost (in the
-Gricean sense) of using a disjunction must be fairly small, all things
-considered, else it is hard to see how the speaker could justify using
-a disjunction \XorY\ to convey simply $\sem{\word{X\/}}$.  That is,
-whatever the costs of using the verbose form, they must be worth
-paying in virtue of the benefits of identifying (for the purposes of
-the current talk exchange) the meanings of the two disjuncts.
+the domain of the conversation.  Third and finally, the cost of using
+a disjunction must be fairly small, all things considered, else it is
+hard to see how the speaker could justify using a disjunction \XorY\
+to convey simply $\sem{\word{X\/}}$.  That is, whatever the costs of
+using the verbose form, they must be worth paying in virtue of the
+benefits of identifying (for the purposes of the current talk
+exchange) the meanings of the two disjuncts.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Modeling Communication under Conditions of \\ Speaker Expertise}\label{sec:model}
+\section{Modeling communication under conditions of speaker expertise}\label{sec:model}
 
 We now describe our model of pragmatic reasoning. Our presentation is
 somewhat compact. Readers wishing to more fully explore the model are
@@ -622,7 +629,7 @@ signaling game.
   \ex\label{states}%
     $\States$ is a set of states (worlds, referents, propositions, etc.).
   \ex\label{messages}%
-    $\Messages$ is a set of messages containing a designated `null' message $\nullmsg$.
+    $\Messages$ is a set of messages containing designated `null' message $\nullmsg$.
   \ex\label{lex}%
     $\LexStar: \Messages \mapsto \wp(\States)$ is a semantic interpretation function. 
     $\Lex'(\nullmsg) = \States$.
@@ -648,62 +655,51 @@ of ensuring definedness, see \citealt{Jaeger:2011} and
 
 %=====================================================================
 
-\subsection{Simple State/Message Signaling}\label{sec:rsa}
+\subsection{Simple state/message signaling}\label{sec:rsa}
 
-As \figref{fig:modstruc} shows, our model defines an intuitive
-hierarchy of agents. The most basic are $\listenerZero$,
-$\speakerOne$, and $\listenerOne$. In intuitive terms, these agents
-make meaning in a Gricean fashion: the pragmatic listener
-$\listenerOne$ reasons about the pragmatic speaker $\speakerOne$
-reasoning about the `literal' (purely semantic) listener
-$\listenerZero$. These agents reason in terms of a fixed lexicon
+As \figref{fig:modstruc} shows, our model defines an intuitive hierarchy
+of agents. The most basic are $\listenerZero$, $\speakerOne$, and
+$\listenerOne$. These agents reason in terms of a fixed lexicon
 $\Lex$, which, for our purposes, can be thought of as a standard
 semantic interpretation function, as in \subeg{model}{lex}. These
 agents suffice to define a version of the Rational Speech Acts model
 of \citet{Frank:Goodman:2012} and \citet{Goodman:Stuhlmuller:2013}.
 
-The starting point is the literal listener, $\listenerZero$. This
-agent simply turns $\Lex$ into a probabilistic formulation that can be
-used for decision-making in the presence of communicative
-indeterminacy. In short, given messages $\msg$, this agent assigns $0$
-probability to states in which $\msg$ is false. For the rest, its
-estimated probability for each state $\state$ is proportional to the
-prior $\Prior(\state)$.
+The starting point is $\listenerZero$. This agent simply turns $\Lex$
+into a probabilistic formulation that can be used for decision-making
+in the presence of communicative indeterminacy. The first term defines
+an even distribution over all of the true states $\state$ for the
+given message $\msg$, and the second term incorporates the contextual
+prior distribution over states $\Prior$. (Here, $\Indicator$ is an
+indicator function: $\Indicator(\varphi) = 1$ if $\varphi = \True$,
+else $0$.)
 %
 \begin{exe}
-\ex\label{l0} $\listenerZero(\state \given \msg, \Lex) \propto \Prior(\state) \text{ if } \state \in \Lex(\msg), \text{ else } 0$
+\ex\label{l0} $\listenerZero(\state \given \msg, \Lex) \propto \frac{\Indicator(\state \in \Lex(\msg))}{|\Lex(\msg)|} \Prior(\state)$
 \end{exe}
 
-This literal listener is pragmatic only insofar as it incorporates the
-contextual prior $\Prior$ into (a distribution derived from) the truth
-conditions. Richer pragmatic inferences start to emerge as soon as we
-envision a speaker that can reason in terms of this listener and plan
-its utterances accordingly. The minimal such speaker is $\speakerOne$,
-which is defined in terms of $\listenerZero$:
-%
-%
-% NOTE: gb4e re-defines \exp for use as some kind of \item command.
-% So I defined \exponential to take its place. Trying to use \exp
-% results in unhelpful, show-stopping errors.
-%
+This agent is pragmatic only insofar as it incorporates the contextual
+prior into (a distribution derived from) the truth conditions. Richer
+pragmatic inferences start to emerge as soon as we envision a speaker
+that can reason in terms of this listener and plan its utterances
+accordingly. The minimal such speaker is $\speakerOne$, which is
+defined in terms of $\listenerZero$:
 %
 \begin{exe}
 \ex\label{s1} $\speakerOne(\msg \given \state, \Lex) \propto \exponential \left( \alpha\log \left( \listenerZero(\state \given \msg, \Lex) \right) -  \Costs(\msg) \right)$
 \end{exe}
 %
-This agent observes a world state $\state$ and, given $\Lex$, chooses
-a message $\msg$ to try to communicate $\state$. The definition
-appears cumbersome in its use of $\log$ and $\exponential$. These
-transformations are needed to ensure that all values are positive even
-with real-valued costs. At its heart, though, this agent is parallel
-to $\listenerZero$ in that it combines a conditional distribution and
-a piece of contextual information --- now costs on messages. The
-result is a distribution that one can imagine serving as the basis for
-decision making: given that the agent would like to convey that a
-certain state holds, which message will do that most effectively for
-the $\listenerZero$ listener? The real-valued parameter $\alpha$
-controls the degree to which the speaker tries to capitalize on the
-distinctions $\listenerZero$ encodes.
+This definition is a bit cumbersome because of the need to ensure that
+all values are positive even with real-valued costs. At its heart,
+though, this agent is parallel to $\listenerZero$ in that it combines
+a conditional distribution and a piece of contextual information ---
+now costs on messages. The result is a distribution that one can
+imagine serving as the basis for decision making: given that the agent
+would like to convey that a certain state holds, which message will do
+that most effectively for the $\listenerZero$ listener? The
+real-valued parameter $\alpha$ controls the degree to which the
+speaker tries to capitalize on the distinctions $\listenerZero$
+encodes.
 
 The first pragmatic listener is $\listenerOne$. It is parallel to
 $\listenerZero$ except that it reasons, not in terms of the original
@@ -796,7 +792,7 @@ further recursion of the agents we define next.
 
 %=====================================================================
 
-\subsection{Reasoning under Lexical Uncertainty}\label{sec:full}
+\subsection{Reasoning under lexical uncertainty}\label{sec:full}
 
 In the model defined by $\listenerZero$, $\speakerOne$, and
 $\listenerOne$, the agents condition on (take as given) a fixed,
@@ -888,18 +884,8 @@ information each message conveys about the lexicon. The relative
 importance of this information is controlled by a new real-valued
 learning-rate parameter $\beta$. The relative weights of $\alpha$ and
 $\beta$ control the relative importance of conveying information about
-the world and information about the lexicon. As $\alpha$ grows, the
-agents venture riskier Gricean behavior: the speaker tries to extract
-as many distinction as possible from its estimate of the listener, and
-it chooses utterances on this (hyper-)rational basis. The pattern is
-similar for $\beta$, but the target becomes exchaning information
-about the language itself. If we set $\beta=0$, then the agents make
-no distinctions among possible lexica and the model reduces to a
-variant of the lexical uncertainty model of
-\citet{Bergen:Levy:Goodman:2014}. As $\beta$ rises, communicating
-about the language itself becomes more important. The precise
-relationship between $\alpha$ and $\beta$ is extremely complex; much
-of our investigation of disjunction focuses on understanding it.
+the world and information about the lexicon, and much of our
+investigation of disjunction focuses on this relationship.
 
 Let's return to the schematic diagram in
 \figref{fig:modstruc}. Intuitively, if one begins at, say,
@@ -1001,7 +987,7 @@ flat (treats all lexica as identical).
 
 %=====================================================================
 
-\subsection{A Return to Simple Signaling}\label{sec:return}
+\subsection{A return to simple signaling}\label{sec:return}
 
 The full model can be unwieldy because of the lexicon inferences.  One
 often wants to return to the intuitive picture of simple state/message
@@ -1023,7 +1009,7 @@ model in \figref{fig:rsa-disj}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Compositional Lexical Uncertainty}\label{sec:composition}
+\section{Compositional lexical uncertainty}\label{sec:composition}
 
 There are two shortcomings of the model as presented so far that are
 important to correct before studying Hurfordian and definitional usage
@@ -1209,7 +1195,7 @@ communicating about the world and communicating about the lexicon
 
 %=====================================================================
 
-\subsection{Definitional Contexts}\label{sec:analysis:definitional}
+\subsection{Definitional contexts}\label{sec:analysis:definitional}
 
 We begin with definitional readings because they more clearly motivate
 the structure of our model. The central question is when
@@ -1414,7 +1400,7 @@ atomic-meaning, focal-point contexts in more detail in
 
 %=====================================================================
 
-\subsection{Hurfordian Contexts}\label{sec:analysis:subsumptive}
+\subsection{Hurfordian contexts}\label{sec:analysis:subsumptive}
 
 For Hurfordian readings, we seek to understand where and how
 \AorX\ gives rise to the inference that
@@ -1499,7 +1485,7 @@ this inference is mirrored by a speaker preference for producing
 
 %=====================================================================
 
-\subsection{Defensive Speakers: Q- and I-implicature Blocking}
+\subsection{Defensive speakers: Q- and I-implicature blocking}
 \label{sec:defensive-speakers}
 
 In \secref{sec:data:overlapping}, we identified two classes of
@@ -1519,32 +1505,15 @@ specific term like \word{free}. The general term is true in both
 $w_\textsc{general-only}$ and $w_\textsc{specific}$, whereas the
 specific term is true only in $w_\textsc{specific}$, creating an
 information state supporting a standard scalar implicature from the
-general term to the falsity of the specific one.  We are interested
-primarily in the conditions under which a speaker will produce the
-disjunction \word{general or specific} having observed the state
-$w_\textsc{general-only} \vee w_\textsc{specific}$. In both panels of
-\figref{fig:qsims}, the x-axis tracks the probability that
-$\ListenerK[1]$, upon hearing the general term, draws an implicature
-inference that the specific term is false. We create this variation by
-changing the cost of the specific term from $0$ to $4$. As its cost
-rises, the listener's implicature inference becomes less and less
-probable. The y-axis depicts the $\SpeakerK[2]$ speaker response
-to this listener, tracking the likelihood that this agent will use
-HG-violating disjunction to convey a disjunctive state. 
-
-
-
-For instance,
-consider the case where $\alpha=2$, which is given by the orange line
-in the left panel. If the listener draws the scalar inference with
-probability $.6$ or above, then the speaker's preferred move is to
-utter an HG-violating disjunction. Similarly, in the right panel,
-where disjunction is free (green line), the speaker is willing to
-violate HG even when the listener's scalar inference is not all that
-strong; as the cost of disjunction goes up, the speaker needs a more
-compelling reason for the violation, that is, a stronger listener
-inference. If disjunction is sufficiently costly (e.g., the pink
-line), then the speaker will never violate HG in these conditions.
+general term to the falsity of the specific one.  In both panels of
+this figure, the x-axis tracks the probability that $\ListenerK[1]$,
+upon hearing the general term, draws an implicature inference that the
+specific term is false. We create this variation by changing the cost
+of the specific term from $0$ to $4$. As its cost rises, the
+implicature inference becomes less and less reliable.  The y-axis
+depicts the $\SpeakerK[2]$ speaker response to this listener, tracking
+the likelihood that this agent will use HG-violating disjunction to
+convey a disjunctive state.
 
 In both panels, the trend is the expected one, mirroring the corpus
 results from \figref{fig:chemla}. The strength of this inference is
@@ -1554,19 +1523,14 @@ the trends for four settings of $\alpha$, and the right panel shows
 the trends for four values of the cost of the disjunction morpheme. In
 both panels, a dot means that the speaker probability is maximal, that
 is, that this is the speaker's preferred choice for what to say given
-the disjunctive state. For instance, consider the case where
-$\alpha=2$, which is given by the orange line in the left panel. If
-the listener draws the scalar inference with probability $.6$ or
-above, then the speaker's \emph{preferred} move is to utter an
-HG-violating disjunction in order to block this inference. Similarly,
-in the right panel, where disjunction is free (green line), the
-speaker violates HG even when the listener's scalar inference is not
-all that strong; as the cost of disjunction goes up, the speaker needs
-a more compelling reason to bother with blocking. If disjunction is
-sufficiently costly (e.g., the pink line), then the speaker never
-violates HG in these conditions. In summary, then, HG violations are
-most likely when the cost of disjunction is low or $\alpha$ is high,
-which is again in-line with intuitions.
+the disjunctive state. HG violations are most likely when the cost of
+disjunction is low or $\alpha$ is high, which is again in-line with
+intuitions. For instance, if the cost of disjunction is high, the
+speaker will bother to violate HG only if the listener is virtually
+certain to make an unwanted inference. Similarly, as $\alpha$ rises,
+the speaker becomes an increasingly greedy interpreter of the
+listener's behavior, and thus becomes more inclined to block unwanted
+implicatures.
 
 \begin{figure}[tp]
   \centering
@@ -1592,7 +1556,7 @@ situation where we work at a marina that is largely devoted to
 motorboats, with canoes infrequent and not especially salient. As in
 \figref{fig:qsims}, the x-axis tracks the inferences of
 $\ListenerK[1]$. We are now interested in this agent's inference from
-hearing the general term (\word{boat}) to the more frequent sub-kind as
+hearing the general term (\word{boat}) to the more frequent subkind as
 the referent. We obtain this variation by varying the prior over
 $r_{\textsc{common}}$ from $0.33$ to $0.99$.  The y-axis shows
 $\SpeakerK[2]$'s responses given the disjunctive observation
@@ -1637,7 +1601,7 @@ factors that guide HG violations in communication.
 
 %=====================================================================
 
-\subsection{Parameter-Space Exploration}\label{sec:characterization}
+\subsection{Parameter-space exploration}\label{sec:characterization}
 
 The above illustrative examples provide initial clues as to how our
 model characterizes Hurfordian and definitional uses from the speaker
@@ -1701,23 +1665,16 @@ justification with regard to $\alpha$. However, the pressures of
 $\beta$ also intrude. If $\beta$ is high, then it might be worth
 paying the disjunction costs for the sake of teaching the listener
 about the lexicon, even if this reduces the amount of information
-conveyed per word. 
+conveyed per word.
 
-In broad strokes, we can relate these ideas to \figref{fig:char}. At
-the bottom of the plot, where disjunction costs are low, we have,
-perhaps, a lecturer with ample time and perhaps not much to say; as we
-move right in this space, the professor becomes more invested in the
-``lingo'', and hence definitioal readings arise.  At the top of the
-plot, the communications become time or resource constrained, and the
-pressures of HG become strong enough to compel exclusivizaton even
-with high $\beta$. From this perspective, it is clear why Hurfordian
-uses are more robust. They arise in a much wider range of contexts
-because they can easily survive high disjunction costs ---
-exclusivization ensures genuine communicative value. In contrast,
-definitional readings exist mainly in the space of low disjunction and
-high $\beta$ because the state information they convey is fully
-encoded in the first disjunct, making the full disjunction an
-inefficient way of conveying world information.
+From this perspective, it is clear why Hurfordian uses are more
+robust. They arise in a much wider range of contexts because they can
+easily survive high disjunction costs --- exclusivization ensures
+genuine communicative value. In contrast, definitional readings exist
+mainly in the space of low disjunction and high $\beta$ because the
+state information they convey is fully encoded in the first disjunct,
+making the full disjunction an inefficient way of conveying world
+information.
 
 The quantitative picture also leads us to expect that there can be
 uncertainty about whether the listener should regard the disjunction
