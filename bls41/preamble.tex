@@ -133,8 +133,10 @@
 \definecolor{defcolor}{HTML}{D95F02}
 %\definecolor{hurfordcolor}{HTML}{00CC33}
 \definecolor{hurfordcolor}{HTML}{1B9E77}
-\newcommand{\hurford}[1]{{\relax\color{hurfordcolor}#1}}
-\newcommand{\definitional}[1]{\relax{\color{defcolor}#1}}
+%\newcommand{\hurford}[1]{{\relax\color{hurfordcolor}#1}}
+%\newcommand{\definitional}[1]{\relax{\color{defcolor}#1}}
+\newcommand{\hurford}[1]{\mathbf{#1}}
+\newcommand{\definitional}[1]{\mathbf{#1}}
 
 \newcommand{\graycell}[1]{{\cellcolor[gray]{.8}#1}}
 
@@ -209,9 +211,9 @@
     \end{array}
   \right]}
 
-\newcommand{\smalldisjlexTargetDef}{\smalldisjlex{\definitional{\mathbf{w_{1}}}}{w_{2}}{\definitional{\mathbf{w_{1}}}}}
+\newcommand{\smalldisjlexTargetDef}{\smalldisjlex{\definitional{w_{1}}}{w_{2}}{\definitional{w_{1}}}}
 
-\newcommand{\smalldisjlexTargetHuford}{\smalldisjlex{\hurford{\mathbf{w_{1}}}}{w_{2}}{\hurford{\mathbf{w_{2}}}}}
+\newcommand{\smalldisjlexTargetHuford}{\smalldisjlex{\hurford{w_{1}}}{w_{2}}{\hurford{w_{2}}}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Macros for the simple illustration of the model:

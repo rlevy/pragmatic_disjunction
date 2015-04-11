@@ -9,15 +9,10 @@ sys.path.append('/Volumes/CHRIS/Documents/research/pypragmods/pypragmods/')
 from lexica import Lexica, NULL_MSG, DISJUNCTION_SIGN
 from pragmods import Pragmod
 
-plt.style.use('ggplot')
-matplotlib.rc('text', usetex=True)
-matplotlib.rc('font', family='serif', serif='times')
-matplotlib.rcParams['text.latex.preamble'] = [r"\usepackage{amsmath}", r'\boldmath']
-matplotlib.rcParams['xtick.major.pad']='1'
-matplotlib.rcParams['ytick.major.pad']='0'
-COLORS = ['#1B9E77', '#D95F02', '#7570B3', '#E7298A', '#66A61E', '#E6AB02', '#A6761D', '#666666'] + matplotlib.colors.cnames.values()
+plt.style.use('bls41.mplstyle')
+COLORS = ['#1B9E77', '#D95F02', '#7570B3', '#E7298A', '#66A61E', '#E6AB02', '#A6761D', '#666666']
 
-def Q_implicature_simulation(output_filename="fig/Q-implicature-simulation.pdf"):
+def Q_implicature_simulation(output_filename="fig/Q-implicature-simulation"):
     w1 = r'w_{\textsc{general-only}}'; w2 = r'w_{\textsc{specific}}'
     GENERAL_MSG = 'general'
     SPECIFIC_MSG = 'specific'
@@ -59,15 +54,16 @@ def Q_implicature_simulation(output_filename="fig/Q-implicature-simulation.pdf")
     # Values to vary:
     specific_costs = np.arange(0.0, 5.0, 1.0)    
     disjunction_costs = np.arange(0.0, 5.0, 1)
-    alphas = np.array([1.0, 2.0, 3.0, 4.0])
-    # Figure set-up:
-    fig, axarray = plt.subplots(nrows=1, ncols=2)
-    fig.set_figheight(7)
-    fig.set_figwidth(16)
+    alphas = np.array([1.0, 2.0, 3.0, 4.0])    
     # Panels:
     variable_lookup = {r'C(\textit{or})': disjunction_costs, r'\alpha': alphas}
+    variable_filename_suffixes = ['or', 'alphas']
     ylims = {r'C(\textit{or})':  [-0.05, 0.45], r'\alpha': [0.15, 0.75]}    
-    for ax, variable_name in zip(axarray, variable_lookup):
+    for variable_name, suffix in zip(variable_lookup, variable_filename_suffixes):
+        # Figure set-up:
+        fig, ax = plt.subplots(nrows=1, ncols=1)
+        fig.set_figheight(7)
+        fig.set_figwidth(8)        
         variables = variable_lookup[variable_name]
         ann_index = 0
         ann_adj = 1.01
@@ -96,18 +92,16 @@ def Q_implicature_simulation(output_filename="fig/Q-implicature-simulation.pdf")
                 ax.plot(maxx, maxy, linestyle='', markersize=6, marker='o', color=color)
             ax.annotate(r'$%s = %s$' % (variable_name, variable), xy=(listener_vals[ann_index]*ann_adj, speaker_vals[ann_index]), fontsize=16, ha=ha, va=va, color=color)
         # Axes:
-        ax.tick_params(axis='both', which='both', bottom='off', left='off', top='off', right='off', labelbottom='on', labelsize=12)
         ax.set_xlabel(r'$L_1(%s \mid \textit{%s})$' % (GENERAL_ONLY_REF, GENERAL_MSG), fontsize=18)
         ax.set_ylabel(r'$S_2(\textit{%s} \mid %s)$' % (DISJ_MSG.replace(' v ', r' or '), DISJ_REF.replace(' v ', r' \vee ')), fontsize=18)        
         ax.set_xlim([0.2, 1.05])   
-        ax.set_ylim([0.0, 1.05])           
-    # Save the figure:
-    plt.savefig(output_filename, bbox_inches='tight')
-
+        ax.set_ylim([0.0, 1.05])
+        # Save the panel:
+        plt.savefig("%s-%s.pdf" % (output_filename, suffix), bbox_inches='tight')
+    
 ######################################################################
 
-
-def I_implicature_simulation(output_filename="fig/I-implicature-simulation.pdf", dcost=1.0, alpha=3.0):
+def I_implicature_simulation(output_filename="fig/I-implicature-simulation", dcost=1.0, alpha=3.0):
     ##### General set-up:
     # Messages:
     SUPERKIND_MSG = r'general'
@@ -155,15 +149,16 @@ def I_implicature_simulation(output_filename="fig/I-implicature-simulation.pdf",
     # Values to vary:
     common_ref_probs = np.arange(1.0/3.0, 1.0/1.0, 0.01)
     disjunction_costs = np.arange(1.0, 5.0, 1)
-    alphas = np.array([1.06, 2.0, 3.0, 4.0])
-    # Figure set-up:
-    fig, axarray = plt.subplots(nrows=1, ncols=2)
-    fig.set_figheight(7)
-    fig.set_figwidth(16)
+    alphas = np.array([1.06, 2.0, 3.0, 4.0])    
     # Panels:
     variable_lookup = {r'C(\textit{or})': disjunction_costs, r'\alpha': alphas}
+    variable_filename_suffixes = ['or', 'alphas']
     ylims = {r'C(\textit{or})':  [-0.05, 0.45], r'\alpha': [0.15, 0.75]}
-    for ax, variable_name in zip(axarray, variable_lookup):
+    for variable_name, suffix in zip(variable_lookup, variable_filename_suffixes):
+        # Figure set-up:
+        fig, ax = plt.subplots(nrows=1, ncols=1)
+        fig.set_figheight(7)
+        fig.set_figwidth(8)
         variables = variable_lookup[variable_name]
         ha = 'left'
         va = 'top'
@@ -192,15 +187,13 @@ def I_implicature_simulation(output_filename="fig/I-implicature-simulation.pdf",
             ax.annotate(r'$%s = %s$' % (variable_name, variable), xy=(listener_vals[0]*0.98, speaker_vals[0]), fontsize=16, ha=ha, va=va)
             ax.set_ylim(ylims[variable_name])
         # Axes:
-        ax.tick_params(axis='both', which='both', bottom='off', left='off', top='off', right='off', labelbottom='on', labelsize=12)
         ax.set_xlabel(r'$L_1(%s \mid \textit{%s})$' % (COMMON_REF, SUPERKIND_MSG), fontsize=18)
         ax.set_ylabel(r'$S_2(\textit{%s} \mid %s)$' % (DISJ_MSG.replace(' v ', r' or '), DISJ_REF.replace(' v ', r' \vee ')), fontsize=18)
         ax.set_xlim([0.0,1.0])
-        
-    # Save the figure:
-    plt.savefig(output_filename, bbox_inches='tight')
+        # Save the panel:
+        plt.savefig("%s-%s.pdf" % (output_filename, suffix), bbox_inches='tight')
         
 
-#Q_implicature_simulation()            
+Q_implicature_simulation()            
 I_implicature_simulation()
 

@@ -23,15 +23,7 @@ from lexica import Lexica, NULL_MSG, DISJUNCTION_SIGN
 from pragmods import Pragmod
 from utils import display_matrix
 
-
-plt.style.use('ggplot')
-matplotlib.rc('text', usetex=True)
-matplotlib.rc('font', family='serif', serif='times')
-matplotlib.rcParams['text.latex.preamble'] = [r"\usepackage{amsmath}", r'\boldmath']
-matplotlib.rcParams['xtick.major.pad']='1'
-matplotlib.rcParams['ytick.major.pad']='0'
-COLORS = ['#1B9E77', '#D95F02', '#7570B3', '#E7298A', '#66A61E', '#E6AB02', '#A6761D', '#666666'] + matplotlib.colors.cnames.values()
-
+plt.style.use('bls41.mplstyle')
 
 ######################################################################
 ##### Illustrative examples
@@ -157,107 +149,6 @@ def definitional_example(n=2, fulldisplay=False):
 
 def focal_definitional_example(n=2, fulldisplay=False):
     generic_disjunction_example(alpha=5.0, beta=7.0, disjunction_cost=0.01, n=n, fulldisplay=fulldisplay, unknown_word='X')  
-
-######################################################################
-#####
-
-def definitional_speaker_alpha_beta_plot(output_filename='fig/definitional-speaker-alpha-beta.pdf', alpha=3.0, dcost=0.01, betas=np.arange(0.0, 11.0, 1.0)):
-    KNOWN_MSG = 'A'
-    UNKNOWN_MSG = 'X'
-    DISJ_MSG = KNOWN_MSG + DISJUNCTION_SIGN + UNKNOWN_MSG
-    DEF_STATE = r'w_{1}'
-    DEF_LEXICON = 0        
-    BASELEXICON = {'A': [r'w_{1}'], 'B': [r'w_{2}'], 'C': [r'w_{3}'], 'D': [r'w_{4}'], 'X': [r'w_{1}', r'w_{2}', r'w_{3}', r'w_{4}']}
-    LEXICAL_COSTS = {'A':0.0, 'B':0.0, 'C':0.0, 'D':0.0, 'X':0.0}
-    #BASELEXICON={'A': [r'w_{1}'], 'B': [r'w_{2}'], 'X':[r'w_{1}', r'w_{2}']} 
-    #LEXICAL_COSTS={'A':0.0, 'B':0.0, 'X':0.0}
-    speaker_vals = []
-    lexica = Lexica(baselexicon=BASELEXICON, costs=LEXICAL_COSTS, join_closure=True, nullsem=True, nullcost=5.0, disjunction_cost=dcost)
-    DEF_LEXICON = [i for i, lex in enumerate(lexica.lexica2matrices()) if lex[lexica.messages.index(KNOWN_MSG)].all() == lex[lexica.messages.index(UNKNOWN_MSG)].all()][0]
-    display_matrix(lexica.lexica2matrices()[DEF_LEXICON], rnames=lexica.messages, cnames=lexica.states)
-    for beta in betas:        
-        ref_prior = np.repeat(1.0/len(lexica.states), len(lexica.states))
-        lexprior = np.repeat(1.0/len(lexica.lexica2matrices()), len(lexica.lexica2matrices()))
-        #lexprior[-1] = 0.5
-        mod = Pragmod(lexica=lexica.lexica2matrices(), messages=lexica.messages, states=lexica.states, costs=lexica.cost_vector(), lexprior=lexprior, prior=ref_prior, alpha=alpha, beta=beta)
-        langs = mod.run_expertise_model(n=3, display=False, digits=2)
-        # Get the values we need:
-        speaker = langs[-2][DEF_LEXICON]
-        disj_msg_index = mod.messages.index(DISJ_MSG)
-        def_state_index = mod.states.index(DEF_STATE)
-        # Fill in listener_val and speaker_val:
-        speaker_val = speaker[def_state_index, disj_msg_index]        
-        # Determine whether max, with a bit of rounding to avoid spurious mismatch diagnosis:
-        maxspkval = np.max(speaker[def_state_index])
-        is_max = np.round(speaker_val, 10) == np.round(maxspkval, 10)
-        speaker_vals.append([speaker_val, is_max])
-    # Figure set-up:
-    fig, ax = plt.subplots(nrows=1, ncols=1)
-    fig.set_figheight(7)
-    fig.set_figwidth(8)
-    vals, maxes = zip(*speaker_vals)
-    max_booleans = [(betas[i], vals[i]) for i, is_max in enumerate(maxes) if is_max]         
-    ax.plot(betas, vals, linewidth=2, color=COLORS[1])
-    if max_booleans:
-        maxx, maxy = zip(*max_booleans)
-        ax.plot(maxx, maxy, linestyle='', markersize=6, marker='o', color=COLORS[1])
-    ax.tick_params(axis='both', which='both', bottom='off', left='off', top='off', right='off', labelbottom='on', labelsize=12)
-    ax.set_xlabel(r'$\beta$', fontsize=18)
-    ax.set_ylabel(r'$S_2(\textit{%s} \mid %s)$' % (DISJ_MSG.replace(' v ', r' or '), DEF_STATE), fontsize=18)        
-    ax.set_ylim([0, 1.05])   
-    ax.set_xlim([0.0, 10.5])
-    # Save the figure:
-    plt.savefig(output_filename, bbox_inches='tight')
-
-
-def definitional_speaker_lexprior_plot(output_filename='fig/definitional-speaker-lexprior.pdf', alpha=2.0, beta=3.0, dcost=0.01):
-    KNOWN_MSG = 'A'
-    UNKNOWN_MSG = 'X'
-    DISJ_MSG = KNOWN_MSG + DISJUNCTION_SIGN + UNKNOWN_MSG
-    DEF_STATE = r'w_{1}'
-    DEF_LEXICON = 0        
-    BASELEXICON = {'A': [r'w_{1}'], 'B': [r'w_{2}'], 'C': [r'w_{3}'], 'D': [r'w_{4}'], 'X': [r'w_{1}', r'w_{2}', r'w_{3}', r'w_{4}']}
-    LEXICAL_COSTS = {'A':0.0, 'B':0.0, 'C':0.0, 'D':0.0, 'X':0.0}
-    BASELEXICON={'A': [r'w_{1}'], 'B': [r'w_{2}'], 'X':[r'w_{1}', r'w_{2}']} 
-    LEXICAL_COSTS={'A':0.0, 'B':0.0, 'X':0.0}
-    speaker_vals = []
-    lexica = Lexica(baselexicon=BASELEXICON, costs=LEXICAL_COSTS, join_closure=True, nullsem=True, nullcost=5.0, disjunction_cost=dcost)
-    DEF_LEXICON = [i for i, lex in enumerate(lexica.lexica2matrices()) if lex[lexica.messages.index(KNOWN_MSG)].all() == lex[lexica.messages.index(UNKNOWN_MSG)].all()][0]
-    display_matrix(lexica.lexica2matrices()[DEF_LEXICON], rnames=lexica.messages, cnames=lexica.states)
-    unknown_lex_probs = np.arange(0.0, 1.0, 0.1)
-    for prob in unknown_lex_probs:
-        lexprior = np.repeat(1.0/(1.0-prob), len(lexica.lexica2matrices()))
-        lexprior[-1] = prob               
-        ref_prior = np.repeat(1.0/len(lexica.states), len(lexica.states))
-        mod = Pragmod(lexica=lexica.lexica2matrices(), messages=lexica.messages, states=lexica.states, costs=lexica.cost_vector(), lexprior=lexprior, prior=ref_prior, alpha=alpha, beta=beta)
-        langs = mod.run_expertise_model(n=3, display=False, digits=2)
-        # Get the values we need:
-        speaker = langs[-2][DEF_LEXICON]
-        disj_msg_index = mod.messages.index(DISJ_MSG)
-        def_state_index = mod.states.index(DEF_STATE)
-        # Fill in listener_val and speaker_val:
-        speaker_val = speaker[def_state_index, disj_msg_index]        
-        # Determine whether max, with a bit of rounding to avoid spurious mismatch diagnosis:
-        maxspkval = np.max(speaker[def_state_index])
-        is_max = np.round(speaker_val, 10) == np.round(maxspkval, 10)
-        speaker_vals.append([speaker_val, is_max])
-    # Figure set-up:
-    fig, ax = plt.subplots(nrows=1, ncols=1)
-    fig.set_figheight(7)
-    fig.set_figwidth(8)
-    vals, maxes = zip(*speaker_vals)
-    ax.plot(unknown_lex_probs, vals, linewidth=2, color=COLORS[1])
-    max_booleans = [(unknown_lex_probs[i], vals[i]) for i, is_max in enumerate(maxes) if is_max]             
-    if max_booleans:
-        maxx, maxy = zip(*max_booleans)
-        ax.plot(maxx, maxy, linestyle='', markersize=6, marker='o', color=COLORS[1])
-    ax.tick_params(axis='both', which='both', bottom='off', left='off', top='off', right='off', labelbottom='on', labelsize=12)
-    ax.set_xlabel(r'Prior expectation for $\mathcal{L}(X) = W$', fontsize=18)
-    ax.set_ylabel(r'$S_2(\textit{%s} \mid %s)$' % (DISJ_MSG.replace(' v ', r' or '), DEF_STATE), fontsize=18)        
-    ax.set_ylim([0, 1.05])   
-    ax.set_xlim([0.0, 1.05])
-    # Save the figure:
-    plt.savefig(output_filename, bbox_inches='tight')    
     
 ######################################################################
 ##### Parameter exploration
@@ -386,12 +277,8 @@ class ListenerParameterExperiment:
 
     def alpha_beta_cost_scatterplot(self, hc, defin):
         """Create the scatterplot with beta/alpha on the x-axis and disjunction costs on the y-axis"""
-        # High-level plotting styles:
-        plt.style.use('ggplot')
-        matplotlib.rc('text', usetex=True)
-        matplotlib.rc('font', family='serif', serif='cm10')
-        matplotlib.rcParams['text.latex.preamble'] = [r"\usepackage{amsmath}", r'\boldmath']
         # Set-up:
+        matplotlib.rc('font', family='serif', serif='times') # Not sure why this has to be set to get the legend font to change.
         transform = np.log if self.logx else (lambda x : x)    
         fig, ax = plt.subplots(nrows=1, ncols=1)
         fig.set_figheight(10)
@@ -399,7 +286,7 @@ class ListenerParameterExperiment:
         labsize = 24
         markersize = 15
         ticksize = 18
-        colors = ['#1B9E77', '#D95F02', '#7570B3']
+        colors = ['#1B9E77', '#E6AB02', '#000000'] # '#7570B3']
         # Hurfordian:
         h_ba = [r['beta']/r['alpha'] for r in hc]
         h_g = [r['disjunction_cost'] for r in hc]
@@ -460,19 +347,18 @@ if __name__ == '__main__':
     #definitional_example(n=3, fulldisplay=False)
     #focal_definitional_example(n=2, fulldisplay=True)
     
-    ## Parameter exploration with a large lexicon; this takes a long time to run!
-    # ListenerParameterExperiment(
-    #     results_filename='paramexplore-lex5.pickle',
-    #     # If the results are already computed:
-    #     # results=pickle.load(file("paramexplore-lex5.pickle")),
-    #     plot_filename='paramexplore-lex5.pdf').run()
+    # Parameter exploration with a large lexicon; this takes a long time to run!
+    ListenerParameterExperiment(
+        results_filename='paramexplore-lex5.pickle',
+        # If the results are already computed:
+        results=pickle.load(file("fig/paramexplore-lex5.pickle")),
+        plot_filename='fig/paramexplore-lex5.pdf').run()
 
-    ## Parameter exploration as above but constraining the unknown word X to an atomic meaning:
-    # ListenerParameterExperiment(
-    #     results_filename='paramexplore-lex5-focal.pickle',
-    #     # If the results are already computed:
-    #     # results=pickle.load(file("paramexplore-lex5-focal.pickle")),
-    #     plot_filename='paramexplore-lex5-focal.pdf',
-    #     unknown_word='X').run()
+    # Parameter exploration as above but constraining the unknown word X to an atomic meaning:
+    ListenerParameterExperiment(
+        results_filename='paramexplore-lex5-focal.pickle',
+        # If the results are already computed:
+        results=pickle.load(file("fig/paramexplore-lex5-focal.pickle")),
+        plot_filename='fig/paramexplore-lex5-focal.pdf',
+        unknown_word='X').run()
 
-    definitional_speaker_lexprior_plot()
