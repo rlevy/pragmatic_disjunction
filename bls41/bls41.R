@@ -19,6 +19,7 @@ library(ggplot2)
 ######################################################################
 
 library(extrafont)
+library(grid)
 loadfonts()
 
 ## Dataset extending Chemla's numbers with the more reliable Google Books (version 2) counts:
@@ -28,7 +29,7 @@ dat = read.csv("/Volumes/CHRIS/Documents/research/pypragmods/pypragmods/lsa2015/
 dat$ratio = dat$GB2.Freq.X.or.Y / dat$GB2.Freq.X
 
 ## Plotting params:
-xlab = expression(paste("Probability of" ~  italic(X) ~ "implicating" ~ italic(not), "-", italic(Y), sep=""))
+xlab = expression(paste("Probability of" ~  italic(X) ~ "implicating" ~ italic(not), " ", italic(Y), sep=""))
 ylab = expression(italic("Count(X or Y) / Count(X)"))
 lab.size = 20
 axis.size = 16
@@ -45,17 +46,18 @@ sizes[fordisplay] = text.label.size
 ## The plot:
 ggplot(dat,aes(x=p/100,y=ratio)) +
 theme_bw() + 
-theme(text=element_text(family="CM Roman", face="bold")) +
+theme(text=element_text(family="CM Roman", face="bold"), axis.ticks=element_blank(), axis.ticks.length=unit(0,'cm')) +
 geom_point(color='#990000',size=5) +
 geom_text(label=labels, size=sizes, angle=65, family="CM Roman", face="bold") +
 stat_smooth(method="lm") + xlab(xlab) + ylab(ylab) +
 coord_cartesian(ylim = c(-0.0003, 0.0015)) + ## Axis that hides one outlier that makes the plot too messy (not excluded from analysis!)
-theme(axis.title.x = element_text(face="bold", colour="#000000", size=lab.size), axis.text.x=element_text(size=axis.size)) +
-theme(axis.title.y = element_text(face="bold", colour="#000000", size=lab.size), axis.text.y=element_text(size=axis.size))
+theme(axis.title.x = element_text(face="bold", colour="#000000", size=lab.size, vjust=-0.75), axis.text.x=element_text(size=axis.size, vjust=-1.0)) +
+theme(axis.title.y = element_text(face="bold", colour="#000000", size=lab.size, vjust=1.25), axis.text.y=element_text(size=axis.size, hjust=-1.0))
 
 ## Save the plot:
-ggsave(file="disjunction-and-implicature.pdf", width=11, height=8)
-embed_fonts("disjunction-and-implicature.pdf", outfile="disjunction-and-implicature.pdf")
+outputFilename = "fig/disjunction-and-implicature.pdf"
+ggsave(file=outputFilename, width=11, height=8)
+embed_fonts(outputFilename, outfile=outputFilename)
 
 # Simple linear model:
 fit = lm(ratio ~ p,dat)
