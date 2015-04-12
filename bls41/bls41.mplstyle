@@ -8,14 +8,14 @@ patch.antialiased: True
 font.size: 10.0
 text.usetex: True
 text.latex.preamble: \usepackage{amsmath}, \boldmath
-font.family: sans-serif
+font.family: serif
 
 axes.facecolor: white
 axes.edgecolor: black
 axes.linewidth: 1
 axes.grid: True
 axes.titlesize: x-large
-axes.labelsize: large
+axes.labelsize: xx-large
 axes.labelcolor: black
 axes.axisbelow: True       # grid/ticks are below elements (eg lines, text)
 
@@ -30,12 +30,12 @@ axes.axisbelow: True       # grid/ticks are below elements (eg lines, text)
 
 axes.color_cycle: 1B9E77, D95F02, 7570B3, E7298A, 66A61E, E6AB02, A6761D, 666666
 
-xtick.color: 555555
+xtick.color: black
 xtick.direction: out
 xtick.major.pad: 4
 xtick.major.size: 0
 
-ytick.color: 555555
+ytick.color: black
 ytick.direction: out
 ytick.major.pad: 4
 ytick.major.size: 0

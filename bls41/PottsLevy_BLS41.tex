@@ -953,7 +953,7 @@ the world and information about the lexicon. As $\alpha$ grows, the
 agents venture riskier Gricean behavior: the speaker tries to extract
 as many distinction as possible from its estimate of the listener, and
 it chooses utterances on this (hyper-)rational basis. The pattern is
-similar for $\beta$, but the target becomes exchaning information
+similar for $\beta$, but the target becomes exchanging information
 about the language itself. If we set $\beta=0$, then the agents make
 no distinctions among possible lexica and the model reduces to a
 variant of the lexical uncertainty model of
@@ -1580,72 +1580,56 @@ specific term like \word{free}. The general term is true in both
 $w_\textsc{general-only}$ and $w_\textsc{specific}$, whereas the
 specific term is true only in $w_\textsc{specific}$, creating an
 information state supporting a standard scalar implicature from the
-general term to the falsity of the specific one.  We are interested
-primarily in the conditions under which a speaker will produce the
-disjunction \word{general or specific} having observed the state
-$w_\textsc{general-only} \vee w_\textsc{specific}$. In both panels of
+general term to the falsity of the specific one. In both panels of
 \figref{fig:qsims}, the x-axis tracks the probability that
 $\ListenerK[1]$, upon hearing the general term, draws an implicature
 inference that the specific term is false. We create this variation by
-changing the cost of the specific term from $0$ to $4$. As its cost
-rises, the listener's implicature inference becomes less and less
-probable. The y-axis depicts the $\SpeakerK[2]$ speaker response
-to this listener, tracking the likelihood that this agent will use
-HG-violating disjunction to convey a disjunctive state. 
-
-
-
-For instance,
-consider the case where $\alpha=2$, which is given by the orange line
-in the left panel. If the listener draws the scalar inference with
-probability $.6$ or above, then the speaker's preferred move is to
-utter an HG-violating disjunction. Similarly, in the right panel,
-where disjunction is free (green line), the speaker is willing to
-violate HG even when the listener's scalar inference is not all that
-strong; as the cost of disjunction goes up, the speaker needs a more
-compelling reason for the violation, that is, a stronger listener
-inference. If disjunction is sufficiently costly (e.g., the pink
-line), then the speaker will never violate HG in these conditions.
-
-In both panels, the trend is the expected one, mirroring the corpus
-results from \figref{fig:chemla}. The strength of this inference is
-heavily influenced by other parameters in the model, especially the
-setting of $\alpha$ and the cost of disjunction. The left panel shows
-the trends for four settings of $\alpha$, and the right panel shows
-the trends for four values of the cost of the disjunction morpheme. In
-both panels, a dot means that the speaker probability is maximal, that
-is, that this is the speaker's preferred choice for what to say given
-the disjunctive state. For instance, consider the case where
-$\alpha=2$, which is given by the orange line in the left panel. If
-the listener draws the scalar inference with probability $.6$ or
-above, then the speaker's \emph{preferred} move is to utter an
-HG-violating disjunction in order to block this inference. Similarly,
-in the right panel, where disjunction is free (green line), the
-speaker violates HG even when the listener's scalar inference is not
-all that strong; as the cost of disjunction goes up, the speaker needs
-a more compelling reason to bother with blocking. If disjunction is
-sufficiently costly (e.g., the pink line), then the speaker never
-violates HG in these conditions. In summary, then, HG violations are
-most likely when the cost of disjunction is low or $\alpha$ is high,
-which is again in-line with intuitions.
+changing the cost of the term \word{specific} from $0$ to $4$. As its
+cost rises, the listener's implicature becomes less probable. The
+y-axes depict the $\SpeakerK[2]$ speaker's response to this listener
+upon observing the state
+$w_\textsc{general-only} \vee w_\textsc{specific}$. We are interested
+primarily in the conditions under which this speaker will produce the
+HG-violating disjunction \word{general or specific} having observed
+this state. The dashes on the lines mark spans in which an HG
+violation is the speaker's \emph{preferred} choice here.
 
 \begin{figure}[tp]
   \centering
   \begin{subfigure}{0.48\textwidth}
     \includegraphics[width=1\textwidth]{fig/Q-implicature-simulation-alphas} 
-    \caption{With $\Costs(\word{or}) =1$, tracing four values of $\alpha$.}\label{fig:qsims:alphas}
+    \caption{Tracing five values of $\alpha$ with $\Costs(\word{or}) =1$.}\label{fig:qsims:alphas}
   \end{subfigure}
   \hfill
   \begin{subfigure}{0.48\textwidth}
     \includegraphics[width=1\textwidth]{fig/Q-implicature-simulation-or} 
-    \caption{With $\alpha=2$, tracing four values of $\Costs(\word{or})$.}\label{fig:qsims:or}
+    \caption{Tracing four values of $\Costs(\word{or})$ with $\alpha=2$.}\label{fig:qsims:or}
   \end{subfigure}
-  \caption{Simulations of Q-implicature blocking. The x-axis variation is 
-    created by varying $\Costs(\word{specific})$ from $1$ to $4$, with lower
-    costs corresponding to higher values (more implicature inferences
-    from \word{general} to \word{not-specific}).}    
-  \label{fig:qsims}
+  \caption{Q-implicature blocking. The variation in the x-axes is
+    created by varying $\Costs(\word{specific})$ from $0$ to $4$, with
+    lower costs corresponding to higher values (more implicature
+    inferences from \word{general} to \word{not specific}). Dashes
+    mark spans in which the speaker probability is maximal given the
+    disjunctive observation, that is, where the HG violation is
+    preferred.}\label{fig:qsims}
 \end{figure}
+
+In both panels, the trend is the expected one, mirroring the corpus
+results from \figref{fig:chemla}. The patterns are heavily influenced
+by other parameters in the model, especially the setting of $\alpha$
+and the cost of disjunction. For instance, consider the case where
+$\alpha=2$, which is given by the orange line in
+\figref{fig:qsims:alphas}. Here, when the listener probability reaches
+$.6$, the speaker's preferred move is to utter an HG-violating
+disjunction. With higher (more aggressive) $\alpha$, the listener
+threshold drops to $.5$; at lower values of $\alpha$, this particular
+speaker never violates HG. Similarly, in \figref{fig:qsims:or}, where
+disjunction is free (green line), the speaker is willing to violate HG
+even when the listener's scalar inference is not all that strong; as
+the cost of disjunction goes up, the speaker needs a more compelling
+reason for the violation, that is, a stronger listener inference. If
+disjunction is sufficiently costly (e.g., the pink line), then this
+speaker never violates HG.
 
 The key mechanism for this Q-implicature example is variation in the
 cost of the specific term. To simulate I-implicatures, we instead vary
@@ -1656,18 +1640,18 @@ referring to objects $r_{\textsc{common}}$ and
 $r_{\textsc{uncommon}}$, respectively. This would correspond to a
 situation where we work at a marina that is largely devoted to
 motorboats, with canoes infrequent and not especially salient. As in
-\figref{fig:qsims}, the x-axis tracks the inferences of
+\figref{fig:qsims}, the x-axes track the inferences of
 $\ListenerK[1]$. We are now interested in this agent's inference from
-hearing the general term (\word{boat}) to the more frequent sub-kind as
-the referent. We obtain this variation by varying the prior over
-$r_{\textsc{common}}$ from $0.33$ to $0.99$.  The y-axis shows
-$\SpeakerK[2]$'s responses given the disjunctive observation
-$r_{\textsc{common}} \vee r_{\textsc{uncommon}}$. Dots on the lines
-again correspond to places where violating HG with the disjunction
-\word{general or marked\_specific} (e.g., \word{boat or canoe}) is the
-preferred utterance. Here again, $\alpha$ and the cost of disjunction
-influence these speaker choices greatly.  For instance, $1.06$ is
-approximately the lowest $\alpha$ that generates this behavior,
+hearing the general term (\word{boat}) to the more frequent sub-kind
+(\word{motorboat}) as the referent. We obtain this variation by
+varying the prior over $r_{\textsc{common}}$ from $0.33$ to $0.99$.
+The y-axes show $\SpeakerK[2]$'s responses given the disjunctive
+observation $r_{\textsc{common}} \vee r_{\textsc{uncommon}}$. Dashes
+again correspond to spans in which violating HG with the disjunction
+\word{general or marked\_specific} (e.g., \word{boat or canoe}) is
+this speaker's preferred utterance. Here again, $\alpha$ and the cost
+of disjunction influence this agent's choices.  For instance, $1.06$
+is approximately the lowest $\alpha$ that generates this behavior,
 whereas high values of $\alpha$ make it more likely. Conversely, high
 disjunction costs again reduce the number of HG-violations by making
 them worthwhile for the speaker only if the listener's tendency to
@@ -1677,18 +1661,20 @@ draw I-implicatures is very high.
   \centering
   \begin{subfigure}{0.48\textwidth}
     \includegraphics[width=1\textwidth]{fig/I-implicature-simulation-alphas} 
-    \caption{With $\Costs(\word{or}) =1$, tracing four values of $\alpha$.}\label{fig:isims:alphas}
+    \caption{Tracing four values of $\alpha$ with $\Costs(\word{or}) =1$.}\label{fig:isims:alphas}
   \end{subfigure}
   \hfill
   \begin{subfigure}{0.48\textwidth}
     \includegraphics[width=1\textwidth]{fig/I-implicature-simulation-or} 
-    \caption{With $\alpha=2$, tracing four values of $\Costs(\word{or})$.}\label{fig:isims:or}
+    \caption{Tracing four values of $\Costs(\word{or})$ with $\alpha=2$.}\label{fig:isims:or}
   \end{subfigure} 
-  \caption{Simulations of I-implicature blocking. The x-axis variation is created
-    by varying $\Prior(r_{\word{common}})$ from $0.33$ to $0.99$, with
-    higher values for this prior corresponding to higher listener
-    inferences (more implicatures from \word{general} to
-    \word{specific\_unmarked}).}
+  \caption{I-implicature blocking. The variation in the x-axes is
+    created by varying $\Prior(r_{\word{common}})$ from $0.33$ to
+    $0.99$, with higher values for this prior corresponding to higher
+    listener inferences (more implicatures from \word{general} to
+    \word{specific\_unmarked}).  Dashes mark spans in which the
+    speaker probability is maximal given the disjunctive observation,
+    that is, where the HG violation is preferred.}
   \label{fig:isims}
 \end{figure}
 
@@ -1778,9 +1764,9 @@ In broad strokes, we can relate these ideas to \figref{fig:char}. At
 the bottom of the plot, where disjunction costs are low, we have,
 perhaps, a lecturer with ample time and perhaps not much to say; as we
 move right in this space, the professor becomes more invested in the
-``lingo'', and hence definitioal readings arise.  At the top of the
+``lingo'', and hence definitional readings arise.  At the top of the
 plot, the communications become time or resource constrained, and the
-pressures of HG become strong enough to compel exclusivizaton even
+pressures of HG become strong enough to compel exclusivization even
 with high $\beta$. From this perspective, it is clear why Hurfordian
 uses are more robust. They arise in a much wider range of contexts
 because they can easily survive high disjunction costs ---

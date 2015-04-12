@@ -51,13 +51,14 @@ def Q_implicature_simulation(output_filename="fig/Q-implicature-simulation"):
         return (listener_val, speaker_val, is_max)
 
     ##### Plot creation:
+    matplotlib.rc('font', family='serif', serif='times') # Not sure why this has to be set to get the legend font to change.
     # Values to vary:
     specific_costs = np.arange(0.0, 5.0, 1.0)    
     disjunction_costs = np.arange(0.0, 5.0, 1)
     alphas = np.array([1.0, 2.0, 3.0, 4.0])    
     # Panels:
     variable_lookup = {r'C(\textit{or})': disjunction_costs, r'\alpha': alphas}
-    variable_filename_suffixes = ['or', 'alphas']
+    variable_filename_suffixes = ['alphas', 'or']
     ylims = {r'C(\textit{or})':  [-0.05, 0.45], r'\alpha': [0.15, 0.75]}    
     for variable_name, suffix in zip(variable_lookup, variable_filename_suffixes):
         # Figure set-up:
@@ -89,7 +90,7 @@ def Q_implicature_simulation(output_filename="fig/Q-implicature-simulation"):
             ax.plot(listener_vals, speaker_vals, color=color, linewidth=2)
             if max_booleans:
                 maxx, maxy = zip(*max_booleans)
-                ax.plot(maxx, maxy, linestyle='', markersize=6, marker='o', color=color)
+                ax.plot(maxx, maxy, linestyle=':', linewidth=6, color=color)
             ax.annotate(r'$%s = %s$' % (variable_name, variable), xy=(listener_vals[ann_index]*ann_adj, speaker_vals[ann_index]), fontsize=16, ha=ha, va=va, color=color)
         # Axes:
         ax.set_xlabel(r'$L_1(%s \mid \textit{%s})$' % (GENERAL_ONLY_REF, GENERAL_MSG), fontsize=18)
@@ -97,6 +98,8 @@ def Q_implicature_simulation(output_filename="fig/Q-implicature-simulation"):
         ax.set_xlim([0.2, 1.05])   
         ax.set_ylim([0.0, 1.05])
         # Save the panel:
+        plt.setp(ax.get_xticklabels(), fontsize=16)
+        plt.setp(ax.get_yticklabels(), fontsize=16)
         plt.savefig("%s-%s.pdf" % (output_filename, suffix), bbox_inches='tight')
     
 ######################################################################
@@ -146,13 +149,14 @@ def I_implicature_simulation(output_filename="fig/I-implicature-simulation", dco
         return (listener_val, speaker_val, is_max)
 
     ##### Plot creation:
+    matplotlib.rc('font', family='serif', serif='times') # Not sure why this has to be set to get the legend font to change.
     # Values to vary:
     common_ref_probs = np.arange(1.0/3.0, 1.0/1.0, 0.01)
     disjunction_costs = np.arange(1.0, 5.0, 1)
     alphas = np.array([1.06, 2.0, 3.0, 4.0])    
     # Panels:
     variable_lookup = {r'C(\textit{or})': disjunction_costs, r'\alpha': alphas}
-    variable_filename_suffixes = ['or', 'alphas']
+    variable_filename_suffixes = ['alphas', 'or']
     ylims = {r'C(\textit{or})':  [-0.05, 0.45], r'\alpha': [0.15, 0.75]}
     for variable_name, suffix in zip(variable_lookup, variable_filename_suffixes):
         # Figure set-up:
@@ -180,17 +184,19 @@ def I_implicature_simulation(output_filename="fig/I-implicature-simulation", dco
             ax.plot(listener_vals, speaker_vals, color=color, linewidth=2)
             if max_booleans:
                 maxx, maxy = zip(*max_booleans)
-                ax.plot(maxx, maxy, linestyle='', markersize=6, marker='o', color=color)
+                ax.plot(maxx, maxy, linestyle=':', linewidth=6, color=color)
             # Annotation:
             if variable_name == r'\alpha' and variable == variables[-1]: # Avoid label overlap for alpha=3 and alpha=4.
                 va = 'bottom'
-            ax.annotate(r'$%s = %s$' % (variable_name, variable), xy=(listener_vals[0]*0.98, speaker_vals[0]), fontsize=16, ha=ha, va=va)
+            ax.annotate(r'$%s = %s$' % (variable_name, variable), xy=(listener_vals[0]*0.98, speaker_vals[0]), fontsize=16, ha=ha, va=va, color=color)
             ax.set_ylim(ylims[variable_name])
         # Axes:
         ax.set_xlabel(r'$L_1(%s \mid \textit{%s})$' % (COMMON_REF, SUPERKIND_MSG), fontsize=18)
         ax.set_ylabel(r'$S_2(\textit{%s} \mid %s)$' % (DISJ_MSG.replace(' v ', r' or '), DISJ_REF.replace(' v ', r' \vee ')), fontsize=18)
         ax.set_xlim([0.0,1.0])
         # Save the panel:
+        plt.setp(ax.get_xticklabels(), fontsize=16)
+        plt.setp(ax.get_yticklabels(), fontsize=16)
         plt.savefig("%s-%s.pdf" % (output_filename, suffix), bbox_inches='tight')
         
 
