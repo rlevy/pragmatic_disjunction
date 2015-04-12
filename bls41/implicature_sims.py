@@ -13,15 +13,17 @@ plt.style.use('bls41.mplstyle')
 COLORS = ['#1B9E77', '#D95F02', '#7570B3', '#E7298A', '#66A61E', '#E6AB02', '#A6761D', '#666666']
 
 def Q_implicature_simulation(output_filename="fig/Q-implicature-simulation"):
-    w1 = r'w_{\textsc{general-only}}'; w2 = r'w_{\textsc{specific}}'
+    # Messages:
     GENERAL_MSG = 'general'
     SPECIFIC_MSG = 'specific'
     DISJ_MSG = GENERAL_MSG + DISJUNCTION_SIGN + SPECIFIC_MSG
-    GENERAL_ONLY_REF = w2
-    DISJ_REF = r'%s v %s' % (w1, w2)
+    # States:
+    GENERAL_ONLY_REF = r'w_{\textsc{general-only}}'
+    SPECIFIC_REF = r'w_{\textsc{specific}}'
+    DISJ_REF = r'%s v %s' % (GENERAL_ONLY_REF, SPECIFIC_REF)
     # Common structures:
-    BASELEXICON = {GENERAL_MSG: [w1, w2], SPECIFIC_MSG: [w1]}
-   
+    BASELEXICON = {GENERAL_MSG: [GENERAL_ONLY_REF, SPECIFIC_REF], SPECIFIC_MSG: [SPECIFIC_REF]}
+       
     ##### General function for getting data points:
     def Q_implicature_simulation_datapoint(specific_cost, dcost=1.0, alpha=2.0):
         # Values to obtain:
@@ -53,7 +55,7 @@ def Q_implicature_simulation(output_filename="fig/Q-implicature-simulation"):
     ##### Plot creation:
     matplotlib.rc('font', family='serif', serif='times') # Not sure why this has to be set to get the legend font to change.
     # Values to vary:
-    specific_costs = np.arange(0.0, 5.0, 1.0)    
+    specific_costs = [0.0,1.0,2.0,3.0,4.0]
     disjunction_costs = np.arange(0.0, 5.0, 1)
     alphas = np.array([1.0, 2.0, 3.0, 4.0])    
     # Panels:
@@ -201,5 +203,5 @@ def I_implicature_simulation(output_filename="fig/I-implicature-simulation", dco
         
 
 Q_implicature_simulation()            
-I_implicature_simulation()
+#I_implicature_simulation()
 

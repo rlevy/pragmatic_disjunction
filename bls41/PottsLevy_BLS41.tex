@@ -83,8 +83,8 @@ and an Alfred P.~Sloan Foundation Research Fellowship and a Fellowship at the Ce
   disjunction and a recursive probabilistic model of communication in
   which speakers and listeners simultaneously exchange information
   about the world and about the language they are using.  We also use
-  the model to begin to characterize implicature blocking with
-  disjunction.
+  the model to begin to formally characterize the pragmatics of
+  implicature cancelation or blocking.
 \end{abstract}
 			
 
@@ -247,9 +247,9 @@ examples. Here is a sample:
   \end{xlist}
 \end{exe}
 
-We have collected a large corpus of apparent counterexamples,
-available at the website for this paper. Here is a small sample from
-that corpus:
+We have collected a large corpus of apparent HG violations, available
+at the website for this paper. Here is a small sample from that
+corpus:
 %
 \begin{exe}
 \ex\label{ourcorpus} 
@@ -322,7 +322,7 @@ mean something more like `Paris outside of France'. The important
 thing for our purposes is that the insight behind HG shines through
 this uncertainty: no matter what one's initial view of the lexicon is,
 a speaker's use of a disjunction \XorY\ raises the likelihood that the
-the disjuncts are semantically disjoint in her currently preferred
+disjuncts are semantically disjoint in her currently preferred
 lexicon. The speaker will be perceived as endorsing such an
 opinionated view of the language, at least for the current
 conversation, and the listener can either adopt that assumption or
@@ -339,13 +339,13 @@ way of identifying the semantic union of the two terms.
 
 More interesting are cases in which the speaker's disjunction seems to
 be part of an attempt to manage the listener's inferences. For
-instance, a speaker who uses the phrase \word{swimwear or bikini}
-might be concerned that using \word{swimwear} alone will trigger an
-ad-hoc scalar implicature \citep{Hirschberg85} excluding the salient
-sub-kind of bikinis. The HG violation then serves to cancel or block
-this unwanted inference. \citet{Chemla-HurfordCounts} studies this
-class of inferences, presenting suggestive evidence that the frequency
-of disjunctions \XorY\ (\word{X} entailed by \word{Y}) is positively
+instance, a speaker who uses the phrase \word{cheap or free} might be
+concerned that using \word{cheap} alone will trigger a scalar
+implicature \citep{Hirschberg85} excluding zero cost. The HG violation
+then serves to cancel or block this unwanted
+inference. \citet{Chemla-HurfordCounts} studies this class of
+inferences, presenting suggestive evidence that the frequency of
+disjunctions \XorY\ (\word{X} entailed by \word{Y}) is positively
 correlated with the likelihood that \word{X} conversationally
 implicates \word{not Y} as estimated by the experimental results of
 \citet{vanTiel-etal:2013}. This connection is anticipated by
@@ -381,7 +381,7 @@ from \posscitet{vanTiel-etal:2013} results, and the relative
 frequencies are given by
 $\CountGB(\XorY\,)/\CountGB(\word{X\/})$, where
 $\CountGB(\varphi)$ is the token count for the word or phrase
-$\varphi$ in our Google Books subcorpus. Our rationale (defined by
+$\varphi$ in our Google Books sub-corpus. Our rationale (defined by
 \citeauthor{Chemla-HurfordCounts}) is that the prevalence of the
 implicature will positively correlate with the frequency of the
 disjunction: all other things being equal, the more likely the
@@ -394,8 +394,8 @@ Blocking a potential scalar implicatures is just one of the
 motivations a speaker might have for uttering a disjunction that
 superficially violates HG. The I-implicatures studied by
 \citet{Levinson00} can also be motivating factors: the speaker is
-compelled to say as a little as possible, and the listener is advised
-to seek out specific interpretations. As a corollary of this, general
+compelled to say as little as possible, and the listener is advised to
+seek out specific interpretations. As a corollary of this, general
 terms are often prone to being restricted to salient or prototypical
 sub-kinds. For instance, at a busy marina in water-skiing country,
 \word{boat} might come to identify just motorboats. In that context, a
@@ -409,27 +409,26 @@ specific sub-kind among potentially many that might be at the same
 semantic or conceptual level.
 
 In these implicature-blocking scenarios, the speaker is concerned that
-the general term \word{X} will be construed as
-$\sem{\word{X\/}}-\sem{\word{Y\/}}$ for some $\sem{\word{Y\/}}$
-overlapping with $\sem{\word{X\/}}$, and the disjunction hedges
-against that possibility. This is a \technicalTerm{defensive}
+the general term \word{X} will be construed as $\sem{\word{X\/}}-p$
+for some $p$ overlapping with $\sem{\word{X\/}}$, and the disjunction
+hedges against that possibility. This is a \technicalTerm{defensive}
 position; the speaker's own lexicon might allow her to use just the
 general term to convey her intentions, but she is concerned that the
 listener will arrive at a different conclusion. The costs of
 disjunction are therefore worth paying even if the disjunction adds no
 new information given the speaker's lexicon.  However, the speaker can
 play a more active role as well, using disjunctions to instruct the
-listener about the right lexicon. Our \secref{sec:introduction}
-example containing ``angioplasty or surgery'' seems to be an instance
-of this: the disjunction conveys secondary information that
+listener about the correct lexicon. Our \secref{sec:introduction}
+example containing \word{angioplasty or surgery} seems to be an
+instance of this: the disjunction conveys secondary information that
 \word{angioplasty} and \word{surgery} will be treated as separate
 options in the discourse \citep{Simons:2001}. If HG were adopted as an
 explicit theoretical constraint, then the possibility of doing this
-would more or less follow --- we would just require the additional
+would more or less follow. We would just require the additional
 premise that the listener is charitable and so will try to find an
 acceptable construal of the utterance. The model we develop in
-\secref{sec:model} also supports this kind of reasoning, but it
-requires no independent statement of HG.
+\secref{sec:model} also supports this reasoning, but it requires no
+independent statement of HG.
  
 %=====================================================================
 
@@ -441,22 +440,22 @@ avoiding overlap, they seem to embrace it, conveying something
 approximating identity.
 
 Definitional disjunctions are even more contextually restricted than
-HG-violating disjunctions, so generalizing about their usage
-conditions is difficult.  The examples in \eg{ted} were obtained by
-annotating the disjunctive clauses in a sample of 98 TED talks. These
-talks seem ideal for finding definitional uses, because the speakers
-are experts with broadly pedagogical aims. In addition, videos of the
-talks are available online, which made it possible for us to use
-intonation and other cues to try to verify that the speakers had
-definitional intentions. These seven examples were drawn from a set of
-344 disjunctive clauses, for a rate of only about 2\%, despite the
-context being conducive to such uses. The examples are given with the
+HG-violating ones, so generalizing about their usage conditions is
+difficult.  The examples in \eg{ted} were obtained by annotating the
+disjunctive clauses in a sample of 98 TED talks. These talks seem
+ideal for finding definitional uses, because the speakers are experts
+with broadly pedagogical aims. In addition, videos of the talks are
+available online, which made it possible for us to use intonation and
+other cues to try to verify that the speakers had definitional
+intentions. These seven examples were drawn from a set of 344
+disjunctive clauses, for a rate of only about 2\%, despite the context
+being conducive to such uses. The examples are given with the
 punctuation from the transcripts that TED provides.
 %
 \begin{exe}
   \ex\label{ted}
   \begin{xlist}
-    \ex \ldots ``more disorder, or `entropy,' over their lifetimes''
+    \ex ``\ldots more disorder, or `entropy,' over their lifetimes''
     
     (Alex Wissner Gross, `A new equation for intelligence', 5:51)
 
@@ -491,8 +490,8 @@ definitional intentions with ad hoc prosody, italics, quotation marks,
 and other devices, which points to the marked nature of the
 usage. However, it would be a mistake to dismiss definitional uses as
 an idiosyncrasy of English. These uses are widely attested in
-typologically diverse languages (we have examples from Chinese,
-German, Hebrew, Ilokano, Japanese, Russian, and Tagalog). Even
+typologically diverse languages; we have examples from Chinese,
+German, Hebrew, Ilokano, Japanese, Russian, and Tagalog. Even
 languages that seem to have a dedicated `definitional' or
 `metalinguistic \word{or}' (e.g., Finnish, Italian) seem also to allow
 the regular \word{or} to play this role.
@@ -571,7 +570,7 @@ the term; rather, such a use would seem to presuppose only that
 \word{oenophile} is relatively unknown, or obscure enough that it's
 useful to reinvoke its definition.
 
-At the the other end of the spectrum, the listener might actually be
+At the other end of the spectrum, the listener might actually be
 presumed to know the term, but the speaker sees social value in
 conveying that she shares this view. This could be because the speaker
 would like to display expertise, as when an ambitious pupil seeks to
@@ -722,10 +721,10 @@ of \citet{Frank:Goodman:2012} and \citet{Goodman:Stuhlmuller:2013}.
 The starting point is the literal listener, $\listenerZero$. This
 agent simply turns $\Lex$ into a probabilistic formulation that can be
 used for decision-making in the presence of communicative
-indeterminacy. In short, given messages $\msg$, this agent assigns $0$
+indeterminacy. In short, given message $\msg$, this agent assigns $0$
 probability to states in which $\msg$ is false. For the rest, its
 estimated probability for each state $\state$ is proportional to the
-prior $\Prior(\state)$.\footnote{$P(a \given b) \propto X$ is read
+prior $\Prior(\state)$.\footnote{`$P(a \given b) \propto X$' is read
   `the value $P(a \given b)$ is proportional to the value $X$'. To
   obtain normalized probabilities, one divides each value $X$ by the
   sum of all the values $X'$ obtained by replacing $a$ by one of its
@@ -760,11 +759,11 @@ with real-valued costs. At its heart, though, this agent is parallel
 to $\listenerZero$ in that it combines a conditional distribution and
 a piece of contextual information --- now costs on messages. The
 result is a distribution that one can imagine serving as the basis for
-decision making: given that the agent would like to convey that a
-certain state holds, which message will do that most effectively for
-the $\listenerZero$ listener? The real-valued parameter $\alpha$
-controls the degree to which the speaker tries to capitalize on the
-distinctions $\listenerZero$ encodes.
+decision-making in production: given that the agent would like to
+convey that a certain state holds, which message will do that most
+effectively for the $\listenerZero$ listener? The real-valued
+parameter $\alpha$ controls the degree to which the speaker tries to
+capitalize on the distinctions $\listenerZero$ encodes.
 
 The first pragmatic listener is $\listenerOne$. It is parallel to
 $\listenerZero$ except that it reasons, not in terms of the original
@@ -951,7 +950,7 @@ learning-rate parameter $\beta$. The relative weights of $\alpha$ and
 $\beta$ control the relative importance of conveying information about
 the world and information about the lexicon. As $\alpha$ grows, the
 agents venture riskier Gricean behavior: the speaker tries to extract
-as many distinction as possible from its estimate of the listener, and
+as many distinctions as possible from its estimate of the listener, and
 it chooses utterances on this (hyper-)rational basis. The pattern is
 similar for $\beta$, but the target becomes exchanging information
 about the language itself. If we set $\beta=0$, then the agents make
@@ -1195,6 +1194,8 @@ the speaker's best choice for state $w_{2}{\vee}w_{3}$ is $\porq$.
     \caption{$\ListenerK[2]$}
   \end{subfigure}
 
+  \vspace{6pt}
+
   \begin{subfigure}{1\textwidth}
     \centering
     $\begin{array}[c]{ *{6}{r} }
@@ -1212,6 +1213,7 @@ the speaker's best choice for state $w_{2}{\vee}w_{3}$ is $\porq$.
      \end{array}$
      \caption{$\SpeakerK[2]$}
    \end{subfigure}
+   \vspace{-4pt}
    \caption{Simple signaling for compositional disjunction.}
   \label{fig:compdisj}
 \end{figure}
@@ -1266,7 +1268,8 @@ to $0$, then communication about the lexicon has no intrinsic value to
 the conversational agents.  Where $\beta$ is positive, the ratio of
 $\alpha$ to $\beta$ is a rough guide to the relative importance of
 communicating about the world and communicating about the lexicon
-(though message costs and other facts about context also play a role).
+(though message costs and other facts about the context also play a
+role).
 
 %=====================================================================
 
@@ -1475,6 +1478,8 @@ atomic-meaning, focal-point contexts in more detail in
 
 %=====================================================================
 
+\vspace{12pt}
+
 \subsection{Hurfordian Contexts}\label{sec:analysis:subsumptive}
 
 For Hurfordian readings, we seek to understand where and how
@@ -1529,7 +1534,7 @@ $\begin{array}[c]{l@{ }l r r r}
 Priors are flat. 
 $\alpha = 2$; 
 $\beta = 1$; 
-$\Costs(\word{or}) = 1$}
+$\Costs(\word{or}) = 1$.}
 \label{fig:hurford}
 \end{figure}
 
@@ -1559,6 +1564,8 @@ this inference is mirrored by a speaker preference for producing
 \eg{hurford-lex-large}.
 
 %=====================================================================
+
+\vspace{12pt}
 
 \subsection{Defensive Speakers: Q- and I-implicature Blocking}
 \label{sec:defensive-speakers}
@@ -1669,7 +1676,7 @@ draw I-implicatures is very high.
     \caption{Tracing four values of $\Costs(\word{or})$ with $\alpha=2$.}\label{fig:isims:or}
   \end{subfigure} 
   \caption{I-implicature blocking. The variation in the x-axes is
-    created by varying $\Prior(r_{\word{common}})$ from $0.33$ to
+    created by varying $\Prior(r_{\textsc{common}})$ from $0.33$ to
     $0.99$, with higher values for this prior corresponding to higher
     listener inferences (more implicatures from \word{general} to
     \word{specific\_unmarked}).  Dashes mark spans in which the
@@ -1678,7 +1685,7 @@ draw I-implicatures is very high.
   \label{fig:isims}
 \end{figure}
 
-The above simulations show that the model can simulate not only
+The above simulations show that the model can capture not only
 implicature inferences but also the behavior that would normally be
 characterized as implicature blocking. This possibility arises from
 the recursive nature of the model, in which pragmatic speakers can
@@ -1725,7 +1732,7 @@ $\alpha$. The y-axis gives the cost of disjunction, ranging from $0$
 to $0.2$, in increments of $0.01$. The dots classify best inferences in
 this space of parameters, with green marking strictly dominant Hurford
 strategies, orange marking strictly dominant definitional strategies,
-and purple marking cases where both strategies are strictly dominant
+and black marking cases where both strategies are strictly dominant
 (which is possible because we've reduced $\alpha$ and $\beta$ to a
 single measure in order to visualize the space in two dimensions).
 
@@ -1740,9 +1747,7 @@ single measure in order to visualize the space in two dimensions).
 \begin{figure}[tp]
   \centering
   \includegraphics[width=0.8\textwidth]{fig/paramexplore-lex5-focal}
-  \caption{A focal point unknown word. Hurfordian and definitional
-    contexts with lexicon (five atomic lexical items, four atomic
-    states).}
+  \caption{As in \figref{fig:char}, but with a focal point unknown word.}
   \label{fig:char-focal}
 \end{figure}
 
@@ -1762,10 +1767,10 @@ conveyed per word.
 
 In broad strokes, we can relate these ideas to \figref{fig:char}. At
 the bottom of the plot, where disjunction costs are low, we have,
-perhaps, a lecturer with ample time and perhaps not much to say; as we
-move right in this space, the professor becomes more invested in the
+perhaps, a professor with ample time and not much to say; as we move
+right in this space, the professor becomes more invested in the
 ``lingo'', and hence definitional readings arise.  At the top of the
-plot, the communications become time or resource constrained, and the
+plot, the communications become time- or resource-constrained, and the
 pressures of HG become strong enough to compel exclusivization even
 with high $\beta$. From this perspective, it is clear why Hurfordian
 uses are more robust. They arise in a much wider range of contexts

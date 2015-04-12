@@ -40,7 +40,7 @@ def simple_disjunction():
     mod = Pragmod(
         lexica=None,
         messages=[p, q, pandq, porq, NULL_MSG],
-        meanings=[w1, w2, w3],
+        states=[w1, w2, w3],
         costs=np.array([0.0, 0.0, 1.0, 1.0, 5.0]),
         prior=np.repeat(1.0/4.0, 3),
         lexprior=None,
@@ -55,7 +55,7 @@ def basic_scalar():
               np.array([[0.0,1.0], [1.0, 0.0], [1.0, 1.0]])]    
     mod = Pragmod(lexica=lexica,
                   messages=['cheap', 'free', NULL_MSG],
-                  meanings=[w1, w2],
+                  states=[w1, w2],
                   costs=np.array([0.0, 0.0, 5.0]),
                   prior=np.repeat(1.0/2.0, 2),
                   lexprior=np.repeat(1.0/3.0, 3),
@@ -79,7 +79,7 @@ def compositional_disjunction():
     lexica.display()
     mod = Pragmod(lexica=lexica.lexica2matrices(),
                   messages=lexica.messages,
-                  meanings=lexica.states,
+                  states=lexica.states,
                   costs=lexica.cost_vector(),
                   prior=np.repeat(1.0/len(lexica.states), len(lexica.states)),
                   lexprior=np.repeat(1.0/len(lexica), len(lexica)),
@@ -119,7 +119,7 @@ def generic_disjunction_example(
     mod = Pragmod(
         lexica=lexmats,
         messages=lexica.messages,
-        meanings=lexica.states,
+        states=lexica.states,
         costs=lexica.cost_vector(),
         prior=np.repeat(1.0/len(lexica.states), len(lexica.states)),
         lexprior=np.repeat(1.0/len(lexmats), len(lexmats)),
@@ -337,28 +337,33 @@ class ListenerParameterExperiment:
         
 if __name__ == '__main__':
 
+    pass
+
     ## Some simple warm-up examples:
     # simple_disjunction()
     # basic_scalar()
     # compositional_disjunction()
 
     ## From the poster:
-    #hurfordian_example(n=2, fulldisplay=False)
-    #definitional_example(n=3, fulldisplay=False)
-    #focal_definitional_example(n=2, fulldisplay=True)
+    # hurfordian_example(n=2, fulldisplay=False)
+    # definitional_example(n=3, fulldisplay=True)
+    # focal_definitional_example(n=2, fulldisplay=False)
+
+    ##
+    
     
     # Parameter exploration with a large lexicon; this takes a long time to run!
-    ListenerParameterExperiment(
-        results_filename='paramexplore-lex5.pickle',
-        # If the results are already computed:
-        results=pickle.load(file("fig/paramexplore-lex5.pickle")),
-        plot_filename='fig/paramexplore-lex5.pdf').run()
+    # ListenerParameterExperiment(
+    #     results_filename='paramexplore-lex5.pickle',
+    #     # If the results are already computed:
+    #     results=pickle.load(file("fig/paramexplore-lex5.pickle")),
+    #     plot_filename='fig/paramexplore-lex5.pdf').run()
 
-    # Parameter exploration as above but constraining the unknown word X to an atomic meaning:
-    ListenerParameterExperiment(
-        results_filename='paramexplore-lex5-focal.pickle',
-        # If the results are already computed:
-        results=pickle.load(file("fig/paramexplore-lex5-focal.pickle")),
-        plot_filename='fig/paramexplore-lex5-focal.pdf',
-        unknown_word='X').run()
+    # # Parameter exploration as above but constraining the unknown word X to an atomic meaning:
+    # ListenerParameterExperiment(
+    #     results_filename='paramexplore-lex5-focal.pickle',
+    #     # If the results are already computed:
+    #     results=pickle.load(file("fig/paramexplore-lex5-focal.pickle")),
+    #     plot_filename='fig/paramexplore-lex5-focal.pdf',
+    #     unknown_word='X').run()
 
