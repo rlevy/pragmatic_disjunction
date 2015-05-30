@@ -38,6 +38,11 @@
 \usepackage{tipa}
 \noautomath
 
+\usepackage{titlesec}
+\titleformat{\section}{\normalsize\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalsize\bfseries}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}{\normalsize\bfseries}{\thesubsubsection}{1em}{}[.]
+
 %=====================================================================
 %========================= cross-references ==========================
 
@@ -355,8 +360,8 @@
 
 %--------------------------------------------------------------------------------------------------------------------------------------------------------
 
-\title{Negotiating Lexical Uncertainty and Speaker Expertise with Disjunction}				%TITLE HERE
-\author{\sc Christopher Potts and Roger Levy\\ 						%AUTHOR HERE
+\title{{\normalsize Negotiating Lexical Uncertainty and Speaker Expertise with Disjunction}}				%TITLE HERE
+\author{{\sc Christopher Potts and Roger Levy}\\ 						%AUTHOR HERE
 {\it Stanford University and UC San Diego}%
 \footnote{For help with the data and ideas, we thank %
 Arto Anttila, %
@@ -715,7 +720,7 @@ motivations a speaker might have for uttering a disjunction that
 superficially violates HG. Blocking an I(nformativeness)-implicature
 \citep{Levinson00} might also be a motivating factor.  Generally
 speaking, an I-implicature involves some kind of reasoning to a
-prototypical case---e.g., saying \emph{The cup is on the table}
+prototypical case --- e.g., saying \emph{The cup is on the table}
 implicates that the cup is in direct contact with the table.
 HG-violating disjunctions could be motivated by the possibility that a
 general term on its own would be understood as referring only more
@@ -930,7 +935,7 @@ the current talk exchange) the meanings of the two disjuncts.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Modeling Communication under Conditions of \\ Speaker Expertise}\label{sec:model}
+\section{Modeling Communication under Conditions of Speaker Expertise}\label{sec:model}
 
 We now describe our model of pragmatic reasoning. Our presentation is
 somewhat compact. Readers wishing to more fully explore the model are
@@ -974,7 +979,7 @@ signaling game.
     $\LexStar: \Messages \mapsto \wp(\States)$ is a semantic interpretation function. 
     $\Lex'(\nullmsg) = \States$.
   \ex\label{prior}%
-    $\Prior : \States \mapsto [0,1]$ is a prior probability
+    $\Prior : \wp(\States) \mapsto [0,1]$ is a prior probability
     distribution over states.    
   \ex\label{costs}%
     $\Costs : \Messages \mapsto \Reals$ is a cost function on messages.
@@ -1202,7 +1207,7 @@ distribution over them $\LexPrior$:
         \Lex'(\msg) \neq \emptyset \mathbin{\&}
         \Lex'(\msg) \subseteq \LexStar(\msg)}$
   \ex\label{LexPrior}% 
-    $\LexPrior : \LexSet \mapsto [0,1]$ is a prior
+    $\LexPrior : \wp(\LexSet) \mapsto [0,1]$ is a prior
     probability distribution over lexica.  
   \end{xlist}
 \end{exe}
@@ -1636,7 +1641,7 @@ the high $\beta$ parameter are beginning to be felt. Although this
 speaker has a bias away from using \AorX\ to convey a definitional
 intention, this bias is only slight, because of the low cost of
 disjunction. Furthermore, $\SpeakerK[2]$ is more likely to say \AorX\
-when observing $\langle \Lex_{2}, w_1 \rangle$ than under any other
+when observing $\tuple{\Lex_{2}, w_{1}}$ than under any other
 circumstance. Together, these factors strongly push $\ListenerK[2]$ to
 adopt a definitional construal of \AorX.  $\SpeakerK[3]$ follows suit,
 strongly preferring to use the disjunction when in a definitional
@@ -1757,7 +1762,7 @@ quantify this intuitive characterization in
 \secref{sec:characterization}.) For example, if $\beta$ is too close
 to $\alpha$, or disjunction costs get too high, the listener fails to
 make the inference and the speaker tends to resort to using just
-\word{A} to convey $w_1$. This makes intuitive sense given
+\word{A} to convey $w_{1}$. This makes intuitive sense given
 the nature of these parameters. For example, if the speaker has little
 interest in communicating about the lexicon, or disjunction costs
 prohibit the wastefulness of using \AorX\ to convey
@@ -2176,7 +2181,7 @@ hierarchies, and linguistic style.
 
 \section{References}
 \bibliographystyle{language}
-\bibliography{PottsLevy_BLS41-bib.bib}
+\bibliography{PottsLevyBLS41-bib}
 
 \end{document}
 
