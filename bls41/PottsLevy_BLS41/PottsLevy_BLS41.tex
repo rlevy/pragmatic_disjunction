@@ -305,23 +305,25 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Macros for the Hurfordian and definitional examples
 
-\newcommand{\lismat}[4]{
+\newcommand{\lismat}[6]{
   \setlength{\arraycolsep}{1pt}
   \begin{array}[c]{l *{3}{r}}
     \toprule
     #1 & w_{1} & w_{2} & w_{1}{\vee}w_{2} \\
     \midrule
     A & #2\\
+    B & #5 \\
     X & #3 \\
-    A\,\word{or}\,X & #4 \\
+    A\word{or}X & #4 \\
+    B\word{or}X & #6 \\
     \bottomrule
   \end{array}}
 
 \newcommand{\spkmat}[4]{
   \setlength{\arraycolsep}{1pt}
-  \begin{array}[c]{l *{3}{r}}
+  \begin{array}[c]{l *{5}{r}}
     \toprule
-    #1 & A & X & A\,\word{or}\,X \\
+    #1 & A & B & X & A\word{or}X & B\word{or}X \\
     \midrule
     w_{1} & #2\\
     w_{2} & #3 \\
@@ -337,6 +339,7 @@
       q  & \set{#2} \\
     \end{array}
   \right]}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -370,6 +373,7 @@ Itamar Francez, %
 Kumiko Fukumora, %
 Larry Horn, %
 Justine Kao, %
+Dan Lassiter, %
 Natalia Roudakova, %
 Rob Voigt, and %
 Eva Wittenberg, %
@@ -1274,10 +1278,10 @@ basis. It is defined for all $k > 1$:
 %
 In broad terms, this agent is similar to $\speakerOne$ except that it
 includes a new term $\ListenerK[k-1](\Lex\given\msg)$ encoding the
-information each message conveys about the lexicon. The relative
+information each message conveys about the lexicon. The 
 importance of this information is controlled by a new real-valued
 parameter $\beta$. The relative weights of $\alpha$ and $\beta$
-control the relative importance of conveying information about the
+govern the relative importance of conveying information about the
 world and information about the lexicon. As $\alpha$ grows, the agents
 venture riskier Gricean behavior: the speaker tries to extract as many
 distinctions as possible from its estimate of the listener, and it
@@ -1646,7 +1650,7 @@ disjunction.  Additionally, the likelihood of $\SpeakerK[2]$ saying
 adopt a definitional construal of \AorX.  This construal is clearer
 (in the sense that the $\ListenerK[2]$ probability on
 $\tuple{\Lex_{2}, w_{1}}$ is higher) for \AorX\ than for any other
-utterance; crucially, $\ListenerK[2]$ inferences for $X$ (not shown
+utterance. Crucially, $\ListenerK[2]$ inferences for $X$ (not shown
 for reasons of space) are split between $\tuple{\Lex_{2}, w_{1}}$ and
 $\tuple{\Lex_{1}, w_{2}}$ because both these world--lexicon pairs give
 high likelihood to $\SpeakerK[2]$ uttering $X$.  As a result,
@@ -1659,23 +1663,25 @@ space).
 
 \begin{figure}[tp]
   \centering
-
+  \footnotesize
   \newcommand{\singlearrowdivider}{& \multicolumn{3}{c}{\downarrow}}
   \newcommand{\straightarrowdivider}{& \downarrow & \downarrow & \downarrow}
   \newcommand{\angledarrowdivider}{& \multicolumn{3}{c}{\swarrow \hspace{100pt} \downarrow\hspace{100pt} \searrow}}
   
   \setlength{\tabcolsep}{4pt}
-  \setlength{\arraycolsep}{12pt}
-  $\begin{array}[c]{r@{\mspace{10mu}}c c c}
-    \SpeakerK[3]  & \text{ observes } \langle \Lex_{2},w_{1}\rangle
-    &
-    \begin{array}[c]{rrr}
+  \setlength{\arraycolsep}{8pt}
+  $\begin{array}[c]{r c c c}
+    \SpeakerK[3]  &  
+    \multicolumn{3}{c}{
+    \begin{array}[c]{r rrrrr}
        \toprule
-       A & X & A\,\word{or}\,X \\
+       & A & B & X & A\word{or}X &  B\word{or}X\\
        \midrule
-       0 & 0 & \graycell{1} \\
+       \text{ observed } \langle \Lex_{2},w_{1}\rangle & 0 & 0  & 0 & \graycell{1} & 0 \\
+       \text{ observed } \langle \Lex_{1},w_{2}\rangle & 0 & 0  & 0 & 0 & \graycell{1}  \\
        \bottomrule
      \end{array}
+     }
     \\
     \singlearrowdivider
     \\
@@ -1683,7 +1689,7 @@ space).
     \multicolumn{3}{c}{
       \begin{array}[c]{l@{ }l r r r}
          \toprule
-         & \text{ heard } \AorX       & w_{1} & w_{2} & w_{1}{\vee}w_{2} \\
+        & \text{ heard } A\word{or}X       & w_{1} & w_{2} & w_{1}{\vee}w_{2} \\
          \midrule
          \LexStar & \smalldisjlex{w_{1}}{w_{2}}{w_{1}, w_{2}}  & 0   & 0 & .08 \\[1ex]
          \Lex_{1} & \smalldisjlex{w_{1}}{w_{2}}{w_{2}}         & .01 & 0 & .08 \\[1ex]
@@ -1693,23 +1699,25 @@ space).
     \\
     \singlearrowdivider
     \\    
-    \SpeakerK[2] & \text{ observes } \langle \Lex_{2},w_{1}\rangle
+    \SpeakerK[2] 
     &
-    \begin{array}[c]{rrr}
+      \multicolumn{3}{c}{
+    \begin{array}[c]{r rrrrr}
        \toprule
-       A & X & A\,\word{or}\,X \\
+       & A & B & X & A\word{or}X &  B\word{or}X\\
        \midrule
-       .07 & \graycell{.48} & .45 \\
+       \text{ observed } \langle \Lex_{2},w_{1}\rangle & .07 & 0   & \graycell{.48} & .45 & 0 \\
+      \text{ observed } \langle \Lex_{1},w_{2}\rangle & 0     & .07 & \graycell{.48} & 0 & .45 \\
        \bottomrule
      \end{array}
-    &    
+     }      
     \\
     \singlearrowdivider
     \\
     \ListenerK[1] & \multicolumn{3}{c}{
       \begin{array}[c]{l@{ }l r r r}
          \toprule
-         & \text{ heard } \AorX      & w_{1} & w_{2} & w_{1}{\vee}w_{2} \\
+         & \text{ heard } A\word{or}X      & w_{1} & w_{2} & w_{1}{\vee}w_{2} \\
          \midrule
          \LexStar & \smalldisjlex{w_{1}}{w_{2}}{w_{1}, w_{2}} & 0 & 0 & .23 \\[1ex]
          \Lex_{1} & \smalldisjlex{w_{1}}{w_{2}}{w_{2}}        & 0 & 0 & \graycell{.38} \\[1ex]
@@ -1719,17 +1727,17 @@ space).
     \\
     \angledarrowdivider
     \\
-    \listenerOne & \lismat{\LexStar}{1 & 0 & 0}{.02 & .02 & .96}{.02 & .02 & .96} & \lismat{\Lex_{1}}{1 & 0 & 0}{0 & 1 & 0}{.01 & 0 & .99} & \lismat{\Lex_{2}}{1 & 0 & 0}{1 & 0 & 0}{1 & 0 & 0}
+    \listenerOne & \lismat{\LexStar}{1 & 0 & 0}{.02 & .02 & .96}{.02 & .02 & .96}{0&1&0}{.02&.02&.96} & \lismat{\Lex_{1}}{1 & 0 & 0}{0 & 1 & 0}{.01 & 0 & .99}{0&1&0}{0&1&0} & \lismat{\Lex_{2}}{1 & 0 & 0}{1 & 0 & 0}{1 & 0 & 0}{0&1&0}{0&.01&.99}
     \\
     \straightarrowdivider
     \\
-    \speakerOne & \spkmat{\LexStar}{.98 & 0 & 0}{0 & 0 & 0}{0 & .2 & .2} & \spkmat{\Lex_{1}}{.99 & 0 & 0}{0 & .33 & 0}{0 & 0 & .33} & \spkmat{\Lex_{2}}{.33 & .33 & .33}{0 & 0 & 0}{0 & 0 & 0}
+    \speakerOne & \spkmat{\LexStar}{.98 & 0 & 0 & 0 & 0}{0 & .98 & 0 & 0 & 0}{0 & 0 & .2 & .2 & .2} & \spkmat{\Lex_{1}}{1 & 0 & 0 & 0 & 0}{0 & .33 & .33 & 0 & .33}{0 & 0 & 0 & .33 & 0} & \spkmat{\Lex_{2}}{.33 & 0 & .33 & .33 & 0}{0 & 1 & 0 & 0 & 0}{0 & 0 & 0 & 0 & .33}
     \\
     \straightarrowdivider
     \\
-    \listenerZero & \lismat{\LexStar}{1 & 0 & 0}{.33 & .33 & .33}{.33 & .33 & .33} & \lismat{\Lex_{1}}{1 & 0 & 0}{0 & 1 & 0}{.33 & .33 & .33} & \lismat{\Lex_{2}}{1 & 0 & 0}{1 & 0 & 0}{1 & 0 & 0}
+    \listenerZero & \lismat{\LexStar}{1 & 0 & 0}{.33 & .33 & .33}{.33 & .33 & .33}{0&1&0}{.33&.33&.33} & \lismat{\Lex_{1}}{1 & 0 & 0}{0 & 1 & 0}{.33 & .33 & .33}{0&1&0}{0&1&0} & \lismat{\Lex_{2}}{1 & 0 & 0}{1 & 0 & 0}{1 & 0 & 0}{0&1&0}{.33&.33&.33}
   \end{array}$
-  \caption{Definitional inference, with only a subset of the states
+  \caption{Definitional intentions and construals, with only a subset of the states
     and messages displayed due to space constraints.
     Priors are flat. 
     $\alpha = 5$; 
@@ -1739,6 +1747,7 @@ space).
     and definitional intentions emerge at $\SpeakerK[3]$.}    
   \label{fig:def}
 \end{figure}
+
 
 The lexicon used in \figref{fig:def} is tiny, and one might wonder
 whether the definitional inference comes about via a spurious process
@@ -1806,7 +1815,7 @@ atomic-meaning, focal-point contexts in more detail in
   \centering
   $\begin{array}[c]{l l r r r}
     \toprule
-      & \AorX  & w_{1} & w_{2} & w_{1} \vee w_{2} \\
+      & \ListenerK[2] \text{ hears } \AorX  & w_{1} & w_{2} & w_{1} \vee w_{2} \\
     \midrule
     \Lex_{1} & \smalldisjlex{w_{1}}{w_{2}}{w_{2}}  &              0 & 0 & .04 \\[1ex]
     \Lex_{2} & \smalldisjlexTargetDef             & \graycell{.92} & 0 & .03\\
@@ -1874,7 +1883,7 @@ $\begin{array}[c]{l@{ }l r r r}
 \Lex_{2} & \smalldisjlex{w_{1}}{w_{2}}{w_{1}}         & .03 & 0 & .14 \\
 \bottomrule
 \end{array}$
-\caption{Hurfordian inference for $\ListenerK[3]$.
+\caption{Hurfordian inference for $\ListenerK[2]$.
 Priors are flat. 
 $\alpha = 2$; 
 $\beta = 1$; 
@@ -1908,8 +1917,6 @@ this inference is mirrored by a speaker preference for producing
 \eg{hurford-lex-large}.
 
 %=====================================================================
-
-\vspace{12pt}
 
 \subsection{Defensive Speakers: Q- and I-implicature Blocking}
 \label{sec:defensive-speakers}
