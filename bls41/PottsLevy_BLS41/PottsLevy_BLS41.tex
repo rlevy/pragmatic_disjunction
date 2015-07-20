@@ -369,6 +369,7 @@
 \footnote{For help with the data and ideas, we thank %
 Arto Anttila, %
 James Collins, %
+Ashwini Deo, %
 Itamar Francez, %
 Kumiko Fukumora, %
 Larry Horn, %
@@ -378,7 +379,7 @@ Natalia Roudakova, %
 Rob Voigt, and %
 Eva Wittenberg, %
 as well as audiences at the 2015 LSA Annual Meeting and ESSLLI 2014. %
-This research was supported in part by NSF~IIS~1159679 and ONR~N00014-10-1-0109 (CP), %
+This research was supported in part by NSF~IIS~1159679 and ONR~N00014-13-1-0287 (CP), %
 and an Alfred P.~Sloan Foundation Research Fellowship and a Fellowship at the Center for Advanced Study in the Behavioral Sciences (RL).}} %AFFILIATION HERE
 \date{}
 
@@ -1273,7 +1274,7 @@ basis. It is defined for all $k > 1$:
 
 \begin{exe}  
   \ex\label{Sk}%
-   $\SpeakerK(\msg \given \state, \Lex) \propto \exponential \left( \alpha\log\left(\ListenerK[k-1](\state \given \msg, \Lex)\right)  -  \beta\log\left(\ListenerK[k-1](\Lex\given\msg)\right) - \Costs(\msg) \right)$
+   $\SpeakerK(\msg \given \state, \Lex) \propto \exponential \left( \alpha\log\left(\ListenerK[k-1](\state \given \msg, \Lex)\right)  +  \beta\log\left(\ListenerK[k-1](\Lex\given\msg)\right) - \Costs(\msg) \right)$
 \end{exe}
 %
 In broad terms, this agent is similar to $\speakerOne$ except that it
